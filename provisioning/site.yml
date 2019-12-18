@@ -2,8 +2,15 @@
 -   name: Provision Site
     hosts: all
     remote_user: root
+    vars:
+        certbot_email: mail@deworker.pro
+        certbot_hosts:
+            - demo-auction.deworker.pro
+            - api.demo-auction.deworker.pro
     tasks:
         -   import_tasks: tasks/setup_docker.yml
+        -   import_tasks: tasks/setup_certbot.yml
+        -   import_tasks: tasks/generate_certificates.yml
     handlers:
         -   name: Start docker on boot
             systemd:
