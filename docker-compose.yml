@@ -1,0 +1,9 @@
+version: "3.7"
+services:
+    frontend:
+        build:
+            context: frontend/docker/development/nginx
+        ports:
+            - "8080:80"
+        volumes:
+            - ./frontend:/app
