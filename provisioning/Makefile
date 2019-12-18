@@ -6,3 +6,6 @@ renew-certificates:
 
 authorize:
 	ansible-playbook -i hosts.yml authorize.yml
+
+docker-login:
+	ansible-playbook -i hosts.yml docker-login.yml
