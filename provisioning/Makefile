@@ -3,3 +3,6 @@ site:
 
 renew-certificates:
 	ansible-playbook -i hosts.yml renew-certificates.yml
+
+authorize:
+	ansible-playbook -i hosts.yml authorize.yml
