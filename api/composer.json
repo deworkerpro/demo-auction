@@ -8,5 +8,8 @@
     },
     "require": {
         "php": "^7.4"
+    },
+    "require-dev": {
+        "roave/security-advisories": "dev-master"
     }
 }
