@@ -1,0 +1,8 @@
+{
+    "name": "deworkerpro/demo-auction",
+    "type": "project",
+    "license": "BSD-3-Clause",
+    "require": {
+        "php": "^7.4"
+    }
+}
