@@ -12,7 +12,7 @@ require __DIR__ . '/../vendor/autoload.php';
 
 $app = AppFactory::create();
 
-$app->addErrorMiddleware(false, true, true);
+$app->addErrorMiddleware((bool)getenv('APP_DEBUG'), true, true);
 
 $app->get('/', function (Request $request, Response $response, $args) {
     $response->getBody()->write('{}');
