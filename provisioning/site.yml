@@ -8,6 +8,7 @@
         -   import_tasks: tasks/setup_docker.yml
         -   import_tasks: tasks/setup_certbot.yml
         -   import_tasks: tasks/generate_certificates.yml
+        -   import_tasks: tasks/create_user.yml
     handlers:
         -   name: Start docker on boot
             systemd:
