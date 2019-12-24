@@ -15,6 +15,7 @@
         "symfony/console": "^5.0"
     },
     "require-dev": {
+        "overtrue/phplint": "^1.2",
         "roave/security-advisories": "dev-master"
     },
     "autoload": {
@@ -23,7 +24,7 @@
         }
     },
     "scripts": {
-        "lint": "find bin config public src -name \"*.php\" -print0 | xargs -0 -n1 php -l",
+        "lint": "phplint --no-cache",
         "app": "php bin/app.php --ansi"
     }
 }
