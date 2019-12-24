@@ -34,6 +34,7 @@ services:
         environment:
             APP_ENV: dev
             APP_DEBUG: 1
+            PHP_IDE_CONFIG: serverName=API
         volumes:
             - ./api:/app
 
