@@ -24,7 +24,7 @@
         }
     },
     "scripts": {
-        "lint": "phplint --no-cache",
+        "lint": "phplint",
         "app": "php bin/app.php --ansi"
     }
 }
