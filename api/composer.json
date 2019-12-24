@@ -16,7 +16,8 @@
     },
     "require-dev": {
         "overtrue/phplint": "^1.2",
-        "roave/security-advisories": "dev-master"
+        "roave/security-advisories": "dev-master",
+        "squizlabs/php_codesniffer": "^3.5"
     },
     "autoload": {
         "psr-4": {
@@ -25,6 +26,8 @@
     },
     "scripts": {
         "lint": "phplint",
+        "cs-check": "phpcs",
+        "cs-fix": "phpcbf",
         "app": "php bin/app.php --ansi"
     }
 }
