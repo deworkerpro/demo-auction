@@ -8,6 +8,7 @@
     },
     "require": {
         "php": "^7.4",
+        "php-di/php-di": "^6.0",
         "slim/psr7": "^0.6.0",
         "slim/slim": "^4.3"
     },
