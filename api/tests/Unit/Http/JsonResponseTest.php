@@ -19,50 +19,43 @@ class JsonResponseTest extends TestCase
         self::assertEquals(201, $response->getStatusCode());
     }
 
-    public function testNull(): void
+    /**
+     * @dataProvider getCases
+     * @param mixed $source
+     * @param mixed $expect
+     */
+    public function testResponse($source, $expect): void
     {
-        $response = new JsonResponse(null);
+        $response = new JsonResponse($source);
 
-        self::assertEquals('null', $response->getBody()->getContents());
+        self::assertEquals('application/json', $response->getHeaderLine('Content-Type'));
+        self::assertEquals($expect, $response->getBody()->getContents());
         self::assertEquals(200, $response->getStatusCode());
     }
 
-    public function testInt(): void
-    {
-        $response = new JsonResponse(12);
-
-        self::assertEquals('12', $response->getBody()->getContents());
-        self::assertEquals(200, $response->getStatusCode());
-    }
-
-    public function testString(): void
-    {
-        $response = new JsonResponse('12');
-
-        self::assertEquals('"12"', $response->getBody()->getContents());
-        self::assertEquals(200, $response->getStatusCode());
-    }
-
-    public function testObject(): void
+    /**
+     * @return array<mixed>
+     */
+    public function getCases(): array
     {
         $object = new stdClass();
         $object->str = 'value';
         $object->int = 1;
         $object->none = null;
 
-        $response = new JsonResponse($object);
+        $array = [
+            'str' => 'value',
+            'int' => 1,
+            'none' => null
+        ];
 
-        self::assertEquals('{"str":"value","int":1,"none":null}', $response->getBody()->getContents());
-        self::assertEquals(200, $response->getStatusCode());
-    }
-
-    public function testArray(): void
-    {
-        $array = ['str' => 'value', 'int' => 1, 'none' => null];
-
-        $response = new JsonResponse($array);
-
-        self::assertEquals('{"str":"value","int":1,"none":null}', $response->getBody()->getContents());
-        self::assertEquals(200, $response->getStatusCode());
+        return [
+            'null' => [null, 'null'],
+            'empty' => ['', '""'],
+            'number' => [12, '12'],
+            'string' => ['12', '"12"'],
+            'object' => [$object, '{"str":"value","int":1,"none":null}'],
+            'array' => [$array, '{"str":"value","int":1,"none":null}'],
+        ];
     }
 }
