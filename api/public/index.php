@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-use App\Http;
-use Psr\Http\Message\ResponseFactoryInterface;
 use Slim\Factory\AppFactory;
 
 http_response_code(500);
@@ -24,6 +22,6 @@ $app = AppFactory::createFromContainer($container);
 
 $app->addErrorMiddleware($container->get('config')['debug'], true, true);
 
-$app->get('/', Http\Action\HomeAction::class);
+(require __DIR__ . '/../config/routes.php')($app);
 
 $app->run();
