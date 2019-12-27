@@ -21,5 +21,8 @@
         "psr-4": {
             "App\\": "src/"
         }
+    },
+    "scripts": {
+        "app": "php bin/app.php --ansi"
     }
 }
