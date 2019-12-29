@@ -17,7 +17,8 @@
     "require-dev": {
         "overtrue/phplint": "^1.2",
         "roave/security-advisories": "dev-master",
-        "squizlabs/php_codesniffer": "^3.5"
+        "squizlabs/php_codesniffer": "^3.5",
+        "vimeo/psalm": "^3.8"
     },
     "autoload": {
         "psr-4": {
@@ -28,6 +29,7 @@
         "lint": "phplint",
         "cs-check": "phpcs",
         "cs-fix": "phpcbf",
+        "psalm": "psalm",
         "app": "php bin/app.php --ansi"
     }
 }
