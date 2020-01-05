@@ -6,6 +6,13 @@ namespace Test\Functional;
 
 class HomeTest extends WebTestCase
 {
+    public function testMethod(): void
+    {
+        $response = $this->app()->handle(self::json('POST', '/'));
+
+        self::assertEquals(405, $response->getStatusCode());
+    }
+
     public function testSuccess(): void
     {
         $response = $this->app()->handle(self::json('GET', '/'));
