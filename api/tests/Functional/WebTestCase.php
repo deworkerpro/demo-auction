@@ -10,6 +10,9 @@ use Psr\Http\Message\ServerRequestInterface;
 use Slim\App;
 use Slim\Psr7\Factory\ServerRequestFactory;
 
+/**
+ * @coversNothing
+ */
 class WebTestCase extends TestCase
 {
     protected static function json(string $method, string $path): ServerRequestInterface
