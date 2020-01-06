@@ -7,6 +7,7 @@ lint: api-lint
 analyze: api-analyze
 test: api-test
 test-unit: api-test-unit
+test-unit-coverage: api-test-unit-coverage
 test-functional: api-test-functional
 
 docker-up:
@@ -44,6 +45,9 @@ api-test:
 
 api-test-unit:
 	docker-compose run --rm api-php-cli composer test -- --testsuite=unit
+
+api-test-unit-coverage:
+	docker-compose run --rm api-php-cli composer test-unit-coverage
 
 api-test-functional:
 	docker-compose run --rm api-php-cli composer test -- --testsuite=functional
