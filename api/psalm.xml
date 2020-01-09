@@ -23,6 +23,7 @@
         <!-- PHPUnit -->
         <PropertyNotSetInConstructor>
             <errorLevel type="suppress">
+                <directory name="src/Http/Test" />
                 <directory name="tests" />
             </errorLevel>
         </PropertyNotSetInConstructor>
