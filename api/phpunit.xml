@@ -10,7 +10,7 @@
          verbose="true">
     <testsuites>
         <testsuite name="unit">
-            <directory suffix="Test.php">tests/Unit</directory>
+            <directory suffix="Test.php">src/Http/Test/Unit</directory>
         </testsuite>
         <testsuite name="functional">
             <directory suffix="Test.php">tests/Functional</directory>
@@ -20,6 +20,9 @@
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">src</directory>
+            <exclude>
+                <directory>src/Http/Test</directory>
+            </exclude>
         </whitelist>
     </filter>
 
