@@ -13,7 +13,8 @@
         "ramsey/uuid": "^3.9",
         "slim/psr7": "^0.6.0",
         "slim/slim": "^4.3",
-        "symfony/console": "^5.0"
+        "symfony/console": "^5.0",
+        "webmozart/assert": "^1.6"
     },
     "require-dev": {
         "overtrue/phplint": "^1.2",
