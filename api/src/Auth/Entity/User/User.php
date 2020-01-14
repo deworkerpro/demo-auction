@@ -141,6 +141,13 @@ class User
         $this->role = $role;
     }
 
+    public function remove(): void
+    {
+        if (!$this->isWait()) {
+            throw new DomainException('Unable to remove active user.');
+        }
+    }
+
     public function isWait(): bool
     {
         return $this->status->isWait();
