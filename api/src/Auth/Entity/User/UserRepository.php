@@ -26,4 +26,5 @@ interface UserRepository
      */
     public function getByEmail(Email $email): User;
     public function add(User $user): void;
+    public function remove(User $user): void;
 }
