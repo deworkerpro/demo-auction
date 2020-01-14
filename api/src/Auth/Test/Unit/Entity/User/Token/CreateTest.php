@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Auth\Test\Unit\Entity\User;
+namespace App\Auth\Test\Unit\Entity\User\Token;
 
 use App\Auth\Entity\User\Token;
 use DateTimeImmutable;
@@ -13,7 +13,7 @@ use Ramsey\Uuid\Uuid;
 /**
  * @covers Token
  */
-class TokenTest extends TestCase
+class CreateTest extends TestCase
 {
     public function testSuccess(): void
     {
