@@ -123,6 +123,17 @@ class User
         $this->newEmailToken = $token;
     }
 
+    public function confirmEmailChanging(string $token, DateTimeImmutable $date): void
+    {
+        if ($this->newEmail === null || $this->newEmailToken === null) {
+            throw new DomainException('Changing is not requested.');
+        }
+        $this->newEmailToken->validate($token, $date);
+        $this->email = $this->newEmail;
+        $this->newEmail = null;
+        $this->newEmailToken = null;
+    }
+
     public function isWait(): bool
     {
         return $this->status->isWait();
