@@ -19,7 +19,7 @@ class RequestTest extends TestCase
 {
     public function testSuccess(): void
     {
-        $user = new User(
+        $user = User::requestJoinByEmail(
             $id = Id::generate(),
             $date = new DateTimeImmutable(),
             $email = new Email('mail@example.com'),
