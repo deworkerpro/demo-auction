@@ -2,21 +2,12 @@
 
 declare(strict_types=1);
 
-$files = array_merge(
-    glob(__DIR__ . '/common/*.php') ?: [],
-    glob(__DIR__ . '/' . (getenv('APP_ENV') ?: 'prod') . '/*.php') ?: []
-);
+use Laminas\ConfigAggregator\ConfigAggregator;
+use Laminas\ConfigAggregator\PhpFileProvider;
 
-$configs = array_map(
-    static function (string $file): array {
-        /**
-         * @var array
-         * @noinspection PhpIncludeInspection
-         * @psalm-suppress UnresolvableInclude
-         */
-        return require $file;
-    },
-    $files
-);
+$aggregator = new ConfigAggregator([
+    new PhpFileProvider(__DIR__ . '/common/*.php'),
+    new PhpFileProvider(__DIR__ . '/' . (getenv('APP_ENV') ?: 'prod') . '/*.php'),
+]);
 
-return array_replace_recursive(...$configs);
+return $aggregator->getMergedConfig();
