@@ -1,2 +1,3 @@
 -   import_tasks: generate_certificates.yml
 -   import_tasks: create_user.yml
+-   import_tasks: add_certbot_hook.yml
