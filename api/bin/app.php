@@ -38,8 +38,6 @@ $configuration->setCheckDatabasePlatform(false);
 $cli->getHelperSet()->set(new EntityManagerHelper($entityManager), 'em');
 $cli->getHelperSet()->set(new ConfigurationHelper($connection, $configuration), 'configuration');
 
-Doctrine\Migrations\Tools\Console\ConsoleRunner::addCommands($cli);
-
 foreach ($commands as $name) {
     /** @var Command $command */
     $command = $container->get($name);
