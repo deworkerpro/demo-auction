@@ -29,12 +29,14 @@ services:
         environment:
             APP_ENV: prod
             APP_DEBUG: 0
+            DB_URL: pgsql://app:${API_DB_PASSWORD}@api-postgres:5432/app
 
     api-php-cli:
         image: ${REGISTRY}/auction-api-php-cli:${IMAGE_TAG}
         environment:
             APP_ENV: prod
             APP_DEBUG: 0
+            DB_URL: pgsql://app:${API_DB_PASSWORD}@api-postgres:5432/app
 
     api-postgres:
         image: postgres:12.2-alpine
