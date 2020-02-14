@@ -38,6 +38,9 @@ api-permissions:
 api-composer-install:
 	docker-compose run --rm api-php-cli composer install
 
+api-migrations:
+	docker-compose run --rm api-php-cli composer app migrations:migrate
+
 api-lint:
 	docker-compose run --rm api-php-cli composer lint
 	docker-compose run --rm api-php-cli composer cs-check
