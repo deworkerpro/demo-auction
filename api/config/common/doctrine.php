@@ -55,7 +55,9 @@ return [
                 'dbname' => getenv('DB_NAME'),
                 'charset' => 'utf-8'
             ],
-            'metadata_dirs' => [],
+            'metadata_dirs' => [
+                __DIR__ . '/../../src/Auth/Entity'
+            ],
         ],
     ],
 ];
