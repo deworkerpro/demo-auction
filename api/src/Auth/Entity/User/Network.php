@@ -4,11 +4,21 @@ declare(strict_types=1);
 
 namespace App\Auth\Entity\User;
 
+use Doctrine\ORM\Mapping as ORM;
 use Webmozart\Assert\Assert;
 
+/**
+ * @ORM\Embeddable
+ */
 class Network
 {
+    /**
+     * @ORM\Column(type="string", length=16)
+     */
     private string $name;
+    /**
+     * @ORM\Column(type="string", length=16)
+     */
     private string $identity;
 
     public function __construct(string $name, string $identity)
