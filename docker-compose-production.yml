@@ -35,3 +35,16 @@ services:
         environment:
             APP_ENV: prod
             APP_DEBUG: 0
+
+    api-postgres:
+        image: postgres:12.2-alpine
+        restart: always
+        environment:
+            POSTGRES_USER: app
+            POSTGRES_PASSWORD: ${API_DB_PASSWORD}
+            POSTGRES_DB: app
+        volumes:
+            - api-postgres:/var/lib/postgresql/data
+
+volumes:
+    api-postgres:
