@@ -16,6 +16,10 @@ use DomainException;
  */
 class User
 {
+    /**
+     * @ORM\Column(type="auth_user_id")
+     * @ORM\Id
+     */
     private Id $id;
     /**
      * @ORM\Column(type="datetime_immutable")
