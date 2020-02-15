@@ -25,16 +25,28 @@ class User
      * @ORM\Column(type="datetime_immutable")
      */
     private DateTimeImmutable $date;
+    /**
+     * @ORM\Column(type="auth_user_email", unique=true)
+     */
     private Email $email;
     /**
      * @ORM\Column(type="string", nullable=true)
      */
     private ?string $passwordHash = null;
+    /**
+     * @ORM\Column(type="auth_user_status", length=16)
+     */
     private Status $status;
     private ?Token $joinConfirmToken = null;
     private ?Token $passwordResetToken = null;
+    /**
+     * @ORM\Column(type="auth_user_email", nullable=true)
+     */
     private ?Email $newEmail = null;
     private ?Token $newEmailToken = null;
+    /**
+     * @ORM\Column(type="auth_user_role", length=16)
+     */
     private Role $role;
     private ArrayObject $networks;
 
