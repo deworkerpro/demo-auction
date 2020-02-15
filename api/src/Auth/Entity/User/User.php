@@ -12,6 +12,7 @@ use DomainException;
 
 /**
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks
  * @ORM\Table(name="auth_users")
  */
 class User
@@ -246,5 +247,21 @@ class User
     {
         /** @var Network[] */
         return $this->networks->getArrayCopy();
+    }
+
+    /**
+     * @ORM\PostLoad()
+     */
+    public function checkEmbeds(): void
+    {
+        if ($this->joinConfirmToken && $this->joinConfirmToken->isEmpty()) {
+            $this->joinConfirmToken = null;
+        }
+        if ($this->passwordResetToken && $this->passwordResetToken->isEmpty()) {
+            $this->passwordResetToken = null;
+        }
+        if ($this->newEmailToken && $this->newEmailToken->isEmpty()) {
+            $this->newEmailToken = null;
+        }
     }
 }

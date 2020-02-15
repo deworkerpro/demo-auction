@@ -61,4 +61,9 @@ class Token
     {
         return $this->expires;
     }
+
+    public function isEmpty(): bool
+    {
+        return empty($this->value);
+    }
 }
