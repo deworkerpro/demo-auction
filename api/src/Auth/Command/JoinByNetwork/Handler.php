@@ -6,7 +6,7 @@ namespace App\User\Command\JoinByNetwork;
 
 use App\Auth\Entity\User\Email;
 use App\Auth\Entity\User\Id;
-use App\Auth\Entity\User\NetworkIdentity;
+use App\Auth\Entity\User\Network;
 use App\Auth\Entity\User\User;
 use App\Auth\Entity\User\UserRepository;
 use App\Flusher;
@@ -24,10 +24,10 @@ class Handler
 
     public function handle(Command $command): void
     {
-        $identity = new NetworkIdentity($command->network, $command->identity);
+        $network = new Network($command->network, $command->identity);
         $email = new Email($command->email);
 
-        if ($this->users->hasByNetwork($identity)) {
+        if ($this->users->hasByNetwork($network)) {
             throw new \DomainException('User with this network already exists.');
         }
 
@@ -39,7 +39,7 @@ class Handler
             Id::generate(),
             new \DateTimeImmutable(),
             $email,
-            $identity
+            $network
         );
 
         $this->users->add($user);
