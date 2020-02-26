@@ -3,6 +3,8 @@
 
 declare(strict_types=1);
 
+use Doctrine\Migrations\Configuration\Configuration;
+use Doctrine\Migrations\Tools\Console\Helper\ConfigurationHelper;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Tools\Console\Helper\EntityManagerHelper;
 use Psr\Container\ContainerInterface;
@@ -24,7 +26,19 @@ $commands = $container->get('config')['console']['commands'];
 
 /** @var EntityManagerInterface $entityManager */
 $entityManager = $container->get(EntityManagerInterface::class);
+$connection = $entityManager->getConnection();
+
+$configuration = new Configuration($connection);
+$configuration->setMigrationsDirectory(__DIR__ . '/../src/Data/Migration');
+$configuration->setMigrationsNamespace('App\Data\Migration');
+$configuration->setMigrationsTableName('migrations');
+$configuration->setAllOrNothing(true);
+$configuration->setCheckDatabasePlatform(false);
+
 $cli->getHelperSet()->set(new EntityManagerHelper($entityManager), 'em');
+$cli->getHelperSet()->set(new ConfigurationHelper($connection, $configuration), 'configuration');
+
+Doctrine\Migrations\Tools\Console\ConsoleRunner::addCommands($cli);
 
 foreach ($commands as $name) {
     /** @var Command $command */
