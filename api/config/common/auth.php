@@ -6,6 +6,7 @@ use App\Auth;
 use App\Auth\Entity\User\User;
 use App\Auth\Entity\User\UserRepository;
 use App\Auth\Service\JoinConfirmationSender;
+use App\Frontend\FrontendUrlGenerator;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Psr\Container\ContainerInterface;
@@ -22,12 +23,9 @@ return [
     JoinConfirmationSender::class => function (ContainerInterface $container): JoinConfirmationSender {
         /** @var Swift_Mailer $mailer */
         $mailer = $container->get(Swift_Mailer::class);
-        /**
-         * @psalm-suppress MixedArrayAccess
-         * @psalm-var array{url:string} $frontendConfig
-         */
-        $frontendConfig = $container->get('config')['frontend'];
+        /** @var FrontendUrlGenerator $frontend */
+        $frontend = $container->get(FrontendUrlGenerator::class);
 
-        return new JoinConfirmationSender($mailer, $frontendConfig['url']);
+        return new JoinConfirmationSender($mailer, $frontend);
     },
 ];
