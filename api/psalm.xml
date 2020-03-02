@@ -28,5 +28,15 @@
                 <directory name="tests" />
             </errorLevel>
         </PropertyNotSetInConstructor>
+
+        <!-- https://github.com/sebastianbergmann/phpunit/issues/3742 -->
+        <InternalMethod>
+            <errorLevel type="suppress">
+                <referencedMethod name="PHPUnit\Framework\MockObject\Builder\InvocationMocker::method" />
+                <referencedMethod name="PHPUnit\Framework\MockObject\Builder\InvocationMocker::with" />
+                <referencedMethod name="PHPUnit\Framework\MockObject\Builder\InvocationMocker::willReturn" />
+                <referencedMethod name="PHPUnit\Framework\MockObject\Builder\InvocationMocker::willReturnCallback" />
+            </errorLevel>
+        </InternalMethod>
     </issueHandlers>
 </psalm>
