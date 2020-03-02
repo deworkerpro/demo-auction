@@ -41,6 +41,11 @@ services:
             DB_USER: app
             DB_PASSWORD: secret
             DB_NAME: app
+            MAILER_HOST: mailer
+            MAILER_PORT: 1025
+            MAILER_USER: app
+            MAILER_PASSWORD: secret
+            MAILER_ENCRYPTION: tcp
         volumes:
             - ./api:/app
 
@@ -55,6 +60,11 @@ services:
             DB_USER: app
             DB_PASSWORD: secret
             DB_NAME: app
+            MAILER_HOST: mailer
+            MAILER_PORT: 1025
+            MAILER_USER: app
+            MAILER_PASSWORD: secret
+            MAILER_ENCRYPTION: tcp
         volumes:
             - ./api:/app
 
