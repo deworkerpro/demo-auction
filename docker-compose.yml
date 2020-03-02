@@ -46,6 +46,7 @@ services:
             MAILER_USER: app
             MAILER_PASSWORD: secret
             MAILER_ENCRYPTION: tcp
+            MAILER_FROM_EMAIL: mail@app.test
         volumes:
             - ./api:/app
 
@@ -65,6 +66,7 @@ services:
             MAILER_USER: app
             MAILER_PASSWORD: secret
             MAILER_ENCRYPTION: tcp
+            MAILER_FROM_EMAIL: mail@app.test
         volumes:
             - ./api:/app
 
