@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b143dd3bf4ae9c0db3cf0b928e450ebe",
+    "content-hash": "cf23769f0f7ea2078ab35c3440ec853d",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1098,6 +1098,54 @@
                 "response"
             ],
             "time": "2020-02-05T20:36:27+00:00"
+        },
+        {
+            "name": "finesse/swiftmailer-defaults-plugin",
+            "version": "v2.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FinesseRus/SwiftMailerDefaultsPlugin.git",
+                "reference": "8b0a0e2cf230a8df02e4e8780192191a3c10582f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FinesseRus/SwiftMailerDefaultsPlugin/zipball/8b0a0e2cf230a8df02e4e8780192191a3c10582f",
+                "reference": "8b0a0e2cf230a8df02e4e8780192191a3c10582f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6",
+                "swiftmailer/swiftmailer": ">=4.0 <7.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.0",
+                "phpunit/phpunit": ">=5.4.3 <8.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Finesse\\SwiftMailerDefaultsPlugin\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Surgie Finesse",
+                    "email": "finesserus@gmail.com"
+                }
+            ],
+            "description": "A plugin for SwiftMailer and Symfony that sets default properties for email Messages (from, sender, reply to and so on)",
+            "homepage": "https://github.com/FinesseRus/SwiftMailerDefaultsPlugin",
+            "keywords": [
+                "defaults",
+                "plugin",
+                "swiftmailer",
+                "symfony"
+            ],
+            "time": "2018-05-01T04:54:30+00:00"
         },
         {
             "name": "jeremeamia/superclosure",
