@@ -39,6 +39,7 @@ services:
             MAILER_PASSWORD: ${API_MAILER_PASSWORD}
             MAILER_ENCRYPTION: tls
             MAILER_FROM_EMAIL: ${API_MAILER_FROM_EMAIL}
+            FRONTEND_URL: https://demo-auction.deworker.pro
 
     api-php-cli:
         image: ${REGISTRY}/auction-api-php-cli:${IMAGE_TAG}
@@ -55,6 +56,7 @@ services:
             MAILER_PASSWORD: ${API_MAILER_PASSWORD}
             MAILER_ENCRYPTION: tls
             MAILER_FROM_EMAIL: ${API_MAILER_FROM_EMAIL}
+            FRONTEND_URL: https://demo-auction.deworker.pro
 
     api-postgres:
         image: postgres:12.2-alpine
