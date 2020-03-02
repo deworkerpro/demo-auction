@@ -47,6 +47,7 @@ services:
             MAILER_PASSWORD: secret
             MAILER_ENCRYPTION: tcp
             MAILER_FROM_EMAIL: mail@app.test
+            FRONTEND_URL: http://localhost:8080
         volumes:
             - ./api:/app
 
@@ -67,6 +68,7 @@ services:
             MAILER_PASSWORD: secret
             MAILER_ENCRYPTION: tcp
             MAILER_FROM_EMAIL: mail@app.test
+            FRONTEND_URL: http://localhost:8080
         volumes:
             - ./api:/app
 
