@@ -11,6 +11,7 @@
         "ext-json": "^7.4",
         "doctrine/migrations": "^2.2",
         "doctrine/orm": "^2.7",
+        "finesse/swiftmailer-defaults-plugin": "^2.0",
         "laminas/laminas-config-aggregator": "^1.2",
         "php-di/php-di": "^6.0",
         "ramsey/uuid": "^3.9",
