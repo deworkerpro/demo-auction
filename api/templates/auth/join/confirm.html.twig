@@ -3,6 +3,8 @@
 {% block body %}
 
     <p style="margin: 0 0 10px 0">Confirm your email:</p>
+
+    {% set url = frontend_url('join/email', {'token': token.value} ) %}
     <p style="margin: 0"><a style="color: #1a8aee; text-decoration: none" href="{{ url }}"><span style="color: #1a8aee; text-decoration: underline">{{ url }}</span></a></p>
 
 {% endblock %}
