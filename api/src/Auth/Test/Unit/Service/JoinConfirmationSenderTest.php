@@ -23,7 +23,8 @@ class JoinConfirmationSenderTest extends TestCase
     {
         $to = new Email('user@app.test');
         $token = new Token(Uuid::uuid4()->toString(), new DateTimeImmutable());
-        $confirmUrl = '/join/confirm?token=' . $token->getValue();
+        $frontendUrl = 'http://test';
+        $confirmUrl = $frontendUrl . '/join/confirm?token=' . $token->getValue();
 
         $mailer = $this->createMock(Swift_Mailer::class);
         $mailer->expects($this->once())->method('send')
@@ -34,7 +35,7 @@ class JoinConfirmationSenderTest extends TestCase
                 return 1;
             });
 
-        $sender = new JoinConfirmationSender($mailer);
+        $sender = new JoinConfirmationSender($mailer, $frontendUrl);
 
         $sender->send($to, $token);
     }
@@ -43,11 +44,12 @@ class JoinConfirmationSenderTest extends TestCase
     {
         $to = new Email('user@app.test');
         $token = new Token(Uuid::uuid4()->toString(), new DateTimeImmutable());
+        $frontendUrl = 'http://test';
 
         $mailer = $this->createStub(Swift_Mailer::class);
         $mailer->method('send')->willReturn(0);
 
-        $sender = new JoinConfirmationSender($mailer);
+        $sender = new JoinConfirmationSender($mailer, $frontendUrl);
 
         $this->expectException(RuntimeException::class);
         $sender->send($to, $token);

@@ -13,17 +13,19 @@ use Swift_Message;
 class JoinConfirmationSender
 {
     private Swift_Mailer $mailer;
+    private string $frontendUrl;
 
-    public function __construct(Swift_Mailer $mailer)
+    public function __construct(Swift_Mailer $mailer, string $frontendUrl)
     {
         $this->mailer = $mailer;
+        $this->frontendUrl = $frontendUrl;
     }
 
     public function send(Email $email, Token $token): void
     {
         $message = (new Swift_Message('Join Confirmation'))
             ->setTo($email->getValue())
-            ->setBody('/join/confirm?' . http_build_query([
+            ->setBody($this->frontendUrl . '/join/confirm?' . http_build_query([
                 'token' => $token->getValue(),
             ]));
 
