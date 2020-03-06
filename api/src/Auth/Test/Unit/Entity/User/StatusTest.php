@@ -15,9 +15,9 @@ class StatusTest extends TestCase
 {
     public function testSuccess(): void
     {
-        $role = new Status($name = Status::WAIT);
+        $status = new Status($name = Status::WAIT);
 
-        self::assertEquals($name, $role->getName());
+        self::assertEquals($name, $status->getName());
     }
 
     public function testIncorrect(): void
