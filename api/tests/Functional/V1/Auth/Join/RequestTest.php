@@ -87,4 +87,26 @@ class RequestTest extends WebTestCase
             ],
         ], Json::decode($body));
     }
+
+    public function testNotValidLang(): void
+    {
+        $this->markTestIncomplete('Waiting for translation.');
+
+        $response = $this->app()->handle(self::json('POST', '/v1/auth/join', [
+            'email' => 'not-email',
+            'password' => '',
+        ])->withHeader('Accept-Language', 'es;q=0.9, ru;q=0.8, *;q=0.5'));
+
+        self::assertEquals(422, $response->getStatusCode());
+        self::assertJson($body = (string)$response->getBody());
+
+        $data = Json::decode($body);
+
+        self::assertEquals([
+            'errors' => [
+                'email' => 'Значение адреса электронной почты недопустимо.',
+                'password' => 'Значение не должно быть пустым.',
+            ],
+        ], $data);
+    }
 }
