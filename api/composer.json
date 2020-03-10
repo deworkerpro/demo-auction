@@ -13,6 +13,7 @@
         "doctrine/orm": "^2.7",
         "finesse/swiftmailer-defaults-plugin": "^2.0",
         "laminas/laminas-config-aggregator": "^1.2",
+        "monolog/monolog": "^2.0",
         "php-di/php-di": "^6.0",
         "ramsey/uuid": "^3.9",
         "slim/psr7": "^1.0",
