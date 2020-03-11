@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
+use App\ErrorHandler\LogErrorHandler;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
-use Slim\Handlers\ErrorHandler;
+use Psr\Log\LoggerInterface;
 use Slim\Interfaces\CallableResolverInterface;
 use Slim\Middleware\ErrorMiddleware;
 
@@ -16,7 +17,7 @@ return [
         $responseFactory = $container->get(ResponseFactoryInterface::class);
         /**
          * @psalm-suppress MixedArrayAccess
-         * @psalm-var array{display_details:bool,log:bool} $config
+         * @psalm-var array{display_details:bool} $config
          */
         $config = $container->get('config')['errors'];
 
@@ -24,12 +25,15 @@ return [
             $callableResolver,
             $responseFactory,
             $config['display_details'],
-            $config['log'],
+            true,
             true
         );
 
+        /** @var LoggerInterface $logger */
+        $logger = $container->get(LoggerInterface::class);
+
         $middleware->setDefaultErrorHandler(
-            new ErrorHandler($callableResolver, $responseFactory)
+            new LogErrorHandler($callableResolver, $responseFactory, $logger)
         );
 
         return $middleware;
@@ -38,7 +42,6 @@ return [
     'config' => [
         'errors' => [
             'display_details' => (bool)getenv('APP_DEBUG'),
-            'log' => true,
         ],
     ],
 ];
