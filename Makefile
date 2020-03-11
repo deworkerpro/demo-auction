@@ -6,12 +6,12 @@ check: lint analyze validate-schema test
 lint: api-lint
 analyze: api-analyze
 validate-schema: api-validate-schema
-test: api-test
+test: api-test api-fixtures
 test-coverage: api-test-coverage
 test-unit: api-test-unit
 test-unit-coverage: api-test-unit-coverage
-test-functional: api-test-functional
-test-functional-coverage: api-test-functional-coverage
+test-functional: api-test-functional api-fixtures
+test-functional-coverage: api-test-functional-coverage api-fixtures
 
 docker-up:
 	docker-compose up -d
