@@ -9,6 +9,7 @@ use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use Doctrine\Common\DataFixtures\Loader;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\ORM\EntityManagerInterface;
+use GuzzleHttp\Client;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -18,6 +19,7 @@ use Slim\Psr7\Factory\ServerRequestFactory;
 class WebTestCase extends TestCase
 {
     private ?App $app = null;
+    private ?MailerClient $mailer = null;
 
     protected function tearDown(): void
     {
@@ -65,6 +67,14 @@ class WebTestCase extends TestCase
             $this->app = (require __DIR__ . '/../../config/app.php')($this->container());
         }
         return $this->app;
+    }
+
+    protected function mailer(): MailerClient
+    {
+        if ($this->mailer === null) {
+            $this->mailer = new MailerClient();
+        }
+        return $this->mailer;
     }
 
     private function container(): ContainerInterface
