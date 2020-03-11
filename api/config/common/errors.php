@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
+use Slim\Handlers\ErrorHandler;
 use Slim\Interfaces\CallableResolverInterface;
 use Slim\Middleware\ErrorMiddleware;
 
@@ -19,13 +20,19 @@ return [
          */
         $config = $container->get('config')['errors'];
 
-        return new ErrorMiddleware(
+        $middleware = new ErrorMiddleware(
             $callableResolver,
             $responseFactory,
             $config['display_details'],
             $config['log'],
             true
         );
+
+        $middleware->setDefaultErrorHandler(
+            new ErrorHandler($callableResolver, $responseFactory)
+        );
+
+        return $middleware;
     },
 
     'config' => [
