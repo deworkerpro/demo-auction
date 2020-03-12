@@ -6,7 +6,7 @@
          beStrictAboutCoversAnnotation="true"
          beStrictAboutOutputDuringTests="true"
          beStrictAboutTodoAnnotatedTests="true"
-         cacheResultFile="var/.phpunit.result.cache"
+         cacheResultFile="var/cache/.phpunit.result.cache"
          verbose="true">
     <testsuites>
         <testsuite name="unit">
