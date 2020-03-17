@@ -6,6 +6,7 @@ namespace App\Http\Action\V1\Auth\Join;
 
 use App\Auth\Command\JoinByEmail\Request\Command;
 use App\Auth\Command\JoinByEmail\Request\Handler;
+use App\Http\EmptyResponse;
 use App\Http\JsonResponse;
 use DomainException;
 use Psr\Http\Message\ResponseInterface;
@@ -34,7 +35,7 @@ class RequestAction implements RequestHandlerInterface
 
         try {
             $this->handler->handle($command);
-            return new JsonResponse(new \stdClass(), 201);
+            return new EmptyResponse(201);
         } catch (DomainException $exception) {
             return new JsonResponse(['message' => $exception->getMessage()], 409);
         }
