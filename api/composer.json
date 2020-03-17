@@ -21,6 +21,7 @@
         "slim/slim": "^4.3",
         "swiftmailer/swiftmailer": "^6.2",
         "symfony/console": "^5.0",
+        "symfony/translation": "^5.0",
         "symfony/validator": "^5.0",
         "twig/twig": "^3.0",
         "webmozart/assert": "^1.6"
