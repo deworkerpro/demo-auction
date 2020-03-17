@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ea5dd62ebb0d4f3b57e8a825755360b8",
+    "content-hash": "002052416fce680f818f68934ff92ca7",
     "packages": [
         {
             "name": "clue/stream-filter",
@@ -3094,6 +3094,69 @@
                 "psr-3"
             ],
             "time": "2019-11-01T11:05:21+00:00"
+        },
+        {
+            "name": "ptlis/conneg",
+            "version": "v4.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ptlis/conneg.git",
+                "reference": "ead222fb5c04f1a2f37ac2280751ccb6dff8b0cc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ptlis/conneg/zipball/ead222fb5c04f1a2f37ac2280751ccb6dff8b0cc",
+                "reference": "ead222fb5c04f1a2f37ac2280751ccb6dff8b0cc",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "pdepend/pdepend": "~2.0",
+                "phploc/phploc": "~2.0",
+                "phpmd/phpmd": "~2.2",
+                "phpunit/phpunit": "~4.5",
+                "sebastian/phpcpd": "~2.0",
+                "squizlabs/php_codesniffer": "~2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "ptlis\\ConNeg\\": "src/",
+                    "ptlis\\ConNeg\\Test\\": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "brian ridley",
+                    "email": "ptlis@ptlis.net"
+                }
+            ],
+            "description": "Tools for performing content negotiation.",
+            "keywords": [
+                "accept",
+                "accept-charset",
+                "accept-encoding",
+                "accept-language",
+                "charset",
+                "content",
+                "content-type",
+                "encoding",
+                "field",
+                "header",
+                "http",
+                "language",
+                "mime",
+                "negotiation",
+                "parse",
+                "types"
+            ],
+            "time": "2015-08-31T20:03:05+00:00"
         },
         {
             "name": "ralouphie/getallheaders",
