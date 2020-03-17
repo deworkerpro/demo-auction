@@ -14,12 +14,28 @@ return [
          */
         $config = $container->get('config')['translator'];
 
-        return new Translator($config['lang']);
+        $translator = new Translator($config['lang']);
+        $translator->addLoader('php', new PhpFileLoader());
+        $translator->addLoader('xlf', new XliffFileLoader());
+
+        foreach ($config['resources'] as $resource) {
+            $translator->addResource(...$resource);
+        }
+
+        return $translator;
     },
 
     'config' => [
         'translator' => [
             'lang' => 'en',
+            'resources' => [
+                [
+                    'xlf',
+                    __DIR__ . '/../../vendor/symfony/validator/Resources/translations/validators.ru.xlf',
+                    'ru',
+                    'validators'
+                ],
+            ],
         ],
     ],
 ];
