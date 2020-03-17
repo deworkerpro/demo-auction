@@ -30,8 +30,8 @@ class RequestAction implements RequestHandlerInterface
         $data = $request->getParsedBody();
 
         $command = new Command();
-        $command->email = trim($data['email'] ?? '');
-        $command->password = trim($data['password'] ?? '');
+        $command->email = $data['email'] ?? '';
+        $command->password = $data['password'] ?? '';
 
         try {
             $this->handler->handle($command);
