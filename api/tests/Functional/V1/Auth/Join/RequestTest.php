@@ -90,8 +90,6 @@ class RequestTest extends WebTestCase
 
     public function testNotValidLang(): void
     {
-        $this->markTestIncomplete('Waiting for translation.');
-
         $response = $this->app()->handle(self::json('POST', '/v1/auth/join', [
             'email' => 'not-email',
             'password' => '',
