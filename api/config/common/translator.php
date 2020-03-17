@@ -48,6 +48,12 @@ return [
                     'ru',
                     'validators'
                 ],
+                [
+                    'php',
+                    __DIR__ . '/../../translations/exceptions.ru.php',
+                    'ru',
+                    'exceptions'
+                ],
             ],
         ],
         'locales' => [
