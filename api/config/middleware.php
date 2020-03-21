@@ -11,6 +11,7 @@ return static function (App $app): void {
     $app->add(Middleware\ValidationExceptionHandler::class);
     $app->add(Middleware\ClearEmptyInput::class);
     $app->add(Middleware\TranslatorLocale::class);
+    $app->add(Middleware\LocaleNegotiation::class);
     $app->addBodyParsingMiddleware();
     $app->add(ErrorMiddleware::class);
 };
