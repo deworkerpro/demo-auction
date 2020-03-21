@@ -21,11 +21,9 @@ class TranslatorLocaleTest extends TestCase
     public function testDefault(): void
     {
         $translator = $this->createMock(Translator::class);
-        $translator->expects($this->once())->method('setLocale')->with(
-            $this->equalTo('en')
-        );
+        $translator->expects($this->never())->method('setLocale');
 
-        $middleware = new TranslatorLocale($translator, ['en', 'ru']);
+        $middleware = new TranslatorLocale($translator);
 
         $handler = $this->createStub(RequestHandlerInterface::class);
         $handler->method('handle')->willReturn($source = self::createResponse());
@@ -42,46 +40,12 @@ class TranslatorLocaleTest extends TestCase
             $this->equalTo('ru')
         );
 
-        $middleware = new TranslatorLocale($translator, ['en', 'ru']);
+        $middleware = new TranslatorLocale($translator);
 
         $handler = $this->createStub(RequestHandlerInterface::class);
         $handler->method('handle')->willReturn(self::createResponse());
 
         $request = self::createRequest()->withHeader('Accept-Language', 'ru');
-
-        $middleware->process($request, $handler);
-    }
-
-    public function testMulti(): void
-    {
-        $translator = $this->createMock(Translator::class);
-        $translator->expects($this->once())->method('setLocale')->with(
-            $this->equalTo('ru')
-        );
-
-        $middleware = new TranslatorLocale($translator, ['en', 'fr', 'ru']);
-
-        $handler = $this->createStub(RequestHandlerInterface::class);
-        $handler->method('handle')->willReturn(self::createResponse());
-
-        $request = self::createRequest()->withHeader('Accept-Language', 'es;q=0.9, ru;q=0.8, *;q=0.5');
-
-        $middleware->process($request, $handler);
-    }
-
-    public function testOther(): void
-    {
-        $translator = $this->createMock(Translator::class);
-        $translator->expects($this->once())->method('setLocale')->with(
-            $this->equalTo('en')
-        );
-
-        $middleware = new TranslatorLocale($translator, ['en', 'ru']);
-
-        $handler = $this->createStub(RequestHandlerInterface::class);
-        $handler->method('handle')->willReturn(self::createResponse());
-
-        $request = self::createRequest()->withHeader('Accept-Language', 'es');
 
         $middleware->process($request, $handler);
     }
