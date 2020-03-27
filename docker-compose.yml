@@ -15,8 +15,7 @@ services:
 
     frontend:
         build:
-            context: frontend/docker
-            dockerfile: development/nginx/Dockerfile
+            context: frontend/docker/development/nginx
         volumes:
             - ./frontend:/app
 
