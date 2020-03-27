@@ -20,6 +20,12 @@ services:
         volumes:
             - ./frontend:/app
 
+    frontend-node-cli:
+        build:
+            context: frontend/docker/development/node
+        volumes:
+            - ./frontend:/app
+
     api:
         build:
             context: api/docker
