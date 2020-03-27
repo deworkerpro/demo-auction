@@ -28,9 +28,6 @@
     "test": "react-scripts test",
     "lint": "eslint --ext .js,.jsx src"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
   "browserslist": {
     "production": [
       ">0.2%",
