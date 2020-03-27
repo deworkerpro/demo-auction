@@ -93,6 +93,9 @@ frontend-ready:
 frontend-lint:
 	docker-compose run --rm frontend-node-cli yarn lint
 
+frontend-lint-fix:
+	docker-compose run --rm frontend-node-cli yarn lint-fix
+
 frontend-test:
 	docker-compose run --rm frontend-node-cli yarn test --watchAll=false
 
