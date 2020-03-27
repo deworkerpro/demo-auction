@@ -2,7 +2,8 @@
   "env": {
     "browser": true,
     "es6": true,
-    "node": true
+    "node": true,
+    "jest": true
   },
   "extends": [
     "plugin:react/recommended",
@@ -22,6 +23,12 @@
   "plugins": [
     "react"
   ],
+  "settings": {
+    "react": {
+      "version": "16"
+    }
+  },
   "rules": {
+    "space-before-function-paren": "off"
   }
 }
