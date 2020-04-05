@@ -1,6 +1,6 @@
 FROM php:7.4-cli-alpine
 
-RUN apk update && apk add unzip
+RUN apk add --no-cache unzip
 
 RUN mv $PHP_INI_DIR/php.ini-development $PHP_INI_DIR/php.ini
 
