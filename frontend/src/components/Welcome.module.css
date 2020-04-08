@@ -3,7 +3,7 @@
   vertical-align: middle;
   padding: 30px;
   background: #fff;
-  box-shadow: 1px 1px 10px rgba(0, 0, 0, .05);
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.05);
   border-radius: 6px;
 }
 
@@ -19,7 +19,7 @@
 .welcome p {
   text-align: center;
   color: #444;
-  font-size: .9rem;
+  font-size: 0.9rem;
   line-height: 1;
   margin: 0;
 }
