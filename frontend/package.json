@@ -20,14 +20,17 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-standard": "^4.0.1",
-    "react-test-renderer": "^16.13.1"
+    "react-test-renderer": "^16.13.1",
+    "stylelint": "^13.3.0",
+    "stylelint-config-standard": "^20.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "lint": "eslint --ext .js,.jsx src",
-    "lint-fix": "eslint --fix --ext .js,.jsx src"
+    "eslint": "eslint --ext .js,.jsx src",
+    "eslint-fix": "eslint --fix --ext .js,.jsx src",
+    "stylelint": "stylelint \"src/**/*.css\""
   },
   "browserslist": {
     "production": [
