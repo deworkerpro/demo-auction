@@ -1,4 +1,7 @@
-init: docker-down-clear api-clear frontend-clear docker-pull docker-build docker-up api-init frontend-init
+init: docker-down-clear \
+	api-clear frontend-clear \
+	docker-pull docker-build docker-up \
+	api-init frontend-init
 up: docker-up
 down: docker-down
 restart: down up
