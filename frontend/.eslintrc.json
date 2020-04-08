@@ -7,7 +7,8 @@
   },
   "extends": [
     "plugin:react/recommended",
-    "standard"
+    "standard",
+    "plugin:prettier/recommended"
   ],
   "globals": {
     "Atomics": "readonly",
@@ -20,15 +21,13 @@
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
-  "plugins": [
-    "react"
-  ],
+  "plugins": ["react", "prettier"],
   "settings": {
     "react": {
       "version": "16"
     }
   },
   "rules": {
-    "space-before-function-paren": "off"
+    "prettier/prettier": "error"
   }
 }
