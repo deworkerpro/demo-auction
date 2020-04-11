@@ -3,6 +3,7 @@
     hosts: site
     remote_user: root
     roles:
+        - swap
         - docker
         - certbot
         - site
