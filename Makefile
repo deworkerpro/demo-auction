@@ -1,7 +1,7 @@
 init: docker-down-clear \
 	api-clear frontend-clear \
 	docker-pull docker-build docker-up \
-	api-init frontend-init
+	api-init frontend-init cucumber-init
 up: docker-up
 down: docker-down
 restart: down up
@@ -105,6 +105,11 @@ frontend-test:
 
 frontend-test-watch:
 	docker-compose run --rm frontend-node-cli yarn test
+
+cucumber-init: cucumber-assets-install
+
+cucumber-assets-install:
+	docker-compose run --rm cucumber-node-cli yarn install
 
 build: build-gateway build-frontend build-api
 
