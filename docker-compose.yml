@@ -101,5 +101,11 @@ services:
     mailer:
         image: mailhog/mailhog
 
+    cucumber-node-cli:
+        build:
+            context: cucumber/docker/development/node
+        volumes:
+            - ./cucumber:/app
+
 volumes:
     api-postgres:
