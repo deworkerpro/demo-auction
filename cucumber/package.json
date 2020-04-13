@@ -1,0 +1,6 @@
+{
+  "license": "MIT",
+  "dependencies": {
+    "cucumber": "^6.0.5"
+  }
+}
