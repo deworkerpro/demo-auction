@@ -14,8 +14,8 @@ Before(async function () {
 
 After(async function (testCase) {
   if (testCase.result.status === Status.FAILED) {
-    const name = testCase.sourceLocation.uri + '-' + testCase.sourceLocation.line
-    await this.page.screenshot({ path: 'var/' + name.replace(/\//g, '_') + '.png', fullPage: true })
+    const screenShot = await this.page.screenshot({ encoding: 'base64', fullPage: true })
+    this.attach(screenShot, 'image/png')
   }
   await this.page.close()
   await this.browser.close()
