@@ -1,5 +1,5 @@
 init: docker-down-clear \
-	api-clear frontend-clear \
+	api-clear frontend-clear cucumber-clear \
 	docker-pull docker-build docker-up \
 	api-init frontend-init cucumber-init
 up: docker-up
@@ -12,7 +12,7 @@ validate-schema: api-validate-schema
 test: api-test api-fixtures frontend-test
 test-unit: api-test-unit
 test-functional: api-test-functional api-fixtures
-test-e2e: api-fixtures cucumber-e2e
+test-e2e: api-fixtures cucumber-clear cucumber-e2e
 
 docker-up:
 	docker-compose up -d
@@ -103,6 +103,9 @@ frontend-test:
 
 frontend-test-watch:
 	docker-compose run --rm frontend-node-cli yarn test
+
+cucumber-clear:
+	docker run --rm -v ${PWD}/cucumber:/app -w /app alpine sh -c 'rm -rf var/*'
 
 cucumber-init: cucumber-assets-install
 
