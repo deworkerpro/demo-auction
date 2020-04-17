@@ -1,6 +1,7 @@
 {
   "license": "MIT",
   "scripts": {
+    "smoke": "cucumber-js --tags @smoke --fail-fast --parallel 2",
     "e2e": "cucumber-js --parallel 4",
     "lint": "eslint --ext .js features",
     "lint-fix": "eslint --fix --ext .js features"
