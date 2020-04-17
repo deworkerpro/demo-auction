@@ -12,6 +12,7 @@ validate-schema: api-validate-schema
 test: api-test api-fixtures frontend-test
 test-unit: api-test-unit
 test-functional: api-test-functional api-fixtures
+test-smoke: api-fixtures cucumber-clear cucumber-smoke
 test-e2e: api-fixtures cucumber-clear cucumber-e2e
 
 docker-up:
@@ -117,6 +118,9 @@ cucumber-lint:
 
 cucumber-lint-fix:
 	docker-compose run --rm cucumber-node-cli yarn lint-fix
+
+cucumber-smoke:
+	docker-compose run --rm cucumber-node-cli yarn smoke
 
 cucumber-e2e:
 	docker-compose run --rm cucumber-node-cli yarn e2e
