@@ -1,15 +1,13 @@
 {
   "license": "MIT",
   "scripts": {
-    "e2e": "cucumber-js --format json:var/report.json",
-    "report": "node reporter.js",
+    "e2e": "cucumber-js",
     "lint": "eslint --ext .js features",
     "lint-fix": "eslint --fix --ext .js features"
   },
   "dependencies": {
     "chai": "^4.2.0",
     "cucumber": "^6.0.5",
-    "cucumber-html-reporter": "^5.2.0",
     "puppeteer": "^2.1.1"
   },
   "devDependencies": {
