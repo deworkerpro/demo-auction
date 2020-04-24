@@ -15,4 +15,4 @@
             prompt: "Password"
     tasks:
         -   name: Log into private registry
-            shell: "docker login -u {{ username }} -p {{ password }} {{ registry }}"
+            shell: "docker login -u '{{ username }}' -p '{{ password }}' '{{ registry }}'"
