@@ -1,0 +1,67 @@
+version: "3.7"
+services:
+    gateway:
+        image: ${REGISTRY}/auction-testing-gateway:${IMAGE_TAG}
+        depends_on:
+            - frontend
+            - api
+            - mailer
+
+    frontend:
+        image: ${REGISTRY}/auction-frontend:${IMAGE_TAG}
+
+    api:
+        image: ${REGISTRY}/auction-api:${IMAGE_TAG}
+        depends_on:
+            - api-php-fpm
+
+    api-php-fpm:
+        image: ${REGISTRY}/auction-api-php-fpm:${IMAGE_TAG}
+        environment:
+            APP_ENV: prod
+            APP_DEBUG: 0
+            DB_HOST: api-postgres
+            DB_USER: app
+            DB_PASSWORD: secret
+            DB_NAME: app
+            MAILER_HOST: mailer
+            MAILER_PORT: 1025
+            MAILER_USER: app
+            MAILER_PASSWORD: secret
+            MAILER_ENCRYPTION: tcp
+            MAILER_FROM_EMAIL: mail@app.test
+            FRONTEND_URL: http://gateway:8080
+            SENTRY_DSN: ""
+
+    api-php-cli:
+        image: ${REGISTRY}/auction-api-php-cli:${IMAGE_TAG}
+        environment:
+            APP_ENV: prod
+            APP_DEBUG: 0
+            DB_HOST: api-postgres
+            DB_USER: app
+            DB_PASSWORD: secret
+            DB_NAME: app
+            MAILER_HOST: mailer
+            MAILER_PORT: 1025
+            MAILER_USER: app
+            MAILER_PASSWORD: secret
+            MAILER_ENCRYPTION: tcp
+            MAILER_FROM_EMAIL: mail@app.test
+            FRONTEND_URL: http://gateway:8080
+            SENTRY_DSN: ""
+
+    api-postgres:
+        image: postgres:12.2-alpine
+        environment:
+            POSTGRES_USER: app
+            POSTGRES_PASSWORD: secret
+            POSTGRES_DB: app
+
+    mailer:
+        image: mailhog/mailhog
+
+    cucumber-node-cli:
+        image: ${REGISTRY}/auction-cucumber-node-cli:${IMAGE_TAG}
+        volumes:
+            - ./cucumber/var:/app/var
