@@ -162,8 +162,22 @@ testing-build-gateway:
 testing-build-cucumber:
 	docker --log-level=debug build --pull --file=cucumber/docker/testing/node/Dockerfile --tag=${REGISTRY}/auction-cucumber-node-cli:${IMAGE_TAG} cucumber
 
+testing-init:
+	COMPOSE_PROJECT_NAME=testing docker-compose -f docker-compose-testing.yml up -d
+	COMPOSE_PROJECT_NAME=testing docker-compose -f docker-compose-testing.yml run --rm api-php-cli wait-for-it api-postgres:5432 -t 60
+	COMPOSE_PROJECT_NAME=testing docker-compose -f docker-compose-testing.yml run --rm api-php-cli php bin/app.php migrations:migrate --no-interaction
+
+testing-down-clear:
+	COMPOSE_PROJECT_NAME=testing docker-compose -f docker-compose-testing.yml down -v --remove-orphans
+
 try-testing-build:
 	REGISTRY=localhost IMAGE_TAG=0 make testing-build
+
+try-testing-init:
+	REGISTRY=localhost IMAGE_TAG=0 make testing-init
+
+try-testing-down-clear:
+	REGISTRY=localhost IMAGE_TAG=0 make testing-down-clear
 
 deploy:
 	ssh ${HOST} -p ${PORT} 'rm -rf site_${BUILD_NUMBER}'
