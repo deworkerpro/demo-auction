@@ -6,6 +6,7 @@ pipeline {
     environment {
         CI = 'true'
         REGISTRY = credentials("REGISTRY")
+        IMAGE_TAG = env.BUILD_NUMBER
     }
     stages {
         stage("Init") {
