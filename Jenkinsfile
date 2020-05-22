@@ -113,6 +113,28 @@ pipeline {
                 sh "make push"
             }
         }
+        stage ('Prod') {
+            when {
+                branch "master"
+            }
+            steps {
+                withCredentials([
+                    string(credentialsId: 'PRODUCTION_HOST', variable: 'HOST'),
+                    string(credentialsId: 'PRODUCTION_PORT', variable: 'PORT'),
+                    string(credentialsId: 'API_DB_PASSWORD', variable: 'API_DB_PASSWORD'),
+                    string(credentialsId: 'API_MAILER_HOST', variable: 'API_MAILER_HOST'),
+                    string(credentialsId: 'API_MAILER_PORT', variable: 'API_MAILER_PORT'),
+                    string(credentialsId: 'API_MAILER_USER', variable: 'API_MAILER_USER'),
+                    string(credentialsId: 'API_MAILER_PASSWORD', variable: 'API_MAILER_PASSWORD'),
+                    string(credentialsId: 'API_MAILER_FROM_EMAIL', variable: 'API_MAILER_FROM_EMAIL'),
+                    string(credentialsId: 'SENTRY_DSN', variable: 'SENTRY_DSN')
+                ]) {
+                    sshagent (credentials: ['PRODUCTION_AUTH']) {
+                        sh "BUILD_NUMBER=${env.BUILD_NUMBER} make deploy"
+                    }
+                }
+            }
+        }
     }
     post {
         always {
