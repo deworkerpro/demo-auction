@@ -18,4 +18,9 @@ pipeline {
             }
         }
     }
+    post {
+        always {
+            sh "make docker-down-clear || true"
+        }
+    }
 }
