@@ -12,6 +12,11 @@ pipeline {
                 sh "make init"
             }
         }
+        stage("Valid") {
+            steps {
+                sh "make api-validate-schema"
+            }
+        }
         stage("Down") {
             steps {
                 sh "make docker-down-clear"
