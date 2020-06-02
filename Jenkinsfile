@@ -3,6 +3,9 @@ pipeline {
     options {
         timestamps()
     }
+    environment {
+        CI = 'true'
+    }
     stages {
         stage("One") {
             steps {
