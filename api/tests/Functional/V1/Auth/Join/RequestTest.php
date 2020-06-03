@@ -100,7 +100,7 @@ class RequestTest extends WebTestCase
         self::assertEquals([
             'errors' => [
                 'email' => 'This value is not a valid email address.',
-                'password' => 'This value should be blank.',
+                'password' => 'This value should not be blank.',
             ],
         ], Json::decode($body));
     }
