@@ -51,7 +51,7 @@ pipeline {
                     }
                     post {
                         failure {
-                            archiveArtifacts 'api/var/log/*'
+                            archiveArtifacts 'api/var/log/**/*'
                         }
                     }
                 }
