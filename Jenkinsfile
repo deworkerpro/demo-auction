@@ -36,6 +36,11 @@ pipeline {
                 }
             }
         }
+        stage("Analyze") {
+            steps {
+                sh "make api-analyze"
+            }
+        }
         stage("Down") {
             steps {
                 sh "make docker-down-clear"
