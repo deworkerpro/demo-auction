@@ -114,3 +114,7 @@ jobs:
 
             -   name: Testing Down
                 run: make testing-down-clear
+
+            -   name: Push
+                run: make push
+                if: ${{ github.ref == 'refs/heads/master' }}
