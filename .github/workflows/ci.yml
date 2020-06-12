@@ -91,6 +91,9 @@ jobs:
             -   name: Testing Build
                 run: make testing-build
 
+            -   name: Push testing cache images
+                run: make push-testing-build-cache
+
             -   name: Testing Init
                 run: make testing-init
 
