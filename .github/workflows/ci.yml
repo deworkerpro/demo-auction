@@ -12,5 +12,23 @@ jobs:
         steps:
             -   uses: actions/checkout@v2
 
+            -   name: Cache API composer
+                uses: actions/cache@v2
+                with:
+                    path: api/vendor
+                    key: api-composer-${{ hashFiles('api/composer.lock') }}
+
+            -   name: Cache frontend yarn
+                uses: actions/cache@v2
+                with:
+                    path: frontend/node_modules
+                    key: frontend-yarn-${{ hashFiles('frontend/yarn.lock') }}
+
+            -   name: Cache cucumber yarn
+                uses: actions/cache@v2
+                with:
+                    path: cucumber/node_modules
+                    key: cucumber-yarn-${{ hashFiles('cucumber/yarn.lock') }}
+
             -   name: Dev Init
                 run: make init
