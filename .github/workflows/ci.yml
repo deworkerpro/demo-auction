@@ -98,10 +98,19 @@ jobs:
                 run: make testing-init
 
             -   name: Testing Smoke
+                id: testing-smoke
                 run: make testing-smoke
 
             -   name: Testing E2E
+                id: testing-e2e
                 run: make testing-e2e
+
+            -   name: Archive tests output
+                uses: actions/upload-artifact@v1
+                with:
+                    name: testing-tests-output
+                    path: cucumber/var
+                if: ${{ always() && (steps.testing-smoke.outcome == 'failure' || steps.testing-e2e.outcome == 'failure') }}
 
             -   name: Testing Down
                 run: make testing-down-clear
