@@ -1,9 +1,12 @@
 version: "3.7"
 services:
     gateway:
+        image: ${REGISTRY:-localhost}/auction-dev-gateway:cache
         build:
             context: gateway/docker
             dockerfile: development/nginx/Dockerfile
+            cache_from:
+                - ${REGISTRY:-localhost}/auction-dev-gateway:cache
         ports:
             - "8080:8080"
             - "8081:8081"
@@ -14,38 +17,53 @@ services:
             - mailer
 
     frontend:
+        image: ${REGISTRY:-localhost}/auction-dev-frontend:cache
         build:
             context: frontend/docker/development/nginx
+            cache_from:
+                - ${REGISTRY:-localhost}/auction-dev-frontend:cache
         depends_on:
             - frontend-node
 
     frontend-node:
+        image: ${REGISTRY:-localhost}/auction-dev-frontend-node:cache
         build:
             context: frontend/docker/development/node
+            cache_from:
+                - ${REGISTRY:-localhost}/auction-dev-frontend-node:cache
         volumes:
             - ./frontend:/app
         command: sh -c "until [ -f .ready ] ; do sleep 1 ; done && yarn start"
         tty: true
 
     frontend-node-cli:
+        image: ${REGISTRY:-localhost}/auction-dev-frontend-node-cli:cache
         build:
             context: frontend/docker/development/node
+            cache_from:
+                - ${REGISTRY:-localhost}/auction-dev-frontend-node-cli:cache
         volumes:
             - ./frontend:/app
 
     api:
+        image: ${REGISTRY:-localhost}/auction-dev-api:cache
         build:
             context: api/docker
             dockerfile: development/nginx/Dockerfile
+            cache_from:
+                - ${REGISTRY:-localhost}/auction-dev-api:cache
         volumes:
             - ./api:/app
         depends_on:
             - api-php-fpm
 
     api-php-fpm:
+        image: ${REGISTRY:-localhost}/auction-dev-api-php-fpm:cache
         build:
             context: api/docker
             dockerfile: development/php-fpm/Dockerfile
+            cache_from:
+                - ${REGISTRY:-localhost}/auction-dev-api-php-fpm:cache
         environment:
             APP_ENV: dev
             APP_DEBUG: 1
@@ -66,9 +84,12 @@ services:
             - ./api:/app
 
     api-php-cli:
+        image: ${REGISTRY:-localhost}/auction-dev-api-php-cli:cache
         build:
             context: api/docker
             dockerfile: development/php-cli/Dockerfile
+            cache_from:
+                - ${REGISTRY:-localhost}/auction-dev-api-php-cli:cache
         environment:
             APP_ENV: dev
             APP_DEBUG: 1
@@ -102,8 +123,11 @@ services:
         image: mailhog/mailhog
 
     cucumber-node-cli:
+        image: ${REGISTRY:-localhost}/auction-dev-cucumber-node-cli:cache
         build:
             context: cucumber/docker/development/node
+            cache_from:
+                - ${REGISTRY:-localhost}/auction-dev-cucumber-node-cli:cache
         volumes:
             - ./cucumber:/app
 
