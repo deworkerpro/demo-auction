@@ -8,6 +8,7 @@ on:
 env:
     REGISTRY: docker.pkg.github.com/deworkerpro/demo-auction
     REGISTRY_HOST: docker.pkg.github.com
+    IMAGE_TAG: master-${GITHUB_RUN_NUMBER}
 
 jobs:
     build:
@@ -78,3 +79,6 @@ jobs:
 
             -   name: Dev Down
                 run: make docker-down-clear
+
+            -   name: Build
+                run: make build
