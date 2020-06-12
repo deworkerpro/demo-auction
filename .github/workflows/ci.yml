@@ -6,7 +6,8 @@ on:
             - master
 
 env:
-    REGISTRY: ${{ secrets.REGISTRY }}
+    REGISTRY: docker.pkg.github.com/deworkerpro/demo-auction
+    REGISTRY_HOST: docker.pkg.github.com
 
 jobs:
     build:
@@ -36,9 +37,9 @@ jobs:
             -   name: Docker login
                 uses: azure/docker-login@v1
                 with:
-                    login-server: ${{ secrets.REGISTRY }}
-                    username: ${{ secrets.REGISTRY_USER }}
-                    password: ${{ secrets.REGISTRY_PASSWORD }}
+                    login-server: ${{ env.REGISTRY_HOST }}
+                    username: ElisDN
+                    password: ${{ github.token }}
 
             -   name: Dev Init
                 run: make init
