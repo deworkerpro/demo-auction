@@ -43,3 +43,6 @@ jobs:
 
             -   name: Dev Init
                 run: make init
+
+            -   name: Push dev cache images
+                run: make push-dev-cache
