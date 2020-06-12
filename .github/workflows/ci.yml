@@ -5,6 +5,9 @@ on:
         branches:
             - master
 
+env:
+    REGISTRY: ${{ secrets.REGISTRY }}
+
 jobs:
     build:
         runs-on: ubuntu-latest
