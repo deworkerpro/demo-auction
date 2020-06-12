@@ -33,5 +33,12 @@ jobs:
                     path: cucumber/node_modules
                     key: cucumber-yarn-${{ hashFiles('cucumber/yarn.lock') }}
 
+            -   name: Docker login
+                uses: azure/docker-login@v1
+                with:
+                    login-server: ${{ secrets.REGISTRY }}
+                    username: ${{ secrets.REGISTRY_USER }}
+                    password: ${{ secrets.REGISTRY_PASSWORD }}
+
             -   name: Dev Init
                 run: make init
