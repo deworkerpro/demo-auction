@@ -131,18 +131,81 @@ cucumber-e2e:
 build: build-gateway build-frontend build-api
 
 build-gateway:
-	docker --log-level=debug build --pull --file=gateway/docker/production/nginx/Dockerfile --tag=${REGISTRY}/auction-gateway:${IMAGE_TAG} gateway/docker
+	DOCKER_BUILDKIT=1 docker --log-level=debug build --pull --build-arg BUILDKIT_INLINE_CACHE=1 \
+    --cache-from ${REGISTRY}/auction-gateway:cache \
+    --tag ${REGISTRY}/auction-gateway:cache \
+    --tag ${REGISTRY}/auction-gateway:${IMAGE_TAG} \
+    --file gateway/docker/production/nginx/Dockerfile gateway/docker
 
 build-frontend:
-	docker --log-level=debug build --pull --file=frontend/docker/production/nginx/Dockerfile --tag=${REGISTRY}/auction-frontend:${IMAGE_TAG} frontend
+	DOCKER_BUILDKIT=1 docker --log-level=debug build --pull --build-arg BUILDKIT_INLINE_CACHE=1 \
+    --target builder \
+    --cache-from ${REGISTRY}/auction-frontend:cache-builder \
+    --tag ${REGISTRY}/auction-frontend:cache-builder \
+	--file frontend/docker/production/nginx/Dockerfile frontend
+
+	DOCKER_BUILDKIT=1 docker --log-level=debug build --pull --build-arg BUILDKIT_INLINE_CACHE=1 \
+    --cache-from ${REGISTRY}/auction-frontend:cache-builder \
+    --cache-from ${REGISTRY}/auction-frontend:cache \
+    --tag ${REGISTRY}/auction-frontend:cache \
+    --tag ${REGISTRY}/auction-frontend:${IMAGE_TAG} \
+	--file frontend/docker/production/nginx/Dockerfile frontend
 
 build-api:
-	docker --log-level=debug build --pull --file=api/docker/production/nginx/Dockerfile --tag=${REGISTRY}/auction-api:${IMAGE_TAG} api
-	docker --log-level=debug build --pull --file=api/docker/production/php-fpm/Dockerfile --tag=${REGISTRY}/auction-api-php-fpm:${IMAGE_TAG} api
-	docker --log-level=debug build --pull --file=api/docker/production/php-cli/Dockerfile --tag=${REGISTRY}/auction-api-php-cli:${IMAGE_TAG} api
+	DOCKER_BUILDKIT=1 docker --log-level=debug build --pull --build-arg BUILDKIT_INLINE_CACHE=1 \
+    --cache-from ${REGISTRY}/auction-api:cache \
+    --tag ${REGISTRY}/auction-api:cache \
+	--tag ${REGISTRY}/auction-api:${IMAGE_TAG} \
+	--file api/docker/production/nginx/Dockerfile api
+
+	DOCKER_BUILDKIT=1 docker --log-level=debug build --pull --build-arg BUILDKIT_INLINE_CACHE=1 \
+	--target builder \
+	--cache-from ${REGISTRY}/auction-api-php-fpm:cache-builder \
+	--tag ${REGISTRY}/auction-api-php-fpm:cache-builder \
+	--file api/docker/production/php-fpm/Dockerfile api
+
+	DOCKER_BUILDKIT=1 docker --log-level=debug build --pull --build-arg BUILDKIT_INLINE_CACHE=1 \
+	--cache-from ${REGISTRY}/auction-api-php-fpm:cache-builder \
+	--cache-from ${REGISTRY}/auction-api-php-fpm:cache \
+	--tag ${REGISTRY}/auction-api-php-fpm:cache \
+	--tag ${REGISTRY}/auction-api-php-fpm:${IMAGE_TAG} \
+	--file api/docker/production/php-fpm/Dockerfile api
+
+	DOCKER_BUILDKIT=1 docker --log-level=debug build --pull --build-arg BUILDKIT_INLINE_CACHE=1 \
+	--target builder \
+	--cache-from ${REGISTRY}/auction-api-php-cli:cache-builder \
+	--tag ${REGISTRY}/auction-api-php-cli:cache-builder \
+	--file api/docker/production/php-cli/Dockerfile api
+
+	DOCKER_BUILDKIT=1 docker --log-level=debug build --pull --build-arg BUILDKIT_INLINE_CACHE=1 \
+	--cache-from ${REGISTRY}/auction-api-php-cli:cache-builder \
+	--cache-from ${REGISTRY}/auction-api-php-cli:cache \
+	--tag ${REGISTRY}/auction-api-php-cli:cache \
+	--tag ${REGISTRY}/auction-api-php-cli:${IMAGE_TAG} \
+	--file api/docker/production/php-cli/Dockerfile api
 
 try-build:
 	REGISTRY=localhost IMAGE_TAG=0 make build
+
+push-build-cache: push-build-cache-gateway push-build-cache-frontend push-build-cache-api push-build-cache-api-php-fpm push-build-cache-api-php-cli
+
+push-build-cache-gateway:
+	docker push ${REGISTRY}/auction-gateway:cache
+
+push-build-cache-frontend:
+	docker push ${REGISTRY}/auction-frontend:cache-builder
+	docker push ${REGISTRY}/auction-frontend:cache
+
+push-build-cache-api:
+	docker push ${REGISTRY}/auction-api:cache
+
+push-build-cache-api-php-fpm:
+	docker push ${REGISTRY}/auction-api-php-fpm:cache-builder
+	docker push ${REGISTRY}/auction-api-php-fpm:cache
+
+push-build-cache-api-php-cli:
+	docker push ${REGISTRY}/auction-api-php-cli:cache-builder
+	docker push ${REGISTRY}/auction-api-php-cli:cache
 
 push: push-gateway push-frontend push-api
 
