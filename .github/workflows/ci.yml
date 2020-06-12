@@ -125,3 +125,18 @@ jobs:
                     key: ${{ secrets.PRODUCTION_KEY }}
                     known_hosts: ${{ secrets.PRODUCTION_HOST }}
                 if: ${{ github.ref == 'refs/heads/master' }}
+
+            -   name: Deploy
+                run: make deploy
+                env:
+                    BUILD_NUMBER: ${GITHUB_RUN_NUMBER}
+                    HOST: ${{ secrets.PRODUCTION_HOST }}
+                    PORT: ${{ secrets.PRODUCTION_PORT }}
+                    API_DB_PASSWORD: ${{ secrets.API_DB_PASSWORD }}
+                    API_MAILER_HOST: ${{ secrets.API_MAILER_HOST }}
+                    API_MAILER_PORT: ${{ secrets.API_MAILER_PORT }}
+                    API_MAILER_USER: ${{ secrets.API_MAILER_USER }}
+                    API_MAILER_PASSWORD: ${{ secrets.API_MAILER_PASSWORD }}
+                    API_MAILER_FROM_EMAIL: ${{ secrets.API_MAILER_FROM_EMAIL }}
+                    SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
+                if: ${{ github.ref == 'refs/heads/master' }}
