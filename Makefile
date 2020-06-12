@@ -223,13 +223,45 @@ push-api:
 testing-build: testing-build-gateway testing-build-testing-api-php-cli testing-build-cucumber
 
 testing-build-gateway:
-	docker --log-level=debug build --pull --file=gateway/docker/testing/nginx/Dockerfile --tag=${REGISTRY}/auction-testing-gateway:${IMAGE_TAG} gateway/docker
+	DOCKER_BUILDKIT=1 docker --log-level=debug build --pull --build-arg BUILDKIT_INLINE_CACHE=1 \
+	--cache-from ${REGISTRY}/auction-testing-gateway:cache \
+	--tag ${REGISTRY}/auction-testing-gateway:cache \
+	--tag ${REGISTRY}/auction-testing-gateway:${IMAGE_TAG} \
+	--file gateway/docker/testing/nginx/Dockerfile gateway/docker
 
 testing-build-testing-api-php-cli:
-	docker --log-level=debug build --pull --file=api/docker/testing/php-cli/Dockerfile --tag=${REGISTRY}/auction-testing-api-php-cli:${IMAGE_TAG} api
+	DOCKER_BUILDKIT=1 docker --log-level=debug build --pull --build-arg BUILDKIT_INLINE_CACHE=1 \
+	--target builder \
+	--cache-from ${REGISTRY}/auction-testing-api-php-cli:cache-builder \
+	--tag ${REGISTRY}/auction-testing-api-php-cli:cache-builder \
+	--file api/docker/testing/php-cli/Dockerfile api
+
+	DOCKER_BUILDKIT=1 docker --log-level=debug build --pull --build-arg BUILDKIT_INLINE_CACHE=1 \
+	--cache-from ${REGISTRY}/auction-testing-api-php-cli:cache-builder \
+	--cache-from ${REGISTRY}/auction-testing-api-php-cli:cache \
+	--tag ${REGISTRY}/auction-testing-api-php-cli:cache \
+	--tag ${REGISTRY}/auction-testing-api-php-cli:${IMAGE_TAG} \
+	--file api/docker/testing/php-cli/Dockerfile api
 
 testing-build-cucumber:
-	docker --log-level=debug build --pull --file=cucumber/docker/testing/node/Dockerfile --tag=${REGISTRY}/auction-cucumber-node-cli:${IMAGE_TAG} cucumber
+	DOCKER_BUILDKIT=1 docker --log-level=debug build --pull --build-arg BUILDKIT_INLINE_CACHE=1 \
+	--cache-from ${REGISTRY}/auction-cucumber-node-cli:cache \
+	--tag ${REGISTRY}/auction-cucumber-node-cli:cache \
+	--tag ${REGISTRY}/auction-cucumber-node-cli:${IMAGE_TAG} \
+	--file cucumber/docker/testing/node/Dockerfile \
+	cucumber
+
+push-testing-build-cache: push-testing-build-cache-gateway push-testing-build-cache-api-php-cli push-testing-build-cache-cucumber
+
+push-testing-build-cache-gateway:
+	docker push ${REGISTRY}/auction-testing-gateway:cache
+
+push-testing-build-cache-api-php-cli:
+	docker push ${REGISTRY}/auction-testing-api-php-cli:cache-builder
+	docker push ${REGISTRY}/auction-testing-api-php-cli:cache
+
+push-testing-build-cache-cucumber:
+	docker push ${REGISTRY}/auction-cucumber-node-cli:cache
 
 testing-init:
 	COMPOSE_PROJECT_NAME=testing docker-compose -f docker-compose-testing.yml up -d
