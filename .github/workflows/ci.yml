@@ -46,3 +46,27 @@ jobs:
 
             -   name: Push dev cache images
                 run: make push-dev-cache
+
+            -   name: Validate
+                run: make api-validate-schema
+
+            -   name: Lint API
+                run: make api-lint
+
+            -   name: Lint Frontend
+                run: make frontend-lint
+
+            -   name: Lint Cucumber
+                run: make cucumber-lint
+
+            -   name: Analyze API
+                run: make api-analyze
+
+            -   name: Test API
+                run: make api-test
+
+            -   name: Test Frontend
+                run: make frontend-test
+
+            -   name: Dev Down
+                run: make docker-down-clear
