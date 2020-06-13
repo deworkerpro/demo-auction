@@ -1,0 +1,62 @@
+image: docker/compose:1.26.0
+
+options:
+    docker: true
+
+pipelines:
+    branches:
+        master:
+            -   step:
+                    caches:
+                        - docker
+                        - api-composer
+                        - frontend-yarn
+                        - cucumber-yarn
+
+                    script:
+                        - apk add --no-cache bash make
+
+                        - docker login -u=$REGISTRY_USER -p='$REGISTRY_PASSWORD' $REGISTRY
+
+                        - make init
+                        - make push-build-cache
+
+                        - make api-validate-schema
+
+                        - make api-lint
+                        - make frontend-lint
+                        - make cucumber-lint
+
+                        - make api-analyze
+
+                        - make api-test
+                        - make frontend-test
+
+                        - make docker-down-clear
+
+                        - export IMAGE_TAG=master-$BITBUCKET_BUILD_NUMBER
+
+                        - make build
+                        - make push-build-cache
+
+                        - make testing-build
+                        - make push-testing-build-cache
+
+                        - make testing-init
+                        - make testing-smoke
+                        - make testing-e2e
+
+                        - make testing-down-clear
+
+                        - make push
+                        - HOST=$PRODUCTION_HOST PORT=$PRODUCTION_PORT make deploy
+
+                    artifacts:
+                        - api/var/log/**
+                        - cucumber/var/*
+
+definitions:
+    caches:
+        api-composer: api/vendor
+        frontend-yarn: frontend/node_modules
+        cucumber-yarn: cucumber/node_modules
