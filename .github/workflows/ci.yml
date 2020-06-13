@@ -79,12 +79,11 @@ jobs:
             -   name: Inject branch slug
                 uses: rlespinasse/github-slug-action@v2.x
 
+            -   name: Set image tag
+                run: echo "::set-env name=IMAGE_TAG::${{ env.GITHUB_REF_SLUG }}-${GITHUB_RUN_NUMBER}"
+
             -   name: Build
                 run: make build
-                env:
-                    IMAGE_TAG: ${{ env.GITHUB_REF_SLUG }}-${GITHUB_RUN_NUMBER}
 
             -   name: Push build cache images
                 run: make push-build-cache
-                env:
-                    IMAGE_TAG: ${{ env.GITHUB_REF_SLUG }}-${GITHUB_RUN_NUMBER}
