@@ -63,7 +63,15 @@ jobs:
                 run: make api-analyze
 
             -   name: Test API
+                id: api-test
                 run: make api-test
+
+            -   name: Archive tests output
+                uses: actions/upload-artifact@v1
+                with:
+                    name: test-output
+                    path: api/var/log
+                if: ${{ always() && steps.api-test.outcome == 'failure' }}
 
             -   name: Test Frontend
                 run: make frontend-test
