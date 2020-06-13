@@ -1,14 +1,10 @@
 name: Pipeline
 
-on:
-    push:
-        branches:
-            - master
+on: push
 
 env:
     REGISTRY: docker.pkg.github.com/deworkerpro/demo-auction
     REGISTRY_HOST: docker.pkg.github.com
-    IMAGE_TAG: master-${GITHUB_RUN_NUMBER}
 
 jobs:
     build:
@@ -80,8 +76,15 @@ jobs:
             -   name: Dev Down
                 run: make docker-down-clear
 
+            -   name: Inject branch slug
+                uses: rlespinasse/github-slug-action@v2.x
+
             -   name: Build
                 run: make build
+                env:
+                    IMAGE_TAG: ${{ env.GITHUB_REF_SLUG }}-${GITHUB_RUN_NUMBER}
 
             -   name: Push build cache images
                 run: make push-build-cache
+                env:
+                    IMAGE_TAG: ${{ env.GITHUB_REF_SLUG }}-${GITHUB_RUN_NUMBER}
