@@ -1,0 +1,145 @@
+version: 2
+jobs:
+    build:
+        machine:
+            image: ubuntu-1604:202004-01
+
+        steps:
+            - checkout
+
+            -   restore_cache:
+                    keys:
+                        - api-composer-{{ checksum "api/composer.lock" }}
+
+            -   restore_cache:
+                    keys:
+                        - frontend-yarn-{{ checksum "frontend/yarn.lock" }}
+
+            -   restore_cache:
+                    keys:
+                        - cucumber-yarn-{{ checksum "cucumber/yarn.lock" }}
+
+            -   run:
+                    name: Docker login
+                    command: docker login -u=$REGISTRY_USER -p='$REGISTRY_PASSWORD' $REGISTRY
+
+            -   run:
+                    name: Init
+                    command: make init
+
+            -   run:
+                    name: Push build cache images
+                    command: make push-build-cache
+
+            -   save_cache:
+                    key: api-composer-{{ checksum "api/composer.lock" }}
+                    paths:
+                        - api/vendor
+
+            -   save_cache:
+                    key: frontend-yarn-{{ checksum "frontend/yarn.lock" }}
+                    paths:
+                        - frontend/node_modules
+
+            -   save_cache:
+                    key: cucumber-yarn-{{ checksum "cucumber/yarn.lock" }}
+                    paths:
+                        - cucumber/node_modules
+
+            -   run:
+                    name: Validate
+                    command: make api-validate-schema
+
+            -   run:
+                    name: Lint API
+                    command: make api-lint
+
+            -   run:
+                    name: Lint Frontend
+                    command: make frontend-lint
+
+            -   run:
+                    name: Lint Cucumber
+                    command: make cucumber-lint
+
+            -   run:
+                    name: Analyze
+                    command: make api-analyze
+
+            -   run:
+                    name: Test API
+                    command: make api-test
+
+            -   store_artifacts:
+                    path: api/var/log
+                    prefix: api
+                    when: on_fail
+
+            -   run:
+                    name: Test Frontend
+                    command: make frontend-test
+
+            -   run:
+                    name: Dev Down
+                    command: make docker-down-clear
+
+            -   run:
+                    name: Set image tag
+                    command: echo "export IMAGE_TAG=$(echo $CIRCLE_BRANCH | sed 's,/,-,g')-$CIRCLE_BUILD_NUM" >> $BASH_ENV
+
+            -   run:
+                    name: Build
+                    command: make build
+
+            -   run:
+                    name: Push build cache images
+                    command: make push-build-cache
+
+            -   run:
+                    name: Testing Build
+                    command: make testing-build
+
+            -   run:
+                    name: Push testing cache images
+                    command: make push-testing-build-cache
+
+            -   run:
+                    name: Testing Init
+                    command: make testing-init
+
+            -   run:
+                    name: Testing Smoke
+                    command: make testing-smoke
+
+            -   run:
+                    name: Testing E2E
+                    command: make testing-e2e
+
+            -   store_artifacts:
+                    path: cucumber/var
+                    prefix: cucumber
+                    when: on_fail
+
+            -   run:
+                    name: Testing Down
+                    command: make testing-down-clear
+
+            -   run:
+                    name: Push
+                    command: |
+                        if [ "${CIRCLE_BRANCH}" == "master" ]; then
+                            make push
+                        fi
+
+            -   run:
+                    name: Deploy
+                    command: |
+                        if [ "${CIRCLE_BRANCH}" == "master" ]; then
+                            HOST=$PRODUCTION_HOST PORT=$PRODUCTION_PORT make deploy
+                        fi
+
+workflows:
+    version: 2
+    workflow:
+        jobs:
+            -   build
