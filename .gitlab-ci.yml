@@ -1,4 +1,4 @@
-image: docker:19-git
+image: docker/compose:1.26.0
 
 stages:
     - dev
@@ -7,3 +7,4 @@ dev:
     stage: dev
     script:
         - docker -v
+        - docker-compose -v
