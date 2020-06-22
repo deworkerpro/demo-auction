@@ -22,3 +22,4 @@ dev:
             - cucumber/node_modules/
     script:
         - make init
+        - make push-dev-cache
