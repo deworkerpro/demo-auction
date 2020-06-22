@@ -3,6 +3,9 @@ image: docker/compose:1.26.0
 stages:
     - dev
 
+services:
+    - docker:dind
+
 dev:
     stage: dev
     script:
