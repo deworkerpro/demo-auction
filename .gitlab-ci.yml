@@ -11,5 +11,4 @@ dev:
     before_script:
         - apk add --no-cache make
     script:
-        - docker -v
-        - docker-compose -v
+        - make init
