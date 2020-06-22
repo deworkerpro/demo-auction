@@ -55,6 +55,7 @@ build:
         - make push-build-cache
 
         - make testing-build
+        - make push-testing-build-cache
 
         - make testing-init
         - make testing-smoke
