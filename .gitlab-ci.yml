@@ -61,7 +61,7 @@ build:
         - make testing-smoke
         - make testing-e2e
 
-        - make push
+        - if [ "${CI_COMMIT_REF_SLUG}" == "master" ]; then make push; fi
     artifacts:
         paths:
             - cucumber/var
