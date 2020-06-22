@@ -60,6 +60,8 @@ build:
         - make testing-init
         - make testing-smoke
         - make testing-e2e
+
+        - make push
     artifacts:
         paths:
             - cucumber/var
