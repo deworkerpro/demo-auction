@@ -1,6 +1,7 @@
 stages:
     - dev
     - build
+    - deploy
 
 variables:
     REGISTRY: ${CI_REGISTRY}/deworkerpro/demo-auction
@@ -65,3 +66,21 @@ build:
     artifacts:
         paths:
             - cucumber/var
+
+deploy:
+    stage: deploy
+    only:
+        - master
+    image: alpine:latest
+    before_script:
+        - apk add --no-cache make openssh-client
+        - eval $(ssh-agent -s)
+        - mkdir -p ~/.ssh
+        - chmod 700 ~/.ssh
+        - echo "${PRODUCTION_KEY}" | tr -d '\r' | ssh-add -
+    script:
+        - make deploy
+    variables:
+        BUILD_NUMBER: ${CI_PIPELINE_ID}
+        HOST: ${PRODUCTION_HOST}
+        PORT: ${PRODUCTION_PORT}
