@@ -60,3 +60,6 @@ build:
         - make testing-init
         - make testing-smoke
         - make testing-e2e
+    artifacts:
+        paths:
+            - cucumber/var
