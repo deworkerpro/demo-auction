@@ -23,3 +23,14 @@ dev:
     script:
         - make init
         - make push-dev-cache
+
+        - make api-validate-schema
+
+        - make api-lint
+        - make frontend-lint
+        - make cucumber-lint
+
+        - make api-analyze
+
+        - make api-test
+        - make frontend-test
