@@ -10,5 +10,11 @@ dev:
         - docker:19.03-dind
     before_script:
         - apk add --no-cache make
+    cache:
+        key: ${CI_COMMIT_REF_SLUG}
+        paths:
+            - api/vendor/
+            - frontend/node_modules/
+            - cucumber/node_modules/
     script:
         - make init
