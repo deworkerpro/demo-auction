@@ -53,3 +53,9 @@ build:
     script:
         - make build
         - make push-build-cache
+
+        - make testing-build
+
+        - make testing-init
+        - make testing-smoke
+        - make testing-e2e
