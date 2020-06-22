@@ -1,0 +1,9 @@
+image: docker:19-git
+
+stages:
+    - dev
+
+dev:
+    stage: dev
+    script:
+        - docker -v
