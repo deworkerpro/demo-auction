@@ -34,3 +34,6 @@ dev:
 
         - make api-test
         - make frontend-test
+    artifacts:
+        paths:
+            - api/var/log
