@@ -4,7 +4,7 @@ stages:
     - dev
 
 services:
-    - docker:dind
+    - docker:19.03-dind
 
 dev:
     stage: dev
