@@ -3,6 +3,8 @@ stages:
 
 dev:
     stage: dev
+    only:
+        - branches
     image: docker/compose:1.26.0
     services:
         - docker:19.03-dind
