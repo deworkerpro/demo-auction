@@ -1,13 +1,11 @@
-image: docker/compose:1.26.0
-
 stages:
     - dev
 
-services:
-    - docker:19.03-dind
-
 dev:
     stage: dev
+    image: docker/compose:1.26.0
+    services:
+        - docker:19.03-dind
     script:
         - docker -v
         - docker-compose -v
