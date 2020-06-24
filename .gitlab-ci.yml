@@ -1,6 +1,9 @@
 stages:
     - dev
 
+variables:
+    REGISTRY: ${CI_REGISTRY}/deworkerpro/demo-auction
+
 dev:
     stage: dev
     only:
