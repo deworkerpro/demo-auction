@@ -7,3 +7,10 @@ all:
                     ansible_user: root
                     ansible_host: 0.0.0.0
                     ansible_port: 22
+        workers:
+            hosts:
+                swarm-worker-1:
+                    ansible_connection: ssh
+                    ansible_user: root
+                    ansible_host: 0.0.0.0
+                    ansible_port: 22
