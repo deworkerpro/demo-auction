@@ -2,18 +2,12 @@ version: "3.7"
 services:
     gateway:
         image: ${REGISTRY}/auction-testing-gateway:${IMAGE_TAG}
-        depends_on:
-            - frontend
-            - api
-            - mailer
 
     frontend:
         image: ${REGISTRY}/auction-frontend:${IMAGE_TAG}
 
     api:
         image: ${REGISTRY}/auction-api:${IMAGE_TAG}
-        depends_on:
-            - api-php-fpm
 
     api-php-fpm:
         image: ${REGISTRY}/auction-api-php-fpm:${IMAGE_TAG}

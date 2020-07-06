@@ -9,9 +9,6 @@ services:
         ports:
             - "80:80"
             - "443:443"
-        depends_on:
-            - frontend
-            - api
 
     frontend:
         image: ${REGISTRY}/auction-frontend:${IMAGE_TAG}
@@ -20,8 +17,6 @@ services:
     api:
         image: ${REGISTRY}/auction-api:${IMAGE_TAG}
         restart: always
-        depends_on:
-            - api-php-fpm
 
     api-php-fpm:
         image: ${REGISTRY}/auction-api-php-fpm:${IMAGE_TAG}
