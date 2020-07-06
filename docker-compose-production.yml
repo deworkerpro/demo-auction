@@ -2,25 +2,41 @@ version: "3.7"
 services:
     gateway:
         image: ${REGISTRY}/auction-gateway:${IMAGE_TAG}
-        restart: always
         volumes:
             - /etc/letsencrypt:/etc/letsencrypt:ro
             - /var/www/html:/var/www/html:ro
         ports:
             - "80:80"
             - "443:443"
+        deploy:
+            mode: replicated
+            replicas: 2
+            update_config:
+                parallelism: 1
+                delay: 10s
+            placement:
+                constraints: [node.role == manager]
 
     frontend:
         image: ${REGISTRY}/auction-frontend:${IMAGE_TAG}
-        restart: always
+        deploy:
+            mode: replicated
+            replicas: 2
+            update_config:
+                parallelism: 1
+                delay: 10s
 
     api:
         image: ${REGISTRY}/auction-api:${IMAGE_TAG}
-        restart: always
+        deploy:
+            mode: replicated
+            replicas: 2
+            update_config:
+                parallelism: 1
+                delay: 5s
 
     api-php-fpm:
         image: ${REGISTRY}/auction-api-php-fpm:${IMAGE_TAG}
-        restart: always
         environment:
             APP_ENV: prod
             APP_DEBUG: 0
@@ -36,10 +52,15 @@ services:
             MAILER_FROM_EMAIL: ${API_MAILER_FROM_EMAIL}
             FRONTEND_URL: https://demo-auction.deworker.pro
             SENTRY_DSN: ${SENTRY_DSN}
+        deploy:
+            mode: replicated
+            replicas: 2
+            update_config:
+                parallelism: 1
+                delay: 5s
 
     api-migration:
         image: ${REGISTRY}/auction-api-php-cli:${IMAGE_TAG}
-        restart: on-failure
         environment:
             APP_ENV: prod
             APP_DEBUG: 0
@@ -56,16 +77,24 @@ services:
             FRONTEND_URL: https://demo-auction.deworker.pro
             SENTRY_DSN: ${SENTRY_DSN}
         command: sh -c 'wait-for-it api-postgres:5432 -t 60 && php bin/app.php migrations:migrate --no-interaction'
+        deploy:
+            restart_policy:
+                condition: on-failure
+                delay: 5s
+                max_attempts: 5
+                window: 120s
 
     api-postgres:
         image: postgres:12.2-alpine
-        restart: always
         environment:
             POSTGRES_USER: app
             POSTGRES_PASSWORD: ${API_DB_PASSWORD}
             POSTGRES_DB: app
         volumes:
             - api-postgres:/var/lib/postgresql/data
+        deploy:
+            placement:
+                constraints: [node.role == manager]
 
 volumes:
     api-postgres:
