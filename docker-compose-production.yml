@@ -94,7 +94,7 @@ services:
             - api-postgres:/var/lib/postgresql/data
         deploy:
             placement:
-                constraints: [node.role == manager]
+                constraints: [node.labels.db == db]
             endpoint_mode: dnsrr
 
 volumes:
