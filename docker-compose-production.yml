@@ -37,8 +37,9 @@ services:
             FRONTEND_URL: https://demo-auction.deworker.pro
             SENTRY_DSN: ${SENTRY_DSN}
 
-    api-php-cli:
+    api-migration:
         image: ${REGISTRY}/auction-api-php-cli:${IMAGE_TAG}
+        restart: on-failure
         environment:
             APP_ENV: prod
             APP_DEBUG: 0
@@ -54,6 +55,7 @@ services:
             MAILER_FROM_EMAIL: ${API_MAILER_FROM_EMAIL}
             FRONTEND_URL: https://demo-auction.deworker.pro
             SENTRY_DSN: ${SENTRY_DSN}
+        command: sh -c 'wait-for-it api-postgres:5432 -t 60 && php bin/app.php migrations:migrate --no-interaction'
 
     api-postgres:
         image: postgres:12.2-alpine
