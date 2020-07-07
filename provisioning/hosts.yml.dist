@@ -1,8 +1,8 @@
 all:
     children:
-        site:
+        manager:
             hosts:
-                server:
+                swarm-manager:
                     ansible_connection: ssh
                     ansible_user: root
                     ansible_host: 0.0.0.0

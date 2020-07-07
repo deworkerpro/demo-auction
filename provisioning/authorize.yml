@@ -1,6 +1,6 @@
 ---
 -   name: Add authorized key
-    hosts: site
+    hosts: manager
     remote_user: root
     vars_prompt:
         -   name: file

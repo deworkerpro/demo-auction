@@ -1,6 +1,6 @@
 ---
 -   name: Upgrade
-    hosts: site
+    hosts: all
     remote_user: root
     tasks:
         -   name: Update APT package cache
