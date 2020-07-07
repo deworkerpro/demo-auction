@@ -5,4 +5,5 @@
         password: '!'
         groups:
             - docker
+        shell: /bin/bash
         state: present
