@@ -2,4 +2,5 @@
 -   name: Add Certbot hook
     lineinfile:
         path: /etc/letsencrypt/cli.ini
-        line: "post-hook = /bin/sh -c 'cd /home/deploy/site && docker-compose restart gateway'"
+        regexp: "^post-hook"
+        line: "post-hook = docker service update --force auction_gateway"
