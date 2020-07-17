@@ -11,7 +11,7 @@
   "dependencies": {
     "chai": "^4.2.0",
     "cucumber": "^6.0.5",
-    "puppeteer": "^2.1.1"
+    "puppeteer": "^5.2.0"
   },
   "devDependencies": {
     "eslint": "^7.4.0",
