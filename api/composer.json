@@ -9,7 +9,7 @@
     "require": {
         "php": "^7.4",
         "ext-json": "^7.4",
-        "doctrine/migrations": "^2.2",
+        "doctrine/migrations": "^3.0",
         "doctrine/orm": "^2.7",
         "finesse/swiftmailer-defaults-plugin": "^2.0",
         "laminas/laminas-config-aggregator": "^1.2",
