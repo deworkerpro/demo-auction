@@ -16,7 +16,7 @@ use Swift_Message;
 use Twig\Environment;
 
 /**
- * @covers NewEmailConfirmTokenSender
+ * @covers \App\Auth\Service\NewEmailConfirmTokenSender
  */
 class NewEmailConfirmTokenSenderTest extends TestCase
 {

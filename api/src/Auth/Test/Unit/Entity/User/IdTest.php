@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
 
 /**
- * @covers Id
+ * @covers \App\Auth\Entity\User\Id
  */
 class IdTest extends TestCase
 {

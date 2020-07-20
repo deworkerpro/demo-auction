@@ -10,7 +10,7 @@ use App\Auth\Test\Builder\UserBuilder;
 use Ramsey\Uuid\Uuid;
 
 /**
- * @covers User
+ * @covers \App\Auth\Entity\User\User
  */
 class ConfirmTest extends TestCase
 {

@@ -15,7 +15,7 @@ use Slim\Psr7\Factory\StreamFactory;
 use Slim\Psr7\Factory\UploadedFileFactory;
 
 /**
- * @covers ClearEmptyInput
+ * @covers \App\Http\Middleware\ClearEmptyInput
  */
 class ClearEmptyInputTest extends TestCase
 {

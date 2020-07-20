@@ -14,7 +14,7 @@ use Slim\Psr7\Factory\ServerRequestFactory;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * @covers DomainExceptionHandler
+ * @covers \App\Http\Middleware\DomainExceptionHandler
  */
 class DomainExceptionHandlerTest extends TestCase
 {
