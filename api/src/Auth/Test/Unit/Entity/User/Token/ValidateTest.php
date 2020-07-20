@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
 
 /**
- * @covers Token::validate
+ * @covers \App\Auth\Entity\User\Token::validate
  */
 class ValidateTest extends TestCase
 {

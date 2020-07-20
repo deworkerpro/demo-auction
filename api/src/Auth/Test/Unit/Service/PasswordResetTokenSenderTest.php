@@ -16,7 +16,7 @@ use Swift_Message;
 use Twig\Environment;
 
 /**
- * @covers PasswordResetTokenSender
+ * @covers \App\Auth\Service\PasswordResetTokenSender
  */
 class PasswordResetTokenSenderTest extends TestCase
 {

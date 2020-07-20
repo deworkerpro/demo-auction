@@ -16,7 +16,7 @@ use Swift_Message;
 use Twig\Environment;
 
 /**
- * @covers JoinConfirmationSender
+ * @covers \App\Auth\Service\JoinConfirmationSender
  */
 class JoinConfirmationSenderTest extends TestCase
 {

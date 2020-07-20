@@ -9,7 +9,7 @@ use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers Status
+ * @covers \App\Auth\Entity\User\Status
  */
 class StatusTest extends TestCase
 {
