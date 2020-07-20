@@ -27,13 +27,13 @@ class JoinConfirmationSenderTest extends TestCase
         $confirmUrl = 'http://test/join/confirm?token=' . $token->getValue();
 
         $twig = $this->createMock(Environment::class);
-        $twig->expects($this->once())->method('render')->with(
-            $this->equalTo('auth/join/confirm.html.twig'),
-            $this->equalTo(['token' => $token]),
+        $twig->expects(self::once())->method('render')->with(
+            self::equalTo('auth/join/confirm.html.twig'),
+            self::equalTo(['token' => $token]),
         )->willReturn($body = '<a href="' . $confirmUrl . '">' . $confirmUrl . '</a>');
 
         $mailer = $this->createMock(Swift_Mailer::class);
-        $mailer->expects($this->once())->method('send')
+        $mailer->expects(self::once())->method('send')
             ->willReturnCallback(static function (Swift_Message $message) use ($to, $body): int {
                 self::assertEquals([$to->getValue() => null], $message->getTo());
                 self::assertEquals('Join Confirmation', $message->getSubject());
