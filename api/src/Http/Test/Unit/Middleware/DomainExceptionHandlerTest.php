@@ -39,13 +39,13 @@ class DomainExceptionHandlerTest extends TestCase
     public function testException(): void
     {
         $logger = $this->createMock(LoggerInterface::class);
-        $logger->expects($this->once())->method('warning');
+        $logger->expects(self::once())->method('warning');
 
         $translator = $this->createMock(TranslatorInterface::class);
-        $translator->expects($this->once())->method('trans')->with(
-            $this->equalTo('Some error.'),
-            $this->equalTo([]),
-            $this->equalTo('exceptions')
+        $translator->expects(self::once())->method('trans')->with(
+            self::equalTo('Some error.'),
+            self::equalTo([]),
+            self::equalTo('exceptions')
         )->willReturn('Ошибка.');
 
         $middleware = new DomainExceptionHandler($logger, $translator);
