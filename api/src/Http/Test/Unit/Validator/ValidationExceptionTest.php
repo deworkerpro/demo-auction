@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Component\Validator\ConstraintViolationList;
 
 /**
- * @covers ValidationException
+ * @covers \App\Http\Validator\ValidationException
  */
 class ValidationExceptionTest extends TestCase
 {

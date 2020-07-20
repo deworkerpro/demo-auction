@@ -9,7 +9,7 @@ use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers Network
+ * @covers \App\Auth\Entity\User\Network
  */
 class NetworkTest extends TestCase
 {

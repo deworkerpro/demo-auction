@@ -14,7 +14,7 @@ use Slim\Psr7\Factory\ServerRequestFactory;
 use Symfony\Component\Translation\Translator;
 
 /**
- * @covers TranslatorLocale
+ * @covers \App\Http\Middleware\TranslatorLocale
  */
 class TranslatorLocaleTest extends TestCase
 {

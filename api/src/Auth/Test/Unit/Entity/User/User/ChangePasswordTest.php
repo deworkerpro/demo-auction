@@ -10,7 +10,7 @@ use App\Auth\Test\Builder\UserBuilder;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers User
+ * @covers \App\Auth\Entity\User\User
  */
 class ChangePasswordTest extends TestCase
 {
