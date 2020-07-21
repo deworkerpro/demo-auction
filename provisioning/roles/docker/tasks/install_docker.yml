@@ -33,11 +33,6 @@
         update_cache: yes
     notify: Start docker on boot
 
--   name: Remove Docker Compose
-    file:
-        path: /usr/local/bin/docker-compose
-        state: absent
-
 -   name: Set periodic Docker prune
     cron:
         name: docker-prune
