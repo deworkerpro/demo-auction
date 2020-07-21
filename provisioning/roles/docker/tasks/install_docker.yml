@@ -33,12 +33,10 @@
         update_cache: yes
     notify: Start docker on boot
 
--   name: Install Docker Compose
-    get_url:
-        url: https://github.com/docker/compose/releases/download/1.26.0/docker-compose-{{ ansible_system }}-{{ ansible_userspace_architecture }}
-        dest: /usr/local/bin/docker-compose
-        group: docker
-        mode: 'u+x,g+x'
+-   name: Remove Docker Compose
+    file:
+        path: /usr/local/bin/docker-compose
+        state: absent
 
 -   name: Set periodic Docker prune
     cron:
