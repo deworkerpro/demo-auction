@@ -14,7 +14,10 @@ return [
     UserRepository::class => function (ContainerInterface $container): UserRepository {
         /** @var EntityManagerInterface $em */
         $em = $container->get(EntityManagerInterface::class);
-        /** @var EntityRepository $repo */
+        /**
+         * @var EntityRepository $repo
+         * @psalm-var EntityRepository<User> $repo
+         */
         $repo = $em->getRepository(User::class);
         return new UserRepository($em, $repo);
     },
