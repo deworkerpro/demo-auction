@@ -14,8 +14,10 @@ Before(async function () {
 
 After(async function (testCase) {
   if (testCase.result.status === Status.FAILED) {
-    const name = testCase.sourceLocation.uri + '-' + testCase.sourceLocation.line
-    await this.page.screenshot({ path: 'var/' + name.replace(/\//g, '_') + '.png', fullPage: true })
+    const name = testCase.pickle.uri.replace(/^\/app\/features\//, '').replace(/\//g, '_') +
+      '-' +
+      testCase.pickle.name.toLowerCase().replace(/[^\w]/g, '_')
+    await this.page.screenshot({ path: 'var/' + name + '.png', fullPage: true })
   }
   await this.page.close()
   await this.browser.close()
