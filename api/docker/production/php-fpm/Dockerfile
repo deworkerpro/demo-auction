@@ -8,9 +8,7 @@ RUN apk add --no-cache unzip
 
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/bin --filename=composer --version=1.10.26 --quiet \
-    && composer global require hirak/prestissimo --no-plugins --no-scripts \
-    && rm -rf /root/.composer/cache
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/bin --filename=composer --version=1.10.26 --quiet
 
 WORKDIR /app
 
