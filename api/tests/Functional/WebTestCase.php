@@ -54,7 +54,6 @@ class WebTestCase extends TestCase
             $fixture = $container->get($class);
             $loader->addFixture($fixture);
         }
-        /** @var EntityManagerInterface $em */
         $em = $container->get(EntityManagerInterface::class);
         $executor = new ORMExecutor($em, new ORMPurger($em));
         $executor->execute($loader->getFixtures());
