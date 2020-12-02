@@ -34,9 +34,10 @@ class JsonResponseTest extends TestCase
     }
 
     /**
-     * @return array<mixed>
+     * @return iterable
+     * @psalm-return iterable<array-key, array<array-key, mixed>>
      */
-    public function getCases(): array
+    public function getCases(): iterable
     {
         $object = new stdClass();
         $object->str = 'value';
