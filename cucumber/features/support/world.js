@@ -1,4 +1,4 @@
-const { setWorldConstructor } = require('cucumber')
+const { setWorldConstructor } = require('@cucumber/cucumber')
 
 function CustomWorld ({ attach }) {
   this.attach = attach

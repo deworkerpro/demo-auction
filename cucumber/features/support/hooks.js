@@ -1,5 +1,5 @@
 const puppeteer = require('puppeteer')
-const { Before, After, Status } = require('cucumber')
+const { Before, After, Status } = require('@cucumber/cucumber')
 
 Before(async function () {
   this.browser = await puppeteer.launch({
