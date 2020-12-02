@@ -54,7 +54,7 @@
         "cs-fix": "phpcbf",
         "psalm": "psalm",
         "test": "phpunit --colors=always",
-        "test-coverage": "phpunit --colors=always --coverage-html var/test/coverage",
+        "test-coverage": "XDEBUG_MODE=coverage phpunit --colors=always --coverage-html var/test/coverage",
         "app": "php bin/app.php --ansi"
     }
 }
