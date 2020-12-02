@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c88474f3944b909e415dfeed0374d8bd",
+    "content-hash": "a9505157e272a77d995521c5c662308c",
     "packages": [
         {
             "name": "brick/math",
@@ -3624,21 +3624,21 @@
         },
         {
             "name": "sentry/sdk",
-            "version": "2.2.0",
+            "version": "3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/getsentry/sentry-php-sdk.git",
-                "reference": "089858b1b27d3705a5fd1c32d8d10beb55980190"
+                "reference": "f03133b067fdf03fed09ff03daf3f1d68f5f3673"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/getsentry/sentry-php-sdk/zipball/089858b1b27d3705a5fd1c32d8d10beb55980190",
-                "reference": "089858b1b27d3705a5fd1c32d8d10beb55980190",
+                "url": "https://api.github.com/repos/getsentry/sentry-php-sdk/zipball/f03133b067fdf03fed09ff03daf3f1d68f5f3673",
+                "reference": "f03133b067fdf03fed09ff03daf3f1d68f5f3673",
                 "shasum": ""
             },
             "require": {
                 "http-interop/http-factory-guzzle": "^1.0",
-                "sentry/sentry": "^2.5",
+                "sentry/sentry": "^3.1",
                 "symfony/http-client": "^4.3|^5.0"
             },
             "type": "metapackage",
@@ -3664,7 +3664,7 @@
                 "sentry"
             ],
             "support": {
-                "source": "https://github.com/getsentry/sentry-php-sdk/tree/2.2.0"
+                "source": "https://github.com/getsentry/sentry-php-sdk/tree/3.1.0"
             },
             "funding": [
                 {
@@ -3676,29 +3676,30 @@
                     "type": "custom"
                 }
             ],
-            "time": "2020-09-14T09:30:55+00:00"
+            "time": "2020-12-01T10:31:45+00:00"
         },
         {
             "name": "sentry/sentry",
-            "version": "2.5.0",
+            "version": "3.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/getsentry/sentry-php.git",
-                "reference": "bab5b73dbaf5f0ff62317e1611d952764d5514a9"
+                "reference": "2a0ecb127dbccf93fb5a37df907ce08822a62e6c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/getsentry/sentry-php/zipball/bab5b73dbaf5f0ff62317e1611d952764d5514a9",
-                "reference": "bab5b73dbaf5f0ff62317e1611d952764d5514a9",
+                "url": "https://api.github.com/repos/getsentry/sentry-php/zipball/2a0ecb127dbccf93fb5a37df907ce08822a62e6c",
+                "reference": "2a0ecb127dbccf93fb5a37df907ce08822a62e6c",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "ext-mbstring": "*",
-                "guzzlehttp/promises": "^1.3",
-                "guzzlehttp/psr7": "^1.6",
-                "jean85/pretty-package-versions": "^1.2",
-                "php": "^7.1",
+                "guzzlehttp/promises": "^1.4",
+                "guzzlehttp/psr7": "^1.7",
+                "jean85/pretty-package-versions": "^1.5",
+                "ocramius/package-versions": "^1.8",
+                "php": "^7.2|^8.0",
                 "php-http/async-client-implementation": "^1.0",
                 "php-http/client-common": "^1.5|^2.0",
                 "php-http/discovery": "^1.6.1",
@@ -3707,7 +3708,8 @@
                 "psr/http-factory": "^1.0",
                 "psr/http-message-implementation": "^1.0",
                 "psr/log": "^1.0",
-                "symfony/options-resolver": "^2.7|^3.0|^4.0|^5.0",
+                "symfony/options-resolver": "^3.4.43|^4.4.11|^5.0.11",
+                "symfony/polyfill-php80": "^1.17",
                 "symfony/polyfill-uuid": "^1.13.1"
             },
             "conflict": {
@@ -3716,14 +3718,16 @@
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^2.16",
+                "http-interop/http-factory-guzzle": "^1.0",
                 "monolog/monolog": "^1.3|^2.0",
+                "nikic/php-parser": "^4.10.3",
                 "php-http/mock-client": "^1.3",
                 "phpstan/extension-installer": "^1.0",
                 "phpstan/phpstan": "^0.12",
                 "phpstan/phpstan-phpunit": "^0.12",
-                "phpunit/phpunit": "^7.5.18",
-                "symfony/phpunit-bridge": "^4.3|^5.0",
-                "vimeo/psalm": "^3.4"
+                "phpunit/phpunit": "^8.5.13|^9.4",
+                "symfony/phpunit-bridge": "^5.2",
+                "vimeo/psalm": "^3.4|^4.2"
             },
             "suggest": {
                 "monolog/monolog": "Allow sending log messages to Sentry by using the included Monolog handler."
@@ -3731,7 +3735,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.5.x-dev"
+                    "dev-master": "3.1.x-dev"
                 }
             },
             "autoload": {
@@ -3765,7 +3769,7 @@
             ],
             "support": {
                 "issues": "https://github.com/getsentry/sentry-php/issues",
-                "source": "https://github.com/getsentry/sentry-php/tree/2.5.0"
+                "source": "https://github.com/getsentry/sentry-php/tree/3.1.1"
             },
             "funding": [
                 {
@@ -3777,7 +3781,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2020-09-14T07:02:40+00:00"
+            "time": "2020-12-05T21:59:39+00:00"
         },
         {
             "name": "slim/psr7",
@@ -6653,37 +6657,43 @@
         },
         {
             "name": "guzzlehttp/guzzle",
-            "version": "6.5.5",
+            "version": "7.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "9d4290de1cfd701f38099ef7e183b64b4b7b0c5e"
+                "reference": "0aa74dfb41ae110835923ef10a9d803a22d50e79"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/9d4290de1cfd701f38099ef7e183b64b4b7b0c5e",
-                "reference": "9d4290de1cfd701f38099ef7e183b64b4b7b0c5e",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/0aa74dfb41ae110835923ef10a9d803a22d50e79",
+                "reference": "0aa74dfb41ae110835923ef10a9d803a22d50e79",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "guzzlehttp/promises": "^1.0",
-                "guzzlehttp/psr7": "^1.6.1",
-                "php": ">=5.5",
-                "symfony/polyfill-intl-idn": "^1.17.0"
+                "guzzlehttp/promises": "^1.4",
+                "guzzlehttp/psr7": "^1.7",
+                "php": "^7.2.5 || ^8.0",
+                "psr/http-client": "^1.0"
+            },
+            "provide": {
+                "psr/http-client-implementation": "1.0"
             },
             "require-dev": {
                 "ext-curl": "*",
-                "phpunit/phpunit": "^4.8.35 || ^5.7 || ^6.4 || ^7.0",
+                "php-http/client-integration-tests": "^3.0",
+                "phpunit/phpunit": "^8.5.5 || ^9.3.5",
                 "psr/log": "^1.1"
             },
             "suggest": {
+                "ext-curl": "Required for CURL handler support",
+                "ext-intl": "Required for Internationalized Domain Name (IDN) support",
                 "psr/log": "Required for using the Log middleware"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "6.5-dev"
+                    "dev-master": "7.1-dev"
                 }
             },
             "autoload": {
@@ -6703,6 +6713,11 @@
                     "name": "Michael Dowling",
                     "email": "mtdowling@gmail.com",
                     "homepage": "https://github.com/mtdowling"
+                },
+                {
+                    "name": "Márk Sági-Kazár",
+                    "email": "mark.sagikazar@gmail.com",
+                    "homepage": "https://sagikazarmark.hu"
                 }
             ],
             "description": "Guzzle is a PHP HTTP client library",
@@ -6713,14 +6728,34 @@
                 "framework",
                 "http",
                 "http client",
+                "psr-18",
+                "psr-7",
                 "rest",
                 "web service"
             ],
             "support": {
                 "issues": "https://github.com/guzzle/guzzle/issues",
-                "source": "https://github.com/guzzle/guzzle/tree/6.5"
+                "source": "https://github.com/guzzle/guzzle/tree/7.2.0"
             },
-            "time": "2020-06-16T21:01:06+00:00"
+            "funding": [
+                {
+                    "url": "https://github.com/GrahamCampbell",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/Nyholm",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/alexeyshockov",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/gmponos",
+                    "type": "github"
+                }
+            ],
+            "time": "2020-10-10T11:47:56+00:00"
         },
         {
             "name": "myclabs/deep-copy",
