@@ -10,9 +10,18 @@ use DomainException;
 
 class UserRepository
 {
-    private EntityManagerInterface $em;
+    /**
+     * @var EntityRepository
+     * @psalm-var EntityRepository<User>
+     */
     private EntityRepository $repo;
+    private EntityManagerInterface $em;
 
+    /**
+     * @param EntityManagerInterface $em
+     * @param EntityRepository $repo
+     * @psalm-param EntityRepository<User> $repo
+     */
     public function __construct(EntityManagerInterface $em, EntityRepository $repo)
     {
         $this->em = $em;
@@ -46,7 +55,6 @@ class UserRepository
      */
     public function findByJoinConfirmToken(string $token): ?User
     {
-        /** @psalm-var User|null */
         return $this->repo->findOneBy(['joinConfirmToken.value' => $token]);
     }
 
@@ -57,7 +65,6 @@ class UserRepository
      */
     public function findByPasswordResetToken(string $token): ?User
     {
-        /** @psalm-var User|null */
         return $this->repo->findOneBy(['passwordResetToken.value' => $token]);
     }
 
@@ -68,25 +75,26 @@ class UserRepository
      */
     public function findByNewEmailToken(string $token): ?User
     {
-        /** @psalm-var User|null */
         return $this->repo->findOneBy(['newEmailToken.value' => $token]);
     }
 
     public function get(Id $id): User
     {
-        if (!$user = $this->repo->find($id->getValue())) {
+        /** @var User|null $user */
+        $user = $this->repo->find($id->getValue());
+        if ($user === null) {
             throw new DomainException('User is not found.');
         }
-        /** @var User $user */
         return $user;
     }
 
     public function getByEmail(Email $email): User
     {
-        if (!$user = $this->repo->findOneBy(['email' => $email->getValue()])) {
+        /** @var User|null $user */
+        $user = $this->repo->findOneBy(['email' => $email->getValue()]);
+        if ($user === null) {
             throw new DomainException('User is not found.');
         }
-        /** @var User $user */
         return $user;
     }
 

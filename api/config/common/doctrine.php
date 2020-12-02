@@ -23,7 +23,7 @@ return [
          *     dev_mode:bool,
          *     proxy_dir:string,
          *     cache_dir:?string,
-         *     types:array<string,string>,
+         *     types:array<string,class-string<Doctrine\DBAL\Types\Type>>,
          *     subscribers:string[],
          *     connection:array
          * } $settings
