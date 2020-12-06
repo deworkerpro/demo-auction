@@ -54,9 +54,9 @@
     },
     "scripts": {
         "lint": "phplint",
-        "cs-check": "phpcs",
-        "cs-fix": "phpcbf",
-        "psalm": "psalm",
+        "phpcs": "phpcs --standard=phpcs.xml",
+        "phpcbf": "phpcbf --standard=phpcs.xml",
+        "psalm": "psalm --config=psalm.xml",
         "test": "phpunit --colors=always",
         "test-coverage": "XDEBUG_MODE=coverage phpunit --colors=always --coverage-html var/test/coverage",
         "app": "php bin/app.php --ansi"
