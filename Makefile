@@ -5,7 +5,7 @@ init: docker-down-clear \
 up: docker-up
 down: docker-down
 restart: down up
-check: lint analyze validate-schema test
+check: lint analyze validate-schema test test-e2e
 lint: api-lint frontend-lint cucumber-lint
 analyze: api-analyze
 validate-schema: api-validate-schema
