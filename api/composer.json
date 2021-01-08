@@ -39,7 +39,7 @@
         "lctrs/psalm-psr-container-plugin": "^1.1",
         "overtrue/phplint": "^2.0",
         "phpunit/phpunit": "^9.2",
-        "psalm/plugin-phpunit": "^0.13.0",
+        "psalm/plugin-phpunit": "^0.15.0",
         "roave/security-advisories": "dev-master",
         "squizlabs/php_codesniffer": "^3.5",
         "vimeo/psalm": "^4.3"
