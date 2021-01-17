@@ -10,3 +10,11 @@ Feature: View home page
     Then I see welcome block
     And I see "We will be here soon"
     And I do not see "We are here"
+
+  Scenario: View new home page content
+    Given I am a guest user
+    And I have "WE_ARE_HERE" feature
+    When I open "/" page
+    Then I see welcome block
+    And I do not see "We will be here soon"
+    And I see "We are here"
