@@ -4,9 +4,11 @@ import './index.css'
 import App from './App'
 import * as serviceWorker from './serviceWorker'
 
+const features = []
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App features={features} />
   </React.StrictMode>,
   document.getElementById('root')
 )
