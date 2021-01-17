@@ -1,6 +1,6 @@
 import React from 'react'
 import './App.css'
-import Welcome from './Welcome/Welcome'
+import Welcome from './Welcome'
 
 function App() {
   return (
