@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 use App\FeatureToggle\FeatureFlag;
 use App\FeatureToggle\Features;
+use App\FeatureToggle\FeatureSwitch;
 use Psr\Container\ContainerInterface;
 
 return [
     FeatureFlag::class => DI\get(Features::class),
+    FeatureSwitch::class => DI\get(Features::class),
 
     Features::class => static function (ContainerInterface $container): Features {
         /**
