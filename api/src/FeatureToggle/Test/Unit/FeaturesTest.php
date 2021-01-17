@@ -22,6 +22,8 @@ class FeaturesTest extends TestCase
         self::assertTrue($features->isEnabled('FIRST'));
         self::assertFalse($features->isEnabled('SECOND'));
         self::assertFalse($features->isEnabled('THIRD'));
+
+        self::assertEquals(['FIRST'], $features->getAllEnabled());
     }
 
     public function testEnable(): void
@@ -37,6 +39,8 @@ class FeaturesTest extends TestCase
         self::assertFalse($features->isEnabled('FIRST'));
         self::assertTrue($features->isEnabled('SECOND'));
         self::assertTrue($features->isEnabled('THIRD'));
+
+        self::assertEquals(['SECOND', 'THIRD'], $features->getAllEnabled());
     }
 
     public function testDisable(): void

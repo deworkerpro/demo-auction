@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\FeatureToggle;
 
-class Features implements FeatureFlag, FeatureSwitch
+class Features implements FeatureFlag, FeatureSwitch, FeaturesContext
 {
     /**
      * @var bool[]
@@ -37,5 +37,10 @@ class Features implements FeatureFlag, FeatureSwitch
     public function disable(string $name): void
     {
         $this->features[$name] = false;
+    }
+
+    public function getAllEnabled(): array
+    {
+        return array_keys(array_filter($this->features));
     }
 }
