@@ -14,8 +14,13 @@ class FeaturesTest extends TestCase
 {
     public function testInitial(): void
     {
-        $features = new Features();
+        $features = new Features($source = [
+            'FIRST' => true,
+            'SECOND' => false,
+        ]);
 
-        self::assertFalse($features->isEnabled('FIRST'));
+        self::assertTrue($features->isEnabled('FIRST'));
+        self::assertFalse($features->isEnabled('SECOND'));
+        self::assertFalse($features->isEnabled('THIRD'));
     }
 }
