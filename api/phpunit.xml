@@ -10,6 +10,7 @@
     <testsuites>
         <testsuite name="unit">
             <directory>src/Auth/Test/Unit</directory>
+            <directory>src/FeatureToggle/Test/Unit</directory>
             <directory>src/Frontend/Test/Unit</directory>
             <directory>src/Http/Test/Unit</directory>
         </testsuite>
@@ -24,6 +25,7 @@
         </include>
         <exclude>
             <directory>src/Auth/Test</directory>
+            <directory>src/FeatureToggle/Test</directory>
             <directory>src/Frontend/Test</directory>
             <directory>src/Http/Test</directory>
         </exclude>
