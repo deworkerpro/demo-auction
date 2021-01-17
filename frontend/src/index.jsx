@@ -11,7 +11,9 @@ const defaultFeatures = {
 }
 
 const cookies = cookie.parse(document.cookie)
-const cookieFeatures = (cookies.features || '').split(/\s*,\s*/g)
+const cookieFeatures = (cookies.features || '')
+  .split(/\s*,\s*/g)
+  .filter(Boolean)
 
 const features = mergeFeatures(defaultFeatures, cookieFeatures)
 
