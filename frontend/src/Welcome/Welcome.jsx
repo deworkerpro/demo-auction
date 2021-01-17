@@ -1,8 +1,10 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, { useContext } from 'react'
 import styles from './Welcome.module.css'
+import { FeaturesContext } from '../FeatureToggle'
 
-function Welcome({ features }) {
+function Welcome() {
+  const features = useContext(FeaturesContext)
+
   return (
     <div data-testid="welcome" className={styles.welcome}>
       <h1>Auction</h1>
@@ -13,10 +15,6 @@ function Welcome({ features }) {
       )}
     </div>
   )
-}
-
-Welcome.propTypes = {
-  features: PropTypes.array.isRequired,
 }
 
 export default Welcome
