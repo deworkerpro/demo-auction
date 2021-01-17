@@ -1,0 +1,34 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\FeatureToggle;
+
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\MiddlewareInterface;
+use Psr\Http\Server\RequestHandlerInterface;
+
+class FeaturesMiddleware implements MiddlewareInterface
+{
+    private FeatureSwitch $switch;
+    private string $header;
+
+    public function __construct(FeatureSwitch $switch, string $header = 'X-Features')
+    {
+        $this->switch = $switch;
+        $this->header = $header;
+    }
+
+    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+    {
+        $header = $request->getHeaderLine($this->header);
+        $features = array_filter(preg_split('/\s*,\s*/', $header));
+
+        foreach ($features as $feature) {
+            $this->switch->enable($feature);
+        }
+
+        return $handler->handle($request);
+    }
+}
