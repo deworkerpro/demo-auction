@@ -1,13 +1,13 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 import Welcome from './Welcome'
-import { FeaturesContext } from '../FeatureToggle'
+import { FeaturesProvider } from '../FeatureToggle'
 
-test('renders old welcome', () => {
+test('renders welcome', () => {
   const { getByText, queryByText } = render(
-    <FeaturesContext.Provider value={[]}>
+    <FeaturesProvider features={[]}>
       <Welcome />
-    </FeaturesContext.Provider>
+    </FeaturesProvider>
   )
 
   expect(getByText(/We will be here/i)).toBeInTheDocument()
@@ -16,9 +16,9 @@ test('renders old welcome', () => {
 
 test('renders new welcome', () => {
   const { getByText, queryByText } = render(
-    <FeaturesContext.Provider value={['WE_ARE_HERE']}>
+    <FeaturesProvider features={['WE_ARE_HERE']}>
       <Welcome />
-    </FeaturesContext.Provider>
+    </FeaturesProvider>
   )
 
   expect(queryByText(/We will be here/i)).toBeNull()
