@@ -7,4 +7,5 @@ namespace App\FeatureToggle;
 interface FeatureSwitch
 {
     public function enable(string $name): void;
+    public function disable(string $name): void;
 }
