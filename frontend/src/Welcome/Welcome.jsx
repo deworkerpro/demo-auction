@@ -1,18 +1,19 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import styles from './Welcome.module.css'
-import { FeaturesContext } from '../FeatureToggle'
+import FeatureFlag from '../FeatureToggle'
 
 function Welcome() {
-  const features = useContext(FeaturesContext)
-
   return (
     <div data-testid="welcome" className={styles.welcome}>
       <h1>Auction</h1>
-      {features.includes('WE_ARE_HERE') ? (
-        <p>We are here</p>
-      ) : (
+
+      <FeatureFlag not name="WE_ARE_HERE">
         <p>We will be here soon</p>
-      )}
+      </FeatureFlag>
+
+      <FeatureFlag name="WE_ARE_HERE">
+        <p>We are here</p>
+      </FeatureFlag>
     </div>
   )
 }
