@@ -16,19 +16,19 @@ pipeline {
         ).trim()
         GIT_DIFF_API = sh(
             returnStdout: true,
-            script: "git diff --name-only ${env.GIT_DIFF_BASE_COMMIT} HEAD -- api"
+            script: "git diff --name-only ${env.GIT_DIFF_BASE_COMMIT} HEAD -- api || echo 'all'"
         ).trim()
         GIT_DIFF_FRONTEND = sh(
             returnStdout: true,
-            script: "git diff --name-only ${env.GIT_DIFF_BASE_COMMIT} HEAD -- frontend"
+            script: "git diff --name-only ${env.GIT_DIFF_BASE_COMMIT} HEAD -- frontend || echo 'all'"
         ).trim()
         GIT_DIFF_CUCUMBER = sh(
             returnStdout: true,
-            script: "git diff --name-only ${env.GIT_DIFF_BASE_COMMIT} HEAD -- cucumber"
+            script: "git diff --name-only ${env.GIT_DIFF_BASE_COMMIT} HEAD -- cucumber || echo 'all'"
         ).trim()
         GIT_DIFF_ROOT = sh(
             returnStdout: true,
-            script: "git diff --name-only ${env.GIT_DIFF_BASE_COMMIT} HEAD -- . | { grep -v / - || true; }"
+            script: "{ git diff --name-only ${env.GIT_DIFF_BASE_COMMIT} HEAD -- . || echo 'all'; } | { grep -v / - || true; }"
         ).trim()
     }
     stages {
