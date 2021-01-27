@@ -37,11 +37,17 @@ pipeline {
                 sh "touch .docker-images-before"
                 sh "make init-ci"
                 sh "docker-compose images > .docker-images-after"
+                script {
+                    DOCKER_DIFF = sh(
+                        returnStdout: true,
+                        script: "diff .docker-images-before .docker-images-after || true"
+                    ).trim()
+                }
             }
         }
         stage("Valid") {
             when {
-                expression { return env.GIT_DIFF_ROOT || env.GIT_DIFF_API }
+                expression { return DOCKER_DIFF || env.GIT_DIFF_ROOT || env.GIT_DIFF_API }
             }
             steps {
                 sh "make api-validate-schema"
@@ -51,7 +57,7 @@ pipeline {
             parallel {
                 stage("API") {
                     when {
-                        expression { return env.GIT_DIFF_ROOT || env.GIT_DIFF_API }
+                        expression { return DOCKER_DIFF || env.GIT_DIFF_ROOT || env.GIT_DIFF_API }
                     }
                     steps {
                         sh "make api-lint"
@@ -59,7 +65,7 @@ pipeline {
                 }
                 stage("Frontend") {
                     when {
-                        expression { return env.GIT_DIFF_ROOT || env.GIT_DIFF_FRONTEND }
+                        expression { return DOCKER_DIFF || env.GIT_DIFF_ROOT || env.GIT_DIFF_FRONTEND }
                     }
                     steps {
                         sh "make frontend-lint"
@@ -67,7 +73,7 @@ pipeline {
                 }
                 stage("Cucumber") {
                     when {
-                        expression { return env.GIT_DIFF_ROOT || env.GIT_DIFF_CUCUMBER }
+                        expression { return DOCKER_DIFF || env.GIT_DIFF_ROOT || env.GIT_DIFF_CUCUMBER }
                     }
                     steps {
                         sh "make cucumber-lint"
@@ -77,7 +83,7 @@ pipeline {
         }
         stage("Analyze") {
             when {
-                expression { return env.GIT_DIFF_ROOT || env.GIT_DIFF_API }
+                expression { return DOCKER_DIFF || env.GIT_DIFF_ROOT || env.GIT_DIFF_API }
             }
             steps {
                 sh "make api-analyze"
@@ -87,7 +93,7 @@ pipeline {
             parallel {
                 stage("API") {
                     when {
-                        expression { return env.GIT_DIFF_ROOT || env.GIT_DIFF_API }
+                        expression { return DOCKER_DIFF || env.GIT_DIFF_ROOT || env.GIT_DIFF_API }
                     }
                     steps {
                         sh "make api-test"
@@ -100,7 +106,7 @@ pipeline {
                 }
                 stage("Front") {
                     when {
-                        expression { return env.GIT_DIFF_ROOT || env.GIT_DIFF_FRONTEND }
+                        expression { return DOCKER_DIFF || env.GIT_DIFF_ROOT || env.GIT_DIFF_FRONTEND }
                     }
                     steps {
                         sh "make frontend-test"
