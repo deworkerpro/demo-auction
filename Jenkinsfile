@@ -10,21 +10,25 @@ pipeline {
             returnStdout: true,
             script: "echo '${env.BUILD_TAG}' | sed 's/%2F/-/g'"
         ).trim()
+        GIT_DIFF_BASE_COMMIT = sh(
+            returnStdout: true,
+            script: "echo ${env.GIT_PREVIOUS_SUCCESSFUL_COMMIT ?: '`git rev-list HEAD | tail -n 1`'}"
+        ).trim()
         GIT_DIFF_API = sh(
             returnStdout: true,
-            script: "git diff --name-only ${env.GIT_PREVIOUS_SUCCESSFUL_COMMIT} HEAD -- api"
+            script: "git diff --name-only ${env.GIT_DIFF_BASE_COMMIT} HEAD -- api"
         ).trim()
         GIT_DIFF_FRONTEND = sh(
             returnStdout: true,
-            script: "git diff --name-only ${env.GIT_PREVIOUS_SUCCESSFUL_COMMIT} HEAD -- frontend"
+            script: "git diff --name-only ${env.GIT_DIFF_BASE_COMMIT} HEAD -- frontend"
         ).trim()
         GIT_DIFF_CUCUMBER = sh(
             returnStdout: true,
-            script: "git diff --name-only ${env.GIT_PREVIOUS_SUCCESSFUL_COMMIT} HEAD -- cucumber"
+            script: "git diff --name-only ${env.GIT_DIFF_BASE_COMMIT} HEAD -- cucumber"
         ).trim()
         GIT_DIFF_ROOT = sh(
             returnStdout: true,
-            script: "git diff --name-only ${env.GIT_PREVIOUS_SUCCESSFUL_COMMIT} HEAD -- . | { grep -v / - || true; }"
+            script: "git diff --name-only ${env.GIT_DIFF_BASE_COMMIT} HEAD -- . | { grep -v / - || true; }"
         ).trim()
     }
     stages {
