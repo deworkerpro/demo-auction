@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage("Init") {
             steps {
-                sh "make init"
+                sh "make init-ci"
             }
         }
         stage("Valid") {
