@@ -10,6 +10,18 @@ pipeline {
             returnStdout: true,
             script: "echo '${env.BUILD_TAG}' | sed 's/%2F/-/g'"
         ).trim()
+        GIT_DIFF_API = sh(
+            returnStdout: true,
+            script: "git diff --name-only ${env.GIT_PREVIOUS_SUCCESSFUL_COMMIT} HEAD -- api"
+        ).trim()
+        GIT_DIFF_FRONTEND = sh(
+            returnStdout: true,
+            script: "git diff --name-only ${env.GIT_PREVIOUS_SUCCESSFUL_COMMIT} HEAD -- frontend"
+        ).trim()
+        GIT_DIFF_CUCUMBER = sh(
+            returnStdout: true,
+            script: "git diff --name-only ${env.GIT_PREVIOUS_SUCCESSFUL_COMMIT} HEAD -- cucumber"
+        ).trim()
     }
     stages {
         stage("Init") {
