@@ -16,7 +16,7 @@ test('renders home', () => {
 
 test('renders new home', () => {
   const { getByText, queryByText } = render(
-    <FeaturesProvider features={['WE_ARE_HERE']}>
+    <FeaturesProvider features={['JOIN_TO_US']}>
       <Home />
     </FeaturesProvider>
   )

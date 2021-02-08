@@ -7,11 +7,11 @@ function Home() {
     <System>
       <h1>Auction</h1>
 
-      <FeatureFlag not name="WE_ARE_HERE">
+      <FeatureFlag not name="JOIN_TO_US">
         <p>We will be here soon</p>
       </FeatureFlag>
 
-      <FeatureFlag name="WE_ARE_HERE">
+      <FeatureFlag name="JOIN_TO_US">
         <p>We are here</p>
       </FeatureFlag>
     </System>

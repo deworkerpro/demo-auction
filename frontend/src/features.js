@@ -1,5 +1,5 @@
 const features = {
-  WE_ARE_HERE: false,
+  JOIN_TO_US: false,
 }
 
 export default features
