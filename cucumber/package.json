@@ -1,10 +1,10 @@
 {
   "license": "MIT",
   "scripts": {
-    "smoke": "cucumber-js --tags @smoke --fail-fast --parallel 4",
-    "smoke-ci": "cucumber-js --tags @smoke --fail-fast --parallel 2 --retry 2",
-    "e2e": "cucumber-js --parallel 4",
-    "e2e-ci": "cucumber-js --parallel 2 --retry 2",
+    "smoke": "cucumber-js --tags '@smoke and not @wip' --fail-fast --parallel 4",
+    "smoke-ci": "cucumber-js --tags '@smoke and not @wip' --fail-fast --parallel 2 --retry 2",
+    "e2e": "cucumber-js --tags 'not @wip' --parallel 4",
+    "e2e-ci": "cucumber-js --tags 'not @wip' --parallel 2 --retry 2",
     "lint": "eslint --ext .js features",
     "lint-fix": "eslint --fix --ext .js features"
   },
