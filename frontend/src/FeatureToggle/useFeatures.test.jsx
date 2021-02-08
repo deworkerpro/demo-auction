@@ -15,5 +15,5 @@ test('read features', () => {
     </FeaturesProvider>
   )
 
-  expect(container.textContent).toEqual('ONE,TWO')
+  expect(container).toHaveTextContent('ONE,TWO')
 })

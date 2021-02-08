@@ -11,7 +11,7 @@ test('renders welcome', () => {
   )
 
   expect(getByText(/We will be here/i)).toBeInTheDocument()
-  expect(queryByText(/We are here/i)).toBeNull()
+  expect(queryByText(/We are here/i)).not.toBeInTheDocument()
 })
 
 test('renders new welcome', () => {
@@ -21,6 +21,6 @@ test('renders new welcome', () => {
     </FeaturesProvider>
   )
 
-  expect(queryByText(/We will be here/i)).toBeNull()
+  expect(queryByText(/We will be here/i)).not.toBeInTheDocument()
   expect(getByText(/We are here/i)).toBeInTheDocument()
 })
