@@ -4,6 +4,7 @@ import './App.css'
 import { FeaturesProvider } from '../FeatureToggle'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import Home from '../Home'
+import { NotFound } from '../Error'
 
 function App({ features }) {
   return (
@@ -13,6 +14,9 @@ function App({ features }) {
           <Switch>
             <Route exact path="/">
               <Home />
+            </Route>
+            <Route path="*">
+              <NotFound />
             </Route>
           </Switch>
         </div>
