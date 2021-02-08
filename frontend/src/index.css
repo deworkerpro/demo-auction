@@ -114,3 +114,78 @@ p {
 a {
   color: #005ba0;
 }
+
+.form {
+  margin-bottom: 20px;
+}
+
+.form .input-row {
+  margin-bottom: 12px;
+}
+
+.form .input-row label {
+  vertical-align: middle;
+  font-size: 0.87rem;
+  color: #333;
+}
+
+.form .input-row label small {
+  font-size: 0.85rem;
+}
+
+.form .input-row .input-label {
+  display: block;
+}
+
+.form .input-row.has-error label {
+  color: #c82333;
+}
+
+.form .input-row input[type='email'],
+.form .input-row input[type='password'] {
+  display: block;
+  width: 100%;
+  color: #444;
+  border: 1px solid #ddd;
+  background: #fff;
+  border-radius: 4px;
+  padding: 10px;
+  font-size: 0.9rem;
+  font-family: Arial, sans-serif;
+  margin: 3px 0;
+}
+
+.form .input-row input[type='checkbox'] {
+  vertical-align: middle;
+  margin-right: 6px;
+}
+
+.form .input-row.has-error input[type='email'],
+.form .input-row.has-error input[type='password'] {
+  border-color: #c82333;
+  color: #c82333;
+}
+
+.form .button-row {
+  text-align: center;
+}
+
+.form .button-row button {
+  display: inline-block;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.form .button-row button[type='submit'] {
+  background: linear-gradient(to bottom, #ad0090, #af0061);
+  color: #fff;
+}
+
+.form .input-error {
+  margin-top: 4px;
+  font-size: 0.8rem;
+  color: #c82333;
+}
