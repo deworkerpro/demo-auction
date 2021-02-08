@@ -9,7 +9,8 @@
     "plugin:react/recommended",
     "standard",
     "plugin:prettier/recommended",
-    "plugin:jest-dom/recommended"
+    "plugin:jest-dom/recommended",
+    "plugin:testing-library/react"
   ],
   "globals": {
     "Atomics": "readonly",
@@ -22,7 +23,7 @@
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
-  "plugins": ["react", "prettier", "jest-dom"],
+  "plugins": ["react", "prettier", "jest-dom", "testing-library"],
   "settings": {
     "react": {
       "version": "17"
