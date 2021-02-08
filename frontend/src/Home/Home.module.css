@@ -1,4 +1,4 @@
-.welcome {
+.home {
   display: block;
   vertical-align: middle;
   padding: 30px;
@@ -7,7 +7,7 @@
   border-radius: 6px;
 }
 
-.welcome h1 {
+.home h1 {
   text-align: center;
   color: #444;
   font-weight: normal;
@@ -16,7 +16,7 @@
   margin: 0 0 20px 0;
 }
 
-.welcome p {
+.home p {
   text-align: center;
   color: #444;
   font-size: 0.9rem;
