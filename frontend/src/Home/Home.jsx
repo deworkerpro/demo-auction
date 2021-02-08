@@ -1,6 +1,7 @@
 import React from 'react'
 import FeatureFlag from '../FeatureToggle'
 import System from '../Layout/System'
+import { Link } from 'react-router-dom'
 
 function Home() {
   return (
@@ -13,6 +14,11 @@ function Home() {
 
       <FeatureFlag name="JOIN_TO_US">
         <p>We are here</p>
+        <p>
+          <Link to="/join" data-testid="join-link">
+            Join to Us
+          </Link>
+        </p>
       </FeatureFlag>
     </System>
   )
