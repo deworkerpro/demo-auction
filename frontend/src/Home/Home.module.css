@@ -1,3 +1,11 @@
+.layout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #f6f6f6;
+}
+
 .content {
   display: block;
   vertical-align: middle;
