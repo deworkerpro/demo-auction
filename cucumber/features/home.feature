@@ -6,7 +6,7 @@ Feature: View home page
   @smoke
   Scenario: View home page content
     Given I am a guest user
-    And I do not have "WE_ARE_HERE" feature
+    And I do not have "JOIN_TO_US" feature
     When I open "/" page
     Then I see "Auction" header
     And I see "We will be here soon"
@@ -14,7 +14,7 @@ Feature: View home page
 
   Scenario: View new home page content
     Given I am a guest user
-    And I have "WE_ARE_HERE" feature
+    And I have "JOIN_TO_US" feature
     When I open "/" page
     Then I see "Auction" header
     And I do not see "We will be here soon"
