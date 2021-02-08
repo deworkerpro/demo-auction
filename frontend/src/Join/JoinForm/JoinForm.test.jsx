@@ -1,12 +1,10 @@
 import React from 'react'
-import { render, fireEvent, screen } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 import JoinForm from './JoinForm'
+import api from '../../Api'
 
 test('allows the user to join successfully', async () => {
-  const fetch = jest.spyOn(global, 'fetch').mockResolvedValue({
-    ok: true,
-    status: 201
-  })
+  jest.spyOn(api, 'post').mockResolvedValue('')
 
   render(<JoinForm />)
 
@@ -24,21 +22,14 @@ test('allows the user to join successfully', async () => {
 
   expect(alert).toHaveTextContent('Confirm join by link in email')
 
-  expect(fetch).toHaveBeenCalledWith('/api/v1/auth/join', {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      email: 'mail@app.test',
-      password: 'password',
-    }),
+  expect(api.post).toHaveBeenCalledWith('/v1/auth/join', {
+    email: 'mail@app.test',
+    password: 'password',
   })
 })
 
 test('shows conflict error', async () => {
-  jest.spyOn(global, 'fetch').mockResolvedValue({
+  jest.spyOn(api, 'post').mockRejectedValue({
     ok: false,
     status: 409,
     headers: new Headers({ 'Content-Type': 'application/json' }),
@@ -63,7 +54,7 @@ test('shows conflict error', async () => {
 })
 
 test('shows validation errors', async () => {
-  jest.spyOn(global, 'fetch').mockResolvedValue({
+  jest.spyOn(api, 'post').mockRejectedValue({
     ok: false,
     status: 422,
     headers: new Headers({ 'Content-Type': 'application/json' }),
@@ -95,7 +86,7 @@ test('shows validation errors', async () => {
 })
 
 test('shows server error', async () => {
-  jest.spyOn(global, 'fetch').mockResolvedValue({
+  jest.spyOn(api, 'post').mockRejectedValue({
     ok: false,
     status: 502,
     statusText: 'Bad Gateway',
