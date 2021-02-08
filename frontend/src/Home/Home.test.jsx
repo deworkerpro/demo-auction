@@ -1,12 +1,12 @@
 import React from 'react'
 import { render } from '@testing-library/react'
-import Welcome from './Welcome'
+import Home from './Home'
 import { FeaturesProvider } from '../FeatureToggle'
 
-test('renders welcome', () => {
+test('renders home', () => {
   const { getByText, queryByText } = render(
     <FeaturesProvider features={[]}>
-      <Welcome />
+      <Home />
     </FeaturesProvider>
   )
 
@@ -14,10 +14,10 @@ test('renders welcome', () => {
   expect(queryByText(/We are here/i)).not.toBeInTheDocument()
 })
 
-test('renders new welcome', () => {
+test('renders new home', () => {
   const { getByText, queryByText } = render(
     <FeaturesProvider features={['WE_ARE_HERE']}>
-      <Welcome />
+      <Home />
     </FeaturesProvider>
   )
 
