@@ -1,6 +1,6 @@
 Feature: API
 
-  @smoke @wip
+  @smoke
   Scenario: Open api proxy
     Given I open "/api" page
     Then I see "{}"
