@@ -43,30 +43,38 @@ function JoinForm() {
         password: formData.password,
       }),
     })
-      .then(async (response) => {
+      .then((response) => {
         if (response.ok) {
-          setSuccess('Confirm join by link in email.')
-          return
+          return response
         }
-
-        if (response.status === 422) {
-          const data = await response.json()
+        throw response
+      })
+      .then(() => {
+        setSuccess('Confirm join by link in email.')
+      })
+      .catch(async (error) => {
+        if (error.status === 422) {
+          const data = await error.json()
           setErrors(data.errors)
           return
         }
 
-        const type = response.headers.get('content-type')
-        if (type && type.includes('application/json')) {
-          const data = await response.json()
-          if (data.message) {
-            setError(data.message)
-            return
+        if (error.status) {
+          const type = error.headers.get('content-type')
+          if (type && type.includes('application/json')) {
+            const data = await error.json()
+            if (data.message) {
+              setError(data.message)
+              return
+            }
           }
         }
 
-        setError(error.statusText)
-      })
-      .catch((error) => {
+        if (error.status) {
+          setError(error.statusText)
+          return
+        }
+
         setError(error.message)
       })
   }
