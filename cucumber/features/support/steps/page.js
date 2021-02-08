@@ -18,3 +18,9 @@ Then('I do not see {string}', async function (value) {
 Then('I see {string} element', async function (id) {
   await this.page.waitForSelector('[data-testid=' + id + ']')
 })
+
+Then('I see {string} header', async function (value) {
+  await this.page.waitForSelector('h1')
+  const text = await this.page.$eval('h1', el => el.innerText)
+  expect(text).to.equals(value)
+})
