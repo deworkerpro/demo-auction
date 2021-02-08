@@ -4,16 +4,18 @@ import FeatureFlag from '../FeatureToggle'
 
 function Home() {
   return (
-    <div className={styles.content}>
-      <h1>Auction</h1>
+    <div className={styles.layout}>
+      <div className={styles.content}>
+        <h1>Auction</h1>
 
-      <FeatureFlag not name="WE_ARE_HERE">
-        <p>We will be here soon</p>
-      </FeatureFlag>
+        <FeatureFlag not name="WE_ARE_HERE">
+          <p>We will be here soon</p>
+        </FeatureFlag>
 
-      <FeatureFlag name="WE_ARE_HERE">
-        <p>We are here</p>
-      </FeatureFlag>
+        <FeatureFlag name="WE_ARE_HERE">
+          <p>We are here</p>
+        </FeatureFlag>
+      </div>
     </div>
   )
 }
