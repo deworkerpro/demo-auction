@@ -9,17 +9,12 @@
 
 .home h1 {
   text-align: center;
-  color: #444;
-  font-weight: normal;
-  font-size: 1.8rem;
-  line-height: 1;
-  margin: 0 0 20px 0;
 }
 
 .home p {
   text-align: center;
-  color: #444;
-  font-size: 0.9rem;
-  line-height: 1;
-  margin: 0;
+}
+
+.home p:last-child {
+  margin-bottom: 0;
 }
