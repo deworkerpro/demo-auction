@@ -4,6 +4,7 @@ import './App.css'
 import { FeaturesProvider } from '../FeatureToggle'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import Home from '../Home'
+import Join from '../Join'
 import { NotFound } from '../Error'
 
 function App({ features }) {
@@ -15,6 +16,11 @@ function App({ features }) {
             <Route exact path="/">
               <Home />
             </Route>
+            {features.includes('JOIN_TO_US') ? (
+              <Route exact path="/join">
+                <Join />
+              </Route>
+            ) : null}
             <Route path="*">
               <NotFound />
             </Route>
