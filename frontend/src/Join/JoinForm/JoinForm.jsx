@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import styles from './JoinForm.module.css'
+import api from '../../Api'
 
 function JoinForm() {
   const [formData, setFormData] = useState({
@@ -32,22 +33,10 @@ function JoinForm() {
     setError(null)
     setSuccess(null)
 
-    fetch('/api/v1/auth/join', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-      },
-      body: JSON.stringify({
+    api
+      .post('/v1/auth/join', {
         email: formData.email,
         password: formData.password,
-      }),
-    })
-      .then((response) => {
-        if (response.ok) {
-          return response
-        }
-        throw response
       })
       .then(() => {
         setSuccess('Confirm join by link in email.')
