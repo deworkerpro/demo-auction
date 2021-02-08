@@ -11,3 +11,4 @@ Feature: View join page
     And I have "JOIN_TO_US" feature
     When I open "/join" page
     Then I see "Join to Us" header
+    And I see "join-form" element
