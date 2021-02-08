@@ -1,4 +1,4 @@
-.home {
+.content {
   display: block;
   vertical-align: middle;
   padding: 30px;
@@ -7,14 +7,14 @@
   border-radius: 6px;
 }
 
-.home h1 {
+.content h1 {
   text-align: center;
 }
 
-.home p {
+.content p {
   text-align: center;
 }
 
-.home p:last-child {
+.content p:last-child {
   margin-bottom: 0;
 }
