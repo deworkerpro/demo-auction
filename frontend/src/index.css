@@ -18,4 +18,18 @@ html {
 body {
   background-color: #f6f6f6;
   font-family: Arial, sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.3;
+  color: #444;
+}
+
+h1 {
+  font-weight: normal;
+  font-size: 1.8rem;
+  line-height: 1;
+  margin: 0 0 1.4rem 0;
+}
+
+p {
+  margin: 0 0 1rem 0;
 }
