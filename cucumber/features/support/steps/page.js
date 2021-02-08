@@ -6,8 +6,11 @@ When('I open {string} page', { wrapperOptions: { retry: 2 }, timeout: 30000 }, a
 })
 
 Then('I see {string}', async function (value) {
-  const content = await this.page.content()
-  expect(content).to.include(value)
+  await this.page.waitForFunction(
+    (text) => document.querySelector('body').innerText.includes(text),
+    {},
+    value
+  )
 })
 
 Then('I do not see {string}', async function (value) {
@@ -20,7 +23,12 @@ Then('I see {string} element', async function (id) {
 })
 
 Then('I see {string} header', async function (value) {
-  await this.page.waitForSelector('h1')
-  const text = await this.page.$eval('h1', el => el.innerText)
-  expect(text).to.equals(value)
+  await this.page.waitForFunction(
+    (text) => {
+      const el = document.querySelector('h1')
+      return el ? el.innerText.includes(text) : false
+    },
+    {},
+    value
+  )
 })
