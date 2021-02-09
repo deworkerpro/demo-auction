@@ -7,6 +7,7 @@ import Home from '../Home'
 import Join from '../Join'
 import { NotFound } from '../Error'
 import Confirm from '../Join/Confirm'
+import Success from '../Join/Success'
 
 function App({ features }) {
   return (
@@ -25,6 +26,11 @@ function App({ features }) {
             {features.includes('JOIN_TO_US') ? (
               <Route exact path="/join/confirm">
                 <Confirm />
+              </Route>
+            ) : null}
+            {features.includes('JOIN_TO_US') ? (
+              <Route exact path="/join/success">
+                <Success />
               </Route>
             ) : null}
             <Route path="*">
