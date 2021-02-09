@@ -1,3 +1,5 @@
+import isJsonResponse from './isJsonResponse'
+
 function request(url, method, data, headers) {
   const common = {
     method,
@@ -32,8 +34,7 @@ function request(url, method, data, headers) {
       throw response
     })
     .then((response) => {
-      const type = response.headers.get('content-type')
-      if (type && type.includes('application/json')) {
+      if (isJsonResponse(response)) {
         return response.json()
       }
       return response.text()
