@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import styles from './JoinForm.module.css'
 import api, { parseError, parseErrors } from '../../Api'
 import { AlertError, AlertSuccess } from '../../Alert'
+import { InputError } from '../../Form'
 
 function JoinForm() {
   const [formData, setFormData] = useState({
@@ -71,11 +72,7 @@ function JoinForm() {
               onChange={handleChange}
               required
             />
-            {errors.email ? (
-              <div className="input-error" data-testid="violation">
-                {errors.email}
-              </div>
-            ) : null}
+            <InputError error={errors.email} />
           </div>
           <div className={'input-row' + (errors.password ? ' has-error' : '')}>
             <label htmlFor="password" className="input-label">
@@ -89,11 +86,7 @@ function JoinForm() {
               onChange={handleChange}
               required
             />
-            {errors.password ? (
-              <div className="input-error" data-testid="violation">
-                {errors.password}
-              </div>
-            ) : null}
+            <InputError error={errors.password} />
           </div>
           <div className={'input-row' + (errors.agree ? ' has-error' : '')}>
             <label>
@@ -106,11 +99,7 @@ function JoinForm() {
               />
               <small>I agree with privacy policy</small>
             </label>
-            {errors.agree ? (
-              <div className="input-error" data-testid="violation">
-                {errors.agree}
-              </div>
-            ) : null}
+            <InputError error={errors.agree} />
           </div>
           <div className="button-row">
             <button
