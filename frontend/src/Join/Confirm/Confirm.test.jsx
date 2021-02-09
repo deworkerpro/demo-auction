@@ -1,6 +1,6 @@
 import React from 'react'
 import { createMemoryHistory } from 'history'
-import { render, screen } from '@testing-library/react'
+import { render, waitFor, screen } from '@testing-library/react'
 import Confirm from './Confirm'
 import { Router, MemoryRouter } from 'react-router-dom'
 import api from '../../Api'
@@ -31,15 +31,21 @@ test('confirms successfully', async () => {
     text: () => Promise.resolve(''),
   })
 
+  const history = createMemoryHistory({
+    initialEntries: ['/join/confirm?token=01'],
+  })
+
   render(
-    <MemoryRouter initialEntries={['/join/confirm?token=01']}>
+    <Router history={history}>
       <Confirm />
-    </MemoryRouter>
+    </Router>
   )
 
-  const alert = await screen.findByTestId('alert-success')
+  await waitFor(() => {
+    expect(api.post).toHaveBeenCalled()
+  })
 
-  expect(alert).toHaveTextContent('Success!')
+  expect(history.location.pathname).toBe('/join/success')
 
   expect(api.post).toHaveBeenCalledWith('/v1/auth/join/confirm', {
     token: '01',
