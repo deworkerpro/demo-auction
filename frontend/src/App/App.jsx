@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import Home from '../Home'
 import Join from '../Join'
 import { NotFound } from '../Error'
+import Confirm from '../Join/Confirm'
 
 function App({ features }) {
   return (
@@ -19,6 +20,11 @@ function App({ features }) {
             {features.includes('JOIN_TO_US') ? (
               <Route exact path="/join">
                 <Join />
+              </Route>
+            ) : null}
+            {features.includes('JOIN_TO_US') ? (
+              <Route exact path="/join/confirm">
+                <Confirm />
               </Route>
             ) : null}
             <Route path="*">
