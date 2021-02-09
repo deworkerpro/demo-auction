@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import styles from './JoinForm.module.css'
 import api, { parseError, parseErrors } from '../../Api'
+import { AlertError, AlertSuccess } from '../../Alert'
 
 function JoinForm() {
   const [formData, setFormData] = useState({
@@ -53,16 +54,8 @@ function JoinForm() {
 
   return (
     <div data-testid="join-form" className={styles.joinForm}>
-      {error ? (
-        <div className="alert error" data-testid="alert-error">
-          {error}
-        </div>
-      ) : null}
-      {success ? (
-        <div className="alert success" data-testid="alert-success">
-          {success}
-        </div>
-      ) : null}
+      <AlertError message={error} />
+      <AlertSuccess message={success} />
 
       {!success ? (
         <form className="form" method="post" onSubmit={handleSubmit}>
