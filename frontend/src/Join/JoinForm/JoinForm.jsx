@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import styles from './JoinForm.module.css'
 import api, { parseError, parseErrors } from '../../Api'
 import { AlertError, AlertSuccess } from '../../Alert'
-import { InputError } from '../../Form'
+import { ButtonRow, InputError, InputLabel, InputRow } from '../../Form'
 
 function JoinForm() {
   const [formData, setFormData] = useState({
@@ -60,10 +60,8 @@ function JoinForm() {
 
       {!success ? (
         <form className="form" method="post" onSubmit={handleSubmit}>
-          <div className={'input-row' + (errors.email ? ' has-error' : '')}>
-            <label htmlFor="email" className="input-label">
-              Email
-            </label>
+          <InputRow error={errors.email}>
+            <InputLabel htmlFor="email" label="Email" />
             <input
               id="email"
               name="email"
@@ -73,11 +71,9 @@ function JoinForm() {
               required
             />
             <InputError error={errors.email} />
-          </div>
-          <div className={'input-row' + (errors.password ? ' has-error' : '')}>
-            <label htmlFor="password" className="input-label">
-              Password
-            </label>
+          </InputRow>
+          <InputRow error={errors.password}>
+            <InputLabel htmlFor="password" label="Password" />
             <input
               id="password"
               name="password"
@@ -87,8 +83,8 @@ function JoinForm() {
               required
             />
             <InputError error={errors.password} />
-          </div>
-          <div className={'input-row' + (errors.agree ? ' has-error' : '')}>
+          </InputRow>
+          <InputRow error={errors.agree}>
             <label>
               <input
                 name="agree"
@@ -100,8 +96,8 @@ function JoinForm() {
               <small>I agree with privacy policy</small>
             </label>
             <InputError error={errors.agree} />
-          </div>
-          <div className="button-row">
+          </InputRow>
+          <ButtonRow>
             <button
               type="submit"
               data-testid="join-button"
@@ -109,7 +105,7 @@ function JoinForm() {
             >
               Join to Us
             </button>
-          </div>
+          </ButtonRow>
         </form>
       ) : null}
     </div>
