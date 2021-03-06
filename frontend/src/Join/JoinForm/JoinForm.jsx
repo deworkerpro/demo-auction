@@ -9,6 +9,7 @@ function JoinForm() {
     agree: false,
   })
 
+  const [buttonActive, setButtonActive] = useState(true)
   const [errors, setErrors] = useState({})
   const [error, setError] = useState(null)
   const [success, setSuccess] = useState(null)
@@ -29,6 +30,7 @@ function JoinForm() {
       return
     }
 
+    setButtonActive(false)
     setErrors({})
     setError(null)
     setSuccess(null)
@@ -40,10 +42,12 @@ function JoinForm() {
       })
       .then(() => {
         setSuccess('Confirm join by link in email.')
+        setButtonActive(true)
       })
       .catch(async (error) => {
         setErrors(await parseErrors(error))
         setError(await parseError(error))
+        setButtonActive(true)
       })
   }
 
@@ -116,7 +120,11 @@ function JoinForm() {
             ) : null}
           </div>
           <div className="button-row">
-            <button type="submit" data-testid="join-button">
+            <button
+              type="submit"
+              data-testid="join-button"
+              disabled={!buttonActive}
+            >
               Join to Us
             </button>
           </div>
