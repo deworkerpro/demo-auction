@@ -34,7 +34,7 @@ return [
             $log->pushHandler(new StreamHandler($config['file'], $level));
         }
 
-        foreach ($config['processors'] as $key => $class) {
+        foreach ($config['processors'] as $class) {
             /** @var ProcessorInterface $processor */
             $processor = $container->get($class);
             $log->pushProcessor($processor);

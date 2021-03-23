@@ -19,7 +19,6 @@ class PasswordHasher
     public function hash(string $password): string
     {
         Assert::notEmpty($password);
-        /** @var string|false|null $hash */
         $hash = password_hash($password, PASSWORD_ARGON2I, ['memory_cost' => $this->memoryCost]);
         if ($hash === null) {
             throw new RuntimeException('Invalid hash algorithm.');

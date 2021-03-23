@@ -17,7 +17,7 @@ class ExpiresTest extends TestCase
     public function testNot(): void
     {
         $token = new Token(
-            $value = Uuid::uuid4()->toString(),
+            Uuid::uuid4()->toString(),
             $expires = new DateTimeImmutable()
         );
 
