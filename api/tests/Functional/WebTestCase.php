@@ -49,7 +49,7 @@ class WebTestCase extends TestCase
         /** @var ContainerInterface $container */
         $container = $this->app()->getContainer();
         $loader = new Loader();
-        foreach ($fixtures as $name => $class) {
+        foreach ($fixtures as $class) {
             /** @var AbstractFixture $fixture */
             $fixture = $container->get($class);
             $loader->addFixture($fixture);
@@ -62,7 +62,6 @@ class WebTestCase extends TestCase
     protected function app(): App
     {
         if ($this->app === null) {
-            /** @var App */
             $this->app = (require __DIR__ . '/../../config/app.php')($this->container());
         }
         return $this->app;
