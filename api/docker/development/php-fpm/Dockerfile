@@ -1,7 +1,9 @@
 FROM php:7.4-fpm-alpine
 
+ENV XDEBUG_VERSION 3.0.3
+
 RUN apk add --no-cache autoconf g++ make \
-    && pecl install xdebug-3.0.3 \
+    && pecl install xdebug-$XDEBUG_VERSION \
     && rm -rf /tmp/pear \
     && docker-php-ext-enable xdebug
 
