@@ -22,8 +22,6 @@ class JsonResponseTest extends TestCase
 
     /**
      * @dataProvider getCases
-     * @param mixed $source
-     * @param mixed $expect
      * @throws JsonException
      */
     public function testResponse(mixed $source, mixed $expect): void
