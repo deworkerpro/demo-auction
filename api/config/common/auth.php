@@ -14,8 +14,7 @@ return [
     UserRepository::class => function (ContainerInterface $container): UserRepository {
         $em = $container->get(EntityManagerInterface::class);
         /**
-         * @var EntityRepository $repo
-         * @psalm-var EntityRepository<User> $repo
+         * @var EntityRepository<User> $repo
          */
         $repo = $em->getRepository(User::class);
         return new UserRepository($em, $repo);
@@ -24,7 +23,7 @@ return [
     Tokenizer::class => function (ContainerInterface $container): Tokenizer {
         /**
          * @psalm-suppress MixedArrayAccess
-         * @psalm-var array{token_ttl:string} $config
+         * @var array{token_ttl:string} $config
          */
         $config = $container->get('config')['auth'];
 

@@ -16,7 +16,7 @@ return [
     Features::class => static function (ContainerInterface $container): Features {
         /**
          * @psalm-suppress MixedArrayAccess
-         * @psalm-var array{features: array<string, bool>} $config
+         * @var array{features: array<string, bool>} $config
          */
         $config = $container->get('config')['feature-toggle'];
 

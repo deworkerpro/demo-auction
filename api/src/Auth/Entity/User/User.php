@@ -60,7 +60,7 @@ class User
      */
     private Role $role;
     /**
-     * @psalm-var Collection<array-key,UserNetwork>
+     * @var Collection<array-key,UserNetwork>
      * @ORM\OneToMany(targetEntity="UserNetwork", mappedBy="user", cascade={"all"}, orphanRemoval=true)
      */
     private Collection $networks;
