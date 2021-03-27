@@ -28,21 +28,21 @@ final class UserRepository
     public function hasByEmail(Email $email): bool
     {
         return $this->repo->createQueryBuilder('t')
-                ->select('COUNT(t.id)')
-                ->andWhere('t.email = :email')
-                ->setParameter(':email', $email->getValue())
-                ->getQuery()->getSingleScalarResult() > 0;
+            ->select('COUNT(t.id)')
+            ->andWhere('t.email = :email')
+            ->setParameter(':email', $email->getValue())
+            ->getQuery()->getSingleScalarResult() > 0;
     }
 
     public function hasByNetwork(Network $network): bool
     {
         return $this->repo->createQueryBuilder('t')
-                ->select('COUNT(t.id)')
-                ->innerJoin('t.networks', 'n')
-                ->andWhere('n.network.name = :name and n.network.identity = :identity')
-                ->setParameter(':name', $network->getName())
-                ->setParameter(':identity', $network->getIdentity())
-                ->getQuery()->getSingleScalarResult() > 0;
+            ->select('COUNT(t.id)')
+            ->innerJoin('t.networks', 'n')
+            ->andWhere('n.network.name = :name and n.network.identity = :identity')
+            ->setParameter(':name', $network->getName())
+            ->setParameter(':identity', $network->getIdentity())
+            ->getQuery()->getSingleScalarResult() > 0;
     }
 
     public function findByJoinConfirmToken(string $token): ?User
