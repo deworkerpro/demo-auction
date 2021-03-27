@@ -1,4 +1,4 @@
-FROM php:7.4-cli-alpine AS builder
+FROM php:8.0-cli-alpine AS builder
 
 RUN apk add --no-cache postgresql-dev \
     && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
@@ -8,7 +8,7 @@ RUN apk add --no-cache unzip
 
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/bin --filename=composer --version=2.0.7 --quiet
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/bin --filename=composer --version=2.0.11 --quiet
 
 WORKDIR /app
 
@@ -19,7 +19,7 @@ RUN composer install --prefer-dist --no-progress --no-suggest --optimize-autoloa
 
 ### CLI ###
 
-FROM php:7.4-cli-alpine
+FROM php:8.0-cli-alpine
 
 RUN apk add --no-cache postgresql-dev bash coreutils \
     && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
