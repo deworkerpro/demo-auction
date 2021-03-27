@@ -9,7 +9,7 @@ return [
     Swift_Mailer::class => static function (ContainerInterface $container) {
         /**
          * @psalm-suppress MixedArrayAccess
-         * @psalm-var array{
+         * @var array{
          *     host:string,
          *     port:int,
          *     user:string,

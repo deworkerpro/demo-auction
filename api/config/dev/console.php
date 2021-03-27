@@ -12,7 +12,7 @@ return [
     FixturesLoadCommand::class => static function (ContainerInterface $container) {
         /**
          * @psalm-suppress MixedArrayAccess
-         * @psalm-var array{fixture_paths:string[]} $config
+         * @var array{fixture_paths:string[]} $config
          */
         $config = $container->get('config')['console'];
 

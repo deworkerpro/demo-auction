@@ -36,8 +36,7 @@ class JsonResponseTest extends TestCase
     }
 
     /**
-     * @return iterable
-     * @psalm-return iterable<array-key, array<array-key, mixed>>
+     * @return iterable<array-key, array<array-key, mixed>>
      */
     public function getCases(): iterable
     {

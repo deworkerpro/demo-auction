@@ -18,7 +18,7 @@ return [
     EntityManagerInterface::class => function (ContainerInterface $container): EntityManagerInterface {
         /**
          * @psalm-suppress MixedArrayAccess
-         * @psalm-var array{
+         * @var array{
          *     metadata_dirs:array,
          *     dev_mode:bool,
          *     proxy_dir:string,

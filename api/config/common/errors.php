@@ -16,7 +16,7 @@ return [
         $responseFactory = $container->get(ResponseFactoryInterface::class);
         /**
          * @psalm-suppress MixedArrayAccess
-         * @psalm-var array{display_details:bool} $config
+         * @var array{display_details:bool} $config
          */
         $config = $container->get('config')['errors'];
 

@@ -13,7 +13,7 @@ return [
     LoggerInterface::class => function (ContainerInterface $container) {
         /**
          * @psalm-suppress MixedArrayAccess
-         * @psalm-var array{
+         * @var array{
          *     debug:bool,
          *     stderr:bool,
          *     file:string,
