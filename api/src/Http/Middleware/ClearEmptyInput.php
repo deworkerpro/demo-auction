@@ -31,7 +31,7 @@ class ClearEmptyInput implements MiddlewareInterface
 
         /**
          * @var string $key
-         * @var null|string|object $item
+         * @var object|string|null $item
          */
         foreach ($items as $key => $item) {
             if (is_string($item)) {
