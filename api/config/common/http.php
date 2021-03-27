@@ -6,7 +6,5 @@ use Psr\Http\Message\ResponseFactoryInterface;
 use Slim\Psr7\Factory\ResponseFactory;
 
 return [
-    ResponseFactoryInterface::class => static function (): ResponseFactoryInterface {
-        return new ResponseFactory();
-    },
+    ResponseFactoryInterface::class => static fn (): ResponseFactoryInterface => new ResponseFactory(),
 ];

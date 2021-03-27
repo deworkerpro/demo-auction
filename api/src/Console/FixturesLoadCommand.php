@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Console;
 
 use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
@@ -48,7 +50,7 @@ class FixturesLoadCommand extends Command
 
         $executor = new ORMExecutor($this->em, new ORMPurger());
 
-        $executor->setLogger(static function (string $message) use ($output) {
+        $executor->setLogger(static function (string $message) use ($output): void {
             $output->writeln($message);
         });
 

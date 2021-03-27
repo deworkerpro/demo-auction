@@ -19,13 +19,13 @@ class FeatureMonologProcessorTest extends TestCase
         $processor = new FeaturesMonologProcessor($context);
 
         $result = $processor([
-            'message' => 'Message'
+            'message' => 'Message',
         ]);
 
         self::assertEquals([
             'message' => 'Message',
             'extra' => [
-                'features' => $source
+                'features' => $source,
             ],
         ], $result);
     }

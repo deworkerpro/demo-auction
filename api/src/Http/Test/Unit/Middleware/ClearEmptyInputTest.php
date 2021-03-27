@@ -32,7 +32,7 @@ class ClearEmptyInputTest extends TestCase
                     'null' => null,
                     'space' => ' ',
                     'name' => ' Name',
-                ]
+                ],
             ]);
 
         $handler = $this->createMock(RequestHandlerInterface::class);
@@ -46,7 +46,7 @@ class ClearEmptyInputTest extends TestCase
                         'null' => null,
                         'space' => '',
                         'name' => 'Name',
-                    ]
+                    ],
                 ], $request->getParsedBody());
                 return (new ResponseFactory())->createResponse();
             });
