@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Test\Unit\Middleware;
+namespace App\Http\Test\Middleware;
 
 use App\Http\Middleware\DomainExceptionHandler;
 use DomainException;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Test\Unit;
+namespace App\Http\Test;
 
 use App\Http\JsonResponse;
 use JsonException;

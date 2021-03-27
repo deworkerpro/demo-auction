@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Test\Unit\Validator;
+namespace App\Http\Test\Validator;
 
 use App\Http\Validator\ValidationException;
 use PHPUnit\Framework\TestCase;
