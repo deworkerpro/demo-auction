@@ -11,7 +11,7 @@ use Twig\Extension\ExtensionInterface;
 use Twig\Loader\FilesystemLoader;
 
 return [
-    Environment::class => function (ContainerInterface $container): Environment {
+    Environment::class => static function (ContainerInterface $container): Environment {
         /**
          * @psalm-suppress MixedArrayAccess
          * @var array{

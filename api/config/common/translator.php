@@ -12,7 +12,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 return [
     TranslatorInterface::class => DI\get(Translator::class),
 
-    Translator::class => function (ContainerInterface $container): Translator {
+    Translator::class => static function (ContainerInterface $container): Translator {
         /**
          * @psalm-suppress MixedArrayAccess
          * @var array{lang:string,resources:array<string[]>} $config
@@ -30,7 +30,7 @@ return [
         return $translator;
     },
 
-    ContentLanguage::class => function (ContainerInterface $container): ContentLanguage {
+    ContentLanguage::class => static function (ContainerInterface $container): ContentLanguage {
         /**
          * @psalm-suppress MixedArrayAccess
          * @var array{allowed:string[]} $config

@@ -15,7 +15,7 @@ use Doctrine\ORM\Tools\Setup;
 use Psr\Container\ContainerInterface;
 
 return [
-    EntityManagerInterface::class => function (ContainerInterface $container): EntityManagerInterface {
+    EntityManagerInterface::class => static function (ContainerInterface $container): EntityManagerInterface {
         /**
          * @psalm-suppress MixedArrayAccess
          * @var array{
