@@ -9,6 +9,9 @@ use JsonException;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
+/**
+ * @internal
+ */
 class JsonResponseTest extends TestCase
 {
     public function testWithCode(): void

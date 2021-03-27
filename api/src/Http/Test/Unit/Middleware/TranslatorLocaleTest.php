@@ -15,14 +15,16 @@ use Symfony\Component\Translation\Translator;
 
 /**
  * @covers \App\Http\Middleware\TranslatorLocale
+ *
+ * @internal
  */
 class TranslatorLocaleTest extends TestCase
 {
     public function testDefault(): void
     {
         $translator = $this->createMock(Translator::class);
-        $translator->expects($this->once())->method('setLocale')->with(
-            $this->equalTo('en')
+        $translator->expects(self::once())->method('setLocale')->with(
+            self::equalTo('en')
         );
 
         $middleware = new TranslatorLocale($translator, ['en', 'ru']);
@@ -55,8 +57,8 @@ class TranslatorLocaleTest extends TestCase
     public function testMulti(): void
     {
         $translator = $this->createMock(Translator::class);
-        $translator->expects($this->once())->method('setLocale')->with(
-            $this->equalTo('ru')
+        $translator->expects(self::once())->method('setLocale')->with(
+            self::equalTo('ru')
         );
 
         $middleware = new TranslatorLocale($translator, ['en', 'fr', 'ru']);
@@ -72,8 +74,8 @@ class TranslatorLocaleTest extends TestCase
     public function testOther(): void
     {
         $translator = $this->createMock(Translator::class);
-        $translator->expects($this->once())->method('setLocale')->with(
-            $this->equalTo('en')
+        $translator->expects(self::once())->method('setLocale')->with(
+            self::equalTo('en')
         );
 
         $middleware = new TranslatorLocale($translator, ['en', 'ru']);

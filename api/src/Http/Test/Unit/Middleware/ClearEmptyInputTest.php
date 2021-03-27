@@ -16,6 +16,8 @@ use Slim\Psr7\Factory\UploadedFileFactory;
 
 /**
  * @covers \App\Http\Middleware\ClearEmptyInput
+ *
+ * @internal
  */
 class ClearEmptyInputTest extends TestCase
 {

@@ -17,6 +17,8 @@ use Twig\Environment;
 
 /**
  * @covers \App\Auth\Service\JoinConfirmationSender
+ *
+ * @internal
  */
 class JoinConfirmationSenderTest extends TestCase
 {

@@ -17,6 +17,8 @@ use Twig\Environment;
 
 /**
  * @covers \App\Auth\Service\PasswordResetTokenSender
+ *
+ * @internal
  */
 class PasswordResetTokenSenderTest extends TestCase
 {

@@ -17,6 +17,8 @@ use Symfony\Component\Validator\ConstraintViolationList;
 
 /**
  * @covers \App\Http\Middleware\ValidationExceptionHandler
+ *
+ * @internal
  */
 class ValidationExceptionHandlerTest extends TestCase
 {

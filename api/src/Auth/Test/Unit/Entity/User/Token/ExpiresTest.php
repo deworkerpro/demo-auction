@@ -11,6 +11,8 @@ use Ramsey\Uuid\Uuid;
 
 /**
  * @covers \App\Auth\Entity\User\Token::isExpiredTo
+ *
+ * @internal
  */
 class ExpiresTest extends TestCase
 {

@@ -8,9 +8,12 @@ use Ramsey\Uuid\Uuid;
 use Test\Functional\Json;
 use Test\Functional\WebTestCase;
 
+/**
+ * @internal
+ */
 class ConfirmTest extends WebTestCase
 {
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 

@@ -6,6 +6,9 @@ namespace Test\Functional;
 
 use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
 
+/**
+ * @internal
+ */
 class NotFoundTest extends WebTestCase
 {
     use ArraySubsetAsserts;

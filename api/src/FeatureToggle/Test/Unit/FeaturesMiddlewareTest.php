@@ -15,6 +15,8 @@ use Slim\Psr7\Factory\ServerRequestFactory;
 
 /**
  * @covers \App\FeatureToggle\FeaturesMiddleware
+ *
+ * @internal
  */
 class FeaturesMiddlewareTest extends TestCase
 {

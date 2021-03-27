@@ -17,6 +17,8 @@ use Twig\Environment;
 
 /**
  * @covers \App\Auth\Service\NewEmailConfirmTokenSender
+ *
+ * @internal
  */
 class NewEmailConfirmTokenSenderTest extends TestCase
 {

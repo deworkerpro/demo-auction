@@ -15,6 +15,9 @@ use Psr\Http\Message\ServerRequestInterface;
 use Slim\App;
 use Slim\Psr7\Factory\ServerRequestFactory;
 
+/**
+ * @internal
+ */
 class WebTestCase extends TestCase
 {
     private ?App $app = null;
