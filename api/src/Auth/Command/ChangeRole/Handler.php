@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Auth\Command\ChangeRole;
 
-use App\Flusher;
-use App\Auth\Entity\User\Role;
 use App\Auth\Entity\User\Id;
+use App\Auth\Entity\User\Role;
 use App\Auth\Entity\User\UserRepository;
+use App\Flusher;
 
 class Handler
 {
