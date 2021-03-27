@@ -19,8 +19,8 @@ class FeaturesMonologProcessor implements ProcessorInterface
     {
         return array_merge_recursive($record, [
             'extra' => [
-                'features' => $this->context->getAllEnabled()
-            ]
+                'features' => $this->context->getAllEnabled(),
+            ],
         ]);
     }
 }

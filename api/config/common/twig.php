@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use App\FeatureToggle\FeatureFlagTwigExtension;
 use App\Frontend\FrontendUrlTwigExtension;
 use Psr\Container\ContainerInterface;

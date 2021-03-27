@@ -250,13 +250,11 @@ class User
     public function getNetworks(): array
     {
         /** @var Network[] */
-        return $this->networks->map(static function (UserNetwork $network) {
-            return $network->getNetwork();
-        })->toArray();
+        return $this->networks->map(static fn (UserNetwork $network) => $network->getNetwork())->toArray();
     }
 
     /**
-     * @ORM\PostLoad()
+     * @ORM\PostLoad
      */
     public function checkEmbeds(): void
     {
