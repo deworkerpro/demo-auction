@@ -10,7 +10,7 @@ use Doctrine\ORM\EntityRepository;
 use Psr\Container\ContainerInterface;
 
 return [
-    UserRepository::class => function (ContainerInterface $container): UserRepository {
+    UserRepository::class => static function (ContainerInterface $container): UserRepository {
         $em = $container->get(EntityManagerInterface::class);
         /**
          * @var EntityRepository<User> $repo
@@ -19,7 +19,7 @@ return [
         return new UserRepository($em, $repo);
     },
 
-    Tokenizer::class => function (ContainerInterface $container): Tokenizer {
+    Tokenizer::class => static function (ContainerInterface $container): Tokenizer {
         /**
          * @psalm-suppress MixedArrayAccess
          * @var array{token_ttl:string} $config
