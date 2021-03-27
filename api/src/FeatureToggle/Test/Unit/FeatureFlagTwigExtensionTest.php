@@ -12,6 +12,8 @@ use Twig\Loader\ArrayLoader;
 
 /**
  * @covers \App\FeatureToggle\FeatureFlagTwigExtension
+ *
+ * @internal
  */
 class FeatureFlagTwigExtensionTest extends TestCase
 {

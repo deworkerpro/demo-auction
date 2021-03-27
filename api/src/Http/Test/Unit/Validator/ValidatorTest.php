@@ -15,6 +15,8 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
  * @covers \App\Http\Validator\Validator
+ *
+ * @internal
  */
 class ValidatorTest extends TestCase
 {

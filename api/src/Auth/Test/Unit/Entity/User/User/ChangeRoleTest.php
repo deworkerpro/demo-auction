@@ -8,6 +8,9 @@ use App\Auth\Entity\User\Role;
 use App\Auth\Test\Builder\UserBuilder;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @internal
+ */
 class ChangeRoleTest extends TestCase
 {
     public function testSuccess(): void

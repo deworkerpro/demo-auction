@@ -14,6 +14,8 @@ use Slim\Psr7\Factory\ServerRequestFactory;
 
 /**
  * @covers \Middlewares\ContentLanguage
+ *
+ * @internal
  */
 class ContentLanguageTest extends TestCase
 {

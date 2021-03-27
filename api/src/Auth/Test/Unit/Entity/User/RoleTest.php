@@ -10,6 +10,8 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \App\Auth\Entity\User\Role
+ *
+ * @internal
  */
 class RoleTest extends TestCase
 {

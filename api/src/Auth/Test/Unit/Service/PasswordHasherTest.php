@@ -10,6 +10,8 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \App\Auth\Service\PasswordHasher
+ *
+ * @internal
  */
 class PasswordHasherTest extends TestCase
 {

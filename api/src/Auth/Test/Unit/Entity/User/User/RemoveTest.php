@@ -7,6 +7,9 @@ namespace App\Auth\Test\Unit\Entity\User\User;
 use App\Auth\Test\Builder\UserBuilder;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @internal
+ */
 class RemoveTest extends TestCase
 {
     /**

@@ -7,6 +7,9 @@ namespace App\Http\Test\Unit;
 use App\Http\EmptyResponse;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @internal
+ */
 class EmptyResponseTest extends TestCase
 {
     public function testDefault(): void
