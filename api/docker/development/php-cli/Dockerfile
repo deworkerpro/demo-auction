@@ -1,7 +1,7 @@
 FROM php:7.4-cli-alpine
 
 RUN apk add --no-cache autoconf g++ make \
-    && pecl install xdebug-3.0.2 \
+    && pecl install xdebug-3.0.3 \
     && rm -rf /tmp/pear \
     && docker-php-ext-enable xdebug
 
