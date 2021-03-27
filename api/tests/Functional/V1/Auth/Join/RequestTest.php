@@ -10,7 +10,7 @@ use Test\Functional\WebTestCase;
 /**
  * @internal
  */
-class RequestTest extends WebTestCase
+final class RequestTest extends WebTestCase
 {
     protected function setUp(): void
     {

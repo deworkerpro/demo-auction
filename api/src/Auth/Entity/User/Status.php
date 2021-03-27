@@ -6,7 +6,7 @@ namespace App\Auth\Entity\User;
 
 use Webmozart\Assert\Assert;
 
-class Status
+final class Status
 {
     public const WAIT = 'wait';
     public const ACTIVE = 'active';

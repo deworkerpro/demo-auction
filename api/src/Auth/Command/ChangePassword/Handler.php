@@ -9,7 +9,7 @@ use App\Auth\Entity\User\UserRepository;
 use App\Auth\Service\PasswordHasher;
 use App\Flusher;
 
-class Handler
+final class Handler
 {
     private UserRepository $users;
     private PasswordHasher $hasher;

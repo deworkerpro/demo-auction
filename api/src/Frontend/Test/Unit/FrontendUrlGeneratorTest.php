@@ -12,7 +12,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @internal
  */
-class FrontendUrlGeneratorTest extends TestCase
+final class FrontendUrlGeneratorTest extends TestCase
 {
     public function testEmpty(): void
     {

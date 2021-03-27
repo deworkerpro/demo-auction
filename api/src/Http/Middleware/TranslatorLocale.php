@@ -11,7 +11,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 use ptlis\ConNeg\Negotiation;
 use Symfony\Component\Translation\Translator;
 
-class TranslatorLocale implements MiddlewareInterface
+final class TranslatorLocale implements MiddlewareInterface
 {
     private Translator $translator;
     private array $locales;

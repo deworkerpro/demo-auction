@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\FeatureToggle;
 
-class Features implements FeatureFlag, FeatureSwitch, FeaturesContext
+final class Features implements FeatureFlag, FeatureSwitch, FeaturesContext
 {
     /**
      * @var array<string,bool> $features

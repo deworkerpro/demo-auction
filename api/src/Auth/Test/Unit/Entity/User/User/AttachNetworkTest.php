@@ -13,7 +13,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @internal
  */
-class AttachNetworkTest extends TestCase
+final class AttachNetworkTest extends TestCase
 {
     public function testSuccess(): void
     {

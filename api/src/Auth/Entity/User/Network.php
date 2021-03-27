@@ -10,7 +10,7 @@ use Webmozart\Assert\Assert;
 /**
  * @ORM\Embeddable
  */
-class Network
+final class Network
 {
     /**
      * @ORM\Column(type="string", length=16)

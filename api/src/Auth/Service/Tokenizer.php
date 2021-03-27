@@ -9,7 +9,7 @@ use DateInterval;
 use DateTimeImmutable;
 use Ramsey\Uuid\Uuid;
 
-class Tokenizer
+final class Tokenizer
 {
     private DateInterval $interval;
 

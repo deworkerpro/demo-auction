@@ -6,7 +6,7 @@ namespace App\Auth\Entity\User;
 
 use Webmozart\Assert\Assert;
 
-class Role
+final class Role
 {
     public const USER = 'user';
     public const ADMIN = 'admin';

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Frontend;
 
-class FrontendUrlGenerator
+final class FrontendUrlGenerator
 {
     private string $baseUrl;
 

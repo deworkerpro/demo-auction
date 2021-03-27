@@ -19,7 +19,7 @@ use Slim\Psr7\Factory\UploadedFileFactory;
  *
  * @internal
  */
-class ClearEmptyInputTest extends TestCase
+final class ClearEmptyInputTest extends TestCase
 {
     public function testParsedBody(): void
     {

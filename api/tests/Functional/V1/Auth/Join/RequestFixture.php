@@ -13,7 +13,7 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Persistence\ObjectManager;
 use Ramsey\Uuid\Uuid;
 
-class RequestFixture extends AbstractFixture
+final class RequestFixture extends AbstractFixture
 {
     public function load(ObjectManager $manager): void
     {

@@ -13,7 +13,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @internal
  */
-class TokenizerTest extends TestCase
+final class TokenizerTest extends TestCase
 {
     public function testSuccess(): void
     {

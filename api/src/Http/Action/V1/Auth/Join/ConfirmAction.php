@@ -12,7 +12,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-class ConfirmAction implements RequestHandlerInterface
+final class ConfirmAction implements RequestHandlerInterface
 {
     private Handler $handler;
     private Validator $validator;

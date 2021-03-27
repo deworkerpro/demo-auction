@@ -18,7 +18,7 @@ use Symfony\Component\Translation\Translator;
  *
  * @internal
  */
-class TranslatorLocaleTest extends TestCase
+final class TranslatorLocaleTest extends TestCase
 {
     public function testDefault(): void
     {

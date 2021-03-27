@@ -9,7 +9,7 @@ use App\Flusher;
 use DateTimeImmutable;
 use DomainException;
 
-class Handler
+final class Handler
 {
     private UserRepository $users;
     private Flusher $flusher;

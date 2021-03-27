@@ -20,7 +20,7 @@ use Twig\Environment;
  *
  * @internal
  */
-class PasswordResetTokenSenderTest extends TestCase
+final class PasswordResetTokenSenderTest extends TestCase
 {
     public function testSuccess(): void
     {

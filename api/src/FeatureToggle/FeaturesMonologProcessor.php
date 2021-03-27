@@ -6,7 +6,7 @@ namespace App\FeatureToggle;
 
 use Monolog\Processor\ProcessorInterface;
 
-class FeaturesMonologProcessor implements ProcessorInterface
+final class FeaturesMonologProcessor implements ProcessorInterface
 {
     private FeaturesContext $context;
 

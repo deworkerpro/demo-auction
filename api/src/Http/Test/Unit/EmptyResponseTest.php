@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * @internal
  */
-class EmptyResponseTest extends TestCase
+final class EmptyResponseTest extends TestCase
 {
     public function testDefault(): void
     {

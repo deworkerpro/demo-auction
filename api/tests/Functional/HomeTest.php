@@ -7,7 +7,7 @@ namespace Test\Functional;
 /**
  * @internal
  */
-class HomeTest extends WebTestCase
+final class HomeTest extends WebTestCase
 {
     public function testMethod(): void
     {
