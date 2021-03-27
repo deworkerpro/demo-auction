@@ -1,5 +1,6 @@
 {
     "name": "deworkerpro/demo-auction",
+    "description": "",
     "type": "project",
     "license": "BSD-3-Clause",
     "config": {
