@@ -15,7 +15,7 @@ use Twig\Loader\ArrayLoader;
  *
  * @internal
  */
-class FeatureFlagTwigExtensionTest extends TestCase
+final class FeatureFlagTwigExtensionTest extends TestCase
 {
     public function testActive(): void
     {

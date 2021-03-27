@@ -12,7 +12,7 @@ use DateTimeImmutable;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Persistence\ObjectManager;
 
-class UserJoinFixture extends AbstractFixture
+final class UserJoinFixture extends AbstractFixture
 {
     private const PASSWORD_HASH = '$2y$12$qwnND33o8DGWvFoepotSju7eTAQ6gzLD/zy6W8NCVtiHPbkybz.w6';
 

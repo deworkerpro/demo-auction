@@ -15,7 +15,7 @@ use Twig\Loader\ArrayLoader;
  *
  * @internal
  */
-class FrontendUrlTwigExtensionTest extends TestCase
+final class FrontendUrlTwigExtensionTest extends TestCase
 {
     public function testSuccess(): void
     {

@@ -16,7 +16,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @internal
  */
-class JoinByNetworkTest extends TestCase
+final class JoinByNetworkTest extends TestCase
 {
     public function testSuccess(): void
     {

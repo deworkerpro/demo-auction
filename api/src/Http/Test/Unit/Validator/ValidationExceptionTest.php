@@ -13,7 +13,7 @@ use Symfony\Component\Validator\ConstraintViolationList;
  *
  * @internal
  */
-class ValidationExceptionTest extends TestCase
+final class ValidationExceptionTest extends TestCase
 {
     public function testValid(): void
     {

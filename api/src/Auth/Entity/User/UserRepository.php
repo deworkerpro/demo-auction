@@ -8,7 +8,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use DomainException;
 
-class UserRepository
+final class UserRepository
 {
     /**
      * @var EntityRepository<User>

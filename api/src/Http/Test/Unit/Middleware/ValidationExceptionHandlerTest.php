@@ -20,7 +20,7 @@ use Symfony\Component\Validator\ConstraintViolationList;
  *
  * @internal
  */
-class ValidationExceptionHandlerTest extends TestCase
+final class ValidationExceptionHandlerTest extends TestCase
 {
     public function testNormal(): void
     {

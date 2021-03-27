@@ -11,7 +11,7 @@ use App\Auth\Entity\User\User;
 use App\Auth\Entity\User\UserRepository;
 use App\Flusher;
 
-class Handler
+final class Handler
 {
     private UserRepository $users;
     private Flusher $flusher;

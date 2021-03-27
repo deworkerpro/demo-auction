@@ -15,7 +15,7 @@ use Ramsey\Uuid\Uuid;
  *
  * @internal
  */
-class ResetTest extends TestCase
+final class ResetTest extends TestCase
 {
     public function testSuccess(): void
     {

@@ -12,7 +12,7 @@ use App\Auth\Entity\User\User;
 use DateTimeImmutable;
 use Ramsey\Uuid\Uuid;
 
-class UserBuilder
+final class UserBuilder
 {
     private Id $id;
     private Email $email;

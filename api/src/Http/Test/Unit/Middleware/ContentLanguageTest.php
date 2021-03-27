@@ -17,7 +17,7 @@ use Slim\Psr7\Factory\ServerRequestFactory;
  *
  * @internal
  */
-class ContentLanguageTest extends TestCase
+final class ContentLanguageTest extends TestCase
 {
     public function testDefault(): void
     {

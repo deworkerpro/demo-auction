@@ -12,7 +12,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class FixturesLoadCommand extends Command
+final class FixturesLoadCommand extends Command
 {
     private EntityManagerInterface $em;
     /**

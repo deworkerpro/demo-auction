@@ -12,7 +12,7 @@ use Webmozart\Assert\Assert;
 /**
  * @ORM\Embeddable
  */
-class Token
+final class Token
 {
     /**
      * @var string

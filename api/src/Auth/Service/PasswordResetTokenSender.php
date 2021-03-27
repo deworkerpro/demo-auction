@@ -11,7 +11,7 @@ use Swift_Mailer;
 use Swift_Message;
 use Twig\Environment;
 
-class PasswordResetTokenSender
+final class PasswordResetTokenSender
 {
     private Swift_Mailer $mailer;
     private Environment $twig;

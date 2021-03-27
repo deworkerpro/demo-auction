@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Auth\Command\ChangePassword;
 
-class Command
+final class Command
 {
     public string $id = '';
     public string $current = '';

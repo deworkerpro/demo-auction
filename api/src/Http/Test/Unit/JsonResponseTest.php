@@ -12,7 +12,7 @@ use stdClass;
 /**
  * @internal
  */
-class JsonResponseTest extends TestCase
+final class JsonResponseTest extends TestCase
 {
     public function testWithCode(): void
     {

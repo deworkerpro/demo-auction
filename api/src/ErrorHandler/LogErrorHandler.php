@@ -9,7 +9,7 @@ use Slim\Handlers\ErrorHandler;
 /**
  * @psalm-suppress PropertyNotSetInConstructor
  */
-class LogErrorHandler extends ErrorHandler
+final class LogErrorHandler extends ErrorHandler
 {
     protected function writeToErrorLog(): void
     {

@@ -8,7 +8,7 @@ use App\Auth\Entity\User\Id;
 use App\Auth\Entity\User\UserRepository;
 use App\Flusher;
 
-class Handler
+final class Handler
 {
     private UserRepository $users;
     private Flusher $flusher;

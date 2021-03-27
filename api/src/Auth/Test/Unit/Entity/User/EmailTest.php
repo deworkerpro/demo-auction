@@ -13,7 +13,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @internal
  */
-class EmailTest extends TestCase
+final class EmailTest extends TestCase
 {
     public function testSuccess(): void
     {

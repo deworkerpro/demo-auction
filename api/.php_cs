@@ -47,4 +47,8 @@ return
             'php_unit_fqcn_annotation' => true,
             'php_unit_set_up_tear_down_visibility' => true,
             'php_unit_test_case_static_method_calls' => ['call_type' => 'self'],
+
+            'final_class' => true,
+            'final_public_method_for_abstract_class' => true,
+            'self_static_accessor' => true,
         ]);

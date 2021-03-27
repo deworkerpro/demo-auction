@@ -14,7 +14,7 @@ use Ramsey\Uuid\Uuid;
  *
  * @internal
  */
-class ValidateTest extends TestCase
+final class ValidateTest extends TestCase
 {
     /**
      * @doesNotPerformAssertions

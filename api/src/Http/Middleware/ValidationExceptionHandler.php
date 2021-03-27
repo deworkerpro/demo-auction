@@ -13,7 +13,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 use Symfony\Component\Validator\ConstraintViolationInterface;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 
-class ValidationExceptionHandler implements MiddlewareInterface
+final class ValidationExceptionHandler implements MiddlewareInterface
 {
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {

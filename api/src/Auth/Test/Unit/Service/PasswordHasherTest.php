@@ -13,7 +13,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @internal
  */
-class PasswordHasherTest extends TestCase
+final class PasswordHasherTest extends TestCase
 {
     public function testHash(): void
     {
