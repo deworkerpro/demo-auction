@@ -48,6 +48,6 @@ final class TranslatorLocale implements MiddlewareInterface
         $negotiation = new Negotiation();
         $locale = $negotiation->languageBest($accept, implode(',', $allowed));
 
-        return in_array($locale, $allowed, true) ? $locale : $default;
+        return \in_array($locale, $allowed, true) ? $locale : $default;
     }
 }

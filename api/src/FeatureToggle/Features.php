@@ -7,7 +7,7 @@ namespace App\FeatureToggle;
 final class Features implements FeatureFlag, FeatureSwitch, FeaturesContext
 {
     /**
-     * @var array<string,bool> $features
+     * @var array<string,bool>
      */
     private array $features;
 
@@ -21,7 +21,7 @@ final class Features implements FeatureFlag, FeatureSwitch, FeaturesContext
 
     public function isEnabled(string $name): bool
     {
-        if (!array_key_exists($name, $this->features)) {
+        if (!\array_key_exists($name, $this->features)) {
             return false;
         }
         return $this->features[$name];
