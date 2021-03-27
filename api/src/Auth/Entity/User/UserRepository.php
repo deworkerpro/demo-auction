@@ -17,7 +17,6 @@ class UserRepository
     private EntityManagerInterface $em;
 
     /**
-     * @param EntityManagerInterface $em
      * @param EntityRepository<User> $repo
      */
     public function __construct(EntityManagerInterface $em, EntityRepository $repo)
@@ -46,31 +45,16 @@ class UserRepository
                 ->getQuery()->getSingleScalarResult() > 0;
     }
 
-    /**
-     * @param string $token
-     * @return User|object|null
-     * @psalm-return User|null
-     */
     public function findByJoinConfirmToken(string $token): ?User
     {
         return $this->repo->findOneBy(['joinConfirmToken.value' => $token]);
     }
 
-    /**
-     * @param string $token
-     * @return User|object|null
-     * @psalm-return User|null
-     */
     public function findByPasswordResetToken(string $token): ?User
     {
         return $this->repo->findOneBy(['passwordResetToken.value' => $token]);
     }
 
-    /**
-     * @param string $token
-     * @return User|object|null
-     * @psalm-return User|null
-     */
     public function findByNewEmailToken(string $token): ?User
     {
         return $this->repo->findOneBy(['newEmailToken.value' => $token]);
