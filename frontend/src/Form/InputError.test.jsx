@@ -1,17 +1,17 @@
 import React from 'react'
-import { render } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import InputError from './InputError'
 
 test('renders violation', () => {
-  const { getByTestId } = render(<InputError error="Error!" />)
+  render(<InputError error="Error!" />)
 
-  const violation = getByTestId('violation')
+  const violation = screen.getByTestId('violation')
   expect(violation).toBeInTheDocument()
   expect(violation).toHaveTextContent('Error!')
 })
 
 test('renders empty', () => {
-  const { queryByTestId } = render(<InputError error={null} />)
+  render(<InputError error={null} />)
 
-  expect(queryByTestId('violation')).not.toBeInTheDocument()
+  expect(screen.queryByTestId('violation')).not.toBeInTheDocument()
 })
