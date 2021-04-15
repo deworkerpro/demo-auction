@@ -3,8 +3,7 @@
 declare(strict_types=1);
 
 use App\Auth;
-use Doctrine\Common\Cache\ArrayCache;
-use Doctrine\Common\Cache\FilesystemCache;
+use Doctrine\Common\Cache\Psr6\DoctrineProvider;
 use Doctrine\Common\EventManager;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\DBAL\Types\Type;
@@ -13,6 +12,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\UnderscoreNamingStrategy;
 use Doctrine\ORM\Tools\Setup;
 use Psr\Container\ContainerInterface;
+use Symfony\Component\Cache\Adapter\ArrayAdapter;
+use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 
 return [
     EntityManagerInterface::class => static function (ContainerInterface $container): EntityManagerInterface {
@@ -30,14 +31,13 @@ return [
          */
         $settings = $container->get('config')['doctrine'];
 
-        /**
-         * @psalm-suppress DeprecatedClass
-         */
         $config = Setup::createAnnotationMetadataConfiguration(
             $settings['metadata_dirs'],
             $settings['dev_mode'],
             $settings['proxy_dir'],
-            $settings['cache_dir'] ? new FilesystemCache($settings['cache_dir']) : new ArrayCache(),
+            $settings['cache_dir'] ?
+                DoctrineProvider::wrap(new FilesystemAdapter('', 0, $settings['cache_dir'])) :
+                DoctrineProvider::wrap(new ArrayAdapter()),
             false
         );
 
