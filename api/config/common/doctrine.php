@@ -30,6 +30,9 @@ return [
          */
         $settings = $container->get('config')['doctrine'];
 
+        /**
+         * @psalm-suppress DeprecatedClass
+         */
         $config = Setup::createAnnotationMetadataConfiguration(
             $settings['metadata_dirs'],
             $settings['dev_mode'],
