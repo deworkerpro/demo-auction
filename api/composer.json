@@ -53,6 +53,9 @@
         "symfony/polyfill-php80": "*"
     },
     "autoload": {
+        "files": [
+            "src/env.php"
+        ],
         "psr-4": {
             "App\\": "src/"
         }
