@@ -85,7 +85,7 @@ services:
                 window: 120s
 
     api-postgres:
-        image: postgres:13.1-alpine
+        image: postgres:13.3-alpine
         environment:
             POSTGRES_USER: app
             POSTGRES_PASSWORD: ${API_DB_PASSWORD}
