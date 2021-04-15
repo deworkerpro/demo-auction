@@ -1,14 +1,14 @@
 import React from 'react'
 import { MemoryRouter } from 'react-router-dom'
-import { render } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import NotFound from './NotFound'
 
 test('renders not found', () => {
-  const { getByText } = render(
+  render(
     <MemoryRouter>
       <NotFound />
     </MemoryRouter>
   )
 
-  expect(getByText(/Page is not found/i)).toBeInTheDocument()
+  expect(screen.getByText(/Page is not found/i)).toBeInTheDocument()
 })

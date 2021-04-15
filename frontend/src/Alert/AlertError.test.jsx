@@ -1,17 +1,17 @@
 import React from 'react'
-import { render } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import AlertError from './AlertError'
 
 test('renders error', () => {
-  const { getByTestId } = render(<AlertError message="Error!" />)
+  render(<AlertError message="Error!" />)
 
-  const alert = getByTestId('alert-error')
+  const alert = screen.getByTestId('alert-error')
   expect(alert).toBeInTheDocument()
   expect(alert).toHaveTextContent('Error!')
 })
 
 test('renders empty', () => {
-  const { queryByTestId } = render(<AlertError message="" />)
+  render(<AlertError message="" />)
 
-  expect(queryByTestId('alert-error')).not.toBeInTheDocument()
+  expect(screen.queryByTestId('alert-error')).not.toBeInTheDocument()
 })
