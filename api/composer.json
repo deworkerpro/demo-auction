@@ -42,7 +42,7 @@
         "overtrue/phplint": "^2.0",
         "phpunit/phpunit": "^9.2",
         "psalm/plugin-phpunit": "^0.15.0",
-        "roave/security-advisories": "dev-master",
+        "roave/security-advisories": "dev-latest",
         "vimeo/psalm": "^4.3"
     },
     "replace": {
