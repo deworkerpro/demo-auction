@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Frontend\FrontendUrlGenerator;
 use Psr\Container\ContainerInterface;
+use function App\env;
 
 return [
     FrontendUrlGenerator::class => static function (ContainerInterface $container): FrontendUrlGenerator {
@@ -18,7 +19,7 @@ return [
 
     'config' => [
         'frontend' => [
-            'url' => getenv('FRONTEND_URL'),
+            'url' => env('FRONTEND_URL'),
         ],
     ],
 ];
