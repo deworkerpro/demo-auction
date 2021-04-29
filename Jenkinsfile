@@ -194,7 +194,8 @@ pipeline {
                     string(credentialsId: 'API_MAILER_USER', variable: 'API_MAILER_USER'),
                     string(credentialsId: 'API_MAILER_PASSWORD', variable: 'API_MAILER_PASSWORD'),
                     string(credentialsId: 'API_MAILER_FROM_EMAIL', variable: 'API_MAILER_FROM_EMAIL'),
-                    string(credentialsId: 'SENTRY_DSN', variable: 'SENTRY_DSN')
+                    string(credentialsId: 'SENTRY_DSN', variable: 'SENTRY_DSN'),
+                    string(credentialsId: 'JWT_ENCRYPTION_KEY', variable: 'JWT_ENCRYPTION_KEY')
                 ]) {
                     sshagent (credentials: ['PRODUCTION_AUTH']) {
                         sh 'make deploy'
