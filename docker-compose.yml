@@ -55,8 +55,13 @@ services:
             FRONTEND_URL: http://localhost:8080
             SENTRY_DSN: ""
             JWT_ENCRYPTION_KEY: secret
+            JWT_PUBLIC_KEY_PATH: /run/secrets/jwt_public_key
+            JWT_PRIVATE_KEY_PATH: /run/secrets/jwt_private_key
         volumes:
             - ./api:/app
+        secrets:
+            - jwt_public_key
+            - jwt_private_key
 
     api-php-cli:
         build:
@@ -78,8 +83,13 @@ services:
             FRONTEND_URL: http://localhost:8080
             SENTRY_DSN: ""
             JWT_ENCRYPTION_KEY: secret
+            JWT_PUBLIC_KEY_PATH: /run/secrets/jwt_public_key
+            JWT_PRIVATE_KEY_PATH: /run/secrets/jwt_private_key
         volumes:
             - ./api:/app
+        secrets:
+            - jwt_public_key
+            - jwt_private_key
 
     api-postgres:
         image: postgres:13.3-alpine
@@ -100,6 +110,12 @@ services:
             context: cucumber/docker/development/node
         volumes:
             - ./cucumber:/app
+
+secrets:
+    jwt_public_key:
+        file: ./docker/development/secrets/jwt_public.key
+    jwt_private_key:
+        file: ./docker/development/secrets/jwt_private.key
 
 volumes:
     api-postgres:

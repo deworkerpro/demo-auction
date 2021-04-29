@@ -53,6 +53,11 @@ services:
             FRONTEND_URL: https://demo-auction.deworker.pro
             SENTRY_DSN: ${SENTRY_DSN}
             JWT_ENCRYPTION_KEY: ${JWT_ENCRYPTION_KEY}
+            JWT_PUBLIC_KEY_PATH: /run/secrets/jwt_public_key
+            JWT_PRIVATE_KEY_PATH: /run/secrets/jwt_private_key
+        secrets:
+            - jwt_public_key
+            - jwt_private_key
         deploy:
             mode: replicated
             replicas: 2
@@ -78,6 +83,11 @@ services:
             FRONTEND_URL: https://demo-auction.deworker.pro
             SENTRY_DSN: ${SENTRY_DSN}
             JWT_ENCRYPTION_KEY: ${JWT_ENCRYPTION_KEY}
+            JWT_PUBLIC_KEY_PATH: /run/secrets/jwt_public_key
+            JWT_PRIVATE_KEY_PATH: /run/secrets/jwt_private_key
+        secrets:
+            - jwt_public_key
+            - jwt_private_key
         command: sh -c 'wait-for-it api-postgres:5432 -t 60 && php bin/app.php migrations:migrate --no-interaction'
         deploy:
             restart_policy:
@@ -98,6 +108,12 @@ services:
             placement:
                 constraints: [node.labels.db == db]
             endpoint_mode: dnsrr
+
+secrets:
+    jwt_public_key:
+        file: ./secrets/jwt_public.key
+    jwt_private_key:
+        file: ./secrets/jwt_private.key
 
 volumes:
     api-postgres:
