@@ -26,16 +26,12 @@ final class AuthorizeTest extends WebTestCase
 
     public function testWithoutParams(): void
     {
-        self::markTestIncomplete();
-
         $response = $this->app()->handle(self::html('GET', '/authorize'));
         self::assertEquals(400, $response->getStatusCode());
     }
 
     public function testPageWithoutChallenge(): void
     {
-        self::markTestIncomplete();
-
         $response = $this->app()->handle(self::html(
             'GET',
             '/authorize?' . http_build_query([
@@ -47,13 +43,18 @@ final class AuthorizeTest extends WebTestCase
             ])
         ));
 
-        self::assertEquals(401, $response->getStatusCode());
+        self::assertEquals(400, $response->getStatusCode());
+        self::assertJson($content = (string)$response->getBody());
+
+        $data = Json::decode($content);
+
+        self::assertArraySubset([
+            'error' => 'invalid_request',
+        ], $data);
     }
 
     public function testPageWithChallenge(): void
     {
-        self::markTestIncomplete();
-
         $response = $this->app()->handle(self::html(
             'GET',
             '/authorize?' . http_build_query([
@@ -74,8 +75,6 @@ final class AuthorizeTest extends WebTestCase
 
     public function testInvalidClient(): void
     {
-        self::markTestIncomplete();
-
         $response = $this->app()->handle(self::html(
             'GET',
             '/authorize?' . http_build_query([
