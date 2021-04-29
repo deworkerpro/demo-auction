@@ -57,6 +57,12 @@ return [
                     'ru',
                     'exceptions',
                 ],
+                [
+                    'php',
+                    __DIR__ . '/../../translations/oauth.ru.php',
+                    'ru',
+                    'oauth',
+                ],
             ],
         ],
         'locales' => [
