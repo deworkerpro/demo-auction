@@ -8,6 +8,7 @@ use Slim\App;
 use Slim\Middleware\ErrorMiddleware;
 
 return static function (App $app): void {
+    $app->add(Middleware\Auth\Authenticate::class);
     $app->add(Middleware\DomainExceptionHandler::class);
     $app->add(Middleware\ValidationExceptionHandler::class);
     $app->add(FeaturesMiddleware::class);
