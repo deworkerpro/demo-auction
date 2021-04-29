@@ -33,7 +33,7 @@ final class UserTest extends WebTestCase
     {
         $response = $this->app()->handle(
             self::json('GET', '/v1/auth/user')
-                ->withHeader('Authorization', AuthHeader::for('00000000-0000-0000-0000-000000000001'))
+                ->withHeader('Authorization', AuthHeader::for('00000000-0000-0000-0000-000000000001', 'admin'))
         );
 
         self::assertEquals(200, $response->getStatusCode());

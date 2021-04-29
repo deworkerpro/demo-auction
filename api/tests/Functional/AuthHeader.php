@@ -13,7 +13,7 @@ use function App\env;
 
 final class AuthHeader
 {
-    public static function for(string $userId): string
+    public static function for(string $userId, string $role): string
     {
         $token = new AccessToken(
             new Client(
@@ -26,6 +26,7 @@ final class AuthHeader
         $token->setIdentifier(bin2hex(random_bytes(40)));
         $token->setExpiryDateTime(new DateTimeImmutable('+1000 years'));
         $token->setUserIdentifier($userId);
+        $token->setUserRole($role);
         $token->setPrivateKey(new CryptKey(env('JWT_PRIVATE_KEY_PATH'), null, false));
 
         return 'Bearer ' . $token;
