@@ -130,11 +130,11 @@
 
     <form method="POST" action="">
         <div class="input-row">
-            <input value="" name="email" type="email" placeholder="Email" class="input"
+            <input value="{{ query.email }}" name="email" type="email" placeholder="Email" class="input"
                    required/>
         </div>
         <div class="input-row">
-            <input value="" name="password" placeholder="Password" type="password"
+            <input value="{{ query.password }}" name="password" placeholder="Пароль" type="password"
                    class="input" required/>
         </div>
         <div class="button-row">

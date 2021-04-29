@@ -100,8 +100,6 @@ final class AuthorizeTest extends WebTestCase
 
     public function testAuthActiveUser(): void
     {
-        self::markTestIncomplete();
-
         $response = $this->app()->handle(self::html(
             'POST',
             '/authorize?' . http_build_query([
@@ -138,8 +136,6 @@ final class AuthorizeTest extends WebTestCase
 
     public function testAuthWaitUser(): void
     {
-        self::markTestIncomplete();
-
         $response = $this->app()->handle(self::html(
             'POST',
             '/authorize?' . http_build_query([
@@ -164,8 +160,6 @@ final class AuthorizeTest extends WebTestCase
 
     public function testAuthInvalidUser(): void
     {
-        self::markTestIncomplete();
-
         $response = $this->app()->handle(self::html(
             'POST',
             '/authorize?' . http_build_query([
@@ -186,5 +180,29 @@ final class AuthorizeTest extends WebTestCase
         self::assertEquals(400, $response->getStatusCode());
         self::assertNotEmpty($content = (string)$response->getBody());
         self::assertStringContainsString('Incorrect email or password.', $content);
+    }
+
+    public function testAuthInvalidUserLang(): void
+    {
+        $response = $this->app()->handle(self::html(
+            'POST',
+            '/authorize?' . http_build_query([
+                'response_type' => 'code',
+                'client_id' => 'frontend',
+                'redirect_uri' => 'http://localhost:8080/oauth',
+                'code_challenge' => PKCE::challenge(PKCE::verifier()),
+                'code_challenge_method' => 'S256',
+                'scope' => 'common',
+                'state' => 'sTaTe',
+            ]),
+            [
+                'email' => 'active@app.test',
+                'password' => '',
+            ]
+        )->withHeader('Accept-Language', 'ru'));
+
+        self::assertEquals(400, $response->getStatusCode());
+        self::assertNotEmpty($content = (string)$response->getBody());
+        self::assertStringContainsString('Неверный email или пароль.', $content);
     }
 }
