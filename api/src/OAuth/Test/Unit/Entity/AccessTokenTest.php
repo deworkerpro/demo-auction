@@ -18,16 +18,17 @@ final class AccessTokenTest extends TestCase
 {
     public function testCreate(): void
     {
-        $token = new AccessToken();
+        $token = new AccessToken(
+            $client = (new ClientBuilder())->build(),
+            $scopes = [new Scope('common')]
+        );
 
-        $token->setClient($client = (new ClientBuilder())->build());
-        $token->addScope($scope = new Scope('common'));
         $token->setIdentifier($identifier = Uuid::uuid4()->toString());
         $token->setUserIdentifier($userIdentifier = Uuid::uuid4()->toString());
         $token->setExpiryDateTime($expiryDateTime = new DateTimeImmutable());
 
         self::assertSame($client, $token->getClient());
-        self::assertSame([$scope], $token->getScopes());
+        self::assertSame($scopes, $token->getScopes());
         self::assertSame($identifier, $token->getIdentifier());
         self::assertSame($userIdentifier, $token->getUserIdentifier());
         self::assertSame($expiryDateTime, $token->getExpiryDateTime());
