@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Middleware;
+namespace App\Http\Middleware\Auth;
 
 use League\OAuth2\Server\Exception\OAuthServerException;
 use League\OAuth2\Server\ResourceServer;
@@ -14,6 +14,8 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 final class Authenticate implements MiddlewareInterface
 {
+    public const ATTRIBUTE = 'identity';
+
     private ResourceServer $server;
     private ResponseFactoryInterface $response;
 
@@ -31,6 +33,8 @@ final class Authenticate implements MiddlewareInterface
             return $exception->generateHttpResponse($this->response->createResponse());
         }
 
-        return $handler->handle($request);
+        $identity = new Identity((string)$request->getAttribute('oauth_user_id'));
+
+        return $handler->handle($request->withAttribute(self::ATTRIBUTE, $identity));
     }
 }
