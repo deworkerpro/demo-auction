@@ -10,7 +10,8 @@ namespace App\Http\Middleware\Auth;
 final class Identity
 {
     public function __construct(
-        public string $id
+        public string $id,
+        public string $role,
     ) {
     }
 }
