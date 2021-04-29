@@ -52,6 +52,7 @@ services:
             MAILER_FROM_EMAIL: ${API_MAILER_FROM_EMAIL}
             FRONTEND_URL: https://demo-auction.deworker.pro
             SENTRY_DSN: ${SENTRY_DSN}
+            JWT_ENCRYPTION_KEY: ${JWT_ENCRYPTION_KEY}
         deploy:
             mode: replicated
             replicas: 2
@@ -76,6 +77,7 @@ services:
             MAILER_FROM_EMAIL: ${API_MAILER_FROM_EMAIL}
             FRONTEND_URL: https://demo-auction.deworker.pro
             SENTRY_DSN: ${SENTRY_DSN}
+            JWT_ENCRYPTION_KEY: ${JWT_ENCRYPTION_KEY}
         command: sh -c 'wait-for-it api-postgres:5432 -t 60 && php bin/app.php migrations:migrate --no-interaction'
         deploy:
             restart_policy:

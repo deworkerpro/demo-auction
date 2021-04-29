@@ -54,6 +54,7 @@ services:
             MAILER_FROM_EMAIL: mail@app.test
             FRONTEND_URL: http://localhost:8080
             SENTRY_DSN: ""
+            JWT_ENCRYPTION_KEY: secret
         volumes:
             - ./api:/app
 
@@ -76,6 +77,7 @@ services:
             MAILER_FROM_EMAIL: mail@app.test
             FRONTEND_URL: http://localhost:8080
             SENTRY_DSN: ""
+            JWT_ENCRYPTION_KEY: secret
         volumes:
             - ./api:/app
 
