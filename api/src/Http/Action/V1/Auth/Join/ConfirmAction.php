@@ -6,7 +6,7 @@ namespace App\Http\Action\V1\Auth\Join;
 
 use App\Auth\Command\JoinByEmail\Confirm\Command;
 use App\Auth\Command\JoinByEmail\Confirm\Handler;
-use App\Http\EmptyResponse;
+use App\Http\Response\EmptyResponse;
 use App\Http\Validator\Validator;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
