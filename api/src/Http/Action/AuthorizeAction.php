@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Action;
 
 use App\Http\Response\HtmlResponse;
+use App\Sentry;
 use Exception;
 use League\OAuth2\Server\AuthorizationServer;
 use League\OAuth2\Server\Exception\OAuthServerException;
@@ -21,17 +22,20 @@ final class AuthorizeAction implements RequestHandlerInterface
     private LoggerInterface $logger;
     private Environment $template;
     private ResponseFactoryInterface $response;
+    private Sentry $sentry;
 
     public function __construct(
         AuthorizationServer $server,
         LoggerInterface $logger,
         Environment $template,
-        ResponseFactoryInterface $response
+        ResponseFactoryInterface $response,
+        Sentry $sentry
     ) {
         $this->server = $server;
         $this->logger = $logger;
         $this->template = $template;
         $this->response = $response;
+        $this->sentry = $sentry;
     }
 
     public function handle(ServerRequestInterface $request): ResponseInterface
@@ -51,6 +55,7 @@ final class AuthorizeAction implements RequestHandlerInterface
             return $exception->generateHttpResponse($this->response->createResponse());
         } catch (Exception $exception) {
             $this->logger->error($exception->getMessage(), ['exception' => $exception]);
+            $this->sentry->capture($exception);
             return (new OAuthServerException('Server error.', 0, 'unknown_error', 500))
                 ->generateHttpResponse($this->response->createResponse());
         }
