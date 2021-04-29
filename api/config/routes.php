@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use App\Http\Action;
-use App\Http\Middleware\Authenticate;
+use App\Http\Middleware\Auth\Authenticate;
 use App\Router\StaticRouteGroup as Group;
 use Slim\App;
 use Slim\Routing\RouteCollectorProxy;
