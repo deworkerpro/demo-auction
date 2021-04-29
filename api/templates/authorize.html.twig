@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width">
+    <title>Auth</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            background-color: #fcfcfc;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        body {
+            margin: 2em auto;
+            padding: 1em;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-family: Arial, sans-serif;
+            color: #333;
+            font-size: 1rem;
+        }
+
+        .block {
+            display: block;
+            vertical-align: middle;
+            background: #fff;
+            padding: 30px;
+            box-shadow: 0 1px 10px rgba(0, 0, 0, .05);
+            border-radius: 4px;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .logo a {
+            font-size: 1.6rem;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .alert {
+            position: relative;
+            padding: .75rem 1rem;
+            margin-bottom: 1rem;
+            border: 1px solid transparent;
+            border-radius: .25rem;
+            font-size: .9rem;
+        }
+
+        .alert.error {
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+        }
+
+        form {
+            margin-bottom: 25px;
+        }
+
+        form .input-row {
+            margin-bottom: 14px;
+        }
+
+        form .input {
+            display: block;
+            width: 100%;
+            color: #444;
+            border: 1px solid #ddd;
+            background: #fff;
+            border-radius: 4px;
+            padding: 10px 8px;
+            font-size: 0.9rem;
+            font-family: Arial, sans-serif;
+        }
+
+        form .button-row {
+            padding-top: 0;
+        }
+
+        form .button-row button.submit {
+            border: none;
+            background: linear-gradient(to bottom, #ad0090, #af0061);
+            padding: 11px 15px;
+            color: #fff;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            display: block;
+            width: 100%;
+        }
+
+        p.links {
+            font-size: .8rem;
+            color: #666;
+            margin-bottom: 0;
+            text-align: center;
+        }
+
+        p.links a {
+            color: #2d6ba1;
+        }
+    </style>
+</head>
+
+<body>
+<div class="block" data-testid="authorize-page">
+
+    <div class="logo">
+        <a href="{{ frontend_url('') }}">
+            Auction
+        </a>
+    </div>
+
+    {% if error is defined %}
+        <p class="alert error">{{ error }}</p>
+    {% endif %}
+
+    <form method="POST" action="">
+        <div class="input-row">
+            <input value="" name="email" type="email" placeholder="Email" class="input"
+                   required/>
+        </div>
+        <div class="input-row">
+            <input value="" name="password" placeholder="Password" type="password"
+                   class="input" required/>
+        </div>
+        <div class="button-row">
+            <button type="submit" class="submit">Войти</button>
+        </div>
+    </form>
+
+    <p class="links">
+        <a href="{{ frontend_url('join' ) }}">Зарегистрироваться</a> |
+        <a href="{{ frontend_url('reset' ) }}">Восстановить пароль</a>
+    </p>
+</div>
+</body>
+</html>
