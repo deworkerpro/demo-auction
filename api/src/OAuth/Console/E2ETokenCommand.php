@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\OAuth\Console;
 
-use App\OAuth\Entity\AccessToken;
 use App\OAuth\Entity\Scope;
+use App\OAuth\Generator\AccessTokenGenerator;
+use App\OAuth\Generator\Params;
 use DateTimeImmutable;
-use League\OAuth2\Server\CryptKey;
 use League\OAuth2\Server\Repositories\ClientRepositoryInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\QuestionHelper;
@@ -18,16 +18,14 @@ use Symfony\Component\Console\Question\Question;
 
 final class E2ETokenCommand extends Command
 {
-    private string $privateKeyPath;
     private ClientRepositoryInterface $clients;
+    private AccessTokenGenerator $generator;
 
-    public function __construct(
-        string $privateKeyPath,
-        ClientRepositoryInterface $clients
-    ) {
+    public function __construct(ClientRepositoryInterface $clients, AccessTokenGenerator $generator)
+    {
         parent::__construct();
-        $this->privateKeyPath = $privateKeyPath;
         $this->clients = $clients;
+        $this->generator = $generator;
     }
 
     protected function configure(): void
@@ -93,20 +91,20 @@ final class E2ETokenCommand extends Command
             return 1;
         }
 
-        $token = new AccessToken(
+        $token = $this->generator->generate(
             $client,
-            array_map(static fn (string $name) => new Scope($name), explode(' ', $scopes))
+            array_map(
+                static fn (string $name) => new Scope($name),
+                explode(' ', $scopes)
+            ),
+            new Params(
+                userId: $userId,
+                role: $role,
+                expires: new DateTimeImmutable('+1000 years')
+            )
         );
 
-        $token->setIdentifier(bin2hex(random_bytes(40)));
-        $token->setExpiryDateTime(new DateTimeImmutable('+1000 years'));
-        $token->setUserIdentifier($userId);
-        $token->setUserRole($role);
-
-        $token->setPrivateKey(new CryptKey($this->privateKeyPath, null, false));
-
         $output->writeln((string)$token);
-
         return 0;
     }
 }
