@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Test;
+namespace App\Http\Test\Response;
 
-use App\Http\EmptyResponse;
+use App\Http\Response\EmptyResponse;
 use PHPUnit\Framework\TestCase;
 
 /**
