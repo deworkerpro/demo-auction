@@ -1,5 +1,15 @@
 version: "3.7"
 services:
+    swarm-cronjob:
+        image: crazymax/swarm-cronjob:latest
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+        environment:
+            LOG_LEVEL: info
+        deploy:
+            placement:
+                constraints: [node.role == manager]
+
     gateway:
         image: ${REGISTRY}/auction-gateway:${IMAGE_TAG}
         volumes:
