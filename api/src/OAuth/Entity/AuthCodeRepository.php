@@ -55,6 +55,15 @@ final class AuthCodeRepository implements AuthCodeRepositoryInterface
         return !$this->exists($codeId);
     }
 
+    public function removeAllForUser(string $userId): void
+    {
+        $this->em->createQueryBuilder()
+            ->delete(AuthCode::class, 'ac')
+            ->andWhere('ac.userIdentifier = :user_id')
+            ->setParameter(':user_id', $userId)
+            ->getQuery()->execute();
+    }
+
     private function exists(string $id): bool
     {
         return $this->repo->createQueryBuilder('t')

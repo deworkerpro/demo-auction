@@ -55,6 +55,15 @@ final class RefreshTokenRepository implements RefreshTokenRepositoryInterface
         return !$this->exists($tokenId);
     }
 
+    public function removeAllForUser(string $userId): void
+    {
+        $this->em->createQueryBuilder()
+            ->delete(RefreshToken::class, 'rt')
+            ->andWhere('rt.userIdentifier < :user_id')
+            ->setParameter(':user_id', $userId)
+            ->getQuery()->execute();
+    }
+
     private function exists(string $id): bool
     {
         return $this->repo->createQueryBuilder('t')
