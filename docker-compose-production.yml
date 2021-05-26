@@ -106,6 +106,39 @@ services:
                 max_attempts: 5
                 window: 120s
 
+    api-oauth-clear-expired:
+        image: ${REGISTRY}/auction-api-php-cli:${IMAGE_TAG}
+        environment:
+            APP_ENV: prod
+            APP_DEBUG: 0
+            DB_HOST: api-postgres
+            DB_USER: app
+            DB_PASSWORD: ${API_DB_PASSWORD}
+            DB_NAME: app
+            MAILER_HOST: ${API_MAILER_HOST}
+            MAILER_PORT: ${API_MAILER_PORT}
+            MAILER_USER: ${API_MAILER_USER}
+            MAILER_PASSWORD: ${API_MAILER_PASSWORD}
+            MAILER_ENCRYPTION: tls
+            MAILER_FROM_EMAIL: ${API_MAILER_FROM_EMAIL}
+            FRONTEND_URL: https://demo-auction.deworker.pro
+            SENTRY_DSN: ${SENTRY_DSN}
+            JWT_ENCRYPTION_KEY: ${JWT_ENCRYPTION_KEY}
+            JWT_PUBLIC_KEY_PATH: /run/secrets/jwt_public_key
+            JWT_PRIVATE_KEY_PATH: /run/secrets/jwt_private_key
+        secrets:
+            - jwt_public_key
+            - jwt_private_key
+        command: sh -c 'wait-for-it api-postgres:5432 -t 60 && php bin/app.php oauth:clear-expired'
+        deploy:
+            labels:
+                - swarm.cronjob.enable=true
+                - swarm.cronjob.schedule=0 * * * *
+                - swarm.cronjob.skip-running=true
+            replicas: 0
+            restart_policy:
+                condition: none
+
     api-postgres:
         image: postgres:13.3-alpine
         environment:
