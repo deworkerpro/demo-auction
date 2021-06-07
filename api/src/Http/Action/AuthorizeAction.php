@@ -65,7 +65,7 @@ final class AuthorizeAction implements RequestHandlerInterface
                 $user = $this->users->fetch($query);
 
                 if ($user === null) {
-                    $error = $this->translator->trans('Incorrect email or password.', [], 'oauth');
+                    $error = $this->translator->trans('error.incorrect_credentials', [], 'oauth');
 
                     return new HtmlResponse(
                         $this->template->render('authorize.html.twig', compact('query', 'error')),
@@ -74,7 +74,7 @@ final class AuthorizeAction implements RequestHandlerInterface
                 }
 
                 if (!$user->isActive) {
-                    $error = $this->translator->trans('User is not confirmed.', [], 'oauth');
+                    $error = $this->translator->trans('error.not_confirmed', [], 'oauth');
 
                     return new HtmlResponse(
                         $this->template->render('authorize.html.twig', compact('query', 'error')),

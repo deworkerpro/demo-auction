@@ -15,6 +15,7 @@
             <directory>src/Http/Test</directory>
             <directory>src/OAuth/Test</directory>
             <directory>src/Router/Test</directory>
+            <directory>src/Translator/Test</directory>
         </testsuite>
         <testsuite name="functional">
             <directory>tests/Functional</directory>
