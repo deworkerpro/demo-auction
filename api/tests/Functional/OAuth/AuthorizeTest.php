@@ -73,6 +73,26 @@ final class AuthorizeTest extends WebTestCase
         self::assertStringContainsString('<title>Auth</title>', $content);
     }
 
+    public function testLang(): void
+    {
+        $response = $this->app()->handle(self::html(
+            'GET',
+            '/authorize?' . http_build_query([
+                'response_type' => 'code',
+                'client_id' => 'frontend',
+                'code_challenge' => PKCE::challenge(PKCE::verifier()),
+                'code_challenge_method' => 'S256',
+                'redirect_uri' => 'http://localhost:8080/oauth',
+                'scope' => 'common',
+                'state' => 'sTaTe',
+            ])
+        )->withHeader('Accept-Language', 'ru'));
+
+        self::assertEquals(200, $response->getStatusCode());
+        self::assertNotEmpty($content = (string)$response->getBody());
+        self::assertStringContainsString('<title>Вход</title>', $content);
+    }
+
     public function testInvalidClient(): void
     {
         $response = $this->app()->handle(self::html(

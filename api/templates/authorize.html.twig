@@ -1,9 +1,9 @@
 <!doctype html>
 <html lang="ru">
 <head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width">
-    <title>Auth</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{{ trans('title', [], 'oauth') }}</title>
 
     <style>
         * {
@@ -130,21 +130,23 @@
 
     <form method="POST" action="">
         <div class="input-row">
-            <input value="{{ query.email }}" name="email" type="email" placeholder="Email" class="input"
-                   required/>
+            <input value="{{ query.email }}" name="email" type="email"
+                   placeholder="{{ trans('input.email', [], 'oauth') }}"
+                   class="input" required />
         </div>
         <div class="input-row">
-            <input value="{{ query.password }}" name="password" placeholder="Пароль" type="password"
-                   class="input" required/>
+            <input value="{{ query.password }}" name="password" type="password"
+                   placeholder="{{ trans('input.password', [], 'oauth') }}"
+                   class="input" required />
         </div>
         <div class="button-row">
-            <button type="submit" class="submit">Войти</button>
+            <button type="submit" class="submit">{{ trans('button.login', [], 'oauth') }}</button>
         </div>
     </form>
 
     <p class="links">
-        <a href="{{ frontend_url('join' ) }}">Зарегистрироваться</a> |
-        <a href="{{ frontend_url('reset' ) }}">Восстановить пароль</a>
+        <a href="{{ frontend_url('join' ) }}">{{ trans('link.join', [], 'oauth') }}</a> |
+        <a href="{{ frontend_url('reset' ) }}">{{ trans('link.reset', [], 'oauth') }}</a>
     </p>
 </div>
 </body>

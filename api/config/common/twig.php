@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\FeatureToggle\FeatureFlagTwigExtension;
 use App\Frontend\FrontendUrlTwigExtension;
+use App\Translator\TranslatorTwigExtension;
 use Psr\Container\ContainerInterface;
 use Twig\Environment;
 use Twig\Extension\DebugExtension;
@@ -60,6 +61,7 @@ return [
             'extensions' => [
                 FrontendUrlTwigExtension::class,
                 FeatureFlagTwigExtension::class,
+                TranslatorTwigExtension::class,
             ],
         ],
     ],
