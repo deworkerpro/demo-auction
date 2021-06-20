@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Validator;
+namespace App\Validator;
 
 use LogicException;
 use Symfony\Component\Validator\ConstraintViolationListInterface;

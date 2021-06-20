@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Validator;
+namespace App\Validator;
 
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 

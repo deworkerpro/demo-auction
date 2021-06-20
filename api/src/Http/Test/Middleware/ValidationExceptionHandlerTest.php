@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Test\Middleware;
 
 use App\Http\Middleware\ValidationExceptionHandler;
-use App\Http\Validator\ValidationException;
+use App\Validator\ValidationException;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
