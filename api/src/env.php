@@ -14,6 +14,12 @@ function env(string $name, ?string $default = null): string
         return $value;
     }
 
+    $file = getenv($name . '_FILE');
+
+    if ($file !== false) {
+        return trim(file_get_contents($file));
+    }
+
     if ($default !== null) {
         return $default;
     }
