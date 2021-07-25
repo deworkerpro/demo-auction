@@ -44,22 +44,26 @@ services:
             PHP_IDE_CONFIG: serverName=API
             DB_HOST: api-postgres
             DB_USER: app
-            DB_PASSWORD: secret
+            DB_PASSWORD_FILE: /run/secrets/api_db_password
             DB_NAME: app
             MAILER_HOST: mailer
             MAILER_PORT: 1025
             MAILER_USERNAME: app
-            MAILER_PASSWORD: secret
+            MAILER_PASSWORD_FILE: /run/secrets/api_mailer_password
             MAILER_ENCRYPTION: tcp
             MAILER_FROM_EMAIL: mail@app.test
             FRONTEND_URL: http://localhost:8080
-            SENTRY_DSN: ""
-            JWT_ENCRYPTION_KEY: secret
+            SENTRY_DSN_FILE: /run/secrets/sentry_dsn
+            JWT_ENCRYPTION_KEY_FILE: /run/secrets/jwt_encryption_key
             JWT_PUBLIC_KEY_PATH: /run/secrets/jwt_public_key
             JWT_PRIVATE_KEY_PATH: /run/secrets/jwt_private_key
         volumes:
             - ./api:/app
         secrets:
+            - api_db_password
+            - api_mailer_password
+            - sentry_dsn
+            - jwt_encryption_key
             - jwt_public_key
             - jwt_private_key
 
@@ -72,22 +76,26 @@ services:
             APP_DEBUG: 1
             DB_HOST: api-postgres
             DB_USER: app
-            DB_PASSWORD: secret
+            DB_PASSWORD_FILE: /run/secrets/api_db_password
             DB_NAME: app
             MAILER_HOST: mailer
             MAILER_PORT: 1025
             MAILER_USERNAME: app
-            MAILER_PASSWORD: secret
+            MAILER_PASSWORD_FILE: /run/secrets/api_mailer_password
             MAILER_ENCRYPTION: tcp
             MAILER_FROM_EMAIL: mail@app.test
             FRONTEND_URL: http://localhost:8080
-            SENTRY_DSN: ""
-            JWT_ENCRYPTION_KEY: secret
+            SENTRY_DSN_FILE: /run/secrets/sentry_dsn
+            JWT_ENCRYPTION_KEY_FILE: /run/secrets/jwt_encryption_key
             JWT_PUBLIC_KEY_PATH: /run/secrets/jwt_public_key
             JWT_PRIVATE_KEY_PATH: /run/secrets/jwt_private_key
         volumes:
             - ./api:/app
         secrets:
+            - api_db_password
+            - api_mailer_password
+            - sentry_dsn
+            - jwt_encryption_key
             - jwt_public_key
             - jwt_private_key
 
@@ -95,8 +103,10 @@ services:
         image: postgres:13.3-alpine
         environment:
             POSTGRES_USER: app
-            POSTGRES_PASSWORD: secret
+            POSTGRES_PASSWORD_FILE: /run/secrets/api_db_password
             POSTGRES_DB: app
+        secrets:
+            - api_db_password
         volumes:
             - api-postgres:/var/lib/postgresql/data
         ports:
@@ -112,6 +122,14 @@ services:
             - ./cucumber:/app
 
 secrets:
+    api_db_password:
+        file: ./docker/development/secrets/api_db_password
+    api_mailer_password:
+        file: ./docker/development/secrets/api_mailer_password
+    sentry_dsn:
+        file: ./docker/development/secrets/sentry_dsn
+    jwt_encryption_key:
+        file: ./docker/development/secrets/jwt_encryption_key
     jwt_public_key:
         file: ./docker/development/secrets/jwt_public_key
     jwt_private_key:
