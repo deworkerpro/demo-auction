@@ -56,7 +56,7 @@ services:
             DB_NAME: app
             MAILER_HOST: ${API_MAILER_HOST}
             MAILER_PORT: ${API_MAILER_PORT}
-            MAILER_USER: ${API_MAILER_USER}
+            MAILER_USERNAME: ${API_MAILER_USERNAME}
             MAILER_PASSWORD: ${API_MAILER_PASSWORD}
             MAILER_ENCRYPTION: tls
             MAILER_FROM_EMAIL: ${API_MAILER_FROM_EMAIL}
@@ -86,7 +86,7 @@ services:
             DB_NAME: app
             MAILER_HOST: ${API_MAILER_HOST}
             MAILER_PORT: ${API_MAILER_PORT}
-            MAILER_USER: ${API_MAILER_USER}
+            MAILER_USERNAME: ${API_MAILER_USERNAME}
             MAILER_PASSWORD: ${API_MAILER_PASSWORD}
             MAILER_ENCRYPTION: tls
             MAILER_FROM_EMAIL: ${API_MAILER_FROM_EMAIL}
@@ -117,7 +117,7 @@ services:
             DB_NAME: app
             MAILER_HOST: ${API_MAILER_HOST}
             MAILER_PORT: ${API_MAILER_PORT}
-            MAILER_USER: ${API_MAILER_USER}
+            MAILER_USERNAME: ${API_MAILER_USERNAME}
             MAILER_PASSWORD: ${API_MAILER_PASSWORD}
             MAILER_ENCRYPTION: tls
             MAILER_FROM_EMAIL: ${API_MAILER_FROM_EMAIL}

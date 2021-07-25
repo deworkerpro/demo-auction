@@ -191,7 +191,7 @@ pipeline {
                     string(credentialsId: 'API_DB_PASSWORD', variable: 'API_DB_PASSWORD'),
                     string(credentialsId: 'API_MAILER_HOST', variable: 'API_MAILER_HOST'),
                     string(credentialsId: 'API_MAILER_PORT', variable: 'API_MAILER_PORT'),
-                    string(credentialsId: 'API_MAILER_USER', variable: 'API_MAILER_USER'),
+                    string(credentialsId: 'API_MAILER_USERNAME', variable: 'API_MAILER_USERNAME'),
                     string(credentialsId: 'API_MAILER_PASSWORD', variable: 'API_MAILER_PASSWORD'),
                     string(credentialsId: 'API_MAILER_FROM_EMAIL', variable: 'API_MAILER_FROM_EMAIL'),
                     string(credentialsId: 'SENTRY_DSN', variable: 'SENTRY_DSN'),
