@@ -188,14 +188,14 @@ pipeline {
                 withCredentials([
                     string(credentialsId: 'PRODUCTION_HOST', variable: 'HOST'),
                     string(credentialsId: 'PRODUCTION_PORT', variable: 'PORT'),
-                    string(credentialsId: 'API_DB_PASSWORD', variable: 'API_DB_PASSWORD'),
+                    file(credentialsId: 'API_DB_PASSWORD_FILE', variable: 'API_DB_PASSWORD_FILE'),
                     string(credentialsId: 'API_MAILER_HOST', variable: 'API_MAILER_HOST'),
                     string(credentialsId: 'API_MAILER_PORT', variable: 'API_MAILER_PORT'),
                     string(credentialsId: 'API_MAILER_USERNAME', variable: 'API_MAILER_USERNAME'),
-                    string(credentialsId: 'API_MAILER_PASSWORD', variable: 'API_MAILER_PASSWORD'),
+                    file(credentialsId: 'API_MAILER_PASSWORD_FILE', variable: 'API_MAILER_PASSWORD_FILE'),
                     string(credentialsId: 'API_MAILER_FROM_EMAIL', variable: 'API_MAILER_FROM_EMAIL'),
-                    string(credentialsId: 'SENTRY_DSN', variable: 'SENTRY_DSN'),
-                    string(credentialsId: 'JWT_ENCRYPTION_KEY', variable: 'JWT_ENCRYPTION_KEY'),
+                    file(credentialsId: 'SENTRY_DSN_FILE', variable: 'SENTRY_DSN_FILE'),
+                    file(credentialsId: 'JWT_ENCRYPTION_KEY_FILE', variable: 'JWT_ENCRYPTION_KEY_FILE'),
                     file(credentialsId: 'JWT_PUBLIC_KEY', variable: 'JWT_PUBLIC_KEY'),
                     file(credentialsId: 'JWT_PRIVATE_KEY', variable: 'JWT_PRIVATE_KEY')
                 ]) {
