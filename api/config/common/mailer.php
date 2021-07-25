@@ -39,7 +39,7 @@ return [
         'mailer' => [
             'host' => env('MAILER_HOST'),
             'port' => env('MAILER_PORT'),
-            'user' => env('MAILER_USER'),
+            'user' => env('MAILER_USERNAME'),
             'password' => env('MAILER_PASSWORD'),
             'encryption' => env('MAILER_ENCRYPTION'),
             'from' => [env('MAILER_FROM_EMAIL') => 'Auction'],
