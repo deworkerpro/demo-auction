@@ -13,8 +13,8 @@ validate-schema: api-validate-schema
 test: api-test api-fixtures frontend-test
 test-unit: api-test-unit
 test-functional: api-test-functional api-fixtures
-test-smoke: api-fixtures cucumber-clear cucumber-smoke
-test-e2e: api-fixtures cucumber-clear cucumber-e2e
+test-smoke: api-fixtures cucumber-smoke
+test-e2e: api-fixtures cucumber-e2e
 
 update-deps: api-composer-update frontend-yarn-upgrade cucumber-yarn-upgrade restart
 
@@ -94,6 +94,7 @@ api-test-functional-coverage:
 
 frontend-clear:
 	docker run --rm -v ${PWD}/frontend:/app -w /app alpine sh -c 'rm -rf .ready build'
+	docker run --rm -v ${PWD}/frontend:/app -w /app alpine sh -c 'rm -rf node_modules'
 
 frontend-init: frontend-yarn-install
 
@@ -126,6 +127,7 @@ frontend-test-watch:
 
 cucumber-clear:
 	docker run --rm -v ${PWD}/cucumber:/app -w /app alpine sh -c 'rm -rf var/*'
+	docker run --rm -v ${PWD}/cucumber:/app -w /app alpine sh -c 'rm -rf node_modules'
 
 cucumber-init: cucumber-yarn-install
 
