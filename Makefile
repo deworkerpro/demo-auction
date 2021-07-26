@@ -35,6 +35,7 @@ docker-build:
 
 api-clear:
 	docker run --rm -v ${PWD}/api:/app -w /app alpine sh -c 'rm -rf var/cache/* var/log/* var/test/*'
+	docker run --rm -v ${PWD}/api:/app -w /app alpine sh -c 'rm -rf vendor var/cache/.p*'
 
 api-init: api-permissions api-composer-install api-wait-db api-migrations api-fixtures
 
