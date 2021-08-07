@@ -205,7 +205,12 @@ pipeline {
                     file(credentialsId: 'SENTRY_DSN_FILE', variable: 'SENTRY_DSN_FILE'),
                     file(credentialsId: 'JWT_ENCRYPTION_KEY_FILE', variable: 'JWT_ENCRYPTION_KEY_FILE'),
                     file(credentialsId: 'JWT_PUBLIC_KEY', variable: 'JWT_PUBLIC_KEY'),
-                    file(credentialsId: 'JWT_PRIVATE_KEY', variable: 'JWT_PRIVATE_KEY')
+                    file(credentialsId: 'JWT_PRIVATE_KEY', variable: 'JWT_PRIVATE_KEY'),
+                    string(credentialsId: 'BACKUP_AWS_ACCESS_KEY_ID', variable: 'BACKUP_AWS_ACCESS_KEY_ID'),
+                    file(credentialsId: 'BACKUP_AWS_SECRET_ACCESS_KEY_FILE', variable: 'BACKUP_AWS_SECRET_ACCESS_KEY_FILE'),
+                    string(credentialsId: 'BACKUP_AWS_DEFAULT_REGION', variable: 'BACKUP_AWS_DEFAULT_REGION'),
+                    string(credentialsId: 'BACKUP_S3_ENDPOINT', variable: 'BACKUP_S3_ENDPOINT'),
+                    string(credentialsId: 'BACKUP_S3_BUCKET', variable: 'BACKUP_S3_BUCKET')
                 ]) {
                     sshagent (credentials: ['PRODUCTION_AUTH']) {
                         sh 'make deploy'
