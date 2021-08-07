@@ -125,7 +125,7 @@ services:
             - backup_aws_secret_access_key
         volumes:
             - backup-storage:/data
-        command: minio server /data --console-address ":80"
+        entrypoint: sh -c 'mkdir -p /data/backup && docker-entrypoint.sh minio server /data --console-address ":80"'
 
     cucumber-node-cli:
         build:
