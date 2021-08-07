@@ -8,6 +8,7 @@ services:
             - "8080:8080"
             - "8081:8081"
             - "8082:8082"
+            - "8083:8083"
 
     frontend:
         build:
@@ -124,7 +125,7 @@ services:
             - backup_aws_secret_access_key
         volumes:
             - backup-storage:/data
-        command: minio server /data
+        command: minio server /data --console-address ":80"
 
     cucumber-node-cli:
         build:
