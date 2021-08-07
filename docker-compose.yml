@@ -113,6 +113,26 @@ services:
         ports:
             - "54321:5432"
 
+    api-postgres-backup:
+        build:
+            context: ./api/docker/common
+            dockerfile: postgres-backup/Dockerfile
+        environment:
+            BACKUP_NAME: auction_api-postgres
+            POSTGRES_HOST: api-postgres
+            POSTGRES_DB: app
+            POSTGRES_USERNAME: app
+            POSTGRES_PASSWORD_FILE: /run/secrets/api_db_password
+            AWS_ACCESS_KEY_ID: storage_app
+            AWS_SECRET_ACCESS_KEY_FILE: /run/secrets/backup_aws_secret_access_key
+            AWS_DEFAULT_REGION: region
+            S3_ENDPOINT: http://backup-storage:9000
+            S3_BUCKET: backup
+        secrets:
+            - api_db_password
+            - backup_aws_secret_access_key
+        command: sh -c 'wait-for-it api-postgres:5432 -t 20 && backup'
+
     mailer:
         image: mailhog/mailhog
 
