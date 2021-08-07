@@ -56,6 +56,9 @@ api-migrations:
 api-fixtures:
 	docker-compose run --rm api-php-cli composer app fixtures:load
 
+api-backup:
+	docker-compose run --rm api-postgres-backup
+
 api-check: api-validate-schema api-lint api-analyze api-test
 
 api-validate-schema:
