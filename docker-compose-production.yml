@@ -24,8 +24,14 @@ services:
             --certificatesresolvers.letsEncrypt.acme.email=mail@deworker.pro
             --certificatesresolvers.letsEncrypt.acme.storage=/certs/acme.json
         ports:
-            - "80:80"
-            - "443:443"
+            - target: 80
+              published: 80
+              protocol: tcp
+              mode: host
+            - target: 443
+              published: 443
+              protocol: tcp
+              mode: host
         networks:
             - traefik-public
         volumes:
