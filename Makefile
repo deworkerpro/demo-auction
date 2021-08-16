@@ -150,10 +150,7 @@ cucumber-smoke:
 cucumber-e2e:
 	docker-compose run --rm cucumber-node-cli yarn e2e
 
-build: build-gateway build-frontend build-api
-
-build-gateway:
-	docker --log-level=debug build --pull --file=gateway/docker/production/nginx/Dockerfile --tag=${REGISTRY}/auction-gateway:${IMAGE_TAG} gateway/docker
+build: build-frontend build-api
 
 build-frontend:
 	docker --log-level=debug build --pull --file=frontend/docker/production/nginx/Dockerfile --tag=${REGISTRY}/auction-frontend:${IMAGE_TAG} frontend
@@ -167,10 +164,7 @@ build-api:
 try-build:
 	REGISTRY=localhost IMAGE_TAG=0 make build
 
-push: push-gateway push-frontend push-api
-
-push-gateway:
-	docker push ${REGISTRY}/auction-gateway:${IMAGE_TAG}
+push: push-frontend push-api
 
 push-frontend:
 	docker push ${REGISTRY}/auction-frontend:${IMAGE_TAG}
