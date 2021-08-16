@@ -5,7 +5,6 @@
     roles:
         - swap
         - docker
-        - certbot
         - swarm-manager
 
 -   name: Provision worker
