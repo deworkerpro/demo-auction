@@ -1,7 +1,0 @@
----
--   name: Join to Swarm
-    docker_swarm:
-        advertise_addr: "{{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'] }}"
-        remote_addrs: [ "{{ hostvars[groups['manager'][0]]['ansible_default_ipv4']['address'] }}:2377" ]
-        join_token: "{{ hostvars[groups['manager'][0]]['worker_join_token'] }}"
-        state: join
