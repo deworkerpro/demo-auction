@@ -10,26 +10,64 @@ services:
             placement:
                 constraints: [ node.role == manager ]
 
-    gateway:
-        image: ${REGISTRY}/auction-gateway:${IMAGE_TAG}
-        volumes:
-            - /etc/letsencrypt:/etc/letsencrypt:ro
-            - /var/www/html:/var/www/html:ro
+    traefik:
+        image: traefik:2.4
+        command:
+            --providers.docker=true
+            --providers.docker.watch=true
+            --providers.docker.swarmMode=true
+            --providers.docker.exposedByDefault=false
+            --entryPoints.http.address=:80
+            --entryPoints.https.address=:443
+            --certificatesresolvers.letsEncrypt.acme.httpChallenge=true
+            --certificatesresolvers.letsEncrypt.acme.httpChallenge.entryPoint=http
+            --certificatesresolvers.letsEncrypt.acme.email=mail@deworker.pro
+            --certificatesresolvers.letsEncrypt.acme.storage=/certs/acme.json
         ports:
             - "80:80"
             - "443:443"
+        networks:
+            - traefik-public
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock:ro
+            - traefik-public-certs:/certs
         deploy:
-            mode: replicated
-            replicas: 2
-            update_config:
-                parallelism: 1
-                delay: 10s
+            labels:
+                - traefik.enable=true
+                - traefik.docker.network=traefik-public
+
+                - traefik.http.routers.http-catchall.rule=HostRegexp(`{host:.+}`)
+                - traefik.http.routers.http-catchall.entryPoints=http
+                - traefik.http.routers.http-catchall.middlewares=redirect-to-https
+                - traefik.http.services.http-catchall.loadBalancer.server.port=80
+
+                - traefik.http.middlewares.redirect-to-https.redirectScheme.scheme=https
+                - traefik.http.middlewares.redirect-to-https.redirectScheme.permanent=true
+
+                - traefik.http.middlewares.secure-headers.headers.sslRedirect=true
+                - traefik.http.middlewares.secure-headers.headers.stsSeconds=31536000
+                - traefik.http.middlewares.secure-headers.headers.contentSecurityPolicy=block-all-mixed-content
             placement:
                 constraints: [ node.role == manager ]
 
     frontend:
         image: ${REGISTRY}/auction-frontend:${IMAGE_TAG}
+        networks:
+            - traefik-public
+            - default
         deploy:
+            labels:
+                - traefik.enable=true
+                - traefik.docker.network=traefik-public
+                - traefik.http.routers.frontend.rule=Host(`demo-auction.deworker.pro`) || Host(`www.demo-auction.deworker.pro`)
+                - traefik.http.services.frontend.loadBalancer.server.port=80
+                - traefik.http.middlewares.frontend-redirect.redirectRegex.regex=^(https?://)www.demo-auction.deworker.pro/(.*)$$
+                - traefik.http.middlewares.frontend-redirect.redirectRegex.replacement=$${1}demo-auction.deworker.pro/$${2}
+                - traefik.http.middlewares.frontend-redirect.redirectRegex.permanent=true
+                - traefik.http.routers.frontend.middlewares=frontend-redirect,secure-headers
+                - traefik.http.routers.frontend.entryPoints=https
+                - traefik.http.routers.frontend.tls=true
+                - traefik.http.routers.frontend.tls.certResolver=letsEncrypt
             mode: replicated
             replicas: 2
             update_config:
@@ -38,7 +76,19 @@ services:
 
     api:
         image: ${REGISTRY}/auction-api:${IMAGE_TAG}
+        networks:
+            - traefik-public
+            - default
         deploy:
+            labels:
+                - traefik.enable=true
+                - traefik.docker.network=traefik-public
+                - traefik.http.routers.api.rule=Host(`api.demo-auction.deworker.pro`)
+                - traefik.http.services.api.loadBalancer.server.port=80
+                - traefik.http.routers.api.middlewares=secure-headers
+                - traefik.http.routers.api.entryPoints=https
+                - traefik.http.routers.api.tls=true
+                - traefik.http.routers.api.tls.certResolver=letsEncrypt
             mode: replicated
             replicas: 2
             update_config:
@@ -209,4 +259,9 @@ secrets:
         file: ./secrets/backup_aws_secret_access_key
 
 volumes:
+    traefik-public-certs:
     api-postgres:
+
+networks:
+    traefik-public:
+        name: traefik-public
