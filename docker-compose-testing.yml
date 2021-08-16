@@ -24,7 +24,7 @@ services:
             MAILER_PASSWORD_FILE: /run/secrets/api_mailer_password
             MAILER_ENCRYPTION: tcp
             MAILER_FROM_EMAIL: mail@app.test
-            FRONTEND_URL: http://gateway:8080
+            FRONTEND_URL: http://localhost:8080
             SENTRY_DSN_FILE: /run/secrets/sentry_dsn
             JWT_ENCRYPTION_KEY_FILE: /run/secrets/jwt_encryption_key
             JWT_PUBLIC_KEY_PATH: /run/secrets/jwt_public_key
@@ -52,7 +52,7 @@ services:
             MAILER_PASSWORD_FILE: /run/secrets/api_mailer_password
             MAILER_ENCRYPTION: tcp
             MAILER_FROM_EMAIL: mail@app.test
-            FRONTEND_URL: http://gateway:8080
+            FRONTEND_URL: http://localhost:8080
             SENTRY_DSN_FILE: /run/secrets/sentry_dsn
             JWT_ENCRYPTION_KEY_FILE: /run/secrets/jwt_encryption_key
             JWT_PUBLIC_KEY_PATH: /run/secrets/jwt_public_key
@@ -80,7 +80,7 @@ services:
             MAILER_PASSWORD_FILE: /run/secrets/api_mailer_password
             MAILER_ENCRYPTION: tcp
             MAILER_FROM_EMAIL: mail@app.test
-            FRONTEND_URL: http://gateway:8080
+            FRONTEND_URL: http://localhost:8080
             SENTRY_DSN_FILE: /run/secrets/sentry_dsn
             JWT_ENCRYPTION_KEY_FILE: /run/secrets/jwt_encryption_key
             JWT_PUBLIC_KEY_PATH: /run/secrets/jwt_public_key
@@ -109,6 +109,7 @@ services:
         image: ${REGISTRY}/auction-cucumber-node-cli:${IMAGE_TAG}
         volumes:
             - ./cucumber/var:/app/var
+        network_mode: service:gateway
 
 secrets:
     api_db_password:

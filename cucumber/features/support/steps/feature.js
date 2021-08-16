@@ -4,7 +4,7 @@ Given('I have {string} feature', async function (feature) {
   await this.page.setCookie({
     name: 'features',
     value: feature,
-    domain: 'gateway',
+    domain: 'localhost',
     httpOnly: false,
     secure: false,
     path: '/',
@@ -16,7 +16,7 @@ Given('I do not have {string} feature', async function (feature) {
   await this.page.setCookie({
     name: 'features',
     value: '!' + feature,
-    domain: 'gateway',
+    domain: 'localhost',
     httpOnly: false,
     secure: false,
     path: '/',
