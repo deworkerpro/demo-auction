@@ -2,14 +2,15 @@
 -   name: Add Certbot repository
     apt_repository:
         repo: 'deb http://ftp.debian.org/debian buster-backports main'
-        state: present
+        state: absent
         filename: buster-backports
         update_cache: yes
 
 -   name: Install Certbot
     apt:
         name: certbot
-        state: present
+        state: absent
+        purge: yes
         default_release: buster-backports
         update_cache: yes
 

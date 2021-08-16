@@ -1,6 +1,0 @@
----
--   name: Add Certbot hook
-    lineinfile:
-        path: /etc/letsencrypt/cli.ini
-        regexp: "^post-hook"
-        line: "post-hook = docker service update --force auction_gateway"
