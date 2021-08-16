@@ -40,7 +40,7 @@ final class AuthorizationCodeTest extends WebTestCase
 
         $payload = [
             'client_id' => 'frontend',
-            'redirect_uri' => 'http://localhost:8080/oauth',
+            'redirect_uri' => 'http://localhost/oauth',
             'auth_code_id' => 'def50200f204dedbb244ce4539b9e',
             'scopes' => 'common',
             'user_id' => '00000000-0000-0000-0000-000000000001',
@@ -54,7 +54,7 @@ final class AuthorizationCodeTest extends WebTestCase
         $response = $this->app()->handle(self::html('POST', '/token', [
             'grant_type' => 'authorization_code',
             'code' => $code,
-            'redirect_uri' => 'http://localhost:8080/oauth',
+            'redirect_uri' => 'http://localhost/oauth',
             'client_id' => 'frontend',
             'code_verifier' => $verifier,
             'access_type' => 'offline',
@@ -86,7 +86,7 @@ final class AuthorizationCodeTest extends WebTestCase
 
         $payload = [
             'client_id' => 'frontend',
-            'redirect_uri' => 'http://localhost:8080/oauth',
+            'redirect_uri' => 'http://localhost/oauth',
             'auth_code_id' => 'def50200f204dedbb244ce4539b9e',
             'scopes' => 'common',
             'user_id' => '00000000-0000-0000-0000-000000000001',
@@ -100,7 +100,7 @@ final class AuthorizationCodeTest extends WebTestCase
         $response = $this->app()->handle(self::html('POST', '/token', [
             'grant_type' => 'authorization_code',
             'code' => $code,
-            'redirect_uri' => 'http://localhost:8080/oauth',
+            'redirect_uri' => 'http://localhost/oauth',
             'client_id' => 'frontend',
             'code_verifier' => PKCE::verifier(),
             'access_type' => 'offline',
@@ -116,7 +116,7 @@ final class AuthorizationCodeTest extends WebTestCase
 
         $payload = [
             'client_id' => 'frontend',
-            'redirect_uri' => 'http://localhost:8080/oauth',
+            'redirect_uri' => 'http://localhost/oauth',
             'auth_code_id' => 'def50200f204dedbb244ce4539b9e',
             'scopes' => 'common',
             'user_id' => '00000000-0000-0000-0000-000000000001',
@@ -130,7 +130,7 @@ final class AuthorizationCodeTest extends WebTestCase
         $response = $this->app()->handle(self::html('POST', '/token', [
             'grant_type' => 'authorization_code',
             'code' => $code,
-            'redirect_uri' => 'http://localhost:8080/oauth',
+            'redirect_uri' => 'http://localhost/oauth',
             'client_id' => 'invalid',
             'access_type' => 'offline',
         ]));
@@ -145,7 +145,7 @@ final class AuthorizationCodeTest extends WebTestCase
 
         $payload = [
             'client_id' => 'invalid',
-            'redirect_uri' => 'http://localhost:8080/oauth',
+            'redirect_uri' => 'http://localhost/oauth',
             'auth_code_id' => 'def50200f204dedbb244ce4539b9e',
             'scopes' => 'common',
             'user_id' => '00000000-0000-0000-0000-000000000001',
@@ -159,7 +159,7 @@ final class AuthorizationCodeTest extends WebTestCase
         $response = $this->app()->handle(self::html('POST', '/token', [
             'grant_type' => 'authorization_code',
             'code' => $code,
-            'redirect_uri' => 'http://localhost:8080/oauth',
+            'redirect_uri' => 'http://localhost/oauth',
             'client_id' => 'invalid',
             'code_verifier' => $verifier,
             'access_type' => 'offline',

@@ -17,7 +17,7 @@ final class ClientBuilder
     {
         $this->identifier = Uuid::uuid4()->toString();
         $this->name = 'Client';
-        $this->redirectUri = 'http://localhost:8080/auth';
+        $this->redirectUri = 'http://localhost/auth';
     }
 
     public function build(): Client

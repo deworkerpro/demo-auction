@@ -21,7 +21,7 @@ final class AuthHeader
             new Client(
                 identifier: 'frontend',
                 name: 'Auction',
-                redirectUri: 'http://localhost:8080/oauth'
+                redirectUri: 'http://localhost/oauth'
             ),
             [new Scope('common')],
             new Params(

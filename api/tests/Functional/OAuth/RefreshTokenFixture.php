@@ -27,7 +27,7 @@ final class RefreshTokenFixture extends AbstractFixture
         $client = new Client(
             identifier: 'frontend',
             name: 'Frontend',
-            redirectUri: 'http://localhost:8080/oauth',
+            redirectUri: 'http://localhost/oauth',
         );
 
         $accessToken = (new AccessTokenBuilder())
