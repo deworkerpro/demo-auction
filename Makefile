@@ -181,10 +181,7 @@ push-api:
 	docker push ${REGISTRY}/auction-api-php-cli:${IMAGE_TAG}
 	docker push ${REGISTRY}/auction-api-postgres-backup:${IMAGE_TAG}
 
-testing-build: testing-build-gateway testing-build-testing-api-php-cli testing-build-cucumber
-
-testing-build-gateway:
-	docker --log-level=debug build --pull --file=gateway/docker/testing/nginx/Dockerfile --tag=${REGISTRY}/auction-testing-gateway:${IMAGE_TAG} gateway/docker
+testing-build: testing-build-testing-api-php-cli testing-build-cucumber
 
 testing-build-testing-api-php-cli:
 	docker --log-level=debug build --pull --file=api/docker/testing/php-cli/Dockerfile --tag=${REGISTRY}/auction-testing-api-php-cli:${IMAGE_TAG} api
@@ -197,6 +194,7 @@ testing-init:
 	COMPOSE_PROJECT_NAME=testing docker-compose -f docker-compose-testing.yml run --rm api-php-cli wait-for-it api-postgres:5432 -t 60
 	COMPOSE_PROJECT_NAME=testing docker-compose -f docker-compose-testing.yml run --rm api-php-cli php bin/app.php migrations:migrate --no-interaction
 	COMPOSE_PROJECT_NAME=testing docker-compose -f docker-compose-testing.yml run --rm testing-api-php-cli php bin/app.php fixtures:load --no-interaction
+	sleep 15
 
 testing-smoke:
 	COMPOSE_PROJECT_NAME=testing docker-compose -f docker-compose-testing.yml run --rm cucumber-node-cli yarn smoke-ci

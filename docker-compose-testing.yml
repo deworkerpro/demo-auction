@@ -1,13 +1,46 @@
 version: "3.9"
 services:
-    gateway:
-        image: ${REGISTRY}/auction-testing-gateway:${IMAGE_TAG}
+    traefik:
+        image: traefik:2.4
+        command:
+            --providers.docker=true
+            --providers.docker.exposedByDefault=false
+            --entryPoints.http.address=:80
+        networks:
+            - traefik-public
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock:ro
+        labels:
+            - traefik.enable=true
+            - traefik.docker.network=traefik-public
 
     frontend:
         image: ${REGISTRY}/auction-frontend:${IMAGE_TAG}
+        networks:
+            - traefik-public
+            - default
+        labels:
+            - traefik.enable=true
+            - traefik.docker.network=traefik-public
+            - traefik.http.routers.frontend.rule=Host(`localhost`) || Host(`www.localhost`)
+            - traefik.http.routers.frontend.entryPoints=http
+            - traefik.http.services.frontend.loadBalancer.server.port=80
+            - traefik.http.middlewares.frontend-redirect.redirectRegex.regex=^(https?://)www.localhost/(.*)$$
+            - traefik.http.middlewares.frontend-redirect.redirectRegex.replacement=$${1}localhost/$${2}
+            - traefik.http.middlewares.frontend-redirect.redirectRegex.permanent=true
+            - traefik.http.routers.frontend.middlewares=frontend-redirect
 
     api:
         image: ${REGISTRY}/auction-api:${IMAGE_TAG}
+        networks:
+            - traefik-public
+            - default
+        labels:
+            - traefik.enable=true
+            - traefik.docker.network=traefik-public
+            - traefik.http.routers.api.rule=Host(`api.localhost`)
+            - traefik.http.routers.api.entryPoints=http
+            - traefik.http.services.api.loadBalancer.server.port=80
 
     api-php-fpm:
         image: ${REGISTRY}/auction-api-php-fpm:${IMAGE_TAG}
@@ -109,7 +142,7 @@ services:
         image: ${REGISTRY}/auction-cucumber-node-cli:${IMAGE_TAG}
         volumes:
             - ./cucumber/var:/app/var
-        network_mode: service:gateway
+        network_mode: service:traefik
 
 secrets:
     api_db_password:
@@ -124,3 +157,7 @@ secrets:
         file: ./docker/development/secrets/jwt_public_key
     jwt_private_key:
         file: ./docker/development/secrets/jwt_private_key
+
+networks:
+    traefik-public:
+        name: traefik-public
