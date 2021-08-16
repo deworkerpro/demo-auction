@@ -2,9 +2,9 @@
 -   name: Install Docker SDK dependencies
     apt:
         name:
-            - python-pip
+            - python3-pip
             - virtualenv
-            - python-setuptools
+            - python3-setuptools
         state: present
         update_cache: yes
 
