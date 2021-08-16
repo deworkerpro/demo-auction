@@ -2,7 +2,7 @@ const { Given, When, Then } = require('@cucumber/cucumber')
 const { expect } = require('chai')
 
 const onPage = async function (uri) {
-  return await this.page.goto('http://localhost:8080' + uri)
+  return await this.page.goto('http://localhost' + uri)
 }
 
 Given('I am on {string} page', { wrapperOptions: { retry: 2 }, timeout: 30000 }, onPage)

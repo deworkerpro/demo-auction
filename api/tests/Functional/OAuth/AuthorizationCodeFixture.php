@@ -28,13 +28,13 @@ final class AuthorizationCodeFixture extends AbstractFixture
         $code->setClient(new Client(
             identifier: 'frontend',
             name: 'Frontend',
-            redirectUri: 'http://localhost:8080/oauth',
+            redirectUri: 'http://localhost/oauth',
         ));
         $code->addScope(new Scope('common'));
         $code->setExpiryDateTime(new DateTimeImmutable('2300-12-31 21:00:10'));
         $code->setIdentifier('def50200f204dedbb244ce4539b9e');
         $code->setUserIdentifier($user->getId()->getValue());
-        $code->setRedirectUri('http://localhost:8080/oauth');
+        $code->setRedirectUri('http://localhost/oauth');
 
         $manager->persist($code);
 

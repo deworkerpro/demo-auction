@@ -37,7 +37,7 @@ final class AuthorizeTest extends WebTestCase
             '/authorize?' . http_build_query([
                 'response_type' => 'code',
                 'client_id' => 'frontend',
-                'redirect_uri' => 'http://localhost:8080/oauth',
+                'redirect_uri' => 'http://localhost/oauth',
                 'scope' => 'common',
                 'state' => 'sTaTe',
             ])
@@ -62,7 +62,7 @@ final class AuthorizeTest extends WebTestCase
                 'client_id' => 'frontend',
                 'code_challenge' => PKCE::challenge(PKCE::verifier()),
                 'code_challenge_method' => 'S256',
-                'redirect_uri' => 'http://localhost:8080/oauth',
+                'redirect_uri' => 'http://localhost/oauth',
                 'scope' => 'common',
                 'state' => 'sTaTe',
             ])
@@ -82,7 +82,7 @@ final class AuthorizeTest extends WebTestCase
                 'client_id' => 'frontend',
                 'code_challenge' => PKCE::challenge(PKCE::verifier()),
                 'code_challenge_method' => 'S256',
-                'redirect_uri' => 'http://localhost:8080/oauth',
+                'redirect_uri' => 'http://localhost/oauth',
                 'scope' => 'common',
                 'state' => 'sTaTe',
             ])
@@ -100,7 +100,7 @@ final class AuthorizeTest extends WebTestCase
             '/authorize?' . http_build_query([
                 'response_type' => 'code',
                 'client_id' => 'invalid',
-                'redirect_uri' => 'http://localhost:8080/oauth',
+                'redirect_uri' => 'http://localhost/oauth',
                 'code_challenge' => PKCE::challenge(PKCE::verifier()),
                 'code_challenge_method' => 'S256',
                 'scope' => 'common',
@@ -125,7 +125,7 @@ final class AuthorizeTest extends WebTestCase
             '/authorize?' . http_build_query([
                 'response_type' => 'code',
                 'client_id' => 'frontend',
-                'redirect_uri' => 'http://localhost:8080/oauth',
+                'redirect_uri' => 'http://localhost/oauth',
                 'code_challenge' => PKCE::challenge(PKCE::verifier()),
                 'code_challenge_method' => 'S256',
                 'scope' => 'common',
@@ -161,7 +161,7 @@ final class AuthorizeTest extends WebTestCase
             '/authorize?' . http_build_query([
                 'response_type' => 'code',
                 'client_id' => 'frontend',
-                'redirect_uri' => 'http://localhost:8080/oauth',
+                'redirect_uri' => 'http://localhost/oauth',
                 'code_challenge' => PKCE::challenge(PKCE::verifier()),
                 'code_challenge_method' => 'S256',
                 'scope' => 'common',
@@ -185,7 +185,7 @@ final class AuthorizeTest extends WebTestCase
             '/authorize?' . http_build_query([
                 'response_type' => 'code',
                 'client_id' => 'frontend',
-                'redirect_uri' => 'http://localhost:8080/oauth',
+                'redirect_uri' => 'http://localhost/oauth',
                 'code_challenge' => PKCE::challenge(PKCE::verifier()),
                 'code_challenge_method' => 'S256',
                 'scope' => 'common',
@@ -209,7 +209,7 @@ final class AuthorizeTest extends WebTestCase
             '/authorize?' . http_build_query([
                 'response_type' => 'code',
                 'client_id' => 'frontend',
-                'redirect_uri' => 'http://localhost:8080/oauth',
+                'redirect_uri' => 'http://localhost/oauth',
                 'code_challenge' => PKCE::challenge(PKCE::verifier()),
                 'code_challenge_method' => 'S256',
                 'scope' => 'common',
