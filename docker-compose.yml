@@ -152,6 +152,7 @@ services:
             context: cucumber/docker/development/node
         volumes:
             - ./cucumber:/app
+        network_mode: service:gateway
 
 secrets:
     api_db_password:
