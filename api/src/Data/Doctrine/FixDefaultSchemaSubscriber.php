@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Data\Doctrine;
 
 use Doctrine\Common\EventSubscriber;
-use Doctrine\DBAL\Schema\PostgreSqlSchemaManager;
+use Doctrine\DBAL\Schema\PostgreSQLSchemaManager;
 use Doctrine\ORM\Tools\Event\GenerateSchemaEventArgs;
 use Doctrine\ORM\Tools\ToolEvents;
 
@@ -23,12 +23,15 @@ final class FixDefaultSchemaSubscriber implements EventSubscriber
         $schemaManager = $args
             ->getEntityManager()
             ->getConnection()
-            ->getSchemaManager();
+            ->createSchemaManager();
 
-        if (!$schemaManager instanceof PostgreSqlSchemaManager) {
+        if (!$schemaManager instanceof PostgreSQLSchemaManager) {
             return;
         }
 
+        /**
+         * @psalm-suppress InternalMethod
+         */
         foreach ($schemaManager->getExistingSchemaSearchPaths() as $namespace) {
             if (!$args->getSchema()->hasNamespace($namespace)) {
                 $args->getSchema()->createNamespace($namespace);
