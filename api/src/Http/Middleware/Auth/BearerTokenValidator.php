@@ -8,11 +8,10 @@ use DateTimeZone;
 use Lcobucci\Clock\SystemClock;
 use Lcobucci\JWT\Configuration;
 use Lcobucci\JWT\Signer\Key\InMemory;
-use Lcobucci\JWT\Signer\Key\LocalFileReference;
 use Lcobucci\JWT\Signer\Rsa\Sha256;
 use Lcobucci\JWT\Token\Plain;
 use Lcobucci\JWT\Validation\Constraint\SignedWith;
-use Lcobucci\JWT\Validation\Constraint\ValidAt;
+use Lcobucci\JWT\Validation\Constraint\StrictValidAt;
 use Lcobucci\JWT\Validation\RequiredConstraintsViolated;
 use League\OAuth2\Server\AuthorizationValidators\AuthorizationValidatorInterface;
 use League\OAuth2\Server\CryptKey;
@@ -52,7 +51,7 @@ final class BearerTokenValidator implements AuthorizationValidatorInterface
         }
 
         $header = $request->getHeader('authorization');
-        $jwt = trim((string)preg_replace('/^(?:\s+)?Bearer\s/', '', $header[0]));
+        $jwt = trim((string)preg_replace('/^\s*Bearer\s/', '', $header[0]));
 
         try {
             /** @var Plain $token */
@@ -90,8 +89,11 @@ final class BearerTokenValidator implements AuthorizationValidatorInterface
         );
 
         $this->jwtConfiguration->setValidationConstraints(
-            new ValidAt(new SystemClock(new DateTimeZone(date_default_timezone_get()))),
-            new SignedWith(new Sha256(), LocalFileReference::file($this->publicKey->getKeyPath()))
+            new StrictValidAt(new SystemClock(new DateTimeZone(date_default_timezone_get()))),
+            new SignedWith(
+                new Sha256(),
+                InMemory::plainText($this->publicKey->getKeyContents(), $this->publicKey->getPassPhrase() ?? '')
+            )
         );
     }
 
