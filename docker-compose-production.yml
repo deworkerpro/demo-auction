@@ -68,7 +68,6 @@ services:
             MAILER_PORT: ${API_MAILER_PORT}
             MAILER_USERNAME: ${API_MAILER_USERNAME}
             MAILER_PASSWORD_FILE: /run/secrets/api_mailer_password
-            MAILER_ENCRYPTION: tls
             MAILER_FROM_EMAIL: ${API_MAILER_FROM_EMAIL}
             FRONTEND_URL: https://demo-auction.deworker.pro
             SENTRY_DSN_FILE: /run/secrets/sentry_dsn
@@ -102,7 +101,6 @@ services:
             MAILER_PORT: ${API_MAILER_PORT}
             MAILER_USERNAME: ${API_MAILER_USERNAME}
             MAILER_PASSWORD_FILE: /run/secrets/api_mailer_password
-            MAILER_ENCRYPTION: tls
             MAILER_FROM_EMAIL: ${API_MAILER_FROM_EMAIL}
             FRONTEND_URL: https://demo-auction.deworker.pro
             SENTRY_DSN_FILE: /run/secrets/sentry_dsn
@@ -137,7 +135,6 @@ services:
             MAILER_PORT: ${API_MAILER_PORT}
             MAILER_USERNAME: ${API_MAILER_USERNAME}
             MAILER_PASSWORD_FILE: /run/secrets/api_mailer_password
-            MAILER_ENCRYPTION: tls
             MAILER_FROM_EMAIL: ${API_MAILER_FROM_EMAIL}
             FRONTEND_URL: https://demo-auction.deworker.pro
             SENTRY_DSN_FILE: /run/secrets/sentry_dsn

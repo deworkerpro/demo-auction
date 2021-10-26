@@ -6,17 +6,16 @@ namespace App\Auth\Service;
 
 use App\Auth\Entity\User\Email;
 use App\Auth\Entity\User\Token;
-use RuntimeException;
-use Swift_Mailer;
-use Swift_Message;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email as MimeEmail;
 use Twig\Environment;
 
 final class PasswordResetTokenSender
 {
-    private Swift_Mailer $mailer;
+    private MailerInterface $mailer;
     private Environment $twig;
 
-    public function __construct(Swift_Mailer $mailer, Environment $twig)
+    public function __construct(MailerInterface $mailer, Environment $twig)
     {
         $this->mailer = $mailer;
         $this->twig = $twig;
@@ -24,12 +23,11 @@ final class PasswordResetTokenSender
 
     public function send(Email $email, Token $token): void
     {
-        $message = (new Swift_Message('Password Reset'))
-            ->setTo($email->getValue())
-            ->setBody($this->twig->render('auth/password/confirm.html.twig', ['token' => $token]), 'text/html');
+        $message = (new MimeEmail())
+            ->subject('Password Reset')
+            ->to($email->getValue())
+            ->html($this->twig->render('auth/password/confirm.html.twig', ['token' => $token]), 'text/html');
 
-        if ($this->mailer->send($message) === 0) {
-            throw new RuntimeException('Unable to send email.');
-        }
+        $this->mailer->send($message);
     }
 }
