@@ -10,9 +10,8 @@ use App\Auth\Service\NewEmailConfirmTokenSender;
 use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
-use RuntimeException;
-use Swift_Mailer;
-use Swift_Message;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email as MimeEmail;
 use Twig\Environment;
 
 /**
@@ -34,36 +33,16 @@ final class NewEmailConfirmTokenSenderTest extends TestCase
             self::equalTo(['token' => $token]),
         )->willReturn($body = '<a href="' . $confirmUrl . '">' . $confirmUrl . '</a>');
 
-        $mailer = $this->createMock(Swift_Mailer::class);
+        $mailer = $this->createMock(MailerInterface::class);
         $mailer->expects(self::once())->method('send')
-            ->willReturnCallback(static function (Swift_Message $message) use ($to, $body): int {
-                self::assertEquals([$to->getValue() => null], $message->getTo());
+            ->willReturnCallback(static function (MimeEmail $message) use ($to, $body): void {
+                self::assertEquals($to->getValue(), $message->getTo()[0]->getAddress());
                 self::assertEquals('New Email Confirmation', $message->getSubject());
-                self::assertEquals($body, $message->getBody());
-                self::assertEquals('text/html', $message->getBodyContentType());
-                return 1;
+                self::assertEquals($body, $message->getHtmlBody());
             });
 
         $sender = new NewEmailConfirmTokenSender($mailer, $twig);
 
-        $sender->send($to, $token);
-    }
-
-    public function testError(): void
-    {
-        $to = new Email('user@app.test');
-        $token = new Token(Uuid::uuid4()->toString(), new DateTimeImmutable());
-        $confirmUrl = 'http://test/email/confirm?token=' . $token->getValue();
-
-        $twig = $this->createStub(Environment::class);
-        $twig->method('render')->willReturn('<a href="' . $confirmUrl . '">' . $confirmUrl . '</a>');
-
-        $mailer = $this->createStub(Swift_Mailer::class);
-        $mailer->method('send')->willReturn(0);
-
-        $sender = new NewEmailConfirmTokenSender($mailer, $twig);
-
-        $this->expectException(RuntimeException::class);
         $sender->send($to, $token);
     }
 }

@@ -79,7 +79,6 @@ services:
             MAILER_PORT: 1025
             MAILER_USERNAME: app
             MAILER_PASSWORD_FILE: /run/secrets/api_mailer_password
-            MAILER_ENCRYPTION: tcp
             MAILER_FROM_EMAIL: mail@app.test
             FRONTEND_URL: http://localhost
             SENTRY_DSN_FILE: /run/secrets/sentry_dsn
@@ -111,7 +110,6 @@ services:
             MAILER_PORT: 1025
             MAILER_USERNAME: app
             MAILER_PASSWORD_FILE: /run/secrets/api_mailer_password
-            MAILER_ENCRYPTION: tcp
             MAILER_FROM_EMAIL: mail@app.test
             FRONTEND_URL: http://localhost
             SENTRY_DSN_FILE: /run/secrets/sentry_dsn
