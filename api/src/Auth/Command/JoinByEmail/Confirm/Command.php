@@ -8,8 +8,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 final class Command
 {
-    /**
-     * @Assert\NotBlank
-     */
+    #[Assert\NotBlank]
     public string $token = '';
 }
