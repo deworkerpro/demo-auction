@@ -14,8 +14,8 @@ final class Command
      */
     public string $email = '';
     /**
+     * @Assert\Length(min=6)
      * @Assert\NotBlank
-     * @Assert\Length(min=6, allowEmptyString=true)
      */
     public string $password = '';
 }

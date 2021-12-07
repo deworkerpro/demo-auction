@@ -17,6 +17,7 @@ return [
 
         return Validation::createValidatorBuilder()
             ->enableAnnotationMapping()
+            ->addDefaultDoctrineAnnotationReader()
             ->setTranslator($translator)
             ->setTranslationDomain('validators')
             ->getValidator();

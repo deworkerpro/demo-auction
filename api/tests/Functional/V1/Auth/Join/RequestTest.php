@@ -75,9 +75,27 @@ final class RequestTest extends WebTestCase
         ], $data);
     }
 
-    public function testEmpty(): void
+    public function testEmptyBody(): void
     {
         $response = $this->app()->handle(self::json('POST', '/v1/auth/join', []));
+
+        self::assertEquals(422, $response->getStatusCode());
+        self::assertJson($body = (string)$response->getBody());
+
+        self::assertEquals([
+            'errors' => [
+                'email' => 'This value should not be blank.',
+                'password' => 'This value should not be blank.',
+            ],
+        ], Json::decode($body));
+    }
+
+    public function testEmptyFields(): void
+    {
+        $response = $this->app()->handle(self::json('POST', '/v1/auth/join', [
+            'email' => '',
+            'password' => '',
+        ]));
 
         self::assertEquals(422, $response->getStatusCode());
         self::assertJson($body = (string)$response->getBody());
@@ -94,7 +112,7 @@ final class RequestTest extends WebTestCase
     {
         $response = $this->app()->handle(self::json('POST', '/v1/auth/join', [
             'email' => 'not-email',
-            'password' => '',
+            'password' => 'new',
         ]));
 
         self::assertEquals(422, $response->getStatusCode());
@@ -103,7 +121,7 @@ final class RequestTest extends WebTestCase
         self::assertEquals([
             'errors' => [
                 'email' => 'This value is not a valid email address.',
-                'password' => 'This value should not be blank.',
+                'password' => 'This value is too short. It should have 6 characters or more.',
             ],
         ], Json::decode($body));
     }
