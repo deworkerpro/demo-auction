@@ -13,30 +13,28 @@ use League\OAuth2\Server\Entities\Traits\RefreshTokenTrait;
 
 /**
  * @psalm-suppress MissingConstructor
- * @ORM\Entity
- * @ORM\Table(name="oauth_refresh_tokens")
  */
-class RefreshToken implements RefreshTokenEntityInterface
+#[ORM\Entity]
+#[ORM\Table(name: 'oauth_refresh_tokens')]
+final class RefreshToken implements RefreshTokenEntityInterface
 {
     use EntityTrait;
     use RefreshTokenTrait;
 
     /**
      * @var string
-     * @ORM\Column(type="string", length=80)
-     * @ORM\Id
      */
+    #[ORM\Column(type: 'string', length: 80)]
+    #[ORM\Id]
     protected $identifier;
 
     /**
      * @var DateTimeImmutable
-     * @ORM\Column(type="datetime_immutable")
      */
+    #[ORM\Column(type: 'datetime_immutable')]
     protected $expiryDateTime;
 
-    /**
-     * @ORM\Column(type="guid", nullable=false)
-     */
+    #[ORM\Column(type: 'guid', nullable: false)]
     private ?string $userIdentifier = null;
 
     public function setAccessToken(AccessTokenEntityInterface $accessToken): void
