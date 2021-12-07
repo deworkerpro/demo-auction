@@ -13,10 +13,10 @@ use League\OAuth2\Server\Entities\Traits\TokenEntityTrait;
 
 /**
  * @psalm-suppress MissingConstructor
- * @ORM\Entity
- * @ORM\Table(name="oauth_auth_codes")
  */
-class AuthCode implements AuthCodeEntityInterface
+#[ORM\Entity]
+#[ORM\Table(name: 'oauth_auth_codes')]
+final class AuthCode implements AuthCodeEntityInterface
 {
     use AuthCodeTrait;
     use EntityTrait;
@@ -24,20 +24,20 @@ class AuthCode implements AuthCodeEntityInterface
 
     /**
      * @var string
-     * @ORM\Column(type="string", length=80)
-     * @ORM\Id
      */
+    #[ORM\Column(type: 'string', length: 80)]
+    #[ORM\Id]
     protected $identifier;
 
     /**
      * @var DateTimeImmutable
-     * @ORM\Column(type="datetime_immutable")
      */
+    #[ORM\Column(type: 'datetime_immutable')]
     protected $expiryDateTime;
 
     /**
      * @var string
-     * @ORM\Column(type="guid")
      */
+    #[ORM\Column(type: 'guid')]
     protected $userIdentifier;
 }
