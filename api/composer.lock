@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3bb6106cc6ff9f70c88eb36de61ba082",
+    "content-hash": "b0cb8143a1b8b73c6bf9d9f0c08c18a6",
     "packages": [
         {
             "name": "brick/math",
@@ -7907,31 +7907,31 @@
         },
         {
             "name": "overtrue/phplint",
-            "version": "3.0.6",
+            "version": "4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/overtrue/phplint.git",
-                "reference": "b4212c2c65bf50f6c823ab8e7c13c9ead9433241"
+                "reference": "a646e4367e6723dda503c8bd15269f454d30bb61"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/overtrue/phplint/zipball/b4212c2c65bf50f6c823ab8e7c13c9ead9433241",
-                "reference": "b4212c2c65bf50f6c823ab8e7c13c9ead9433241",
+                "url": "https://api.github.com/repos/overtrue/phplint/zipball/a646e4367e6723dda503c8bd15269f454d30bb61",
+                "reference": "a646e4367e6723dda503c8bd15269f454d30bb61",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "n98/junit-xml": "1.1.0",
-                "php": ">=5.5.9",
-                "symfony/console": "^3.2|^4.0|^5.0",
-                "symfony/finder": "^3.0|^4.0|^5.0",
-                "symfony/process": "^3.3|^4.0|^5.0",
-                "symfony/yaml": "^3.0|^4.0|^5.0"
+                "php": ">=8.0",
+                "symfony/console": "^5.3.11",
+                "symfony/finder": "^5.3.7",
+                "symfony/process": "^5.3.12",
+                "symfony/yaml": "^5.3.11"
             },
             "require-dev": {
-                "brainmaestro/composer-git-hooks": "^2.7",
-                "friendsofphp/php-cs-fixer": "^2.16",
-                "jakub-onderka/php-console-highlighter": "^0.3.2 || ^0.4"
+                "brainmaestro/composer-git-hooks": "^2.8.5",
+                "friendsofphp/php-cs-fixer": "^3.3.2",
+                "jakub-onderka/php-console-highlighter": "^0.4"
             },
             "bin": [
                 "bin/phplint"
@@ -7941,9 +7941,6 @@
                 "hooks": {
                     "pre-commit": [
                         "composer fix-style"
-                    ],
-                    "pre-push": [
-                        "composer check-style"
                     ]
                 }
             },
@@ -7971,7 +7968,7 @@
             ],
             "support": {
                 "issues": "https://github.com/overtrue/phplint/issues",
-                "source": "https://github.com/overtrue/phplint/tree/3.0.6"
+                "source": "https://github.com/overtrue/phplint/tree/4.0.0"
             },
             "funding": [
                 {
@@ -7979,7 +7976,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-11-30T15:45:02+00:00"
+            "time": "2021-11-29T14:55:19+00:00"
         },
         {
             "name": "phar-io/manifest",
