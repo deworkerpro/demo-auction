@@ -10,7 +10,6 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Symfony\Component\Validator\ConstraintViolationInterface;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 
 final class ValidationExceptionHandler implements MiddlewareInterface
@@ -29,7 +28,6 @@ final class ValidationExceptionHandler implements MiddlewareInterface
     private static function errorsArray(ConstraintViolationListInterface $violations): array
     {
         $errors = [];
-        /** @var ConstraintViolationInterface $violation */
         foreach ($violations as $violation) {
             $errors[$violation->getPropertyPath()] = $violation->getMessage();
         }

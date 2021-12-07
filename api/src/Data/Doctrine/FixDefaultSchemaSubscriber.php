@@ -25,6 +25,9 @@ final class FixDefaultSchemaSubscriber implements EventSubscriber
             ->getConnection()
             ->createSchemaManager();
 
+        /**
+         * @psalm-suppress RedundantCondition
+         */
         if (!$schemaManager instanceof PostgreSQLSchemaManager) {
             return;
         }
