@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link, Redirect, useLocation } from 'react-router-dom'
+import { Link, Navigate, useLocation } from 'react-router-dom'
 import System from '../../Layout/System'
 import { AlertError } from '../../Alert'
 import api, { parseError } from '../../Api'
@@ -25,11 +25,11 @@ function Confirm() {
   }, [success, error, token])
 
   if (success) {
-    return <Redirect to="/join/success" push={false} />
+    return <Navigate to="/join/success" replace />
   }
 
   if (!token) {
-    return <Redirect to="/" push={false} />
+    return <Navigate to="/" replace />
   }
 
   return (

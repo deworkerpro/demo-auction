@@ -13,7 +13,7 @@ test('confirms without token', async () => {
   })
 
   render(
-    <Router history={history}>
+    <Router location={history.location} navigator={history}>
       <Confirm />
     </Router>
   )
@@ -36,7 +36,7 @@ test('confirms successfully', async () => {
   })
 
   render(
-    <Router history={history}>
+    <Router location={history.location} navigator={history}>
       <Confirm />
     </Router>
   )

@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import './App.css'
 import { FeaturesProvider } from '../FeatureToggle'
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Home from '../Home'
 import Join from '../Join'
 import { NotFound } from '../Error'
@@ -14,29 +14,19 @@ function App({ features }) {
     <FeaturesProvider features={features}>
       <BrowserRouter>
         <div className="app">
-          <Switch>
-            <Route exact path="/">
-              <Home />
-            </Route>
+          <Routes>
+            <Route exact path="/" element={<Home />} />
             {features.includes('JOIN_TO_US') ? (
-              <Route exact path="/join">
-                <Join />
-              </Route>
+              <Route exact path="/join" element={<Join />} />
             ) : null}
             {features.includes('JOIN_TO_US') ? (
-              <Route exact path="/join/confirm">
-                <Confirm />
-              </Route>
+              <Route exact path="/join/confirm" element={<Confirm />} />
             ) : null}
             {features.includes('JOIN_TO_US') ? (
-              <Route exact path="/join/success">
-                <Success />
-              </Route>
+              <Route exact path="/join/success" element={<Success />} />
             ) : null}
-            <Route path="*">
-              <NotFound />
-            </Route>
-          </Switch>
+            <Route path="*" element={<NotFound />} />
+          </Routes>
         </div>
       </BrowserRouter>
     </FeaturesProvider>
