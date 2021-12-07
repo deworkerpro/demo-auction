@@ -24,7 +24,7 @@
         "symfony/cache": "^6.0",
         "symfony/config": "^6.0",
         "symfony/console": "^5.0",
-        "symfony/mailer": "^5.3",
+        "symfony/mailer": "^6.0",
         "symfony/translation": "^5.0",
         "symfony/validator": "^5.0",
         "twig/twig": "^3.0",
