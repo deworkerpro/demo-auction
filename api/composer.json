@@ -7,7 +7,8 @@
         "process-timeout": 0,
         "sort-packages": true,
         "allow-plugins": {
-            "ocramius/package-versions": true
+            "ocramius/package-versions": true,
+            "php-http/discovery": true
         }
     },
     "require": {
