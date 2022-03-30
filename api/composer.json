@@ -12,8 +12,8 @@
         }
     },
     "require": {
-        "php": "^8.0",
-        "ext-mbstring": "^8.0",
+        "php": "^8.1",
+        "ext-mbstring": "^8.1",
         "doctrine/migrations": "^3.0",
         "doctrine/orm": "^2.7",
         "laminas/laminas-config-aggregator": "^1.2",
@@ -54,7 +54,8 @@
         "symfony/polyfill-php72": "*",
         "symfony/polyfill-php73": "*",
         "symfony/polyfill-php74": "*",
-        "symfony/polyfill-php80": "*"
+        "symfony/polyfill-php80": "*",
+        "symfony/polyfill-php81": "*"
     },
     "autoload": {
         "files": [

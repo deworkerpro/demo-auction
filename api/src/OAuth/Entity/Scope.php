@@ -20,4 +20,13 @@ final class Scope implements ScopeEntityInterface
 
         $this->setIdentifier($identifier);
     }
+
+    /**
+     * @TODO Remove after release with fixed return type
+     * @see https://github.com/thephpleague/oauth2-server/pull/1251
+     */
+    public function jsonSerialize(): mixed
+    {
+        return $this->getIdentifier();
+    }
 }
