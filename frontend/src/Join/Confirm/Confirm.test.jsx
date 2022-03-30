@@ -45,7 +45,9 @@ test('confirms successfully', async () => {
     expect(api.post).toHaveBeenCalled()
   })
 
-  expect(history.location.pathname).toBe('/join/success')
+  await waitFor(() => {
+    expect(history.location.pathname).toBe('/join/success')
+  })
 
   expect(api.post).toHaveBeenCalledWith('/v1/auth/join/confirm', {
     token: '01',
