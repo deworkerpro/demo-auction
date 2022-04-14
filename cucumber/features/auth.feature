@@ -28,3 +28,9 @@ Feature: Login
     When I click "login-button" element
     Then I see "authorize-page" element
 
+    When I fill "email" field with "user@app.test"
+    And I fill "password" field with "password"
+    And I click submit button
+    Then I see "logout-button" element
+    And I do not see "login-button" element
+    And I do not see "join-link" element
