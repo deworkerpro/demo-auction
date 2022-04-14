@@ -41,7 +41,7 @@
         "friendsofphp/php-cs-fixer": "^3.0",
         "guzzlehttp/guzzle": "^7.2",
         "lctrs/psalm-psr-container-plugin": "^1.1",
-        "overtrue/phplint": "^4.0",
+        "overtrue/phplint": "^5.0",
         "phpunit/phpunit": "^9.2",
         "psalm/plugin-phpunit": "^0.16.0",
         "roave/security-advisories": "dev-latest",
