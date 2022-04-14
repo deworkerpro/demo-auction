@@ -16,15 +16,9 @@ function App({ features }) {
         <div className="app">
           <Routes>
             <Route exact path="/" element={<Home />} />
-            {features.includes('JOIN_TO_US') ? (
-              <Route exact path="/join" element={<Join />} />
-            ) : null}
-            {features.includes('JOIN_TO_US') ? (
-              <Route exact path="/join/confirm" element={<Confirm />} />
-            ) : null}
-            {features.includes('JOIN_TO_US') ? (
-              <Route exact path="/join/success" element={<Success />} />
-            ) : null}
+            <Route exact path="/join" element={<Join />} />
+            <Route exact path="/join/confirm" element={<Confirm />} />
+            <Route exact path="/join/success" element={<Success />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>

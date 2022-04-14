@@ -2,7 +2,6 @@ Feature: Join Confirm
 
   Background:
     Given I am a guest user
-    And I have "JOIN_TO_US" feature
 
   Scenario: Success confirm
     When I open "/join/confirm?token=00000000-0000-0000-0000-200000000001" page

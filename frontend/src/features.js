@@ -1,5 +1,3 @@
-const features = {
-  JOIN_TO_US: true,
-}
+const features = {}
 
 export default features
