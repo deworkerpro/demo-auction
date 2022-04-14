@@ -1,0 +1,16 @@
+.links {
+  text-align: center;
+}
+
+.links a,
+.links button {
+  display: inline-block;
+  color: #005ba0;
+  margin: 0 0.5rem;
+  padding: 0;
+  border: none;
+  background: none;
+  font-size: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
