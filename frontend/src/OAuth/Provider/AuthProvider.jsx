@@ -169,15 +169,26 @@ function AuthProvider({
     setIsAuthenticated(false)
   }, [])
 
+  const getToken = useCallback(() => {
+    const tokens = JSON.parse(window.localStorage.getItem('auth.tokens'))
+
+    if (tokens === null) {
+      return null
+    }
+
+    return tokens.accessToken
+  }, [])
+
   const contextValue = useMemo(
     () => ({
       isAuthenticated,
+      getToken,
       login,
       logout,
       loading,
       error,
     }),
-    [isAuthenticated, login, logout, loading, error]
+    [isAuthenticated, getToken, login, logout, loading, error]
   )
 
   return (
