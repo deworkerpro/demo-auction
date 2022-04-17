@@ -35,6 +35,18 @@ Feature: Login
     And I do not see "login-button" element
     And I do not see "join-link" element
 
+  Scenario: Authenticated
+    Given I am a user
+    And I have "OAUTH" feature
+    And I am on "/" page
+    Then I see "logout-button" element
+    And I do not see "login-button" element
+    And I do not see "join-link" element
+
+  Scenario: Logout
+    Given I am a user
+    And I have "OAUTH" feature
+    And I am on "/" page
     When I click "logout-button" element
     Then I see "login-button" element
     And I do not see "logout-button" element
