@@ -38,6 +38,7 @@ services:
             context: frontend/docker/development/node
         environment:
             WDS_SOCKET_PORT: 0
+            REACT_APP_AUTH_URL: http://api.localhost
         volumes:
             - ./frontend:/app
         command: sh -c "until [ -f .ready ] ; do sleep 1 ; done && yarn start"

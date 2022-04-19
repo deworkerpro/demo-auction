@@ -12,6 +12,8 @@ services:
 
     frontend:
         image: ${REGISTRY}/auction-frontend:${IMAGE_TAG}
+        environment:
+            REACT_APP_AUTH_URL: https://api.demo-auction.deworker.pro
         networks:
             - traefik-public
             - default
