@@ -15,8 +15,8 @@ function App({ features }) {
   return (
     <FeaturesProvider features={features}>
       <AuthProvider
-        authorizeUrl="/api/authorize"
-        tokenUrl="/api/token"
+        authorizeUrl={process.env.REACT_APP_AUTH_URL + '/authorize'}
+        tokenUrl={process.env.REACT_APP_AUTH_URL + '/token'}
         clientId="frontend"
         scope="common"
         redirectPath="/oauth"
