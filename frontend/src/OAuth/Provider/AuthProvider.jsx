@@ -164,21 +164,21 @@ function AuthProvider({
 
   const refreshPromises = useMemo(() => ({}), [])
 
-  const getToken = useCallback(async () => {
+  const getToken = useCallback(() => {
     const tokens = JSON.parse(window.localStorage.getItem('auth.tokens'))
 
     if (tokens === null) {
-      return null
+      return Promise.reject(new Error())
     }
 
     if (tokens.expires > new Date().getTime()) {
-      return tokens.accessToken
+      return Promise.resolve(tokens.accessToken)
     }
 
     setLoading(true)
 
     if (refreshPromises[tokens.refreshToken]) {
-      return await refreshPromises[tokens.refreshToken]
+      return refreshPromises[tokens.refreshToken]
     }
 
     refreshPromises[tokens.refreshToken] = fetch(tokenUrl, {
@@ -209,14 +209,14 @@ function AuthProvider({
         setIsAuthenticated(true)
         return tokens.accessToken
       })
-      .catch(() => {
+      .catch((error) => {
         setLoading(false)
         window.localStorage.removeItem('auth.tokens')
         setIsAuthenticated(false)
-        return null
+        throw error
       })
 
-    return await refreshPromises[tokens.refreshToken]
+    return refreshPromises[tokens.refreshToken]
   }, [])
 
   const buildTokens = useCallback(
