@@ -162,6 +162,8 @@ function AuthProvider({
     setIsAuthenticated(false)
   }, [])
 
+  const refreshPromises = useMemo(() => ({}), [])
+
   const getToken = useCallback(async () => {
     const tokens = JSON.parse(window.localStorage.getItem('auth.tokens'))
 
@@ -175,7 +177,11 @@ function AuthProvider({
 
     setLoading(true)
 
-    return await fetch(tokenUrl, {
+    if (refreshPromises[tokens.refreshToken]) {
+      return await refreshPromises[tokens.refreshToken]
+    }
+
+    refreshPromises[tokens.refreshToken] = fetch(tokenUrl, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -209,6 +215,8 @@ function AuthProvider({
         setIsAuthenticated(false)
         return null
       })
+
+    return await refreshPromises[tokens.refreshToken]
   }, [])
 
   const buildTokens = useCallback(
