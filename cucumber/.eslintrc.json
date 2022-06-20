@@ -18,7 +18,5 @@
     "parserOptions": {
         "ecmaVersion": 2018
     },
-    "rules": {
-      "@typescript-eslint/no-var-requires": "warn"
-    }
+    "rules": {}
 }
