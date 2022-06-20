@@ -1,9 +1,10 @@
-const puppeteer = require('puppeteer')
-const { Before, After, Status, setDefaultTimeout } = require('@cucumber/cucumber')
+import puppeteer from 'puppeteer'
+import { Before, After, Status, setDefaultTimeout } from '@cucumber/cucumber'
+import { CustomWorld } from './world'
 
 setDefaultTimeout(10 * 1000)
 
-Before({ timeout: 30000 }, async function () {
+Before({ timeout: 30000 }, async function (this: CustomWorld) {
   this.browser = await puppeteer.launch({
     args: [
       '--disable-dev-shm-usage',
@@ -14,9 +15,9 @@ Before({ timeout: 30000 }, async function () {
   await this.page.setViewport({ width: 1280, height: 720 })
 })
 
-After(async function (testCase) {
+After(async function (this: CustomWorld, testCase) {
   if (this.page) {
-    if (testCase.result.status === Status.FAILED) {
+    if (testCase.result && testCase.result.status === Status.FAILED) {
       const name = testCase.pickle.uri.replace(/^\/app\/features\//, '').replace(/\//g, '_') +
         '-' +
         testCase.pickle.name.toLowerCase().replace(/[^\w]/g, '_')
