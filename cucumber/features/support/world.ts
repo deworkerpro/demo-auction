@@ -1,9 +1,9 @@
-const { setWorldConstructor } = require('@cucumber/cucumber')
+import { Browser, Page } from 'puppeteer'
+import { setWorldConstructor, World } from '@cucumber/cucumber'
 
-function CustomWorld ({ attach }) {
-  this.attach = attach
-  this.browser = null
-  this.page = null
+export class CustomWorld extends World {
+  browser: Browser | null = null
+  page: Page | null = null
 }
 
 setWorldConstructor(CustomWorld)
