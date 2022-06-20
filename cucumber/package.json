@@ -5,8 +5,8 @@
     "smoke-ci": "cucumber-js --tags '@smoke and not @wip' --fail-fast --retry 2",
     "e2e": "cucumber-js --tags 'not @wip' --parallel 2",
     "e2e-ci": "cucumber-js --tags 'not @wip' --retry 2",
-    "lint": "eslint --ext .js features",
-    "lint-fix": "eslint --fix --ext .js features"
+    "lint": "eslint --ext .js,.ts features",
+    "lint-fix": "eslint --fix --ext .js,.ts features"
   },
   "dependencies": {
     "@cucumber/cucumber": "^8.0.0-rc.1",
@@ -14,6 +14,8 @@
     "puppeteer": "^14.4.1"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.28.0",
+    "@typescript-eslint/parser": "^5.28.0",
     "eslint": "^8.1.0",
     "eslint-config-standard": "^17.0.0",
     "eslint-plugin-import": "^2.20.2",
