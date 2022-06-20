@@ -5,8 +5,11 @@
         "es6": true,
         "node": true
     },
+    "parser": "@typescript-eslint/parser",
+    "plugins": ["@typescript-eslint"],
     "extends": [
-        "standard"
+        "standard",
+        "plugin:@typescript-eslint/recommended"
     ],
     "globals": {
         "Atomics": "readonly",
@@ -16,5 +19,6 @@
         "ecmaVersion": 2018
     },
     "rules": {
+      "@typescript-eslint/no-var-requires": "warn"
     }
 }
