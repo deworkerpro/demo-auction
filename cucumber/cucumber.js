@@ -1,3 +1,7 @@
 module.exports = {
-  default: '--publish-quiet'
+  default: {
+    publishQuiet: true,
+    requireModule: ['ts-node/register'],
+    require: ['features/**/*.ts', 'features/**/*.js']
+  },
 }
