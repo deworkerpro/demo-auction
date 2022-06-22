@@ -14,9 +14,7 @@ function transform(features) {
 }
 
 export default function mergeFeatures(...lists) {
-  const features = lists
-    .map(transform)
-    .reduce((previous, current) => ({ ...previous, ...current }))
+  const features = lists.map(transform).reduce((previous, current) => ({ ...previous, ...current }))
 
   return Object.entries(features)
     .filter(([, value]) => value)

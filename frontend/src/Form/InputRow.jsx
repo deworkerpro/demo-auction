@@ -2,9 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 function InputRow({ children, error }) {
-  return (
-    <div className={'input-row' + (error ? ' has-error' : '')}>{children}</div>
-  )
+  return <div className={'input-row' + (error ? ' has-error' : '')}>{children}</div>
 }
 
 InputRow.propTypes = {

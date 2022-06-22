@@ -1,20 +1,9 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import PropTypes from 'prop-types'
 import AuthContext from './AuthContext'
-import {
-  generateCodeChallenge,
-  generateCodeVerifier,
-  generateState,
-} from './crypt'
+import { generateCodeChallenge, generateCodeVerifier, generateState } from './crypt'
 
-function AuthProvider({
-  authorizeUrl,
-  tokenUrl,
-  clientId,
-  scope,
-  redirectPath,
-  children,
-}) {
+function AuthProvider({ authorizeUrl, tokenUrl, clientId, scope, redirectPath, children }) {
   const [isAuthenticated, setIsAuthenticated] = useState(
     window.localStorage.getItem('auth.tokens') !== null
   )
@@ -36,9 +25,7 @@ function AuthProvider({
   }
 
   const getAuthRedirectError = () => {
-    return (
-      query.get('hint') || query.get('error_description') || query.get('error')
-    )
+    return query.get('hint') || query.get('error_description') || query.get('error')
   }
 
   const [error, setError] = useState(
@@ -114,9 +101,7 @@ function AuthProvider({
         const headers = error.headers.get('content-type')
         if (headers && headers.includes('application/json')) {
           const data = await error.json()
-          setError(
-            data.hint || data.error_description || data.error || data.message
-          )
+          setError(data.hint || data.error_description || data.error || data.message)
           return
         }
 
@@ -240,9 +225,7 @@ function AuthProvider({
     [isAuthenticated, getToken, login, logout, loading, error]
   )
 
-  return (
-    <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
-  )
+  return <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
 }
 
 AuthProvider.propTypes = {

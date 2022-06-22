@@ -7,9 +7,7 @@ import defaultFeatures from './features'
 import { createRoot } from 'react-dom/client'
 
 const cookies = cookie.parse(document.cookie)
-const cookieFeatures = (cookies.features || '')
-  .split(/\s*,\s*/g)
-  .filter(Boolean)
+const cookieFeatures = (cookies.features || '').split(/\s*,\s*/g).filter(Boolean)
 
 const features = mergeFeatures(defaultFeatures, cookieFeatures)
 
