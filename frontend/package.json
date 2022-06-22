@@ -20,6 +20,8 @@
     "@types/react": "^18.0.14",
     "@types/react-dom": "^18.0.5",
     "@types/react-router-dom": "^5.3.3",
+    "@typescript-eslint/eslint-plugin": "^5.29.0",
+    "@typescript-eslint/parser": "^5.29.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
     "eslint-config-prettier": "^8.0.0",
@@ -44,10 +46,10 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eslint": "eslint --ext .js,.jsx src",
-    "eslint-fix": "eslint --fix --ext .js,.jsx src",
+    "eslint": "eslint --ext .js,.ts,.jsx,.tsx src",
+    "eslint-fix": "eslint --fix --ext .js,.ts,.jsx,.tsx src",
     "stylelint": "stylelint \"src/**/*.css\"",
-    "prettier": "prettier --write \"**/*.+(js|jsx|json|css|md)\""
+    "prettier": "prettier --write \"**/*.+(js|ts|jsx|tsx|json|css|md)\""
   },
   "browserslist": {
     "production": [
