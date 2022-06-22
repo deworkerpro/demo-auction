@@ -1,6 +1,5 @@
 function generateRandomString(length) {
-  const possible =
-    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+  const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
 
   let text = ''
   for (let i = 0; i < length; i++) {
@@ -15,10 +14,7 @@ export function generateCodeVerifier() {
 }
 
 export async function generateCodeChallenge(codeVerifier) {
-  const digest = await crypto.subtle.digest(
-    'SHA-256',
-    new TextEncoder().encode(codeVerifier)
-  )
+  const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(codeVerifier))
 
   return btoa(String.fromCharCode(...new Uint8Array(digest)))
     .replace(/=/g, '')

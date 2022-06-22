@@ -4,10 +4,7 @@ import styles from './Alert.module.css'
 
 function AlertError({ message }) {
   return message ? (
-    <div
-      className={styles.alert + ' ' + styles.error}
-      data-testid="alert-error"
-    >
+    <div className={styles.alert + ' ' + styles.error} data-testid="alert-error">
       {message}
     </div>
   ) : null

@@ -3,11 +3,7 @@ import PropTypes from 'prop-types'
 import FeaturesContext from './FeaturesContext'
 
 function FeaturesProvider({ features, children }) {
-  return (
-    <FeaturesContext.Provider value={features}>
-      {children}
-    </FeaturesContext.Provider>
-  )
+  return <FeaturesContext.Provider value={features}>{children}</FeaturesContext.Provider>
 }
 
 FeaturesProvider.propTypes = {

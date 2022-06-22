@@ -98,11 +98,7 @@ function JoinForm() {
             <InputError error={errors.agree} />
           </InputRow>
           <ButtonRow>
-            <button
-              type="submit"
-              data-testid="join-button"
-              disabled={!buttonActive}
-            >
+            <button type="submit" data-testid="join-button" disabled={!buttonActive}>
               Join to Us
             </button>
           </ButtonRow>

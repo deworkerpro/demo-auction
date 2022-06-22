@@ -93,11 +93,7 @@ test('post with params and header', async () => {
     json: () => Promise.resolve({ name: 'value' }),
   })
 
-  const data = await api.post(
-    '/url',
-    { param: 'val' },
-    { 'Custom-Header': 'Value' }
-  )
+  const data = await api.post('/url', { param: 'val' }, { 'Custom-Header': 'Value' })
 
   expect(data).toEqual({ name: 'value' })
 
