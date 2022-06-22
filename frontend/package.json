@@ -17,9 +17,10 @@
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
     "eslint-config-prettier": "^8.0.0",
-    "eslint-config-standard": "^16.0.2",
+    "eslint-config-standard": "^17.0.0",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-jest-dom": "^4.0.1",
+    "eslint-plugin-n": "^15.2.3",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-promise": "^6.0.0",
@@ -29,7 +30,7 @@
     "react-test-renderer": "^18.0.0",
     "stylelint": "^14.0.0",
     "stylelint-config-prettier": "^9.0.3",
-    "stylelint-config-standard": "^25.0.0",
+    "stylelint-config-standard": "^26.0.0",
     "stylelint-prettier": "^2.0.0"
   },
   "scripts": {
