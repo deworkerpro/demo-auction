@@ -1,5 +1,5 @@
 import { createContext } from 'react'
 
-const FeaturesContext = createContext([])
+const FeaturesContext = createContext<string[]>([])
 
 export default FeaturesContext
