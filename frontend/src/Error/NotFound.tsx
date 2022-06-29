@@ -2,7 +2,7 @@ import React from 'react'
 import System from '../Layout/System'
 import { Link } from 'react-router-dom'
 
-function NotFound() {
+function NotFound(): JSX.Element {
   return (
     <System>
       <h1>Error</h1>
