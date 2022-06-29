@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import './App.css'
 import { FeaturesProvider } from '../FeatureToggle'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
@@ -11,7 +10,7 @@ import Success from '../Join/Success'
 import OAuth from '../OAuth'
 import { AuthProvider } from '../OAuth/Provider'
 
-function App({ features }) {
+function App({ features }: { features: string[] }) {
   return (
     <FeaturesProvider features={features}>
       <AuthProvider
@@ -24,13 +23,11 @@ function App({ features }) {
         <BrowserRouter>
           <div className="app">
             <Routes>
-              <Route exact path="/" element={<Home />} />
-              {features.includes('OAUTH') ? (
-                <Route exact path="/oauth" element={<OAuth />} />
-              ) : null}
-              <Route exact path="/join" element={<Join />} />
-              <Route exact path="/join/confirm" element={<Confirm />} />
-              <Route exact path="/join/success" element={<Success />} />
+              <Route path="/" element={<Home />} />
+              {features.includes('OAUTH') ? <Route path="/oauth" element={<OAuth />} /> : null}
+              <Route path="/join" element={<Join />} />
+              <Route path="/join/confirm" element={<Confirm />} />
+              <Route path="/join/success" element={<Success />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </div>
@@ -38,10 +35,6 @@ function App({ features }) {
       </AuthProvider>
     </FeaturesProvider>
   )
-}
-
-App.propTypes = {
-  features: PropTypes.array.isRequired,
 }
 
 export default App
