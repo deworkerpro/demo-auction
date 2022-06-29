@@ -1,17 +1,12 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import styles from './System.module.css'
-import PropTypes from 'prop-types'
 
-function System({ children }) {
+function System({ children }: { children: ReactNode }): JSX.Element {
   return (
     <div className={styles.layout}>
       <div className={styles.content}>{children}</div>
     </div>
   )
-}
-
-System.propTypes = {
-  children: PropTypes.any,
 }
 
 export default System
