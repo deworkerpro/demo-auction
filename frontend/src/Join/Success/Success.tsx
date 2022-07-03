@@ -2,7 +2,7 @@ import React from 'react'
 import System from '../../Layout/System'
 import { Link } from 'react-router-dom'
 
-function Success() {
+function Success(): JSX.Element {
   return (
     <System>
       <div data-testid="join-success">

@@ -29,12 +29,12 @@ test('allows the user to join successfully', async () => {
 })
 
 test('shows conflict error', async () => {
-  jest.spyOn(api, 'post').mockRejectedValue({
-    ok: false,
-    status: 409,
-    headers: new Headers({ 'Content-Type': 'application/json' }),
-    json: () => Promise.resolve({ message: 'User already exists.' }),
-  })
+  jest.spyOn(api, 'post').mockRejectedValue(
+    new Response(JSON.stringify({ message: 'User already exists.' }), {
+      status: 409,
+      headers: new Headers({ 'Content-Type': 'application/json' }),
+    })
+  )
 
   render(<JoinForm />)
 
@@ -54,18 +54,20 @@ test('shows conflict error', async () => {
 })
 
 test('shows validation errors', async () => {
-  jest.spyOn(api, 'post').mockRejectedValue({
-    ok: false,
-    status: 422,
-    headers: new Headers({ 'Content-Type': 'application/json' }),
-    json: () =>
-      Promise.resolve({
+  jest.spyOn(api, 'post').mockRejectedValue(
+    new Response(
+      JSON.stringify({
         errors: {
           email: 'Incorrect email',
           password: 'Incorrect password',
         },
       }),
-  })
+      {
+        status: 422,
+        headers: new Headers({ 'Content-Type': 'application/json' }),
+      }
+    )
+  )
 
   render(<JoinForm />)
 
@@ -86,13 +88,12 @@ test('shows validation errors', async () => {
 })
 
 test('shows server error', async () => {
-  jest.spyOn(api, 'post').mockRejectedValue({
-    ok: false,
-    status: 502,
-    statusText: 'Bad Gateway',
-    headers: new Headers(),
-    text: () => Promise.resolve(''),
-  })
+  jest.spyOn(api, 'post').mockRejectedValue(
+    new Response('', {
+      status: 502,
+      statusText: 'Bad Gateway',
+    })
+  )
 
   render(<JoinForm />)
 

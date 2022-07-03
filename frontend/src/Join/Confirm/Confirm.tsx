@@ -8,9 +8,9 @@ function useQuery() {
   return new URLSearchParams(useLocation().search)
 }
 
-function Confirm() {
-  const [success, setSuccess] = useState(null)
-  const [error, setError] = useState(null)
+function Confirm(): JSX.Element {
+  const [success, setSuccess] = useState<true | null>(null)
+  const [error, setError] = useState<string | null>(null)
 
   const query = useQuery()
   const token = query.get('token')
