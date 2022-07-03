@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import FeatureFlag from '../FeatureToggle'
 import { useAuth } from '../OAuth/Provider'
 
-function Home() {
+function Home(): JSX.Element {
   const { isAuthenticated, login, logout } = useAuth()
 
   return (
