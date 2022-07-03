@@ -24,12 +24,12 @@ test('confirms without token', async () => {
 })
 
 test('confirms successfully', async () => {
-  jest.spyOn(api, 'post').mockResolvedValue({
-    ok: true,
-    status: 201,
-    headers: new Headers(),
-    text: () => Promise.resolve(''),
-  })
+  jest.spyOn(api, 'post').mockResolvedValue(
+    new Response('', {
+      status: 201,
+      headers: new Headers(),
+    })
+  )
 
   const history = createMemoryHistory({
     initialEntries: ['/join/confirm?token=01'],
@@ -55,12 +55,12 @@ test('confirms successfully', async () => {
 })
 
 test('shows error', async () => {
-  jest.spyOn(api, 'post').mockRejectedValue({
-    ok: false,
-    status: 409,
-    headers: new Headers({ 'content-type': 'application/json' }),
-    json: () => Promise.resolve({ message: 'Incorrect token.' }),
-  })
+  jest.spyOn(api, 'post').mockRejectedValue(
+    new Response(JSON.stringify({ message: 'Incorrect token.' }), {
+      status: 409,
+      headers: new Headers({ 'content-type': 'application/json' }),
+    })
+  )
 
   render(
     <MemoryRouter initialEntries={['/join/confirm?token=01']}>
