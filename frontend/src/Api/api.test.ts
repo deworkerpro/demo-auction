@@ -1,12 +1,7 @@
 import api from './api'
 
 test('get with custom header', async () => {
-  const fetch = jest.spyOn(global, 'fetch').mockResolvedValue({
-    ok: true,
-    status: 200,
-    headers: new Headers(),
-    text: () => Promise.resolve(''),
-  })
+  const fetch = jest.spyOn(global, 'fetch').mockResolvedValue(new Response())
 
   const data = await api.get('/url', { 'Custom-Header': 'Value' })
 
@@ -22,12 +17,12 @@ test('get with custom header', async () => {
 })
 
 test('get with JSON response', async () => {
-  const fetch = jest.spyOn(global, 'fetch').mockResolvedValue({
-    ok: true,
-    status: 200,
-    headers: new Headers({ 'Content-Type': 'application/json' }),
-    json: () => Promise.resolve({ name: 'value' }),
-  })
+  const fetch = jest.spyOn(global, 'fetch').mockResolvedValue(
+    new Response(JSON.stringify({ name: 'value' }), {
+      status: 200,
+      headers: new Headers({ 'Content-Type': 'application/json' }),
+    })
+  )
 
   const data = await api.get('/url')
 
@@ -42,12 +37,12 @@ test('get with JSON response', async () => {
 })
 
 test('get with text response', async () => {
-  jest.spyOn(global, 'fetch').mockResolvedValue({
-    ok: true,
-    status: 200,
-    headers: new Headers({ 'Content-Type': 'text/plain' }),
-    text: () => Promise.resolve('value'),
-  })
+  jest.spyOn(global, 'fetch').mockResolvedValue(
+    new Response('value', {
+      status: 200,
+      headers: new Headers({ 'Content-Type': 'text/plain' }),
+    })
+  )
 
   const data = await api.get('/url')
 
@@ -55,12 +50,12 @@ test('get with text response', async () => {
 })
 
 test('get promise', async () => {
-  jest.spyOn(global, 'fetch').mockResolvedValue({
-    ok: true,
-    status: 200,
-    headers: new Headers({ 'Content-Type': 'text/plain' }),
-    text: () => Promise.resolve('value'),
-  })
+  jest.spyOn(global, 'fetch').mockResolvedValue(
+    new Response('value', {
+      status: 200,
+      headers: new Headers({ 'Content-Type': 'text/plain' }),
+    })
+  )
 
   expect.assertions(1)
 
@@ -68,12 +63,12 @@ test('get promise', async () => {
 })
 
 test('post without params', async () => {
-  const fetch = jest.spyOn(global, 'fetch').mockResolvedValue({
-    ok: true,
-    status: 200,
-    headers: new Headers({ 'Content-Type': 'application/json' }),
-    json: () => Promise.resolve({ name: 'value' }),
-  })
+  const fetch = jest.spyOn(global, 'fetch').mockResolvedValue(
+    new Response(JSON.stringify({ name: 'value' }), {
+      status: 200,
+      headers: new Headers({ 'Content-Type': 'application/json' }),
+    })
+  )
 
   const data = await api.post('/url')
 
@@ -86,12 +81,12 @@ test('post without params', async () => {
 })
 
 test('post with params and header', async () => {
-  const fetch = jest.spyOn(global, 'fetch').mockResolvedValue({
-    ok: true,
-    status: 200,
-    headers: new Headers({ 'Content-Type': 'application/json' }),
-    json: () => Promise.resolve({ name: 'value' }),
-  })
+  const fetch = jest.spyOn(global, 'fetch').mockResolvedValue(
+    new Response(JSON.stringify({ name: 'value' }), {
+      status: 200,
+      headers: new Headers({ 'Content-Type': 'application/json' }),
+    })
+  )
 
   const data = await api.post('/url', { param: 'val' }, { 'Custom-Header': 'Value' })
 
@@ -109,10 +104,9 @@ test('post with params and header', async () => {
 })
 
 test('post with error response', async () => {
-  const response = {
-    ok: false,
+  const response = new Response('', {
     status: 409,
-  }
+  })
 
   jest.spyOn(global, 'fetch').mockResolvedValue(response)
 
