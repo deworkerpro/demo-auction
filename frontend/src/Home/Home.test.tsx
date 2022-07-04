@@ -3,23 +3,17 @@ import { render, screen } from '@testing-library/react'
 import Home from './Home'
 import { FeaturesProvider } from '../FeatureToggle'
 import { MemoryRouter } from 'react-router-dom'
-import { AuthProvider } from '../OAuth/Provider'
+import FakeAuthProvider from '../OAuth/Provider/FakeAuthProvider'
 
 test('renders home', () => {
   render(
-    <AuthProvider
-      authorizeUrl="/api/authorize"
-      tokenUrl="/api/token"
-      clientId="frontend"
-      scope="common"
-      redirectPath="/oauth"
-    >
+    <FakeAuthProvider isAuthenticated={false}>
       <FeaturesProvider features={[]}>
         <MemoryRouter>
           <Home />
         </MemoryRouter>
       </FeaturesProvider>
-    </AuthProvider>
+    </FakeAuthProvider>
   )
 
   expect(screen.queryByText(/We will be here/i)).not.toBeInTheDocument()
