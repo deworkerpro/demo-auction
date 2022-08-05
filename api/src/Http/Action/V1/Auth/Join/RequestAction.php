@@ -7,7 +7,7 @@ namespace App\Http\Action\V1\Auth\Join;
 use App\Auth\Command\JoinByEmail\Request\Command;
 use App\Auth\Command\JoinByEmail\Request\Handler;
 use App\Http\Response\EmptyResponse;
-use App\Http\Response\JsonResponse;
+use App\Validator\ValidationException;
 use App\Validator\Validator;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -15,6 +15,8 @@ use Psr\Http\Server\RequestHandlerInterface;
 use Symfony\Component\Serializer\Exception\NotNormalizableValueException;
 use Symfony\Component\Serializer\Exception\PartialDenormalizationException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
+use Symfony\Component\Validator\ConstraintViolation;
+use Symfony\Component\Validator\ConstraintViolationList;
 
 final class RequestAction implements RequestHandlerInterface
 {
@@ -33,16 +35,22 @@ final class RequestAction implements RequestHandlerInterface
                 DenormalizerInterface::COLLECT_DENORMALIZATION_ERRORS => true,
             ]);
         } catch (PartialDenormalizationException $exception) {
-            $errors = [];
+            $violations = new ConstraintViolationList();
             /** @var NotNormalizableValueException $error */
             foreach ($exception->getErrors() as $error) {
-                $errors[(string)$error->getPath()] = sprintf(
+                $message = sprintf(
                     'The type must be one of "%s" ("%s" given).',
                     implode(', ', (array)$error->getExpectedTypes()),
                     (string)$error->getCurrentType()
                 );
+                $parameters = [];
+                if ($error->canUseMessageForUser()) {
+                    $parameters['hint'] = $error->getMessage();
+                }
+                $violations->add(new ConstraintViolation($message, '', $parameters, null, $error->getPath(), null));
             }
-            return new JsonResponse(['errors' => $errors], 422);
+
+            throw new ValidationException($violations);
         }
 
         $this->validator->validate($command);
