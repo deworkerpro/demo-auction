@@ -22,23 +22,23 @@ final class DenormalizationExceptionHandler implements MiddlewareInterface
         try {
             return $handler->handle($request);
         } catch (ExtraAttributesException $exception) {
-            $violations = new ConstraintViolationList();
-            /** @var string $attribute */
-            foreach ($exception->getExtraAttributes() as $attribute) {
-                $violations->add(self::attributeToViolation($attribute));
-            }
-            throw new ValidationException($violations);
+            throw new ValidationException(
+                new ConstraintViolationList(
+                    array_map(self::attributeToViolation(...), $exception->getExtraAttributes())
+                )
+            );
         } catch (NotNormalizableValueException $exception) {
-            $violations = new ConstraintViolationList();
-            $violations->add(self::errorToViolation($exception));
-            throw new ValidationException($violations);
+            throw new ValidationException(
+                new ConstraintViolationList(
+                    [self::errorToViolation($exception)]
+                )
+            );
         } catch (PartialDenormalizationException $exception) {
-            $violations = new ConstraintViolationList();
-            /** @var NotNormalizableValueException $error */
-            foreach ($exception->getErrors() as $error) {
-                $violations->add(self::errorToViolation($error));
-            }
-            throw new ValidationException($violations);
+            throw new ValidationException(
+                new ConstraintViolationList(
+                    array_map(self::errorToViolation(...), $exception->getErrors())
+                )
+            );
         }
     }
 
