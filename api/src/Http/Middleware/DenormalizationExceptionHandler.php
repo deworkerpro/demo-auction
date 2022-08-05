@@ -20,23 +20,31 @@ final class DenormalizationExceptionHandler implements MiddlewareInterface
     {
         try {
             return $handler->handle($request);
+        } catch (NotNormalizableValueException $exception) {
+            $violations = new ConstraintViolationList();
+            $violations->add(self::errorToViolation($exception));
+            throw new ValidationException($violations);
         } catch (PartialDenormalizationException $exception) {
             $violations = new ConstraintViolationList();
             /** @var NotNormalizableValueException $error */
             foreach ($exception->getErrors() as $error) {
-                $message = sprintf(
-                    'The type must be one of "%s" ("%s" given).',
-                    implode(', ', (array)$error->getExpectedTypes()),
-                    (string)$error->getCurrentType()
-                );
-                $parameters = [];
-                if ($error->canUseMessageForUser()) {
-                    $parameters['hint'] = $error->getMessage();
-                }
-                $violations->add(new ConstraintViolation($message, '', $parameters, null, $error->getPath(), null));
+                $violations->add(self::errorToViolation($error));
             }
-
             throw new ValidationException($violations);
         }
+    }
+
+    private static function errorToViolation(NotNormalizableValueException $exception): ConstraintViolation
+    {
+        $message = sprintf(
+            'The type must be one of "%s" ("%s" given).',
+            implode(', ', (array)$exception->getExpectedTypes()),
+            (string)$exception->getCurrentType()
+        );
+        $parameters = [];
+        if ($exception->canUseMessageForUser()) {
+            $parameters['hint'] = $exception->getMessage();
+        }
+        return new ConstraintViolation($message, '', $parameters, null, $exception->getPath(), null);
     }
 }
