@@ -13,6 +13,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Slim\Psr7\Factory\ResponseFactory;
 use Slim\Psr7\Factory\ServerRequestFactory;
+use Symfony\Component\Serializer\Exception\ExtraAttributesException;
 use Symfony\Component\Serializer\Exception\NotNormalizableValueException;
 use Symfony\Component\Serializer\Exception\PartialDenormalizationException;
 
@@ -86,6 +87,27 @@ final class DenormalizationExceptionHandlerTest extends TestCase
             $violation = $exception->getViolations()->get(0);
             self::assertEquals('The type must be one of "string" ("int" given).', $violation->getMessage());
             self::assertEquals('name', $violation->getPropertyPath());
+        }
+    }
+
+    public function testExtraAttributesException(): void
+    {
+        $middleware = new DenormalizationExceptionHandler();
+
+        $handler = $this->createStub(RequestHandlerInterface::class);
+        $handler->method('handle')->willThrowException(
+            new ExtraAttributesException(['age'])
+        );
+
+        try {
+            $middleware->process(self::createRequest(), $handler);
+            self::fail('Expected exception is not thrown');
+        } catch (Exception $exception) {
+            self::assertInstanceOf(ValidationException::class, $exception);
+            self::assertTrue($exception->getViolations()->has(0));
+            $violation = $exception->getViolations()->get(0);
+            self::assertEquals('The attribute is not allowed.', $violation->getMessage());
+            self::assertEquals('age', $violation->getPropertyPath());
         }
     }
 

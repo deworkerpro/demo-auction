@@ -10,6 +10,7 @@
     "require": {
         "php": "^8.1",
         "ext-mbstring": "^8.1",
+        "doctrine/annotations": "^1.13",
         "doctrine/migrations": "^3.0",
         "doctrine/orm": "^2.7",
         "laminas/laminas-config-aggregator": "^1.2",
