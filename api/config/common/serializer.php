@@ -16,6 +16,9 @@ use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\SerializerInterface;
 
 return [
+    NormalizerInterface::class => DI\get(SerializerInterface::class),
+    DenormalizerInterface::class => DI\get(SerializerInterface::class),
+
     SerializerInterface::class => static function (ContainerInterface $container): SerializerInterface {
         /**
          * @psalm-suppress MixedArrayAccess
