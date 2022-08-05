@@ -115,7 +115,14 @@ final class RequestTest extends WebTestCase
             'password' => 42,
         ]));
 
-        self::assertEquals(400, $response->getStatusCode());
+        self::assertEquals(422, $response->getStatusCode());
+        self::assertJson($body = (string)$response->getBody());
+
+        self::assertEquals([
+            'errors' => [
+                'email' => 'The type must be one of "string" ("bool" given).',
+            ],
+        ], Json::decode($body));
     }
 
     public function testNotValid(): void

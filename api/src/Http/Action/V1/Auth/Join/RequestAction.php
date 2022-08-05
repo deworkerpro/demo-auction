@@ -6,8 +6,8 @@ namespace App\Http\Action\V1\Auth\Join;
 
 use App\Auth\Command\JoinByEmail\Request\Command;
 use App\Auth\Command\JoinByEmail\Request\Handler;
-use App\Http\Exception\BadRequestHttpException;
 use App\Http\Response\EmptyResponse;
+use App\Http\Response\JsonResponse;
 use App\Validator\Validator;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -29,8 +29,16 @@ final class RequestAction implements RequestHandlerInterface
         try {
             /** @var Command $command */
             $command = $this->denormalizer->denormalize($request->getParsedBody(), Command::class);
-        } catch (NotNormalizableValueException) {
-            throw new BadRequestHttpException($request);
+        } catch (NotNormalizableValueException $exception) {
+            return new JsonResponse([
+                'errors' => [
+                    (string)$exception->getPath() => sprintf(
+                        'The type must be one of "%s" ("%s" given).',
+                        implode(', ', (array)$exception->getExpectedTypes()),
+                        (string)$exception->getCurrentType()
+                    ),
+                ],
+            ], 422);
         }
 
         $this->validator->validate($command);
