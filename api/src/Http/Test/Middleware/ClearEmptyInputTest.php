@@ -30,6 +30,7 @@ final class ClearEmptyInputTest extends TestCase
                 'null' => null,
                 'space' => ' ',
                 'string' => 'String ',
+                'int' => 42,
                 'nested' => [
                     'null' => null,
                     'space' => ' ',
@@ -44,6 +45,7 @@ final class ClearEmptyInputTest extends TestCase
                     'null' => null,
                     'space' => '',
                     'string' => 'String',
+                    'int' => 42,
                     'nested' => [
                         'null' => null,
                         'space' => '',
