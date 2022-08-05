@@ -110,8 +110,6 @@ final class RequestTest extends WebTestCase
 
     public function testIncorrectFormat(): void
     {
-        self::markTestIncomplete();
-
         $response = $this->app()->handle(self::json('POST', '/v1/auth/join', [
             'email' => true,
             'password' => 42,
