@@ -17,6 +17,7 @@
         "middlewares/negotiation": "^2.0",
         "monolog/monolog": "^2.0",
         "php-di/php-di": "^6.0",
+        "phpdocumentor/reflection-docblock": "^5.3",
         "ramsey/uuid": "^4.0",
         "sentry/sdk": "^3.1",
         "slim/psr7": "^1.0",
