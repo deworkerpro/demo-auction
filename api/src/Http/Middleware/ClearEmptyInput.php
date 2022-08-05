@@ -31,13 +31,15 @@ final class ClearEmptyInput implements MiddlewareInterface
 
         /**
          * @var string $key
-         * @var object|string|null $item
+         * @var array|int|object|string|null $item
          */
         foreach ($items as $key => $item) {
             if (\is_string($item)) {
                 $result[$key] = trim($item);
-            } else {
+            } elseif (\is_array($item)) {
                 $result[$key] = self::filterStrings($item);
+            } else {
+                $result[$key] = $item;
             }
         }
 
