@@ -27,6 +27,7 @@ use League\OAuth2\Server\Repositories\ScopeRepositoryInterface;
 use League\OAuth2\Server\Repositories\UserRepositoryInterface;
 use League\OAuth2\Server\ResourceServer;
 use Psr\Container\ContainerInterface;
+
 use function App\env;
 
 return [

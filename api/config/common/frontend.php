@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Frontend\FrontendUrlGenerator;
 use Psr\Container\ContainerInterface;
+
 use function App\env;
 
 return [

@@ -9,6 +9,7 @@ use App\OAuth\Entity\Scope;
 use App\OAuth\Generator\AccessTokenGenerator;
 use App\OAuth\Generator\Params;
 use DateTimeImmutable;
+
 use function App\env;
 
 final class AuthHeader
