@@ -108,6 +108,24 @@ final class RequestTest extends WebTestCase
         ], Json::decode($body));
     }
 
+    public function testNotExistingFields(): void
+    {
+        $response = $this->app()->handle(self::json('POST', '/v1/auth/join', [
+            'email' => 'existing@app.test',
+            'password' => 'new-password',
+            'age' => 42,
+        ]));
+
+        self::assertEquals(422, $response->getStatusCode());
+        self::assertJson($body = (string)$response->getBody());
+
+        self::assertEquals([
+            'errors' => [
+                'age' => 'The attribute is not allowed.',
+            ],
+        ], Json::decode($body));
+    }
+
     public function testIncorrectFormat(): void
     {
         $response = $this->app()->handle(self::json('POST', '/v1/auth/join', [
