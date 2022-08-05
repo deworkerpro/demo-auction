@@ -20,6 +20,7 @@
         "league/oauth2-server": "^8.2",
         "monolog/monolog": "^2.0",
         "php-di/php-di": "^6.0",
+        "phpdocumentor/reflection-docblock": "^5.3",
         "ptlis/conneg": "^4.0",
         "ramsey/uuid": "^4.0",
         "sentry/sdk": "^3.1",
