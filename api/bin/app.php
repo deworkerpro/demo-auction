@@ -3,8 +3,6 @@
 
 declare(strict_types=1);
 
-use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\Tools\Console\Helper\EntityManagerHelper;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Command\Command;
@@ -31,10 +29,6 @@ if (getenv('SENTRY_DSN')) {
  * @psalm-suppress MixedArrayAccess
  */
 $commands = $container->get('config')['console']['commands'];
-
-$entityManager = $container->get(EntityManagerInterface::class);
-
-$cli->getHelperSet()->set(new EntityManagerHelper($entityManager), 'em');
 
 foreach ($commands as $name) {
     /** @var Command $command */
