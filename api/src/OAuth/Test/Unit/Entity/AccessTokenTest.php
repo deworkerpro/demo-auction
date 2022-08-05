@@ -11,6 +11,7 @@ use DateTimeImmutable;
 use League\OAuth2\Server\CryptKey;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
+
 use function App\env;
 
 /**

@@ -8,6 +8,7 @@ use Monolog\Logger;
 use Monolog\Processor\ProcessorInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
+
 use function App\env;
 
 return [

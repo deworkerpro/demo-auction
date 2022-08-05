@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use Laminas\ConfigAggregator\ConfigAggregator;
 use Laminas\ConfigAggregator\PhpFileProvider;
+
 use function App\env;
 
 $aggregator = new ConfigAggregator([
