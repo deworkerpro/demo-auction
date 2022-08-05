@@ -15,13 +15,10 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class DomainExceptionHandler implements MiddlewareInterface
 {
-    private LoggerInterface $logger;
-    private TranslatorInterface $translator;
-
-    public function __construct(LoggerInterface $logger, TranslatorInterface $translator)
-    {
-        $this->logger = $logger;
-        $this->translator = $translator;
+    public function __construct(
+        private readonly LoggerInterface $logger,
+        private readonly TranslatorInterface $translator
+    ) {
     }
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface

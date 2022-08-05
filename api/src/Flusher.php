@@ -8,11 +8,8 @@ use Doctrine\ORM\EntityManagerInterface;
 
 final class Flusher
 {
-    private EntityManagerInterface $em;
-
-    public function __construct(EntityManagerInterface $em)
+    public function __construct(private readonly EntityManagerInterface $em)
     {
-        $this->em = $em;
     }
 
     public function flush(): void

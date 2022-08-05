@@ -14,18 +14,12 @@ use League\OAuth2\Server\Repositories\AuthCodeRepositoryInterface;
 final class AuthCodeRepository implements AuthCodeRepositoryInterface
 {
     /**
-     * @var EntityRepository<AuthCode>
-     */
-    private EntityRepository $repo;
-    private EntityManagerInterface $em;
-
-    /**
      * @param EntityRepository<AuthCode> $repo
      */
-    public function __construct(EntityManagerInterface $em, EntityRepository $repo)
-    {
-        $this->repo = $repo;
-        $this->em = $em;
+    public function __construct(
+        private readonly EntityManagerInterface $em,
+        private readonly EntityRepository $repo
+    ) {
     }
 
     public function getNewAuthCode(): AuthCode

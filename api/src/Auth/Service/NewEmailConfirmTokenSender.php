@@ -12,13 +12,8 @@ use Twig\Environment;
 
 final class NewEmailConfirmTokenSender
 {
-    private MailerInterface $mailer;
-    private Environment $twig;
-
-    public function __construct(MailerInterface $mailer, Environment $twig)
+    public function __construct(private readonly MailerInterface $mailer, private readonly Environment $twig)
     {
-        $this->mailer = $mailer;
-        $this->twig = $twig;
     }
 
     public function send(Email $email, Token $token): void

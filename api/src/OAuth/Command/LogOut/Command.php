@@ -6,10 +6,8 @@ namespace App\OAuth\Command\LogOut;
 
 final class Command
 {
-    public string $userId;
-
-    public function __construct(string $userId)
-    {
-        $this->userId = $userId;
+    public function __construct(
+        public readonly string $userId
+    ) {
     }
 }

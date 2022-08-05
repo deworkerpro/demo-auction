@@ -12,11 +12,8 @@ use Symfony\Component\Translation\Translator;
 
 final class TranslatorLocale implements MiddlewareInterface
 {
-    private Translator $translator;
-
-    public function __construct(Translator $translator)
+    public function __construct(private readonly Translator $translator)
     {
-        $this->translator = $translator;
     }
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
