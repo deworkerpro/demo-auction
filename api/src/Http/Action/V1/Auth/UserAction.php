@@ -10,9 +10,15 @@ use App\Http\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use Symfony\Component\Serializer\SerializerInterface;
 
 final class UserAction implements RequestHandlerInterface
 {
+    public function __construct(
+        private readonly SerializerInterface $serializer
+    ) {
+    }
+
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $identity = Authenticate::identity($request);
@@ -21,9 +27,6 @@ final class UserAction implements RequestHandlerInterface
             throw new UnauthorizedHttpException($request);
         }
 
-        return new JsonResponse([
-            'id' => $identity->id,
-            'role' => $identity->role,
-        ]);
+        return new JsonResponse($this->serializer->serialize($identity, 'json'), 200, true);
     }
 }

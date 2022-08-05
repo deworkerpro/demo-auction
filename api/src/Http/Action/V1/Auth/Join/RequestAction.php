@@ -11,25 +11,21 @@ use App\Validator\Validator;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use Symfony\Component\Serializer\SerializerInterface;
 
 final class RequestAction implements RequestHandlerInterface
 {
     public function __construct(
-        private readonly Handler $handler,
-        private readonly Validator $validator
+        private readonly SerializerInterface $serializer,
+        private readonly Validator $validator,
+        private readonly Handler $handler
     ) {
     }
 
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        /**
-         * @var array{email:?string, password:?string} $data
-         */
-        $data = $request->getParsedBody();
-
-        $command = new Command();
-        $command->email = $data['email'] ?? '';
-        $command->password = $data['password'] ?? '';
+        /** @var Command $command */
+        $command = $this->serializer->deserialize($request->getBody(), Command::class, 'json');
 
         $this->validator->validate($command);
 
