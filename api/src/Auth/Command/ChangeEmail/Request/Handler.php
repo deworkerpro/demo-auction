@@ -15,21 +15,12 @@ use DomainException;
 
 final class Handler
 {
-    private UserRepository $users;
-    private Tokenizer $tokenizer;
-    private NewEmailConfirmTokenSender $sender;
-    private Flusher $flusher;
-
     public function __construct(
-        UserRepository $users,
-        Tokenizer $tokenizer,
-        NewEmailConfirmTokenSender $sender,
-        Flusher $flusher
+        private readonly UserRepository $users,
+        private readonly Tokenizer $tokenizer,
+        private readonly NewEmailConfirmTokenSender $sender,
+        private readonly Flusher $flusher
     ) {
-        $this->users = $users;
-        $this->tokenizer = $tokenizer;
-        $this->sender = $sender;
-        $this->flusher = $flusher;
     }
 
     public function handle(Command $command): void

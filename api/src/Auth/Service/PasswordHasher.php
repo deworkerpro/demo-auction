@@ -8,11 +8,8 @@ use Webmozart\Assert\Assert;
 
 final class PasswordHasher
 {
-    private int $memoryCost;
-
-    public function __construct(int $memoryCost = PASSWORD_ARGON2_DEFAULT_MEMORY_COST)
+    public function __construct(private readonly int $memoryCost = PASSWORD_ARGON2_DEFAULT_MEMORY_COST)
     {
-        $this->memoryCost = $memoryCost;
     }
 
     public function hash(string $password): string

@@ -12,11 +12,8 @@ use League\OAuth2\Server\Repositories\AccessTokenRepositoryInterface;
 
 final class AccessTokenRepository implements AccessTokenRepositoryInterface
 {
-    private Fetcher $users;
-
-    public function __construct(Fetcher $users)
+    public function __construct(private readonly Fetcher $users)
     {
-        $this->users = $users;
     }
 
     public function getNewToken(

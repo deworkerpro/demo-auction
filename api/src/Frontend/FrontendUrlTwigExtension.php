@@ -9,11 +9,8 @@ use Twig\TwigFunction;
 
 final class FrontendUrlTwigExtension extends AbstractExtension
 {
-    private FrontendUrlGenerator $url;
-
-    public function __construct(FrontendUrlGenerator $url)
+    public function __construct(private readonly FrontendUrlGenerator $url)
     {
-        $this->url = $url;
     }
 
     public function getFunctions(): array

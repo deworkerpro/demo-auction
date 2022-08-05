@@ -11,13 +11,10 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 final class FeaturesMiddleware implements MiddlewareInterface
 {
-    private FeatureSwitch $switch;
-    private string $header;
-
-    public function __construct(FeatureSwitch $switch, string $header = 'X-Features')
-    {
-        $this->switch = $switch;
-        $this->header = $header;
+    public function __construct(
+        private readonly FeatureSwitch $switch,
+        private readonly string $header = 'X-Features'
+    ) {
     }
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface

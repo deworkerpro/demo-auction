@@ -11,13 +11,10 @@ use App\Flusher;
 
 final class Handler
 {
-    private UserRepository $users;
-    private Flusher $flusher;
-
-    public function __construct(UserRepository $users, Flusher $flusher)
-    {
-        $this->users = $users;
-        $this->flusher = $flusher;
+    public function __construct(
+        private readonly UserRepository $users,
+        private readonly Flusher $flusher
+    ) {
     }
 
     public function handle(Command $command): void

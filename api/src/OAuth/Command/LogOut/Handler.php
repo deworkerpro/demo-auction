@@ -9,13 +9,10 @@ use App\OAuth\Entity\RefreshTokenRepository;
 
 final class Handler
 {
-    private AuthCodeRepository $authCodes;
-    private RefreshTokenRepository $refreshTokens;
-
-    public function __construct(AuthCodeRepository $authCodes, RefreshTokenRepository $refreshTokens)
-    {
-        $this->authCodes = $authCodes;
-        $this->refreshTokens = $refreshTokens;
+    public function __construct(
+        private readonly AuthCodeRepository $authCodes,
+        private readonly RefreshTokenRepository $refreshTokens
+    ) {
     }
 
     public function handle(Command $command): void

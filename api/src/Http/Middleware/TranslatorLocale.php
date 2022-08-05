@@ -13,20 +13,13 @@ use Symfony\Component\Translation\Translator;
 
 final class TranslatorLocale implements MiddlewareInterface
 {
-    private Translator $translator;
-
-    /**
-     * @var string[]
-     */
-    private array $locales;
-
     /**
      * @param string[] $locales
      */
-    public function __construct(Translator $translator, array $locales)
-    {
-        $this->translator = $translator;
-        $this->locales = $locales;
+    public function __construct(
+        private readonly Translator $translator,
+        private readonly array $locales
+    ) {
     }
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface

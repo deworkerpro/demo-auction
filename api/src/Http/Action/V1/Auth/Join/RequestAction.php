@@ -14,13 +14,10 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 final class RequestAction implements RequestHandlerInterface
 {
-    private Handler $handler;
-    private Validator $validator;
-
-    public function __construct(Handler $handler, Validator $validator)
-    {
-        $this->handler = $handler;
-        $this->validator = $validator;
+    public function __construct(
+        private readonly Handler $handler,
+        private readonly Validator $validator
+    ) {
     }
 
     public function handle(ServerRequestInterface $request): ResponseInterface

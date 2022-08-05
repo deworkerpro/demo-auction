@@ -11,11 +11,8 @@ use Monolog\Processor\ProcessorInterface;
  */
 final class FeaturesMonologProcessor implements ProcessorInterface
 {
-    private FeaturesContext $context;
-
-    public function __construct(FeaturesContext $context)
+    public function __construct(private readonly FeaturesContext $context)
     {
-        $this->context = $context;
     }
 
     public function __invoke(array $record): array
