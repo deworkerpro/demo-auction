@@ -6,5 +6,8 @@ namespace App\Auth\Command\ResetPassword\Request;
 
 final class Command
 {
-    public string $email = '';
+    public function __construct(
+        public readonly string $email = ''
+    ) {
+    }
 }

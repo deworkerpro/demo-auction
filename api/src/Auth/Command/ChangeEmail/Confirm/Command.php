@@ -6,5 +6,8 @@ namespace App\Auth\Command\ChangeEmail\Confirm;
 
 final class Command
 {
-    public string $token = '';
+    public function __construct(
+        public readonly string $token = ''
+    ) {
+    }
 }

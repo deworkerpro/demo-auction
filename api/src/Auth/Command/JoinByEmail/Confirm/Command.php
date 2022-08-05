@@ -8,6 +8,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 final class Command
 {
-    #[Assert\NotBlank]
-    public string $token = '';
+    public function __construct(
+        #[Assert\NotBlank]
+        public readonly string $token = ''
+    ) {
+    }
 }

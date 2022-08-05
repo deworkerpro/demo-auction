@@ -6,7 +6,10 @@ namespace App\Auth\Command\AttachNetwork;
 
 final class Command
 {
-    public string $id = '';
-    public string $network = '';
-    public string $identity = '';
+    public function __construct(
+        public readonly string $id = '',
+        public readonly string $network = '',
+        public readonly string $identity = ''
+    ) {
+    }
 }
