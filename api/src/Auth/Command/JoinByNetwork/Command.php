@@ -6,7 +6,10 @@ namespace App\Auth\Command\JoinByNetwork;
 
 final class Command
 {
-    public string $email = '';
-    public string $network = '';
-    public string $identity = '';
+    public function __construct(
+        public string $email = '',
+        public string $network = '',
+        public string $identity = ''
+    ) {
+    }
 }

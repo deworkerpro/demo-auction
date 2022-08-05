@@ -6,6 +6,9 @@ namespace App\Auth\Command\ChangeEmail\Request;
 
 final class Command
 {
-    public string $id = '';
-    public string $email = '';
+    public function __construct(
+        public readonly string $id = '',
+        public readonly string $email = ''
+    ) {
+    }
 }

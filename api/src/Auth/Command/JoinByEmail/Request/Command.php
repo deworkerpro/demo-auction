@@ -8,11 +8,13 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 final class Command
 {
-    #[Assert\NotBlank]
-    #[Assert\Email]
-    public string $email = '';
-
-    #[Assert\Length(min: 6)]
-    #[Assert\NotBlank]
-    public string $password = '';
+    public function __construct(
+        #[Assert\NotBlank]
+        #[Assert\Email]
+        public readonly string $email = '',
+        #[Assert\Length(min: 6)]
+        #[Assert\NotBlank]
+        public readonly string $password = ''
+    ) {
+    }
 }
