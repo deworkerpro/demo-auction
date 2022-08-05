@@ -121,6 +121,7 @@ final class RequestTest extends WebTestCase
         self::assertEquals([
             'errors' => [
                 'email' => 'The type must be one of "string" ("bool" given).',
+                'password' => 'The type must be one of "string" ("int" given).',
             ],
         ], Json::decode($body));
     }
