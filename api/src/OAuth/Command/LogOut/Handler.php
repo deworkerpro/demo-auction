@@ -12,8 +12,7 @@ final class Handler
     public function __construct(
         private readonly AuthCodeRepository $authCodes,
         private readonly RefreshTokenRepository $refreshTokens
-    ) {
-    }
+    ) {}
 
     public function handle(Command $command): void
     {

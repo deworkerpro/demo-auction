@@ -27,8 +27,7 @@ final class AuthorizeAction implements RequestHandlerInterface
         private readonly Environment $template,
         private readonly ResponseFactoryInterface $response,
         private readonly TranslatorInterface $translator,
-    ) {
-    }
+    ) {}
 
     public function handle(ServerRequestInterface $request): ResponseInterface
     {

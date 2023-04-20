@@ -25,5 +25,6 @@
 
     <issueHandlers>
         <LessSpecificReturnType errorLevel="info" />
+        <RiskyTruthyFalsyComparison errorLevel="info" />
     </issueHandlers>
 </psalm>

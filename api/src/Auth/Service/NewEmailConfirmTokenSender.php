@@ -12,9 +12,7 @@ use Twig\Environment;
 
 final class NewEmailConfirmTokenSender
 {
-    public function __construct(private readonly MailerInterface $mailer, private readonly Environment $twig)
-    {
-    }
+    public function __construct(private readonly MailerInterface $mailer, private readonly Environment $twig) {}
 
     public function send(Email $email, Token $token): void
     {

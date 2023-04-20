@@ -6,7 +6,6 @@ use App\Console\FixturesLoadCommand;
 use App\OAuth\Console\E2ETokenCommand;
 use Doctrine\Migrations;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\Tools\Console\Command\SchemaTool;
 use Doctrine\ORM\Tools\Console\Command\SchemaTool\DropCommand;
 use Doctrine\ORM\Tools\Console\EntityManagerProvider;
 use Psr\Container\ContainerInterface;
@@ -32,7 +31,7 @@ return [
             'commands' => [
                 FixturesLoadCommand::class,
 
-                SchemaTool\DropCommand::class,
+                DropCommand::class,
 
                 Migrations\Tools\Console\Command\DiffCommand::class,
                 Migrations\Tools\Console\Command\GenerateCommand::class,

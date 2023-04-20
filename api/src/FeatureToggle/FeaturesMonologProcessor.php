@@ -4,24 +4,17 @@ declare(strict_types=1);
 
 namespace App\FeatureToggle;
 
+use Monolog\LogRecord;
 use Monolog\Processor\ProcessorInterface;
 
-/**
- * @psalm-import-type Record from \Monolog\Logger
- */
 final class FeaturesMonologProcessor implements ProcessorInterface
 {
-    public function __construct(private readonly FeaturesContext $context)
-    {
-    }
+    public function __construct(private readonly FeaturesContext $context) {}
 
-    public function __invoke(array $record): array
+    public function __invoke(LogRecord $record): LogRecord
     {
-        /** @var Record */
-        return array_merge_recursive($record, [
-            'extra' => [
-                'features' => $this->context->getAllEnabled(),
-            ],
-        ]);
+        $record->extra['features'] = $this->context->getAllEnabled();
+
+        return $record;
     }
 }

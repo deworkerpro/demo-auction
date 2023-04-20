@@ -11,9 +11,7 @@ final class ClientRepository implements ClientRepositoryInterface
     /**
      * @param Client[] $clients
      */
-    public function __construct(private readonly array $clients)
-    {
-    }
+    public function __construct(private readonly array $clients) {}
 
     public function getClientEntity($clientIdentifier): ?Client
     {

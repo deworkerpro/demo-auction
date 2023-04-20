@@ -9,9 +9,7 @@ use Throwable;
 
 final class Sentry
 {
-    public function __construct(private readonly HubInterface $hub)
-    {
-    }
+    public function __construct(private readonly HubInterface $hub) {}
 
     public function capture(Throwable $exception): void
     {

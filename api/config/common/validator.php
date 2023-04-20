@@ -12,7 +12,7 @@ return [
         $translator = $container->get(TranslatorInterface::class);
 
         return Validation::createValidatorBuilder()
-            ->enableAnnotationMapping()
+            ->enableAttributeMapping()
             ->setTranslator($translator)
             ->setTranslationDomain('validators')
             ->getValidator();

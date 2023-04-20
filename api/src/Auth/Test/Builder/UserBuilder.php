@@ -59,7 +59,7 @@ final class UserBuilder
         return $clone;
     }
 
-    public function viaNetwork(Network $network = null): self
+    public function viaNetwork(?Network $network = null): self
     {
         $clone = clone $this;
         $clone->networkIdentity = $network ?? new Network('vk', '0000001');

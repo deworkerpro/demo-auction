@@ -10,6 +10,5 @@ final class Command
         public readonly string $id = '',
         public readonly string $current = '',
         public readonly string $new = ''
-    ) {
-    }
+    ) {}
 }

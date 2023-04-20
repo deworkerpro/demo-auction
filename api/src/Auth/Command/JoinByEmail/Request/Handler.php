@@ -23,8 +23,7 @@ final class Handler
         private readonly Tokenizer $tokenizer,
         private readonly Flusher $flusher,
         private readonly JoinConfirmationSender $sender
-    ) {
-    }
+    ) {}
 
     public function handle(Command $command): void
     {

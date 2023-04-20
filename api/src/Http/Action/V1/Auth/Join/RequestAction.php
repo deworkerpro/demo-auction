@@ -19,8 +19,7 @@ final class RequestAction implements RequestHandlerInterface
         private readonly Denormalizer $denormalizer,
         private readonly Validator $validator,
         private readonly Handler $handler
-    ) {
-    }
+    ) {}
 
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
