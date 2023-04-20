@@ -14,8 +14,7 @@ final class FeaturesMiddleware implements MiddlewareInterface
     public function __construct(
         private readonly FeatureSwitch $switch,
         private readonly string $header = 'X-Features'
-    ) {
-    }
+    ) {}
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {

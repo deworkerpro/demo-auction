@@ -10,6 +10,5 @@ final class Command
         public string $email = '',
         public string $network = '',
         public string $identity = ''
-    ) {
-    }
+    ) {}
 }

@@ -11,9 +11,7 @@ use League\OAuth2\Server\Entities\ScopeEntityInterface;
 
 final class AccessTokenGenerator
 {
-    public function __construct(private readonly string $privateKeyPath)
-    {
-    }
+    public function __construct(private readonly string $privateKeyPath) {}
 
     /**
      * @param ScopeEntityInterface[] $scopes

@@ -6,9 +6,7 @@ namespace App\Frontend;
 
 final class FrontendUrlGenerator
 {
-    public function __construct(private readonly string $baseUrl)
-    {
-    }
+    public function __construct(private readonly string $baseUrl) {}
 
     public function generate(string $uri, array $params = []): string
     {

@@ -11,9 +11,7 @@ use Ramsey\Uuid\Uuid;
 
 final class Tokenizer
 {
-    public function __construct(private readonly DateInterval $interval)
-    {
-    }
+    public function __construct(private readonly DateInterval $interval) {}
 
     public function generate(DateTimeImmutable $date): Token
     {

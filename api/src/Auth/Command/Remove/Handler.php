@@ -10,9 +10,7 @@ use App\Flusher;
 
 final class Handler
 {
-    public function __construct(private readonly UserRepository $users, private readonly Flusher $flusher)
-    {
-    }
+    public function __construct(private readonly UserRepository $users, private readonly Flusher $flusher) {}
 
     public function handle(Command $command): void
     {

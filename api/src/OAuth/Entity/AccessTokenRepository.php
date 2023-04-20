@@ -12,9 +12,7 @@ use League\OAuth2\Server\Repositories\AccessTokenRepositoryInterface;
 
 final class AccessTokenRepository implements AccessTokenRepositoryInterface
 {
-    public function __construct(private readonly Fetcher $users)
-    {
-    }
+    public function __construct(private readonly Fetcher $users) {}
 
     public function getNewToken(
         ClientEntityInterface $clientEntity,
