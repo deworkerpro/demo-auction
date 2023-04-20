@@ -1,5 +1,5 @@
 const features: Record<string, boolean> = {
-  OAUTH: false,
+  OAUTH: true,
 }
 
 export default features
