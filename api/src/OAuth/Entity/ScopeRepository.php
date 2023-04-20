@@ -12,9 +12,7 @@ final class ScopeRepository implements ScopeRepositoryInterface
     /**
      * @param Scope[] $scopes
      */
-    public function __construct(private readonly array $scopes)
-    {
-    }
+    public function __construct(private readonly array $scopes) {}
 
     public function getScopeEntityByIdentifier($identifier): ?Scope
     {

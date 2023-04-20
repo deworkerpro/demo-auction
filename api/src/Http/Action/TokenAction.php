@@ -21,8 +21,7 @@ final class TokenAction implements RequestHandlerInterface
         private LoggerInterface $logger,
         private ResponseFactoryInterface $response,
         private Sentry $sentry
-    ) {
-    }
+    ) {}
 
     public function handle(ServerRequestInterface $request): ResponseInterface
     {

@@ -13,9 +13,7 @@ use stdClass;
 
 final class HomeAction implements RequestHandlerInterface
 {
-    public function __construct(private readonly FeatureFlag $flag)
-    {
-    }
+    public function __construct(private readonly FeatureFlag $flag) {}
 
     public function handle(ServerRequestInterface $request): ResponseInterface
     {

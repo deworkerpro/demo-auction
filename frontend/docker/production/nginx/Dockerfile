@@ -1,4 +1,4 @@
-FROM node:18-alpine as builder
+FROM node:19-alpine as builder
 
 ENV REACT_APP_AUTH_URL=%%REACT_APP_AUTH_URL%%
 
@@ -10,7 +10,7 @@ RUN yarn install && yarn cache clean
 COPY ./ ./
 RUN yarn build
 
-FROM nginx:1.21-alpine
+FROM nginx:1.23-alpine
 
 RUN apk add --no-cache curl
 

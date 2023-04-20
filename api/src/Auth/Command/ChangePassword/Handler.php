@@ -15,8 +15,7 @@ final class Handler
         private readonly UserRepository $users,
         private readonly PasswordHasher $hasher,
         private readonly Flusher $flusher
-    ) {
-    }
+    ) {}
 
     public function handle(Command $command): void
     {

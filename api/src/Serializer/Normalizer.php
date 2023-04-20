@@ -11,8 +11,7 @@ final class Normalizer
 {
     public function __construct(
         private readonly NormalizerInterface $normalizer
-    ) {
-    }
+    ) {}
 
     public function normalize(mixed $object): array|string|int|float|bool|ArrayObject|null
     {

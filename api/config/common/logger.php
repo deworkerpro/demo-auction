@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\FeatureToggle\FeaturesMonologProcessor;
 use Monolog\Handler\StreamHandler;
+use Monolog\Level;
 use Monolog\Logger;
 use Monolog\Processor\ProcessorInterface;
 use Psr\Container\ContainerInterface;
@@ -24,7 +25,7 @@ return [
          */
         $config = $container->get('config')['logger'];
 
-        $level = $config['debug'] ? Logger::DEBUG : Logger::INFO;
+        $level = $config['debug'] ? Level::Debug : Level::Info;
 
         $log = new Logger('API');
 

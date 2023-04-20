@@ -20,8 +20,7 @@ final class Handler
         private readonly Tokenizer $tokenizer,
         private readonly NewEmailConfirmTokenSender $sender,
         private readonly Flusher $flusher
-    ) {
-    }
+    ) {}
 
     public function handle(Command $command): void
     {

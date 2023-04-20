@@ -19,8 +19,7 @@ final class AuthCodeRepository implements AuthCodeRepositoryInterface
     public function __construct(
         private readonly EntityManagerInterface $em,
         private readonly EntityRepository $repo
-    ) {
-    }
+    ) {}
 
     public function getNewAuthCode(): AuthCode
     {
