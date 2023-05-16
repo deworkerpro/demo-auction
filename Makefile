@@ -19,19 +19,19 @@ test-e2e: api-fixtures cucumber-clear cucumber-e2e
 update-deps: api-composer-update frontend-yarn-upgrade cucumber-yarn-upgrade restart
 
 docker-up:
-	docker-compose up -d
+	docker compose up -d
 
 docker-down:
-	docker-compose down --remove-orphans
+	docker compose down --remove-orphans
 
 docker-down-clear:
-	docker-compose down -v --remove-orphans
+	docker compose down -v --remove-orphans
 
 docker-pull:
-	docker-compose pull
+	docker compose pull
 
 docker-build:
-	docker-compose build --pull
+	docker compose build --pull
 
 api-clear:
 	docker run --rm -v ${PWD}/api:/app -w /app alpine sh -c 'rm -rf var/cache/* var/log/* var/test/*'
@@ -42,58 +42,58 @@ api-permissions:
 	docker run --rm -v ${PWD}/api:/app -w /app alpine chmod 777 var/cache var/log var/test
 
 api-composer-install:
-	docker-compose run --rm api-php-cli composer install
+	docker compose run --rm api-php-cli composer install
 
 api-composer-update:
-	docker-compose run --rm api-php-cli composer update
+	docker compose run --rm api-php-cli composer update
 
 api-wait-db:
-	docker-compose run --rm api-php-cli wait-for-it api-postgres:5432 -t 30
+	docker compose run --rm api-php-cli wait-for-it api-postgres:5432 -t 30
 
 api-migrations:
-	docker-compose run --rm api-php-cli composer app migrations:migrate -- --no-interaction
+	docker compose run --rm api-php-cli composer app migrations:migrate -- --no-interaction
 
 api-fixtures:
-	docker-compose run --rm api-php-cli composer app fixtures:load
+	docker compose run --rm api-php-cli composer app fixtures:load
 
 api-backup:
-	docker-compose run --rm api-postgres-backup
+	docker compose run --rm api-postgres-backup
 
 api-check: api-validate-schema api-lint api-analyze api-test
 
 api-validate-schema:
-	docker-compose run --rm api-php-cli composer app orm:validate-schema
+	docker compose run --rm api-php-cli composer app orm:validate-schema
 
 api-lint:
-	docker-compose run --rm api-php-cli composer lint
-	docker-compose run --rm api-php-cli composer php-cs-fixer fix -- --dry-run --diff
+	docker compose run --rm api-php-cli composer lint
+	docker compose run --rm api-php-cli composer php-cs-fixer fix -- --dry-run --diff
 
 api-cs-fix:
-	docker-compose run --rm api-php-cli composer php-cs-fixer fix
+	docker compose run --rm api-php-cli composer php-cs-fixer fix
 
 api-analyze:
-	docker-compose run --rm api-php-cli composer psalm -- --no-diff
+	docker compose run --rm api-php-cli composer psalm -- --no-diff
 
 api-analyze-diff:
-	docker-compose run --rm api-php-cli composer psalm
+	docker compose run --rm api-php-cli composer psalm
 
 api-test:
-	docker-compose run --rm api-php-cli composer test
+	docker compose run --rm api-php-cli composer test
 
 api-test-coverage:
-	docker-compose run --rm api-php-cli composer test-coverage
+	docker compose run --rm api-php-cli composer test-coverage
 
 api-test-unit:
-	docker-compose run --rm api-php-cli composer test -- --testsuite=unit
+	docker compose run --rm api-php-cli composer test -- --testsuite=unit
 
 api-test-unit-coverage:
-	docker-compose run --rm api-php-cli composer test-coverage -- --testsuite=unit
+	docker compose run --rm api-php-cli composer test-coverage -- --testsuite=unit
 
 api-test-functional:
-	docker-compose run --rm api-php-cli composer test -- --testsuite=functional
+	docker compose run --rm api-php-cli composer test -- --testsuite=functional
 
 api-test-functional-coverage:
-	docker-compose run --rm api-php-cli composer test-coverage -- --testsuite=functional
+	docker compose run --rm api-php-cli composer test-coverage -- --testsuite=functional
 
 frontend-clear:
 	docker run --rm -v ${PWD}/frontend:/app -w /app alpine sh -c 'rm -rf .ready build'
@@ -101,10 +101,10 @@ frontend-clear:
 frontend-init: frontend-yarn-install
 
 frontend-yarn-install:
-	docker-compose run --rm frontend-node-cli yarn install
+	docker compose run --rm frontend-node-cli yarn install
 
 frontend-yarn-upgrade:
-	docker-compose run --rm frontend-node-cli yarn upgrade
+	docker compose run --rm frontend-node-cli yarn upgrade
 
 frontend-ready:
 	docker run --rm -v ${PWD}/frontend:/app -w /app alpine touch .ready
@@ -112,20 +112,20 @@ frontend-ready:
 frontend-check: frontend-lint frontend-test
 
 frontend-lint:
-	docker-compose run --rm frontend-node-cli yarn eslint
-	docker-compose run --rm frontend-node-cli yarn stylelint
+	docker compose run --rm frontend-node-cli yarn eslint
+	docker compose run --rm frontend-node-cli yarn stylelint
 
 frontend-eslint-fix:
-	docker-compose run --rm frontend-node-cli yarn eslint-fix
+	docker compose run --rm frontend-node-cli yarn eslint-fix
 
 frontend-pretty:
-	docker-compose run --rm frontend-node-cli yarn prettier
+	docker compose run --rm frontend-node-cli yarn prettier
 
 frontend-test:
-	docker-compose run --rm frontend-node-cli yarn test --watchAll=false
+	docker compose run --rm frontend-node-cli yarn test --watchAll=false
 
 frontend-test-watch:
-	docker-compose run --rm frontend-node-cli yarn test
+	docker compose run --rm frontend-node-cli yarn test
 
 cucumber-clear:
 	docker run --rm -v ${PWD}/cucumber:/app -w /app alpine sh -c 'rm -rf var/*'
@@ -133,22 +133,22 @@ cucumber-clear:
 cucumber-init: cucumber-yarn-install
 
 cucumber-yarn-install:
-	docker-compose run --rm cucumber-node-cli yarn install
+	docker compose run --rm cucumber-node-cli yarn install
 
 cucumber-yarn-upgrade:
-	docker-compose run --rm cucumber-node-cli yarn upgrade
+	docker compose run --rm cucumber-node-cli yarn upgrade
 
 cucumber-lint:
-	docker-compose run --rm cucumber-node-cli yarn lint
+	docker compose run --rm cucumber-node-cli yarn lint
 
 cucumber-lint-fix:
-	docker-compose run --rm cucumber-node-cli yarn lint-fix
+	docker compose run --rm cucumber-node-cli yarn lint-fix
 
 cucumber-smoke:
-	docker-compose run --rm cucumber-node-cli yarn smoke
+	docker compose run --rm cucumber-node-cli yarn smoke
 
 cucumber-e2e:
-	docker-compose run --rm cucumber-node-cli yarn e2e
+	docker compose run --rm cucumber-node-cli yarn e2e
 
 build: build-frontend build-api
 
@@ -184,20 +184,20 @@ testing-build-cucumber:
 	docker --log-level=debug build --pull --file=cucumber/docker/testing/node/Dockerfile --tag=${REGISTRY}/auction-cucumber-node-cli:${IMAGE_TAG} cucumber
 
 testing-init:
-	COMPOSE_PROJECT_NAME=testing docker-compose -f docker-compose-testing.yml up -d
-	COMPOSE_PROJECT_NAME=testing docker-compose -f docker-compose-testing.yml run --rm api-php-cli wait-for-it api-postgres:5432 -t 60
-	COMPOSE_PROJECT_NAME=testing docker-compose -f docker-compose-testing.yml run --rm api-php-cli php bin/app.php migrations:migrate --no-interaction
-	COMPOSE_PROJECT_NAME=testing docker-compose -f docker-compose-testing.yml run --rm testing-api-php-cli php bin/app.php fixtures:load --no-interaction
+	COMPOSE_PROJECT_NAME=testing docker compose -f docker-compose-testing.yml up -d
+	COMPOSE_PROJECT_NAME=testing docker compose -f docker-compose-testing.yml run --rm api-php-cli wait-for-it api-postgres:5432 -t 60
+	COMPOSE_PROJECT_NAME=testing docker compose -f docker-compose-testing.yml run --rm api-php-cli php bin/app.php migrations:migrate --no-interaction
+	COMPOSE_PROJECT_NAME=testing docker compose -f docker-compose-testing.yml run --rm testing-api-php-cli php bin/app.php fixtures:load --no-interaction
 	sleep 15
 
 testing-smoke:
-	COMPOSE_PROJECT_NAME=testing docker-compose -f docker-compose-testing.yml run --rm cucumber-node-cli yarn smoke-ci
+	COMPOSE_PROJECT_NAME=testing docker compose -f docker-compose-testing.yml run --rm cucumber-node-cli yarn smoke-ci
 
 testing-e2e:
-	COMPOSE_PROJECT_NAME=testing docker-compose -f docker-compose-testing.yml run --rm cucumber-node-cli yarn e2e-ci
+	COMPOSE_PROJECT_NAME=testing docker compose -f docker-compose-testing.yml run --rm cucumber-node-cli yarn e2e-ci
 
 testing-down-clear:
-	COMPOSE_PROJECT_NAME=testing docker-compose -f docker-compose-testing.yml down -v --remove-orphans
+	COMPOSE_PROJECT_NAME=testing docker compose -f docker-compose-testing.yml down -v --remove-orphans
 
 try-testing: try-build try-testing-build try-testing-init try-testing-smoke try-testing-e2e try-testing-down-clear
 
