@@ -31,6 +31,7 @@ return [
                 OAuth\Console\ClearExpiredCommand::class,
 
                 EventStore\Console\EventsEmitCommand::class,
+                EventStore\Console\EventsConsumeCommand::class,
             ],
         ],
     ],
