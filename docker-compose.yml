@@ -78,6 +78,9 @@ services:
             DB_USER: app
             DB_PASSWORD_FILE: /run/secrets/api_db_password
             DB_NAME: app
+            AMQP_HOST: rabbitmq
+            AMQP_USERNAME: app
+            AMQP_PASSWORD_FILE: /run/secrets/rabbitmq_password
             MAILER_HOST: mailer
             MAILER_PORT: 1025
             MAILER_USERNAME: app
@@ -93,6 +96,7 @@ services:
         secrets:
             - api_db_password
             - api_mailer_password
+            - rabbitmq_password
             - sentry_dsn
             - jwt_encryption_key
             - jwt_public_key
@@ -109,6 +113,9 @@ services:
             DB_USER: app
             DB_PASSWORD_FILE: /run/secrets/api_db_password
             DB_NAME: app
+            AMQP_HOST: rabbitmq
+            AMQP_USERNAME: app
+            AMQP_PASSWORD_FILE: /run/secrets/rabbitmq_password
             MAILER_HOST: mailer
             MAILER_PORT: 1025
             MAILER_USERNAME: app
@@ -124,6 +131,7 @@ services:
         secrets:
             - api_db_password
             - api_mailer_password
+            - rabbitmq_password
             - sentry_dsn
             - jwt_encryption_key
             - jwt_public_key
@@ -226,10 +234,10 @@ services:
 secrets:
     api_db_password:
         file: ./docker/development/secrets/api_db_password
-    rabbitmq_password:
-        file: ./docker/development/secrets/rabbitmq_password
     api_mailer_password:
         file: ./docker/development/secrets/api_mailer_password
+    rabbitmq_password:
+        file: ./docker/development/secrets/rabbitmq_password
     sentry_dsn:
         file: ./docker/development/secrets/sentry_dsn
     jwt_encryption_key:
