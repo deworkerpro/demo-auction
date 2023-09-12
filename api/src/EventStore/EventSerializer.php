@@ -4,12 +4,16 @@ declare(strict_types=1);
 
 namespace App\EventStore;
 
+use App\Serializer\Denormalizer;
 use App\Serializer\Normalizer;
 use RuntimeException;
 
 final readonly class EventSerializer
 {
-    public function __construct(private Normalizer $normalizer) {}
+    public function __construct(
+        private Normalizer $normalizer,
+        private Denormalizer $denormalizer
+    ) {}
 
     public function serialize(object $event): array
     {
@@ -20,5 +24,13 @@ final readonly class EventSerializer
         }
 
         return $result;
+    }
+
+    public function unserialize(string $type, array $payload): object
+    {
+        /**
+         * @var class-string $type
+         */
+        return $this->denormalizer->denormalize($payload, $type);
     }
 }
