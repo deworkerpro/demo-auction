@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Queue\Connection\AMQP;
 
 use App\Queue\AmqpQueue;
+use App\Queue\Consumer;
 use App\Queue\Publisher;
 use DI;
 use PhpAmqpLib\Channel\AMQPChannel;
@@ -68,6 +69,7 @@ return [
     },
 
     Publisher::class => DI\get(AmqpQueue::class),
+    Consumer::class => DI\get(AmqpQueue::class),
 
     'config' => [
         'queue' => [
