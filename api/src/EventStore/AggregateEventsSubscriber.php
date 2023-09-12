@@ -9,6 +9,7 @@ use App\EventStore\Entity\Event;
 use App\EventStore\Entity\EventRepository;
 use DateTimeImmutable;
 use Doctrine\Common\EventSubscriber;
+use Doctrine\ORM\Event\PostFlushEventArgs;
 use Doctrine\ORM\Event\PreFlushEventArgs;
 use Doctrine\ORM\Events;
 use Psr\Container\ContainerInterface;
@@ -24,6 +25,7 @@ final readonly class AggregateEventsSubscriber implements EventSubscriber
     {
         return [
             Events::preFlush => 'preFlush',
+            Events::postFlush => 'postFlush',
         ];
     }
 
@@ -47,5 +49,11 @@ final readonly class AggregateEventsSubscriber implements EventSubscriber
                 }
             }
         }
+    }
+
+    public function postFlush(PostFlushEventArgs $args): void
+    {
+        $emitter = $this->container->get(EventsEmitter::class);
+        $emitter->emitNewEvents();
     }
 }
