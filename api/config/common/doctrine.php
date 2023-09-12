@@ -3,6 +3,8 @@
 declare(strict_types=1);
 
 use App\Auth;
+use App\EventStore\AggregateEventsSubscriber;
+use App\EventStore\EventSerializer;
 use App\Newsletter;
 use Doctrine\Common\EventManager;
 use Doctrine\Common\EventSubscriber;
@@ -76,6 +78,12 @@ return [
         $em = $container->get(EntityManagerInterface::class);
         return $em->getConnection();
     },
+    AggregateEventsSubscriber::class => static function (ContainerInterface $container): AggregateEventsSubscriber {
+        return new AggregateEventsSubscriber(
+            $container,
+            $container->get(EventSerializer::class)
+        );
+    },
 
     'config' => [
         'doctrine' => [
@@ -90,8 +98,12 @@ return [
                 'dbname' => env('DB_NAME'),
                 'charset' => 'utf-8',
             ],
-            'subscribers' => [],
+            'subscribers' => [
+                AggregateEventsSubscriber::class,
+            ],
             'metadata_dirs' => [
+                __DIR__ . '/../../src/EventStore/Entity',
+
                 __DIR__ . '/../../src/Auth/Entity',
                 __DIR__ . '/../../src/OAuth/Entity',
 
