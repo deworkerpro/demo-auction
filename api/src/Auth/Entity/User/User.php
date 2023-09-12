@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace App\Auth\Entity\User;
 
+use App\AggregateRoot;
+use App\Auth\Event\UserSignedUp;
 use App\Auth\Service\PasswordHasher;
+use App\EventsTrait;
 use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -14,8 +17,10 @@ use DomainException;
 #[ORM\Entity]
 #[ORM\HasLifecycleCallbacks]
 #[ORM\Table(name: 'auth_users')]
-final class User
+final class User implements AggregateRoot
 {
+    use EventsTrait;
+
     #[ORM\Column(type: 'auth_user_id')]
     #[ORM\Id]
     private Id $id;
@@ -71,6 +76,11 @@ final class User
     ): self {
         $user = new self($id, $date, $email, Status::active());
         $user->networks->add(new UserNetwork($user, $network));
+        $user->recordEvent(new UserSignedUp(
+            id: $user->id->getValue(),
+            date: $user->date->format(DATE_ATOM),
+            email: $user->email->getValue()
+        ));
         return $user;
     }
 
@@ -95,6 +105,11 @@ final class User
         $this->joinConfirmToken->validate($token, $date);
         $this->status = Status::active();
         $this->joinConfirmToken = null;
+        $this->recordEvent(new UserSignedUp(
+            id: $this->id->getValue(),
+            date: $this->date->format(DATE_ATOM),
+            email: $this->email->getValue()
+        ));
     }
 
     public function attachNetwork(Network $network): void
