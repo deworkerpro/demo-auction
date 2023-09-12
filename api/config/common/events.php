@@ -9,6 +9,7 @@ use App\EventStore\Entity\Event;
 use App\EventStore\Entity\EventRepository;
 use App\EventStore\ExchangeResolver\ExchangeResolver;
 use App\EventStore\ExchangeResolver\Route;
+use App\Newsletter;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Container\ContainerInterface;
 
@@ -45,6 +46,11 @@ return [
         'events' => [
             'routes' => [
                 Auth\Event\UserSignedUp::class => 'auth_events',
+            ],
+            'listeners' => [
+                'newsletter_inbox' => [
+                    Auth\Event\UserSignedUp::class => Newsletter\Listener\SubscribeToNewsletterByUserSignedUp::class,
+                ],
             ],
         ],
     ],
