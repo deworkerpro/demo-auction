@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\EventStore;
 use App\OAuth;
 use Doctrine\Migrations;
 use Doctrine\ORM\EntityManagerInterface;
@@ -28,6 +29,8 @@ return [
                 Migrations\Tools\Console\Command\UpToDateCommand::class,
 
                 OAuth\Console\ClearExpiredCommand::class,
+
+                EventStore\Console\EventsEmitCommand::class,
             ],
         ],
     ],
