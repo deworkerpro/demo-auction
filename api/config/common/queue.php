@@ -4,8 +4,12 @@ declare(strict_types=1);
 
 namespace App\Queue\Connection\AMQP;
 
+use App\Queue\AmqpQueue;
+use App\Queue\Publisher;
+use DI;
 use PhpAmqpLib\Channel\AMQPChannel;
 use PhpAmqpLib\Connection\AMQPStreamConnection;
+use PhpAmqpLib\Exchange\AMQPExchangeType;
 use Psr\Container\ContainerInterface;
 
 use function App\env;
@@ -37,6 +41,24 @@ return [
 
         $channel = $connection->channel();
 
+        foreach ($config['exchanges'] as $exchange => $queues) {
+            $channel->exchange_declare(
+                exchange: $exchange,
+                type: AMQPExchangeType::FANOUT,
+                durable: true,
+                auto_delete: false
+            );
+
+            foreach ($queues as $queue) {
+                $channel->queue_declare(
+                    queue: $queue,
+                    durable: true,
+                    auto_delete: false
+                );
+                $channel->queue_bind($queue, $exchange);
+            }
+        }
+
         register_shutdown_function(static function (AMQPChannel $channel, AMQPStreamConnection $connection): void {
             $channel->close();
             $connection->close();
@@ -45,8 +67,13 @@ return [
         return $connection;
     },
 
+    Publisher::class => DI\get(AmqpQueue::class),
+
     'config' => [
         'queue' => [
+            'exchanges' => [
+                'auth_events' => ['newsletter_inbox'],
+            ],
             'amqp' => [
                 'host' => env('AMQP_HOST'),
                 'port' => 5672,
