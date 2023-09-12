@@ -193,6 +193,28 @@ services:
             - traefik.http.routers.backup-storage.entryPoints=http
             - traefik.http.services.backup-storage.loadBalancer.server.port=80
 
+    rabbitmq:
+        hostname: rabbitmq
+        build:
+            context: ./rabbitmq/docker/common
+        networks:
+            - traefik-public
+            - default
+        environment:
+            RABBITMQ_ERLANG_COOKIE: SWQOKODSQALRTCLNMEQG
+            RABBITMQ_DEFAULT_USER: app
+            RABBITMQ_DEFAULT_PASS_FILE: /run/secrets/rabbitmq_password
+        secrets:
+            - rabbitmq_password
+        volumes:
+            - rabbitmq:/var/lib/rabbitmq
+        labels:
+            - traefik.enable=true
+            - traefik.docker.network=traefik-public
+            - traefik.http.routers.rabbitmq.rule=Host(`rabbitmq.localhost`)
+            - traefik.http.services.rabbitmq.loadBalancer.server.port=15672
+            - traefik.http.routers.rabbitmq.entryPoints=http
+
     cucumber-node-cli:
         build:
             context: cucumber/docker/development/node
@@ -203,6 +225,8 @@ services:
 secrets:
     api_db_password:
         file: ./docker/development/secrets/api_db_password
+    rabbitmq_password:
+        file: ./docker/development/secrets/rabbitmq_password
     api_mailer_password:
         file: ./docker/development/secrets/api_mailer_password
     sentry_dsn:
@@ -218,6 +242,7 @@ secrets:
 
 volumes:
     api-postgres:
+    rabbitmq:
     backup-storage:
 
 networks:

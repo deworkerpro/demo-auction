@@ -201,9 +201,23 @@ services:
             restart_policy:
                 condition: none
 
+    rabbitmq:
+        hostname: rabbitmq
+        image: ${REGISTRY}/auction-rabbitmq:${IMAGE_TAG}
+        environment:
+            RABBITMQ_ERLANG_COOKIE: SWQOKODSQALRTCLNMEQG
+            RABBITMQ_DEFAULT_USER: app
+            RABBITMQ_DEFAULT_PASS_FILE: /run/secrets/rabbitmq_password
+        secrets:
+            - rabbitmq_password
+        volumes:
+            - rabbitmq:/var/lib/rabbitmq
+
 secrets:
     api_db_password:
         file: ./secrets/api_db_password
+    rabbitmq_password:
+        file: ./secrets/rabbitmq_password
     api_mailer_password:
         file: ./secrets/api_mailer_password
     sentry_dsn:
@@ -219,6 +233,7 @@ secrets:
 
 volumes:
     api-postgres:
+    rabbitmq:
 
 networks:
     traefik-public:

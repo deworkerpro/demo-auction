@@ -136,6 +136,16 @@ services:
     mailer:
         image: mailhog/mailhog
 
+    rabbitmq:
+        hostname: rabbitmq
+        image: ${REGISTRY}/auction-rabbitmq:${IMAGE_TAG}
+        environment:
+            RABBITMQ_ERLANG_COOKIE: SWQOKODSQALRTCLNMEQG
+            RABBITMQ_DEFAULT_USER: app
+            RABBITMQ_DEFAULT_PASS_FILE: /run/secrets/rabbitmq_password
+        secrets:
+            - rabbitmq_password
+
     cucumber-node-cli:
         image: ${REGISTRY}/auction-cucumber-node-cli:${IMAGE_TAG}
         volumes:
@@ -145,6 +155,8 @@ services:
 secrets:
     api_db_password:
         file: ./docker/development/secrets/api_db_password
+    rabbitmq_password:
+        file: ./docker/development/secrets/rabbitmq_password
     api_mailer_password:
         file: ./docker/development/secrets/api_mailer_password
     sentry_dsn:
