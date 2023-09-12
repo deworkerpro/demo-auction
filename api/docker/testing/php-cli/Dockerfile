@@ -1,8 +1,8 @@
 FROM php:8.3-cli-alpine AS builder
 
-RUN apk add --no-cache postgresql-dev \
+RUN apk add --no-cache postgresql-dev linux-headers \
     && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
-    && docker-php-ext-install pdo_pgsql opcache
+    && docker-php-ext-install pdo_pgsql bcmath sockets opcache
 
 RUN apk add --no-cache unzip
 
@@ -21,9 +21,9 @@ RUN composer install --prefer-dist --no-progress --no-suggest --optimize-autoloa
 
 FROM php:8.3-cli-alpine
 
-RUN apk add --no-cache postgresql-dev bash coreutils \
+RUN apk add --no-cache postgresql-dev bash coreutils linux-headers \
     && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
-    && docker-php-ext-install pdo_pgsql opcache
+    && docker-php-ext-install pdo_pgsql bcmath sockets opcache
 
 RUN mv $PHP_INI_DIR/php.ini-production $PHP_INI_DIR/php.ini
 
