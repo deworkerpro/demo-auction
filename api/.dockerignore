@@ -3,3 +3,4 @@
 /var/cache/*
 /var/log/*
 /var/test/*
+/.ready

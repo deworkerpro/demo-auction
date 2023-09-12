@@ -2,7 +2,7 @@ init: init-ci frontend-ready
 init-ci: docker-down-clear \
 	api-clear frontend-clear cucumber-clear \
 	docker-pull docker-build docker-up \
-	api-init frontend-init cucumber-init
+	api-init frontend-init cucumber-init api-ready
 up: docker-up
 down: docker-down
 restart: down up
@@ -59,6 +59,12 @@ api-migrations:
 
 api-fixtures:
 	docker compose run --rm api-php-cli composer app fixtures:load
+
+api-ready:
+	docker run --rm -v ${PWD}/api:/app -w /app alpine touch .ready
+
+api-restart-consumers:
+	docker compose restart api-newsletter-consumer
 
 api-backup:
 	docker compose run --rm api-postgres-backup
