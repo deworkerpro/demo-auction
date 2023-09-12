@@ -36,7 +36,7 @@ docker-build:
 api-clear:
 	docker run --rm -v ${PWD}/api:/app -w /app alpine sh -c 'rm -rf var/cache/* var/log/* var/test/*'
 
-api-init: api-permissions api-composer-install api-wait-db api-migrations api-fixtures
+api-init: api-permissions api-composer-install api-wait-db api-wait-rabbitmq api-migrations api-fixtures
 
 api-permissions:
 	docker run --rm -v ${PWD}/api:/app -w /app alpine chmod 777 var/cache var/log var/test
@@ -49,6 +49,10 @@ api-composer-update:
 
 api-wait-db:
 	docker compose run --rm api-php-cli wait-for-it api-postgres:5432 -t 30
+
+api-wait-rabbitmq:
+	docker compose run --rm api-php-cli wait-for-it rabbitmq:5672 -t 60
+	sleep 5
 
 api-migrations:
 	docker compose run --rm api-php-cli composer app migrations:migrate -- --no-interaction
@@ -150,7 +154,7 @@ cucumber-smoke:
 cucumber-e2e:
 	docker compose run --rm cucumber-node-cli yarn e2e
 
-build: build-frontend build-api
+build: build-frontend build-api build-rabbitmq
 
 build-frontend:
 	docker --log-level=debug build --pull --file=frontend/docker/production/nginx/Dockerfile --tag=${REGISTRY}/auction-frontend:${IMAGE_TAG} frontend
@@ -161,10 +165,13 @@ build-api:
 	docker --log-level=debug build --pull --file=api/docker/production/php-cli/Dockerfile --tag=${REGISTRY}/auction-api-php-cli:${IMAGE_TAG} api
 	docker --log-level=debug build --pull --file=api/docker/common/postgres-backup/Dockerfile --tag=${REGISTRY}/auction-api-postgres-backup:${IMAGE_TAG} api/docker/common
 
+build-rabbitmq:
+	docker --log-level=debug build --pull --file=rabbitmq/docker/common/Dockerfile --tag=${REGISTRY}/auction-rabbitmq:${IMAGE_TAG} rabbitmq/docker/common
+
 try-build:
 	REGISTRY=localhost IMAGE_TAG=0 make build
 
-push: push-frontend push-api
+push: push-frontend push-api push-rabbitmq
 
 push-frontend:
 	docker push ${REGISTRY}/auction-frontend:${IMAGE_TAG}
@@ -174,6 +181,9 @@ push-api:
 	docker push ${REGISTRY}/auction-api-php-fpm:${IMAGE_TAG}
 	docker push ${REGISTRY}/auction-api-php-cli:${IMAGE_TAG}
 	docker push ${REGISTRY}/auction-api-postgres-backup:${IMAGE_TAG}
+
+push-rabbitmq:
+	docker push ${REGISTRY}/auction-rabbitmq:${IMAGE_TAG}
 
 testing-build: testing-build-testing-api-php-cli testing-build-cucumber
 
@@ -186,6 +196,8 @@ testing-build-cucumber:
 testing-init:
 	COMPOSE_PROJECT_NAME=testing docker compose -f docker-compose-testing.yml up -d
 	COMPOSE_PROJECT_NAME=testing docker compose -f docker-compose-testing.yml run --rm api-php-cli wait-for-it api-postgres:5432 -t 60
+	COMPOSE_PROJECT_NAME=testing docker compose -f docker-compose-testing.yml run --rm api-php-cli wait-for-it rabbitmq:5672 -t 60
+	sleep 5
 	COMPOSE_PROJECT_NAME=testing docker compose -f docker-compose-testing.yml run --rm api-php-cli php bin/app.php migrations:migrate --no-interaction
 	COMPOSE_PROJECT_NAME=testing docker compose -f docker-compose-testing.yml run --rm testing-api-php-cli php bin/app.php fixtures:load --no-interaction
 	sleep 15

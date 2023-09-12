@@ -66,6 +66,9 @@ services:
             DB_USER: app
             DB_PASSWORD_FILE: /run/secrets/api_db_password
             DB_NAME: app
+            AMQP_HOST: rabbitmq
+            AMQP_USERNAME: app
+            AMQP_PASSWORD_FILE: /run/secrets/rabbitmq_password
             MAILER_HOST: ${API_MAILER_HOST}
             MAILER_PORT: ${API_MAILER_PORT}
             MAILER_USERNAME: ${API_MAILER_USERNAME}
@@ -79,6 +82,7 @@ services:
         secrets:
             - api_db_password
             - api_mailer_password
+            - rabbitmq_password
             - sentry_dsn
             - jwt_encryption_key
             - jwt_public_key
@@ -99,6 +103,9 @@ services:
             DB_USER: app
             DB_PASSWORD_FILE: /run/secrets/api_db_password
             DB_NAME: app
+            AMQP_HOST: rabbitmq
+            AMQP_USERNAME: app
+            AMQP_PASSWORD_FILE: /run/secrets/rabbitmq_password
             MAILER_HOST: ${API_MAILER_HOST}
             MAILER_PORT: ${API_MAILER_PORT}
             MAILER_USERNAME: ${API_MAILER_USERNAME}
@@ -112,6 +119,7 @@ services:
         secrets:
             - api_db_password
             - api_mailer_password
+            - rabbitmq_password
             - sentry_dsn
             - jwt_encryption_key
             - jwt_public_key
@@ -133,6 +141,9 @@ services:
             DB_USER: app
             DB_PASSWORD_FILE: /run/secrets/api_db_password
             DB_NAME: app
+            AMQP_HOST: rabbitmq
+            AMQP_USERNAME: app
+            AMQP_PASSWORD_FILE: /run/secrets/rabbitmq_password
             MAILER_HOST: ${API_MAILER_HOST}
             MAILER_PORT: ${API_MAILER_PORT}
             MAILER_USERNAME: ${API_MAILER_USERNAME}
@@ -146,6 +157,7 @@ services:
         secrets:
             - api_db_password
             - api_mailer_password
+            - rabbitmq_password
             - sentry_dsn
             - jwt_encryption_key
             - jwt_public_key
@@ -216,10 +228,10 @@ services:
 secrets:
     api_db_password:
         file: ./secrets/api_db_password
-    rabbitmq_password:
-        file: ./secrets/rabbitmq_password
     api_mailer_password:
         file: ./secrets/api_mailer_password
+    rabbitmq_password:
+        file: ./secrets/rabbitmq_password
     sentry_dsn:
         file: ./secrets/sentry_dsn
     jwt_encryption_key:
