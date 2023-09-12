@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\EventStore\Console;
 
+use App\EventStore\EventListenerResolver\EventListenerResolver;
+use App\EventStore\EventSerializer;
 use App\Queue\Consumer;
 use App\Queue\Message;
 use Symfony\Component\Console\Command\Command;
@@ -14,7 +16,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 final class EventsConsumeCommand extends Command
 {
     public function __construct(
-        private readonly Consumer $consumer
+        private readonly Consumer $consumer,
+        private readonly EventSerializer $serializer,
+        private readonly EventListenerResolver $listenerResolver
     ) {
         parent::__construct();
     }
@@ -32,8 +36,11 @@ final class EventsConsumeCommand extends Command
         $queue = (string)$input->getArgument('queue');
         $output->writeln('<comment>Listen queue ' . $queue . '</comment>');
 
-        $this->consumer->consume($queue, static function (Message $message) use ($output): void {
+        $this->consumer->consume($queue, function (Message $message) use ($queue, $output): void {
             $output->writeln('<info>Consume message ' . $message->type . ':' . $message->id . '</info>');
+            $event = $this->serializer->unserialize($message->type, $message->payload);
+            $listener = $this->listenerResolver->resolve($queue, $event);
+            $listener($event);
         });
 
         $output->writeln('<info>Done!</info>');
