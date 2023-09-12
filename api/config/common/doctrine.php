@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Auth;
+use App\Newsletter;
 use Doctrine\Common\EventManager;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\DBAL\Connection;
@@ -93,12 +94,17 @@ return [
             'metadata_dirs' => [
                 __DIR__ . '/../../src/Auth/Entity',
                 __DIR__ . '/../../src/OAuth/Entity',
+
+                __DIR__ . '/../../src/Newsletter/Entity',
             ],
             'types' => [
                 Auth\Entity\User\IdType::NAME => Auth\Entity\User\IdType::class,
                 Auth\Entity\User\EmailType::NAME => Auth\Entity\User\EmailType::class,
                 Auth\Entity\User\RoleType::NAME => Auth\Entity\User\RoleType::class,
                 Auth\Entity\User\StatusType::NAME => Auth\Entity\User\StatusType::class,
+
+                Newsletter\Entity\Subscription\IdType::NAME => Newsletter\Entity\Subscription\IdType::class,
+                Newsletter\Entity\Subscription\EmailType::NAME => Newsletter\Entity\Subscription\EmailType::class,
             ],
         ],
     ],
