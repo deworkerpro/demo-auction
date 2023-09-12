@@ -136,6 +136,38 @@ services:
             - jwt_public_key
             - jwt_private_key
 
+    api-newsletter-consumer:
+        image: ${REGISTRY}/auction-api-php-cli:${IMAGE_TAG}
+        environment:
+            APP_ENV: prod
+            APP_DEBUG: 0
+            DB_HOST: api-postgres
+            DB_USER: app
+            DB_PASSWORD_FILE: /run/secrets/api_db_password
+            DB_NAME: app
+            AMQP_HOST: rabbitmq
+            AMQP_USERNAME: app
+            AMQP_PASSWORD_FILE: /run/secrets/rabbitmq_password
+            MAILER_HOST: mailer
+            MAILER_PORT: 1025
+            MAILER_USERNAME: app
+            MAILER_PASSWORD_FILE: /run/secrets/api_mailer_password
+            MAILER_FROM_EMAIL: mail@app.test
+            FRONTEND_URL: http://localhost
+            SENTRY_DSN_FILE: /run/secrets/sentry_dsn
+            JWT_ENCRYPTION_KEY_FILE: /run/secrets/jwt_encryption_key
+            JWT_PUBLIC_KEY_PATH: /run/secrets/jwt_public_key
+            JWT_PRIVATE_KEY_PATH: /run/secrets/jwt_private_key
+        secrets:
+            - api_db_password
+            - api_mailer_password
+            - rabbitmq_password
+            - sentry_dsn
+            - jwt_encryption_key
+            - jwt_public_key
+            - jwt_private_key
+        command: sh -c "wait-for-it rabbitmq:5672 -t 60 && sleep 1 && php bin/app.php events:consume newsletter_inbox"
+
     api-postgres:
         image: postgres:13.3-alpine
         environment:
