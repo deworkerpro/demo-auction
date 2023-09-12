@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Auth\Test\Unit\Entity\User\User\JoinByEmail;
 
 use App\Auth\Entity\User\Token;
+use App\Auth\Event\UserSignedUp;
 use App\Auth\Test\Builder\UserBuilder;
 use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
@@ -35,6 +36,9 @@ final class ConfirmTest extends TestCase
         self::assertTrue($user->isActive());
 
         self::assertNull($user->getJoinConfirmToken());
+
+        self::assertCount(1, $events = $user->releaseEvents());
+        self::assertInstanceOf(UserSignedUp::class, $events[0]);
     }
 
     public function testWrong(): void

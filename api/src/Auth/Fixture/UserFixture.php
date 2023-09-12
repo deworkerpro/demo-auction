@@ -30,6 +30,8 @@ final class UserFixture extends AbstractFixture
 
         $user->confirmJoin($value, $date);
 
+        $user->releaseEvents();
+
         $manager->persist($user);
 
         $manager->flush();

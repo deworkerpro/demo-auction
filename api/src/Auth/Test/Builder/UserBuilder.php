@@ -99,6 +99,8 @@ final class UserBuilder
             );
         }
 
+        $user->releaseEvents();
+
         return $user;
     }
 }
