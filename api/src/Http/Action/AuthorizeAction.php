@@ -47,7 +47,7 @@ final class AuthorizeAction implements RequestHandlerInterface
                  */
                 $body = $request->getParsedBody();
 
-                if (!$this->rateLimit->allowed('auth-' . md5(mb_strtolower(trim($body['email']))), 5, 10)) {
+                if (!$this->rateLimit->allowed('auth-' . md5(mb_strtolower(trim($body['email'] ?? ''))), 5, 10)) {
                     $error = $this->translator->trans('error.rate_limit', [], 'oauth');
 
                     return new HtmlResponse(
