@@ -6,6 +6,7 @@ namespace App\Http\Action;
 
 use App\Auth\Query\FindIdByCredentials\Fetcher;
 use App\Auth\Query\FindIdByCredentials\Query;
+use App\Http\RateLimit;
 use App\Http\Response\HtmlResponse;
 use App\OAuth\Entity\User;
 use League\OAuth2\Server\AuthorizationServer;
@@ -28,6 +29,7 @@ final readonly class AuthorizeAction implements RequestHandlerInterface
         private Environment $template,
         private ResponseFactoryInterface $response,
         private TranslatorInterface $translator,
+        private RateLimit $rateLimit
     ) {}
 
     #[Override]
@@ -46,6 +48,15 @@ final readonly class AuthorizeAction implements RequestHandlerInterface
                  * } $body
                  */
                 $body = $request->getParsedBody();
+
+                if (!$this->rateLimit->allowed('auth-' . md5(mb_strtolower(trim($body['email'] ?? ''))), 5, 10)) {
+                    $error = $this->translator->trans('error.rate_limit', [], 'oauth');
+
+                    return new HtmlResponse(
+                        $this->template->render('authorize.html.twig', compact('query', 'error')),
+                        429
+                    );
+                }
 
                 $query->email = $body['email'] ?? '';
                 $query->password = $body['password'] ?? '';
