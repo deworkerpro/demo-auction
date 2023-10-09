@@ -1,8 +1,13 @@
 FROM php:8.3-cli-alpine3.19 AS builder
 
-RUN apk add --no-cache postgresql-dev \
+ENV REDIS_VERSION 6.0.1
+
+RUN apk add --no-cache postgresql-dev git \
     && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
-    && docker-php-ext-install pdo_pgsql opcache
+    && git clone --branch $REDIS_VERSION --depth 1 https://github.com/phpredis/phpredis.git /usr/src/php/ext/redis \
+    && docker-php-ext-configure redis \
+    && docker-php-ext-install pdo_pgsql redis opcache \
+    && apk del git
 
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
@@ -19,9 +24,14 @@ RUN composer install --prefer-dist --no-progress --no-suggest --optimize-autoloa
 
 FROM php:8.3-cli-alpine3.19
 
-RUN apk add --no-cache postgresql-dev bash coreutils \
+ENV REDIS_VERSION 6.0.1
+
+RUN apk add --no-cache postgresql-dev bash coreutils git \
     && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
-    && docker-php-ext-install pdo_pgsql opcache
+    && git clone --branch $REDIS_VERSION --depth 1 https://github.com/phpredis/phpredis.git /usr/src/php/ext/redis \
+    && docker-php-ext-configure redis \
+    && docker-php-ext-install pdo_pgsql redis opcache \
+    && apk del git
 
 RUN mv $PHP_INI_DIR/php.ini-production $PHP_INI_DIR/php.ini
 
