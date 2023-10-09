@@ -77,6 +77,8 @@ services:
             DB_USER: app
             DB_PASSWORD_FILE: /run/secrets/api_db_password
             DB_NAME: app
+            REDIS_HOST: api-redis
+            REDIS_PASSWORD_FILE: /run/secrets/api_redis_password
             MAILER_HOST: mailer
             MAILER_PORT: 1025
             MAILER_USERNAME: app
@@ -91,6 +93,7 @@ services:
             - ./api:/app
         secrets:
             - api_db_password
+            - api_redis_password
             - api_mailer_password
             - sentry_dsn
             - jwt_encryption_key
@@ -108,6 +111,8 @@ services:
             DB_USER: app
             DB_PASSWORD_FILE: /run/secrets/api_db_password
             DB_NAME: app
+            REDIS_HOST: api-redis
+            REDIS_PASSWORD_FILE: /run/secrets/api_redis_password
             MAILER_HOST: mailer
             MAILER_PORT: 1025
             MAILER_USERNAME: app
@@ -122,6 +127,7 @@ services:
             - ./api:/app
         secrets:
             - api_db_password
+            - api_redis_password
             - api_mailer_password
             - sentry_dsn
             - jwt_encryption_key
@@ -165,7 +171,7 @@ services:
         build:
             context: ./api/docker/common/redis
         environment:
-            REDIS_PASSWORD_FILE: /run/secrets/redis_password
+            REDIS_PASSWORD_FILE: /run/secrets/api_redis_password
         secrets:
             - api_redis_password
         volumes:
