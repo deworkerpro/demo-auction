@@ -46,11 +46,10 @@ final class RefreshTokenTest extends WebTestCase
 
         $response = $this->app()->handle(self::html('POST', '/token', [
             'grant_type' => 'refresh_token',
-            'refresh_token' => $token,
             'redirect_uri' => 'http://localhost/oauth',
             'client_id' => 'frontend',
             'access_type' => 'offline',
-        ]));
+        ])->withCookieParams(['refresh_token' => $token]));
 
         self::assertSame(200, $response->getStatusCode());
 
@@ -68,7 +67,8 @@ final class RefreshTokenTest extends WebTestCase
         self::assertArrayHasKey('access_token', $data);
         self::assertNotEmpty($data['access_token']);
 
-        self::assertArrayHasKey('refresh_token', $data);
-        self::assertNotEmpty($data['refresh_token']);
+        self::assertArrayNotHasKey('refresh_token', $data);
+
+        self::assertStringContainsString('refresh_token', $response->getHeaderLine('Set-Cookie'));
     }
 }

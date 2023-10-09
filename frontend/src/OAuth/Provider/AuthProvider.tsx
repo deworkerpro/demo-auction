@@ -21,7 +21,6 @@ interface TokenResponse {
 type Tokens = {
   accessToken: string
   expires: number
-  refreshToken: string
 }
 
 function AuthProvider({ authorizeUrl, tokenUrl, clientId, scope, redirectPath, children }: Props) {
@@ -80,6 +79,7 @@ function AuthProvider({ authorizeUrl, tokenUrl, clientId, scope, redirectPath, c
 
     fetch(tokenUrl, {
       method: 'POST',
+      credentials: 'include',
       headers: {
         Accept: 'application/json',
         'Content-type': 'application/x-www-form-urlencoded',
@@ -196,12 +196,13 @@ function AuthProvider({ authorizeUrl, tokenUrl, clientId, scope, redirectPath, c
 
     setLoading(true)
 
-    if (Object.prototype.hasOwnProperty.call(refreshPromises, tokens.refreshToken)) {
-      return refreshPromises[tokens.refreshToken]
+    if (Object.prototype.hasOwnProperty.call(refreshPromises, tokens.accessToken)) {
+      return refreshPromises[tokens.accessToken]
     }
 
-    refreshPromises[tokens.refreshToken] = fetch(tokenUrl, {
+    refreshPromises[tokens.accessToken] = fetch(tokenUrl, {
       method: 'POST',
+      credentials: 'include',
       headers: {
         Accept: 'application/json',
         'Content-type': 'application/x-www-form-urlencoded',
@@ -211,7 +212,6 @@ function AuthProvider({ authorizeUrl, tokenUrl, clientId, scope, redirectPath, c
         grant_type: 'refresh_token',
         redirect_uri: window.location.origin + redirectPath,
         access_type: 'offline',
-        refresh_token: tokens.refreshToken,
       }),
     })
       .then((response) => {
@@ -235,14 +235,13 @@ function AuthProvider({ authorizeUrl, tokenUrl, clientId, scope, redirectPath, c
         throw error
       })
 
-    return refreshPromises[tokens.refreshToken]
+    return refreshPromises[tokens.accessToken]
   }, [])
 
   const buildTokens = useCallback(
     (data: TokenResponse): Tokens => ({
       accessToken: data.token_type + ' ' + data.access_token,
       expires: new Date().getTime() + (data.expires_in - 5) * 1000,
-      refreshToken: data.refresh_token,
     }),
     [],
   )

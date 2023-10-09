@@ -79,8 +79,9 @@ final class AuthorizationCodeTest extends WebTestCase
         self::assertArrayHasKey('access_token', $data);
         self::assertNotEmpty($data['access_token']);
 
-        self::assertArrayHasKey('refresh_token', $data);
-        self::assertNotEmpty($data['refresh_token']);
+        self::assertArrayNotHasKey('refresh_token', $data);
+
+        self::assertStringContainsString('refresh_token', $response->getHeaderLine('Set-Cookie'));
     }
 
     public function testInvalidVerifier(): void
