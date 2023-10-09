@@ -69,6 +69,18 @@ return [
                     'ru',
                     'oauth',
                 ],
+                [
+                    'php',
+                    __DIR__ . '/../../translations/csrf.en.php',
+                    'en',
+                    'csrf',
+                ],
+                [
+                    'php',
+                    __DIR__ . '/../../translations/csrf.ru.php',
+                    'ru',
+                    'csrf',
+                ],
             ],
         ],
         'locales' => [

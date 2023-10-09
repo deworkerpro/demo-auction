@@ -88,7 +88,7 @@ abstract class WebTestCase extends TestCase
         return $this->mailer;
     }
 
-    private function container(): ContainerInterface
+    protected function container(): ContainerInterface
     {
         /** @var ContainerInterface */
         return require __DIR__ . '/../../config/container.php';
