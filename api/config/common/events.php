@@ -9,6 +9,8 @@ use App\EventStore\Entity\Event;
 use App\EventStore\Entity\EventRepository;
 use App\EventStore\EventListenerResolver\EventListenerResolver;
 use App\EventStore\EventListenerResolver\Listener;
+use App\EventStore\EventNameResolver\EventNameResolver;
+use App\EventStore\EventNameResolver\Name;
 use App\EventStore\ExchangeResolver\ExchangeResolver;
 use App\EventStore\ExchangeResolver\Route;
 use App\Newsletter;
@@ -44,6 +46,28 @@ return [
         return new ExchangeResolver($routes);
     },
 
+    EventNameResolver::class => static function (ContainerInterface $container): EventNameResolver {
+        /**
+         * @psalm-suppress MixedArrayAccess
+         * @var array{
+         *     names: array<string, string>
+         * } $config
+         */
+        $config = $container->get('config')['events'];
+
+        /** @var Name[] $names */
+        $names = [];
+
+        foreach ($config['names'] as $class => $name) {
+            $names[] = new Name(
+                class: $class,
+                name: $name
+            );
+        }
+
+        return new EventNameResolver($names);
+    },
+
     EventListenerResolver::class => static function (ContainerInterface $container): EventListenerResolver {
         /**
          * @psalm-suppress MixedArrayAccess
@@ -73,10 +97,14 @@ return [
 
         return new EventListenerResolver($containerFactory, $listeners);
     },
+
     'config' => [
         'events' => [
+            'names' => [
+                Auth\Event\UserSignedUp::class => 'auth.user_signed_up',
+            ],
             'routes' => [
-                Auth\Event\UserSignedUp::class => 'auth_events',
+                'auth.user_signed_up' => 'auth_events',
             ],
             'listeners' => [
                 'newsletter_inbox' => [

@@ -7,6 +7,7 @@ namespace App\EventStore;
 use App\AggregateRoot;
 use App\EventStore\Entity\Event;
 use App\EventStore\Entity\EventRepository;
+use App\EventStore\EventNameResolver\EventNameResolver;
 use DateTimeImmutable;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\PostFlushEventArgs;
@@ -18,6 +19,7 @@ final readonly class AggregateEventsSubscriber implements EventSubscriber
 {
     public function __construct(
         private ContainerInterface $container,
+        private EventNameResolver $nameResolver,
         private EventSerializer $serializer
     ) {}
 
@@ -43,7 +45,7 @@ final readonly class AggregateEventsSubscriber implements EventSubscriber
                 foreach ($entity->releaseEvents() as $object) {
                     $repository->add(new Event(
                         date: new DateTimeImmutable(),
-                        type: $object::class,
+                        type: $this->nameResolver->nameForClass($object::class),
                         payload: $this->serializer->serialize($object),
                     ));
                 }

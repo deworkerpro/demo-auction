@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Auth;
 use App\EventStore\AggregateEventsSubscriber;
+use App\EventStore\EventNameResolver\EventNameResolver;
 use App\EventStore\EventSerializer;
 use App\Newsletter;
 use Doctrine\Common\EventManager;
@@ -81,6 +82,7 @@ return [
     AggregateEventsSubscriber::class => static function (ContainerInterface $container): AggregateEventsSubscriber {
         return new AggregateEventsSubscriber(
             $container,
+            $container->get(EventNameResolver::class),
             $container->get(EventSerializer::class)
         );
     },
