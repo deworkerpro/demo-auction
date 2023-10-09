@@ -6,6 +6,7 @@ namespace App\EventStore\Console;
 
 use App\EventStore\Entity\ConsumedEventRepository;
 use App\EventStore\EventListenerResolver\EventListenerResolver;
+use App\EventStore\EventNameResolver\EventNameResolver;
 use App\EventStore\EventSerializer;
 use App\Queue\Consumer;
 use App\Queue\Message;
@@ -20,6 +21,7 @@ final class EventsConsumeCommand extends Command
         private readonly Consumer $consumer,
         private readonly EventSerializer $serializer,
         private readonly ConsumedEventRepository $consumed,
+        private readonly EventNameResolver $nameResolver,
         private readonly EventListenerResolver $listenerResolver
     ) {
         parent::__construct();
@@ -44,7 +46,8 @@ final class EventsConsumeCommand extends Command
                 return;
             }
             $output->writeln('<info>Consume message ' . $message->type . ':' . $message->id . '</info>');
-            $event = $this->serializer->unserialize($message->type, $message->payload);
+            $eventClass = $this->nameResolver->classForName($message->type);
+            $event = $this->serializer->unserialize($eventClass, $message->payload);
             $listener = $this->listenerResolver->resolve($queue, $event);
             $listener($event);
             $this->consumed->markAsConsumed($queue, $message->type, $message->id);
