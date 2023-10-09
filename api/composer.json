@@ -13,6 +13,7 @@
     "require": {
         "php": "^8.2",
         "ext-mbstring": "^8.2",
+        "ext-redis": "*",
         "doctrine/annotations": "^2.0",
         "doctrine/migrations": "^3.0",
         "doctrine/orm": "^2.7",

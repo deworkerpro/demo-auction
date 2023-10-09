@@ -66,6 +66,8 @@ services:
             DB_USER: app
             DB_PASSWORD_FILE: /run/secrets/api_db_password
             DB_NAME: app
+            REDIS_HOST: api-redis
+            REDIS_PASSWORD_FILE: /run/secrets/api_redis_password
             MAILER_HOST: ${API_MAILER_HOST}
             MAILER_PORT: ${API_MAILER_PORT}
             MAILER_USERNAME: ${API_MAILER_USERNAME}
@@ -78,6 +80,7 @@ services:
             JWT_PRIVATE_KEY_PATH: /run/secrets/jwt_private_key
         secrets:
             - api_db_password
+            - api_redis_password
             - api_mailer_password
             - sentry_dsn
             - jwt_encryption_key
@@ -99,6 +102,8 @@ services:
             DB_USER: app
             DB_PASSWORD_FILE: /run/secrets/api_db_password
             DB_NAME: app
+            REDIS_HOST: api-redis
+            REDIS_PASSWORD_FILE: /run/secrets/api_redis_password
             MAILER_HOST: ${API_MAILER_HOST}
             MAILER_PORT: ${API_MAILER_PORT}
             MAILER_USERNAME: ${API_MAILER_USERNAME}
@@ -111,6 +116,7 @@ services:
             JWT_PRIVATE_KEY_PATH: /run/secrets/jwt_private_key
         secrets:
             - api_db_password
+            - api_redis_password
             - api_mailer_password
             - sentry_dsn
             - jwt_encryption_key
@@ -133,6 +139,8 @@ services:
             DB_USER: app
             DB_PASSWORD_FILE: /run/secrets/api_db_password
             DB_NAME: app
+            REDIS_HOST: api-redis
+            REDIS_PASSWORD_FILE: /run/secrets/api_redis_password
             MAILER_HOST: ${API_MAILER_HOST}
             MAILER_PORT: ${API_MAILER_PORT}
             MAILER_USERNAME: ${API_MAILER_USERNAME}
@@ -145,6 +153,7 @@ services:
             JWT_PRIVATE_KEY_PATH: /run/secrets/jwt_private_key
         secrets:
             - api_db_password
+            - api_redis_password
             - api_mailer_password
             - sentry_dsn
             - jwt_encryption_key
