@@ -129,6 +129,8 @@
     {% endif %}
 
     <form method="POST" action="">
+        <input type="hidden" name="{{csrf.keys.name}}" value="{{csrf.name}}">
+        <input type="hidden" name="{{csrf.keys.value}}" value="{{csrf.value}}">
         <div class="input-row">
             <input value="{{ query.email }}" name="email" type="email"
                    placeholder="{{ trans('input.email', [], 'oauth') }}"

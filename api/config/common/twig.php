@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Csrf\CsrfTwigExtension;
 use App\FeatureToggle\FeatureFlagTwigExtension;
 use App\Frontend\FrontendUrlTwigExtension;
 use App\Translator\TranslatorTwigExtension;
@@ -63,6 +64,7 @@ return [
                 FrontendUrlTwigExtension::class,
                 FeatureFlagTwigExtension::class,
                 TranslatorTwigExtension::class,
+                CsrfTwigExtension::class,
             ],
         ],
     ],

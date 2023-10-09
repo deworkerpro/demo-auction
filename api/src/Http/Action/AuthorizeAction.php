@@ -59,6 +59,15 @@ final class AuthorizeAction implements RequestHandlerInterface
                 $query->email = $body['email'] ?? '';
                 $query->password = $body['password'] ?? '';
 
+                if ($request->getAttribute('csrf_status') === false) {
+                    $error = $this->translator->trans('error.csrf', [], 'csrf');
+
+                    return new HtmlResponse(
+                        $this->template->render('authorize.html.twig', compact('query', 'error')),
+                        400
+                    );
+                }
+
                 $user = $this->users->fetch($query);
 
                 if ($user === null) {

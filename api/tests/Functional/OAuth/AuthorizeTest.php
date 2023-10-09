@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Test\Functional\OAuth;
 
 use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
+use Redis;
 use Test\Functional\Json;
 use Test\Functional\WebTestCase;
 
@@ -118,7 +119,7 @@ final class AuthorizeTest extends WebTestCase
         ], $data);
     }
 
-    public function testAuthActiveUser(): void
+    public function testAuthNoCsrf(): void
     {
         $response = $this->app()->handle(self::html(
             'POST',
@@ -134,6 +135,33 @@ final class AuthorizeTest extends WebTestCase
             [
                 'email' => 'aCTive@app.test',
                 'password' => 'password',
+            ]
+        ));
+
+        self::assertEquals(400, $response->getStatusCode());
+    }
+
+    public function testAuthActiveUser(): void
+    {
+        $redis = $this->container()->get(Redis::class);
+        $redis->set('csrf652428450beae', '8fbf173d86dc87b3eeda2d81da151c0e');
+
+        $response = $this->app()->handle(self::html(
+            'POST',
+            '/authorize?' . http_build_query([
+                'response_type' => 'code',
+                'client_id' => 'frontend',
+                'redirect_uri' => 'http://localhost/oauth',
+                'code_challenge' => PKCE::challenge(PKCE::verifier()),
+                'code_challenge_method' => 'S256',
+                'scope' => 'common',
+                'state' => 'sTaTe',
+            ]),
+            [
+                'email' => 'aCTive@app.test',
+                'password' => 'password',
+                'csrf_name' => 'csrf652428450beae',
+                'csrf_value' => '05au666iikd1rmF0GQzkZJhvpSsOGuI9ZKWNyOz455Tr8MyNn5W5I02YBRchO4ZX/QrBSjx+2gwAxLz93ZvX8Q==',
             ]
         ));
 
@@ -156,6 +184,9 @@ final class AuthorizeTest extends WebTestCase
 
     public function testAuthWaitUser(): void
     {
+        $redis = $this->container()->get(Redis::class);
+        $redis->set('csrf652428450beae', '8fbf173d86dc87b3eeda2d81da151c0e');
+
         $response = $this->app()->handle(self::html(
             'POST',
             '/authorize?' . http_build_query([
@@ -170,6 +201,8 @@ final class AuthorizeTest extends WebTestCase
             [
                 'email' => 'wait@app.test',
                 'password' => 'password',
+                'csrf_name' => 'csrf652428450beae',
+                'csrf_value' => '05au666iikd1rmF0GQzkZJhvpSsOGuI9ZKWNyOz455Tr8MyNn5W5I02YBRchO4ZX/QrBSjx+2gwAxLz93ZvX8Q==',
             ]
         ));
 
@@ -180,6 +213,9 @@ final class AuthorizeTest extends WebTestCase
 
     public function testAuthInvalidUser(): void
     {
+        $redis = $this->container()->get(Redis::class);
+        $redis->set('csrf652428450beae', '8fbf173d86dc87b3eeda2d81da151c0e');
+
         $response = $this->app()->handle(self::html(
             'POST',
             '/authorize?' . http_build_query([
@@ -194,6 +230,8 @@ final class AuthorizeTest extends WebTestCase
             [
                 'email' => 'active@app.test',
                 'password' => '',
+                'csrf_name' => 'csrf652428450beae',
+                'csrf_value' => '05au666iikd1rmF0GQzkZJhvpSsOGuI9ZKWNyOz455Tr8MyNn5W5I02YBRchO4ZX/QrBSjx+2gwAxLz93ZvX8Q==',
             ]
         ));
 
@@ -204,6 +242,9 @@ final class AuthorizeTest extends WebTestCase
 
     public function testAuthInvalidUserLang(): void
     {
+        $redis = $this->container()->get(Redis::class);
+        $redis->set('csrf652428450beae', '8fbf173d86dc87b3eeda2d81da151c0e');
+
         $response = $this->app()->handle(self::html(
             'POST',
             '/authorize?' . http_build_query([
@@ -218,6 +259,8 @@ final class AuthorizeTest extends WebTestCase
             [
                 'email' => 'active@app.test',
                 'password' => '',
+                'csrf_name' => 'csrf652428450beae',
+                'csrf_value' => '05au666iikd1rmF0GQzkZJhvpSsOGuI9ZKWNyOz455Tr8MyNn5W5I02YBRchO4ZX/QrBSjx+2gwAxLz93ZvX8Q==',
             ]
         )->withHeader('Accept-Language', 'ru'));
 
