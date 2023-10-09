@@ -201,9 +201,28 @@ services:
             restart_policy:
                 condition: none
 
+    api-redis:
+        image: ${REGISTRY}/auction-api-redis:${IMAGE_TAG}
+        environment:
+            REDIS_PASSWORD_FILE: /run/secrets/api_redis_password
+        secrets:
+            - api_redis_password
+        volumes:
+            - api-redis:/data
+        command:
+            - 'redis-server'
+            - '--maxmemory 32mb'
+            - '--maxmemory-policy allkeys-lru'
+        deploy:
+            placement:
+                constraints: [ node.labels.db == db ]
+            endpoint_mode: dnsrr
+
 secrets:
     api_db_password:
         file: ./secrets/api_db_password
+    api_redis_password:
+        file: ./secrets/api_redis_password
     api_mailer_password:
         file: ./secrets/api_mailer_password
     sentry_dsn:
@@ -219,6 +238,7 @@ secrets:
 
 volumes:
     api-postgres:
+    api-redis:
 
 networks:
     traefik-public:

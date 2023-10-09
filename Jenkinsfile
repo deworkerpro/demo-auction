@@ -226,6 +226,7 @@ pipeline {
                     string(credentialsId: 'PRODUCTION_HOST', variable: 'HOST'),
                     string(credentialsId: 'PRODUCTION_PORT', variable: 'PORT'),
                     file(credentialsId: 'API_DB_PASSWORD_FILE', variable: 'API_DB_PASSWORD_FILE'),
+                    file(credentialsId: 'API_REDIS_PASSWORD_FILE', variable: 'API_REDIS_PASSWORD_FILE'),
                     string(credentialsId: 'API_MAILER_HOST', variable: 'API_MAILER_HOST'),
                     string(credentialsId: 'API_MAILER_PORT', variable: 'API_MAILER_PORT'),
                     string(credentialsId: 'API_MAILER_USERNAME', variable: 'API_MAILER_USERNAME'),

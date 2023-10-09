@@ -30,7 +30,7 @@ docker-build:
 api-clear:
 	docker run --rm -v ${PWD}/api:/app -w /app alpine sh -c 'rm -rf var/cache/* var/log/* var/test/*'
 
-api-init: api-permissions api-composer-install api-wait-db api-migrations api-fixtures
+api-init: api-permissions api-composer-install api-wait-db api-wait-redis api-migrations api-fixtures
 
 api-permissions:
 	docker run --rm -v ${PWD}/api:/app -w /app alpine chmod 777 var/cache var/log var/test
@@ -43,6 +43,9 @@ api-composer-update:
 
 api-wait-db:
 	docker compose run --rm api-php-cli wait-for-it api-postgres:5432 -t 30
+
+api-wait-redis:
+	docker compose run --rm api-php-cli wait-for-it api-redis:6379 -t 30
 
 api-migrations:
 	docker compose run --rm api-php-cli composer app migrations:migrate -- --no-interaction
@@ -163,6 +166,7 @@ build-api:
 	docker --log-level=debug build --pull --file=api/docker/production/php-fpm/Dockerfile --tag=${REGISTRY}/auction-api-php-fpm:${IMAGE_TAG} api
 	docker --log-level=debug build --pull --file=api/docker/production/php-cli/Dockerfile --tag=${REGISTRY}/auction-api-php-cli:${IMAGE_TAG} api
 	docker --log-level=debug build --pull --file=api/docker/common/postgres-backup/Dockerfile --tag=${REGISTRY}/auction-api-postgres-backup:${IMAGE_TAG} api/docker/common
+	docker --log-level=debug build --pull --file=api/docker/common/redis/Dockerfile --tag=${REGISTRY}/auction-api-redis:${IMAGE_TAG} api/docker/common/redis
 
 try-build:
 	REGISTRY=localhost IMAGE_TAG=0 make build
@@ -177,6 +181,7 @@ push-api:
 	docker push ${REGISTRY}/auction-api-php-fpm:${IMAGE_TAG}
 	docker push ${REGISTRY}/auction-api-php-cli:${IMAGE_TAG}
 	docker push ${REGISTRY}/auction-api-postgres-backup:${IMAGE_TAG}
+	docker push ${REGISTRY}/auction-api-redis:${IMAGE_TAG}
 
 testing-build: testing-build-testing-api-php-cli testing-build-cucumber
 
@@ -232,6 +237,7 @@ deploy:
 
 	ssh -o StrictHostKeyChecking=no deploy@${HOST} -p ${PORT} 'mkdir site_${BUILD_NUMBER}/secrets'
 	scp -o StrictHostKeyChecking=no -P ${PORT} ${API_DB_PASSWORD_FILE} deploy@${HOST}:site_${BUILD_NUMBER}/secrets/api_db_password
+	scp -o StrictHostKeyChecking=no -P ${PORT} ${API_REDIS_PASSWORD_FILE} deploy@${HOST}:site_${BUILD_NUMBER}/secrets/api_redis_password
 	scp -o StrictHostKeyChecking=no -P ${PORT} ${API_MAILER_PASSWORD_FILE} deploy@${HOST}:site_${BUILD_NUMBER}/secrets/api_mailer_password
 	scp -o StrictHostKeyChecking=no -P ${PORT} ${SENTRY_DSN_FILE} deploy@${HOST}:site_${BUILD_NUMBER}/secrets/sentry_dsn
 	scp -o StrictHostKeyChecking=no -P ${PORT} ${JWT_ENCRYPTION_KEY_FILE} deploy@${HOST}:site_${BUILD_NUMBER}/secrets/jwt_encryption_key

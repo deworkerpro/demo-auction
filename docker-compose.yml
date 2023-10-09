@@ -161,6 +161,20 @@ services:
             - backup_aws_secret_access_key
         command: sh -c 'wait-for-it api-postgres:5432 -t 20 && backup'
 
+    api-redis:
+        build:
+            context: ./api/docker/common/redis
+        environment:
+            REDIS_PASSWORD_FILE: /run/secrets/redis_password
+        secrets:
+            - api_redis_password
+        volumes:
+            - api-redis:/data
+        command:
+            - 'redis-server'
+            - '--maxmemory 32mb'
+            - '--maxmemory-policy allkeys-lru'
+
     mailer:
         image: mailhog/mailhog
         networks:
@@ -203,6 +217,8 @@ services:
 secrets:
     api_db_password:
         file: ./docker/development/secrets/api_db_password
+    api_redis_password:
+        file: ./docker/development/secrets/api_redis_password
     api_mailer_password:
         file: ./docker/development/secrets/api_mailer_password
     sentry_dsn:
@@ -218,6 +234,7 @@ secrets:
 
 volumes:
     api-postgres:
+    api-redis:
     backup-storage:
 
 networks:

@@ -133,6 +133,17 @@ services:
         secrets:
             - api_db_password
 
+    api-redis:
+        image: ${REGISTRY}/auction-api-redis:${IMAGE_TAG}
+        environment:
+            REDIS_PASSWORD_FILE: /run/secrets/api_redis_password
+        secrets:
+            - api_redis_password
+        command:
+            - 'redis-server'
+            - '--maxmemory 32mb'
+            - '--maxmemory-policy allkeys-lru'
+
     mailer:
         image: mailhog/mailhog
 
@@ -145,6 +156,8 @@ services:
 secrets:
     api_db_password:
         file: ./docker/development/secrets/api_db_password
+    api_redis_password:
+        file: ./docker/development/secrets/api_redis_password
     api_mailer_password:
         file: ./docker/development/secrets/api_mailer_password
     sentry_dsn:
