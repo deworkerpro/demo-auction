@@ -18,6 +18,7 @@ return
                     __FILE__,
                 ])
         )
+        ->setRiskyAllowed(true)
         ->setRules([
             '@PSR12' => true,
             '@PSR12:risky' => true,
