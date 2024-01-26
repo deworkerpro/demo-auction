@@ -14,7 +14,7 @@ WORKDIR /app
 
 COPY ./composer.json ./composer.lock ./
 
-RUN composer install --no-dev --prefer-dist --no-progress --no-suggest --optimize-autoloader \
+RUN composer install --no-dev --prefer-dist --no-progress --optimize-autoloader \
     && rm -rf /root/.composer/cache
 
 ### FPM ###
