@@ -24,7 +24,7 @@ final class JsonResponseTest extends TestCase
     }
 
     /**
-     * @dataProvider getCases
+     * @dataProvider provideResponseCases
      * @throws JsonException
      */
     public function testResponse(mixed $source, mixed $expect): void
@@ -39,7 +39,7 @@ final class JsonResponseTest extends TestCase
     /**
      * @return iterable<array-key, array<array-key, mixed>>
      */
-    public function getCases(): iterable
+    public static function provideResponseCases(): iterable
     {
         $object = new stdClass();
         $object->str = 'value';

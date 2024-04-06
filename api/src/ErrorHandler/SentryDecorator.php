@@ -15,8 +15,7 @@ final class SentryDecorator implements ErrorHandlerInterface
     public function __construct(
         private readonly ErrorHandlerInterface $next,
         private readonly Sentry $sentry
-    ) {
-    }
+    ) {}
 
     public function __invoke(
         ServerRequestInterface $request,

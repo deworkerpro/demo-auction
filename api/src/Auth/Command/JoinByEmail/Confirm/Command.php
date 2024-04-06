@@ -11,6 +11,5 @@ final class Command
     public function __construct(
         #[Assert\NotBlank]
         public readonly string $token = ''
-    ) {
-    }
+    ) {}
 }

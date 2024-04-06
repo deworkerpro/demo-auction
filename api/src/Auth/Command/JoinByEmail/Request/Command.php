@@ -15,6 +15,5 @@ final class Command
         #[Assert\Length(min: 6)]
         #[Assert\NotBlank]
         public readonly string $password = ''
-    ) {
-    }
+    ) {}
 }

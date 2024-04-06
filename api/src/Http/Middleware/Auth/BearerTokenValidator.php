@@ -4,14 +4,16 @@ declare(strict_types=1);
 
 namespace App\Http\Middleware\Auth;
 
+use DateInterval;
 use DateTimeZone;
 use Lcobucci\Clock\SystemClock;
 use Lcobucci\JWT\Configuration;
+use Lcobucci\JWT\Exception;
 use Lcobucci\JWT\Signer\Key\InMemory;
 use Lcobucci\JWT\Signer\Rsa\Sha256;
 use Lcobucci\JWT\Token\Plain;
+use Lcobucci\JWT\Validation\Constraint\LooseValidAt;
 use Lcobucci\JWT\Validation\Constraint\SignedWith;
-use Lcobucci\JWT\Validation\Constraint\StrictValidAt;
 use Lcobucci\JWT\Validation\RequiredConstraintsViolated;
 use League\OAuth2\Server\AuthorizationValidators\AuthorizationValidatorInterface;
 use League\OAuth2\Server\CryptKey;
@@ -19,6 +21,7 @@ use League\OAuth2\Server\CryptTrait;
 use League\OAuth2\Server\Exception\OAuthServerException;
 use League\OAuth2\Server\Repositories\AccessTokenRepositoryInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use RuntimeException;
 
 /**
  * @psalm-suppress PropertyNotSetInConstructor
@@ -27,14 +30,17 @@ final class BearerTokenValidator implements AuthorizationValidatorInterface
 {
     use CryptTrait;
 
-    protected CryptKey $publicKey;
-
+    private CryptKey $publicKey;
     private AccessTokenRepositoryInterface $accessTokenRepository;
     private Configuration $jwtConfiguration;
+    private ?DateInterval $jwtValidAtDateLeeway;
 
-    public function __construct(AccessTokenRepositoryInterface $accessTokenRepository)
-    {
+    public function __construct(
+        AccessTokenRepositoryInterface $accessTokenRepository,
+        ?DateInterval $jwtValidAtDateLeeway = null
+    ) {
         $this->accessTokenRepository = $accessTokenRepository;
+        $this->jwtValidAtDateLeeway = $jwtValidAtDateLeeway;
     }
 
     public function setPublicKey(CryptKey $key): void
@@ -53,18 +59,22 @@ final class BearerTokenValidator implements AuthorizationValidatorInterface
         $header = $request->getHeader('authorization');
         $jwt = trim((string)preg_replace('/^\s*Bearer\s/', '', $header[0]));
 
+        if ($jwt === '') {
+            throw OAuthServerException::accessDenied('Access token could not be empty');
+        }
+
         try {
             /** @var Plain $token */
             $token = $this->jwtConfiguration->parser()->parse($jwt);
-        } catch (\Lcobucci\JWT\Exception $exception) {
+        } catch (Exception $exception) {
             throw OAuthServerException::accessDenied($exception->getMessage(), null, $exception);
         }
 
         try {
             $constraints = $this->jwtConfiguration->validationConstraints();
             $this->jwtConfiguration->validator()->assert($token, ...$constraints);
-        } catch (RequiredConstraintsViolated) {
-            throw OAuthServerException::accessDenied('Access token could not be verified');
+        } catch (RequiredConstraintsViolated $exception) {
+            throw OAuthServerException::accessDenied('Access token could not be verified', null, $exception);
         }
 
         $claims = $token->claims();
@@ -85,14 +95,18 @@ final class BearerTokenValidator implements AuthorizationValidatorInterface
     {
         $this->jwtConfiguration = Configuration::forSymmetricSigner(
             new Sha256(),
-            InMemory::plainText('')
+            InMemory::plainText('empty', 'empty')
         );
 
+        $clock = new SystemClock(new DateTimeZone(date_default_timezone_get()));
         $this->jwtConfiguration->setValidationConstraints(
-            new StrictValidAt(new SystemClock(new DateTimeZone(date_default_timezone_get()))),
+            new LooseValidAt($clock, $this->jwtValidAtDateLeeway),
             new SignedWith(
                 new Sha256(),
-                InMemory::plainText($this->publicKey->getKeyContents(), $this->publicKey->getPassPhrase() ?? '')
+                InMemory::plainText(
+                    $this->publicKey->getKeyContents() ?: throw new RuntimeException('Empty value.'),
+                    $this->publicKey->getPassPhrase() ?? ''
+                )
             )
         );
     }

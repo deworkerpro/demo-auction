@@ -18,8 +18,7 @@ final class DomainExceptionHandler implements MiddlewareInterface
     public function __construct(
         private readonly LoggerInterface $logger,
         private readonly TranslatorInterface $translator
-    ) {
-    }
+    ) {}
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {

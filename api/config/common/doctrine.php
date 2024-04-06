@@ -6,6 +6,7 @@ use App\Auth;
 use Doctrine\Common\EventManager;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\DriverManager;
 use Doctrine\DBAL\Types\Type;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -25,10 +26,17 @@ return [
          *     metadata_dirs:string[],
          *     dev_mode:bool,
          *     proxy_dir:string,
-         *     cache_dir:?string,
+         *     cache_dir:string|null,
          *     types:array<string,class-string<Doctrine\DBAL\Types\Type>>,
          *     subscribers:string[],
-         *     connection:array<string, mixed>
+         *     connection:array{
+         *          driver:"pdo_pgsql",
+         *          host:string,
+         *          user:string,
+         *          password:string,
+         *          dbname:string,
+         *          charset:string,
+         *      }
          * } $settings
          */
         $settings = $container->get('config')['doctrine'];
@@ -56,8 +64,8 @@ return [
             $eventManager->addEventSubscriber($subscriber);
         }
 
-        return EntityManager::create(
-            $settings['connection'],
+        return new EntityManager(
+            DriverManager::getConnection($settings['connection']),
             $config,
             $eventManager
         );

@@ -12,6 +12,5 @@ final class Params
         public string $userId,
         public string $role,
         public DateTimeImmutable $expires,
-    ) {
-    }
+    ) {}
 }

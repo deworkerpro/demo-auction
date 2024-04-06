@@ -10,9 +10,7 @@ use Twig\TwigFunction;
 
 final class TranslatorTwigExtension extends AbstractExtension
 {
-    public function __construct(private readonly TranslatorInterface $translator)
-    {
-    }
+    public function __construct(private readonly TranslatorInterface $translator) {}
 
     public function getFunctions(): array
     {
@@ -21,7 +19,7 @@ final class TranslatorTwigExtension extends AbstractExtension
         ];
     }
 
-    public function trans(string $id, array $parameters = [], string $domain = null, string $locale = null): string
+    public function trans(string $id, array $parameters = [], ?string $domain = null, ?string $locale = null): string
     {
         return $this->translator->trans($id, $parameters, $domain, $locale);
     }

@@ -19,8 +19,7 @@ final class RefreshTokenRepository implements RefreshTokenRepositoryInterface
     public function __construct(
         private readonly EntityManagerInterface $em,
         private readonly EntityRepository $repo
-    ) {
-    }
+    ) {}
 
     public function getNewRefreshToken(): ?RefreshToken
     {

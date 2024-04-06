@@ -41,8 +41,25 @@ final class FeaturesMiddlewareTest extends TestCase
     public function testWithFeatures(): void
     {
         $switch = $this->createMock(FeatureSwitch::class);
-        $switch->expects(self::exactly(2))->method('enable')->withConsecutive(['ONE'], ['TWO']);
-        $switch->expects(self::once())->method('disable')->withConsecutive(['THREE']);
+
+        $variants = [['ONE'], ['TWO']];
+
+        $switch->expects(self::exactly(2))->method('enable')->willReturnCallback(
+            static function (mixed ...$params) use (&$variants): void {
+                /**
+                 * @var array[] $variants
+                 */
+                foreach ($variants as $key => $variant) {
+                    if ($params === $variant) {
+                        unset($variants[$key]);
+                        return;
+                    }
+                }
+                self::assertContains($params, $variants);
+            }
+        );
+
+        $switch->expects(self::once())->method('disable')->with('THREE');
 
         $middleware = new FeaturesMiddleware($switch, 'X-Features');
 

@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Doctrine\Migrations;
+use Doctrine\Migrations\Configuration\Configuration;
 use Doctrine\Migrations\DependencyFactory;
 use Doctrine\Migrations\Tools\Console\Command;
 use Doctrine\ORM\EntityManagerInterface;
@@ -12,7 +13,7 @@ return [
     DependencyFactory::class => static function (ContainerInterface $container) {
         $entityManager = $container->get(EntityManagerInterface::class);
 
-        $configuration = new Doctrine\Migrations\Configuration\Configuration();
+        $configuration = new Configuration();
         $configuration->addMigrationsDirectory('App\Data\Migration', __DIR__ . '/../../src/Data/Migration');
         $configuration->setAllOrNothing(true);
         $configuration->setCheckDatabasePlatform(false);
