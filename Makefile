@@ -111,6 +111,7 @@ frontend-lint:
 
 frontend-lint-fix:
 	docker compose run --rm frontend-node-cli yarn eslint-fix
+	docker compose run --rm frontend-node-cli yarn stylelint-fix
 	docker compose run --rm frontend-node-cli yarn prettier
 
 frontend-ts-check:
