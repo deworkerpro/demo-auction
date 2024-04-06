@@ -62,7 +62,7 @@ api-lint:
 	docker compose run --rm api-php-cli composer lint
 	docker compose run --rm api-php-cli composer php-cs-fixer fix -- --dry-run --diff
 
-api-cs-fix:
+api-lint-fix:
 	docker compose run --rm api-php-cli composer php-cs-fixer fix
 
 api-analyze:
@@ -109,10 +109,8 @@ frontend-lint:
 	docker compose run --rm frontend-node-cli yarn eslint
 	docker compose run --rm frontend-node-cli yarn stylelint
 
-frontend-eslint-fix:
+frontend-lint-fix:
 	docker compose run --rm frontend-node-cli yarn eslint-fix
-
-frontend-pretty:
 	docker compose run --rm frontend-node-cli yarn prettier
 
 frontend-test:
