@@ -18,6 +18,7 @@
         <directory name="public" />
         <directory name="src" />
         <directory name="tests" />
+        <directory name="translations" />
         <ignoreFiles>
             <directory name="vendor" />
         </ignoreFiles>

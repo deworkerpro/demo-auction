@@ -18,5 +18,5 @@ return [
     'Email is already same.' => 'Email совпадает с текущим.',
     'Changing is already requested.' => 'Смена уже запрошена.',
     'Changing is not requested.' => 'Смена не запрошена.',
-    'Unable to remove active user.' => 'Нельзя удалить активного пользователя.'
+    'Unable to remove active user.' => 'Нельзя удалить активного пользователя.',
 ];
