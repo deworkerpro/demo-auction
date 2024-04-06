@@ -5,8 +5,7 @@
          executionOrder="depends,defects"
          beStrictAboutOutputDuringTests="true"
          beStrictAboutTodoAnnotatedTests="true"
-         cacheResultFile="var/cache/.phpunit.result.cache"
-         verbose="true">
+         cacheDirectory="var/cache/.phpunit">
     <testsuites>
         <testsuite name="unit">
             <directory>src/Auth/Test</directory>
@@ -23,8 +22,7 @@
             <directory>tests/Functional</directory>
         </testsuite>
     </testsuites>
-
-    <coverage processUncoveredFiles="true">
+    <source>
         <include>
             <directory suffix=".php">src</directory>
         </include>
@@ -34,8 +32,7 @@
             <directory>src/Frontend/Test</directory>
             <directory>src/Http/Test</directory>
         </exclude>
-    </coverage>
-
+    </source>
     <php>
         <env name="APP_ENV" value="test" force="true"/>
         <env name="APP_DEBUG" value="1" force="true"/>
