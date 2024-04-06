@@ -103,7 +103,7 @@ frontend-yarn-upgrade:
 frontend-ready:
 	docker run --rm -v ${PWD}/frontend:/app -w /app alpine touch .ready
 
-frontend-check: frontend-lint frontend-test
+frontend-check: frontend-lint frontend-ts-check frontend-test
 
 frontend-lint:
 	docker compose run --rm frontend-node-cli yarn eslint
@@ -112,6 +112,9 @@ frontend-lint:
 frontend-lint-fix:
 	docker compose run --rm frontend-node-cli yarn eslint-fix
 	docker compose run --rm frontend-node-cli yarn prettier
+
+frontend-ts-check:
+	docker compose run --rm frontend-node-cli yarn ts-check
 
 frontend-test:
 	docker compose run --rm frontend-node-cli yarn test --watchAll=false
@@ -130,13 +133,16 @@ cucumber-yarn-install:
 cucumber-yarn-upgrade:
 	docker compose run --rm cucumber-node-cli yarn upgrade
 
-cucumber-check: cucumber-lint
+cucumber-check: cucumber-lint cucumber-ts-check
 
 cucumber-lint:
 	docker compose run --rm cucumber-node-cli yarn lint
 
 cucumber-lint-fix:
 	docker compose run --rm cucumber-node-cli yarn lint-fix
+
+cucumber-ts-check:
+	docker compose run --rm cucumber-node-cli yarn ts-check
 
 cucumber-smoke:
 	docker compose run --rm cucumber-node-cli yarn smoke

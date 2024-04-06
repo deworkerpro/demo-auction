@@ -5,6 +5,7 @@
     "smoke-ci": "cucumber-js --tags '@smoke and not @wip' --fail-fast --retry 2",
     "e2e": "cucumber-js --tags 'not @wip' --parallel 2",
     "e2e-ci": "cucumber-js --tags 'not @wip' --retry 2",
+    "ts-check": "tsc --noEmit --incremental false",
     "lint": "eslint --ext .ts features",
     "lint-fix": "eslint --fix --ext .ts features"
   },

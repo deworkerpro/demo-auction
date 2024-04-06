@@ -82,11 +82,31 @@ pipeline {
             }
         }
         stage('Analyze') {
-            when {
-                expression { return DOCKER_DIFF || env.GIT_DIFF_ROOT || env.GIT_DIFF_API }
-            }
-            steps {
-                sh 'make api-analyze'
+            parallel {
+                stage('API') {
+                    when {
+                        expression { return DOCKER_DIFF || env.GIT_DIFF_ROOT || env.GIT_DIFF_API }
+                    }
+                    steps {
+                        sh 'make api-analyze'
+                    }
+                }
+                stage('Frontend') {
+                    when {
+                        expression { return DOCKER_DIFF || env.GIT_DIFF_ROOT || env.GIT_DIFF_FRONTEND }
+                    }
+                    steps {
+                        sh 'make frontend-ts-check'
+                    }
+                }
+                stage('Cucumber') {
+                    when {
+                        expression { return DOCKER_DIFF || env.GIT_DIFF_ROOT || env.GIT_DIFF_CUCUMBER }
+                    }
+                    steps {
+                        sh 'make cucumber-ts-check'
+                    }
+                }
             }
         }
         stage('Backup') {

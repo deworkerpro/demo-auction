@@ -43,6 +43,7 @@
     "typescript": "^4.7.4"
   },
   "scripts": {
+    "ts-check": "tsc --noEmit --incremental false",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
