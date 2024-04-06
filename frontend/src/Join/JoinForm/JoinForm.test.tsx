@@ -33,7 +33,7 @@ test('shows conflict error', async () => {
     new Response(JSON.stringify({ message: 'User already exists.' }), {
       status: 409,
       headers: new Headers({ 'Content-Type': 'application/json' }),
-    })
+    }),
   )
 
   render(<JoinForm />)
@@ -65,8 +65,8 @@ test('shows validation errors', async () => {
       {
         status: 422,
         headers: new Headers({ 'Content-Type': 'application/json' }),
-      }
-    )
+      },
+    ),
   )
 
   render(<JoinForm />)
@@ -92,7 +92,7 @@ test('shows server error', async () => {
     new Response('', {
       status: 502,
       statusText: 'Bad Gateway',
-    })
+    }),
   )
 
   render(<JoinForm />)

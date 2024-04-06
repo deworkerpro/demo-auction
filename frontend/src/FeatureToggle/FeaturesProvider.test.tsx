@@ -11,7 +11,7 @@ test('passes features', () => {
       <FeaturesContext.Consumer>
         {(features) => <div data-testid="features">{features.toString()}</div>}
       </FeaturesContext.Consumer>
-    </FeaturesProvider>
+    </FeaturesProvider>,
   )
 
   expect(screen.getByTestId('features')).toHaveTextContent('ONE,TWO')

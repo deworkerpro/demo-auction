@@ -7,7 +7,7 @@ test('renders not found', () => {
   render(
     <MemoryRouter>
       <NotFound />
-    </MemoryRouter>
+    </MemoryRouter>,
   )
 
   expect(screen.getByText(/Page is not found/i)).toBeInTheDocument()

@@ -20,7 +20,7 @@ test('confirms without token', async () => {
     ],
     {
       initialEntries: ['/join/confirm'],
-    }
+    },
   )
 
   render(<RouterProvider router={router} />)
@@ -35,7 +35,7 @@ test('confirms successfully', async () => {
     new Response('', {
       status: 201,
       headers: new Headers(),
-    })
+    }),
   )
 
   const router = createMemoryRouter(
@@ -51,7 +51,7 @@ test('confirms successfully', async () => {
     ],
     {
       initialEntries: ['/join/confirm?token=01'],
-    }
+    },
   )
 
   render(<RouterProvider router={router} />)
@@ -74,7 +74,7 @@ test('shows error', async () => {
     new Response(JSON.stringify({ message: 'Incorrect token.' }), {
       status: 409,
       headers: new Headers({ 'content-type': 'application/json' }),
-    })
+    }),
   )
 
   const router = createMemoryRouter(
@@ -86,7 +86,7 @@ test('shows error', async () => {
     ],
     {
       initialEntries: ['/join/confirm?token=01'],
-    }
+    },
   )
 
   render(<RouterProvider router={router} />)

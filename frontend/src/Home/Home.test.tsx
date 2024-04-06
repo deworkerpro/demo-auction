@@ -13,7 +13,7 @@ test('renders home', () => {
           <Home />
         </MemoryRouter>
       </FeaturesProvider>
-    </FakeAuthProvider>
+    </FakeAuthProvider>,
   )
 
   expect(screen.queryByText(/We will be here/i)).not.toBeInTheDocument()

@@ -26,7 +26,7 @@ type Tokens = {
 
 function AuthProvider({ authorizeUrl, tokenUrl, clientId, scope, redirectPath, children }: Props) {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(
-    window.localStorage.getItem('auth.tokens') !== null
+    window.localStorage.getItem('auth.tokens') !== null,
   )
 
   const [loading, setLoading] = useState<boolean>(false)
@@ -50,7 +50,7 @@ function AuthProvider({ authorizeUrl, tokenUrl, clientId, scope, redirectPath, c
   }
 
   const [error, setError] = useState<string | null>(
-    isAuthRedirect ? getStateError() || getAuthRedirectError() : null
+    isAuthRedirect ? getStateError() || getAuthRedirectError() : null,
   )
 
   useEffect(() => {
@@ -244,7 +244,7 @@ function AuthProvider({ authorizeUrl, tokenUrl, clientId, scope, redirectPath, c
       expires: new Date().getTime() + (data.expires_in - 5) * 1000,
       refreshToken: data.refresh_token,
     }),
-    []
+    [],
   )
 
   const contextValue = useMemo(
@@ -256,7 +256,7 @@ function AuthProvider({ authorizeUrl, tokenUrl, clientId, scope, redirectPath, c
       loading,
       error,
     }),
-    [isAuthenticated, getToken, login, logout, loading, error]
+    [isAuthenticated, getToken, login, logout, loading, error],
   )
 
   return <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>

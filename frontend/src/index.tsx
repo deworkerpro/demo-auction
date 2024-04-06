@@ -15,5 +15,5 @@ const root = createRoot(document.getElementById('root') as HTMLElement)
 root.render(
   <React.StrictMode>
     <App features={features} />
-  </React.StrictMode>
+  </React.StrictMode>,
 )

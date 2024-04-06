@@ -14,7 +14,7 @@ function transform(features: Features): FeaturesHash {
         return [value.substr(1), false]
       }
       return [value, true]
-    })
+    }),
   )
 }
 

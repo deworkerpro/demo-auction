@@ -11,7 +11,7 @@ test('response with violations', async () => {
     {
       status: 422,
       headers: new Headers({ 'content-type': 'application/json' }),
-    }
+    },
   )
   const errors = await parseErrors(response)
   expect(errors).toEqual({

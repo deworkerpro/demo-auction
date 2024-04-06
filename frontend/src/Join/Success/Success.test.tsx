@@ -7,7 +7,7 @@ test('renders join page', () => {
   render(
     <MemoryRouter>
       <Success />
-    </MemoryRouter>
+    </MemoryRouter>,
   )
 
   expect(screen.getByTestId('join-success')).toBeInTheDocument()

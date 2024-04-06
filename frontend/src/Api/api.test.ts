@@ -21,7 +21,7 @@ test('get with JSON response', async () => {
     new Response(JSON.stringify({ name: 'value' }), {
       status: 200,
       headers: new Headers({ 'Content-Type': 'application/json' }),
-    })
+    }),
   )
 
   const data = await api.get('/url')
@@ -41,7 +41,7 @@ test('get with text response', async () => {
     new Response('value', {
       status: 200,
       headers: new Headers({ 'Content-Type': 'text/plain' }),
-    })
+    }),
   )
 
   const data = await api.get('/url')
@@ -54,7 +54,7 @@ test('get promise', async () => {
     new Response('value', {
       status: 200,
       headers: new Headers({ 'Content-Type': 'text/plain' }),
-    })
+    }),
   )
 
   expect.assertions(1)
@@ -67,7 +67,7 @@ test('post without params', async () => {
     new Response(JSON.stringify({ name: 'value' }), {
       status: 200,
       headers: new Headers({ 'Content-Type': 'application/json' }),
-    })
+    }),
   )
 
   const data = await api.post('/url')
@@ -85,7 +85,7 @@ test('post with params and header', async () => {
     new Response(JSON.stringify({ name: 'value' }), {
       status: 200,
       headers: new Headers({ 'Content-Type': 'application/json' }),
-    })
+    }),
   )
 
   const data = await api.post('/url', { param: 'val' }, { 'Custom-Header': 'Value' })

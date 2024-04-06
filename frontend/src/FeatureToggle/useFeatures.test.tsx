@@ -12,7 +12,7 @@ test('read features', () => {
   const { container } = render(
     <FeaturesProvider features={['ONE', 'TWO']}>
       <Component />
-    </FeaturesProvider>
+    </FeaturesProvider>,
   )
 
   expect(container).toHaveTextContent('ONE,TWO')
