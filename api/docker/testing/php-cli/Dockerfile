@@ -1,4 +1,4 @@
-FROM php:8.2-cli-alpine3.19 AS builder
+FROM php:8.3-cli-alpine3.19 AS builder
 
 RUN apk add --no-cache postgresql-dev \
     && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
@@ -17,7 +17,7 @@ RUN composer install --prefer-dist --no-progress --no-suggest --optimize-autoloa
 
 ### CLI ###
 
-FROM php:8.2-cli-alpine3.19
+FROM php:8.3-cli-alpine3.19
 
 RUN apk add --no-cache postgresql-dev bash coreutils \
     && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \

@@ -30,6 +30,7 @@ return
             '@PHP80Migration:risky' => true,
             '@PHP81Migration' => true,
             '@PHP82Migration' => true,
+            '@PHP83Migration' => true,
             '@PHPUnit84Migration:risky' => true,
             '@PhpCsFixer' => true,
             '@PhpCsFixer:risky' => true,
