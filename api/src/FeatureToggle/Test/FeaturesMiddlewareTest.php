@@ -46,9 +46,6 @@ final class FeaturesMiddlewareTest extends TestCase
 
         $switch->expects(self::exactly(2))->method('enable')->willReturnCallback(
             static function (mixed ...$params) use (&$variants): void {
-                /**
-                 * @var array[] $variants
-                 */
                 foreach ($variants as $key => $variant) {
                     if ($params === $variant) {
                         unset($variants[$key]);

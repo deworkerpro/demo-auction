@@ -46,12 +46,12 @@
         "doctrine/data-fixtures": "^1.4",
         "friendsofphp/php-cs-fixer": "^3.0",
         "guzzlehttp/guzzle": "^7.2",
-        "lctrs/psalm-psr-container-plugin": "^1.1",
+        "lctrs/psalm-psr-container-plugin": "^1.10",
         "overtrue/phplint": "^5.0",
         "phpunit/phpunit": "^9.2",
-        "psalm/plugin-phpunit": "^0.16.0",
+        "psalm/plugin-phpunit": "^0.19.0",
         "roave/security-advisories": "dev-latest",
-        "vimeo/psalm": "^4.3"
+        "vimeo/psalm": "^5.23"
     },
     "replace": {
         "symfony/polyfill-mbstring": "*",

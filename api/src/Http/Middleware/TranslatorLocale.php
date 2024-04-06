@@ -28,7 +28,7 @@ final class TranslatorLocale implements MiddlewareInterface
             $this->locales
         );
 
-        if (!empty($locale)) {
+        if ($locale !== null && $locale !== '') {
             $this->translator->setLocale($locale);
         }
 
@@ -42,7 +42,7 @@ final class TranslatorLocale implements MiddlewareInterface
     {
         $default = $allowed[0] ?? null;
 
-        if (empty($accept)) {
+        if ($accept === null || $accept === '') {
             return $default;
         }
 
