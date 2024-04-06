@@ -148,8 +148,17 @@ pipeline {
             }
         }
         stage('Build') {
-            steps {
-                sh 'make build'
+            parallel {
+                stage('API') {
+                    steps {
+                        sh 'make build-api'
+                    }
+                }
+                stage('Front') {
+                    steps {
+                        sh 'make build-frontend'
+                    }
+                }
             }
         }
         stage('Testing') {
