@@ -6,13 +6,7 @@ init-ci: docker-down-clear \
 up: docker-up
 down: docker-down
 restart: down up
-check: lint analyze validate-schema test test-e2e
-lint: api-lint frontend-lint cucumber-lint
-analyze: api-analyze
-validate-schema: api-validate-schema
-test: api-test api-fixtures frontend-test
-test-unit: api-test-unit
-test-functional: api-test-functional api-fixtures
+check: api-check frontend-check cucumber-check test-e2e
 test-smoke: api-fixtures cucumber-clear cucumber-smoke
 test-e2e: api-fixtures cucumber-clear cucumber-e2e
 
@@ -137,6 +131,8 @@ cucumber-yarn-install:
 
 cucumber-yarn-upgrade:
 	docker compose run --rm cucumber-node-cli yarn upgrade
+
+cucumber-check: cucumber-lint
 
 cucumber-lint:
 	docker compose run --rm cucumber-node-cli yarn lint
