@@ -9,8 +9,6 @@ RUN apk add --no-cache postgresql-dev bash coreutils git linux-headers \
     && docker-php-ext-install pdo_pgsql xdebug \
     && apk del git linux-headers
 
-RUN apk add --no-cache unzip
-
 RUN mv $PHP_INI_DIR/php.ini-development $PHP_INI_DIR/php.ini
 
 COPY ./common/php/conf.d /usr/local/etc/php/conf.d
