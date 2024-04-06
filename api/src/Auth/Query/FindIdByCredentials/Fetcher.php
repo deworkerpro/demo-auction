@@ -22,11 +22,11 @@ final class Fetcher
     public function fetch(Query $query): ?User
     {
         $result = $this->connection->createQueryBuilder()
-            ->select([
+            ->select(
                 'id',
                 'status',
                 'password_hash',
-            ])
+            )
             ->from('auth_users')
             ->where('email = :email')
             ->setParameter('email', mb_strtolower($query->email))

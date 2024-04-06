@@ -16,18 +16,8 @@ final class IdType extends GuidType
         return $value instanceof Id ? $value->getValue() : $value;
     }
 
-    public function convertToPHPValue($value, AbstractPlatform $platform): ?Id
+    public function convertToPHPValue(mixed $value, AbstractPlatform $platform): ?Id
     {
         return !empty($value) ? new Id((string)$value) : null;
-    }
-
-    public function getName(): string
-    {
-        return self::NAME;
-    }
-
-    public function requiresSQLCommentHint(AbstractPlatform $platform): bool
-    {
-        return true;
     }
 }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 use Doctrine\Migrations;
 use Doctrine\Migrations\Configuration\Configuration;
 use Doctrine\Migrations\DependencyFactory;
+use Doctrine\Migrations\Metadata\Storage\TableMetadataStorageConfiguration;
 use Doctrine\Migrations\Tools\Console\Command;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Container\ContainerInterface;
@@ -18,15 +19,18 @@ return [
         $configuration->setAllOrNothing(true);
         $configuration->setCheckDatabasePlatform(false);
 
-        $storageConfiguration = new Migrations\Metadata\Storage\TableMetadataStorageConfiguration();
-        $storageConfiguration->setTableName('migrations');
-
+        $storageConfiguration = $container->get(TableMetadataStorageConfiguration::class);
         $configuration->setMetadataStorageConfiguration($storageConfiguration);
 
         return DependencyFactory::fromEntityManager(
             new Migrations\Configuration\Migration\ExistingConfiguration($configuration),
             new Migrations\Configuration\EntityManager\ExistingEntityManager($entityManager)
         );
+    },
+    TableMetadataStorageConfiguration::class =>  static function () {
+        $storageConfiguration = new TableMetadataStorageConfiguration();
+        $storageConfiguration->setTableName('migrations');
+        return $storageConfiguration;
     },
     Command\ExecuteCommand::class => static function (ContainerInterface $container) {
         $factory = $container->get(DependencyFactory::class);

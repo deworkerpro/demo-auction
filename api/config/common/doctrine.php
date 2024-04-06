@@ -65,7 +65,7 @@ return [
         }
 
         return new EntityManager(
-            DriverManager::getConnection($settings['connection']),
+            DriverManager::getConnection($settings['connection'], $config),
             $config,
             $eventManager
         );

@@ -32,10 +32,7 @@ final class FixDefaultSchemaSubscriber implements EventSubscriber
             return;
         }
 
-        /**
-         * @psalm-suppress InternalMethod
-         */
-        foreach ($schemaManager->getExistingSchemaSearchPaths() as $namespace) {
+        foreach ($schemaManager->listSchemaNames() as $namespace) {
             if (!$args->getSchema()->hasNamespace($namespace)) {
                 $args->getSchema()->createNamespace($namespace);
             }

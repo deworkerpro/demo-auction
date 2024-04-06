@@ -18,7 +18,7 @@ final class Fetcher
     public function fetch(string $id): ?Identity
     {
         $result = $this->connection->createQueryBuilder()
-            ->select(['id', 'role'])
+            ->select('id', 'role')
             ->from('auth_users')
             ->where('id = :id')
             ->setParameter('id', $id)

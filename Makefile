@@ -56,7 +56,7 @@ api-backup:
 api-check: api-validate-schema api-lint api-analyze api-test
 
 api-validate-schema:
-	docker compose run --rm api-php-cli composer app orm:validate-schema
+	docker compose run --rm api-php-cli composer app orm:validate-schema -- -v
 
 api-lint:
 	docker compose run --rm api-php-cli composer lint
