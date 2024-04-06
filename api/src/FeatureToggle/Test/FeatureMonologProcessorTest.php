@@ -7,7 +7,8 @@ namespace App\FeatureToggle\Test;
 use App\FeatureToggle\FeaturesContext;
 use App\FeatureToggle\FeaturesMonologProcessor;
 use DateTimeImmutable;
-use Monolog\Logger;
+use Monolog\Level;
+use Monolog\LogRecord;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -24,20 +25,19 @@ final class FeatureMonologProcessorTest extends TestCase
 
         $date = new DateTimeImmutable();
 
-        $result = $processor([
-            'message' => 'Message',
-            'context' => ['name' => 'value'],
-            'level' => Logger::WARNING,
-            'level_name' => 'WARNING',
-            'channel' => 'channel',
-            'datetime' => $date,
-            'extra' => ['param' => 'value'],
-        ]);
+        $result = $processor(new LogRecord(
+            datetime: $date,
+            channel: 'channel',
+            level: Level::Warning,
+            message: 'Message',
+            context: ['name' => 'value'],
+            extra: ['param' => 'value'],
+        ));
 
         self::assertEquals([
             'message' => 'Message',
             'context' => ['name' => 'value'],
-            'level' => Logger::WARNING,
+            'level' => Level::Warning->value,
             'level_name' => 'WARNING',
             'channel' => 'channel',
             'datetime' => $date,
@@ -45,6 +45,6 @@ final class FeatureMonologProcessorTest extends TestCase
                 'param' => 'value',
                 'features' => $source,
             ],
-        ], $result);
+        ], $result->toArray());
     }
 }
