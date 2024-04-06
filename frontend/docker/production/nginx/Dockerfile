@@ -10,7 +10,7 @@ RUN yarn install && yarn cache clean
 COPY ./ ./
 RUN yarn build
 
-FROM nginx:1.21-alpine
+FROM nginx:1.25-alpine
 
 RUN apk add --no-cache curl
 
