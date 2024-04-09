@@ -7,6 +7,7 @@ use Rector\TypeDeclaration\Rector\ClassMethod\AddVoidReturnTypeWhereNoReturnRect
 
 return RectorConfig::configure()
     ->withPaths([
+        __DIR__ . '/bin',
         __DIR__ . '/config',
         __DIR__ . '/public',
         __DIR__ . '/src',
