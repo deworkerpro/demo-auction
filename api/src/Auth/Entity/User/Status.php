@@ -8,8 +8,8 @@ use Webmozart\Assert\Assert;
 
 final class Status
 {
-    public const WAIT = 'wait';
-    public const ACTIVE = 'active';
+    public const string WAIT = 'wait';
+    public const string ACTIVE = 'active';
 
     private string $name;
 

@@ -15,8 +15,8 @@ use Override;
 
 final class ConfirmFixture extends AbstractFixture
 {
-    public const VALID = '00000000-0000-0000-0000-000000000001';
-    public const EXPIRED = '00000000-0000-0000-0000-000000000002';
+    public const string VALID = '00000000-0000-0000-0000-000000000001';
+    public const string EXPIRED = '00000000-0000-0000-0000-000000000002';
 
     #[Override]
     public function load(ObjectManager $manager): void

@@ -10,7 +10,7 @@ use Override;
 
 final class RoleType extends StringType
 {
-    public const NAME = 'auth_user_role';
+    public const string NAME = 'auth_user_role';
 
     #[Override]
     public function convertToDatabaseValue(mixed $value, AbstractPlatform $platform): mixed

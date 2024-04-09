@@ -16,7 +16,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 final class Authenticate implements MiddlewareInterface
 {
-    private const ATTRIBUTE = 'identity';
+    private const string ATTRIBUTE = 'identity';
 
     private ResourceServer $server;
     private ResponseFactoryInterface $response;

@@ -8,8 +8,8 @@ use Webmozart\Assert\Assert;
 
 final class Role
 {
-    public const USER = 'user';
-    public const ADMIN = 'admin';
+    public const string USER = 'user';
+    public const string ADMIN = 'admin';
 
     private string $name;
 

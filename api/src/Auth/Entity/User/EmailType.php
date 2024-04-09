@@ -10,7 +10,7 @@ use Override;
 
 final class EmailType extends StringType
 {
-    public const NAME = 'auth_user_email';
+    public const string NAME = 'auth_user_email';
 
     #[Override]
     public function convertToDatabaseValue(mixed $value, AbstractPlatform $platform): mixed

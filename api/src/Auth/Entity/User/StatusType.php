@@ -10,7 +10,7 @@ use Override;
 
 final class StatusType extends StringType
 {
-    public const NAME = 'auth_user_status';
+    public const string NAME = 'auth_user_status';
 
     #[Override]
     public function convertToDatabaseValue(mixed $value, AbstractPlatform $platform): mixed
