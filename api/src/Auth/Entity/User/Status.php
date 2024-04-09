@@ -6,12 +6,12 @@ namespace App\Auth\Entity\User;
 
 use Webmozart\Assert\Assert;
 
-final class Status
+final readonly class Status
 {
     public const string WAIT = 'wait';
     public const string ACTIVE = 'active';
 
-    private readonly string $name;
+    private string $name;
 
     public function __construct(string $name)
     {

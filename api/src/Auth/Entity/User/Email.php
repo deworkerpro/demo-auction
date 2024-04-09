@@ -6,9 +6,9 @@ namespace App\Auth\Entity\User;
 
 use Webmozart\Assert\Assert;
 
-final class Email
+final readonly class Email
 {
-    private readonly string $value;
+    private string $value;
 
     public function __construct(string $value)
     {

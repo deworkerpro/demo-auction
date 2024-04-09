@@ -6,12 +6,12 @@ namespace App\Auth\Entity\User;
 
 use Webmozart\Assert\Assert;
 
-final class Role
+final readonly class Role
 {
     public const string USER = 'user';
     public const string ADMIN = 'admin';
 
-    private readonly string $name;
+    private string $name;
 
     public function __construct(string $name)
     {

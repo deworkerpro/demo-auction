@@ -8,13 +8,13 @@ use Doctrine\ORM\Mapping as ORM;
 use Webmozart\Assert\Assert;
 
 #[ORM\Embeddable]
-final class Network
+final readonly class Network
 {
     #[ORM\Column(type: 'string', length: 16)]
-    private readonly string $name;
+    private string $name;
 
     #[ORM\Column(type: 'string', length: 16)]
-    private readonly string $identity;
+    private string $identity;
 
     public function __construct(string $name, string $identity)
     {

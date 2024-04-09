@@ -9,9 +9,9 @@ use Ramsey\Uuid\Uuid;
 use Stringable;
 use Webmozart\Assert\Assert;
 
-final class Id implements Stringable
+final readonly class Id implements Stringable
 {
-    private readonly string $value;
+    private string $value;
 
     public function __construct(string $value)
     {

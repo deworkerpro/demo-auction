@@ -10,7 +10,7 @@ use Ramsey\Uuid\Uuid;
 #[ORM\Entity(readOnly: true)]
 #[ORM\Table(name: 'auth_user_networks')]
 #[ORM\UniqueConstraint(columns: ['network_name', 'network_identity'])]
-final class UserNetwork
+final readonly class UserNetwork
 {
     #[ORM\Column(type: 'guid')]
     #[ORM\Id]
