@@ -23,9 +23,7 @@ final class TranslatorLocaleTest extends TestCase
     public function testDefault(): void
     {
         $translator = $this->createMock(Translator::class);
-        $translator->expects(self::once())->method('setLocale')->with(
-            self::equalTo('en')
-        );
+        $translator->expects(self::once())->method('setLocale')->with('en');
 
         $middleware = new TranslatorLocale($translator, ['en', 'ru']);
 
@@ -40,9 +38,7 @@ final class TranslatorLocaleTest extends TestCase
     public function testAccepted(): void
     {
         $translator = $this->createMock(Translator::class);
-        $translator->expects(self::once())->method('setLocale')->with(
-            self::equalTo('ru')
-        );
+        $translator->expects(self::once())->method('setLocale')->with('ru');
 
         $middleware = new TranslatorLocale($translator, ['en', 'ru']);
 
@@ -57,9 +53,7 @@ final class TranslatorLocaleTest extends TestCase
     public function testMulti(): void
     {
         $translator = $this->createMock(Translator::class);
-        $translator->expects(self::once())->method('setLocale')->with(
-            self::equalTo('ru')
-        );
+        $translator->expects(self::once())->method('setLocale')->with('ru');
 
         $middleware = new TranslatorLocale($translator, ['en', 'fr', 'ru']);
 
@@ -74,9 +68,7 @@ final class TranslatorLocaleTest extends TestCase
     public function testOther(): void
     {
         $translator = $this->createMock(Translator::class);
-        $translator->expects(self::once())->method('setLocale')->with(
-            self::equalTo('en')
-        );
+        $translator->expects(self::once())->method('setLocale')->with('en');
 
         $middleware = new TranslatorLocale($translator, ['en', 'ru']);
 

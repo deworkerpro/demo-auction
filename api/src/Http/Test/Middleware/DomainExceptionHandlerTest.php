@@ -44,11 +44,9 @@ final class DomainExceptionHandlerTest extends TestCase
         $logger->expects(self::once())->method('warning');
 
         $translator = $this->createMock(TranslatorInterface::class);
-        $translator->expects(self::once())->method('trans')->with(
-            self::equalTo('Some error.'),
-            self::equalTo([]),
-            self::equalTo('exceptions')
-        )->willReturn('Ошибка.');
+        $translator->expects(self::once())->method('trans')
+            ->with('Some error.', [], 'exceptions')
+            ->willReturn('Ошибка.');
 
         $middleware = new DomainExceptionHandler($logger, $translator);
 
