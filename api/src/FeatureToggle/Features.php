@@ -9,17 +9,9 @@ use Override;
 final class Features implements FeatureFlag, FeatureSwitch, FeaturesContext
 {
     /**
-     * @var array<string,bool>
-     */
-    private array $features;
-
-    /**
      * @param array<string,bool> $features
      */
-    public function __construct(array $features)
-    {
-        $this->features = $features;
-    }
+    public function __construct(private array $features) {}
 
     #[Override]
     public function isEnabled(string $name): bool

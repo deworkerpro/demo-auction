@@ -8,16 +8,9 @@ use App\Auth\Entity\User\Status;
 use App\Auth\Service\PasswordHasher;
 use Doctrine\DBAL\Connection;
 
-final class Fetcher
+final readonly class Fetcher
 {
-    private readonly Connection $connection;
-    private readonly PasswordHasher $hasher;
-
-    public function __construct(Connection $connection, PasswordHasher $hasher)
-    {
-        $this->connection = $connection;
-        $this->hasher = $hasher;
-    }
+    public function __construct(private Connection $connection, private PasswordHasher $hasher) {}
 
     public function fetch(Query $query): ?User
     {

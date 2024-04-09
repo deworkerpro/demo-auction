@@ -6,14 +6,9 @@ namespace App\Auth\Query\FindIdentityById;
 
 use Doctrine\DBAL\Connection;
 
-final class Fetcher
+final readonly class Fetcher
 {
-    private readonly Connection $connection;
-
-    public function __construct(Connection $connection)
-    {
-        $this->connection = $connection;
-    }
+    public function __construct(private Connection $connection) {}
 
     public function fetch(string $id): ?Identity
     {

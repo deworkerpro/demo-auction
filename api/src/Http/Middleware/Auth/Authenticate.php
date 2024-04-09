@@ -14,18 +14,11 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-final class Authenticate implements MiddlewareInterface
+final readonly class Authenticate implements MiddlewareInterface
 {
     private const string ATTRIBUTE = 'identity';
 
-    private readonly ResourceServer $server;
-    private readonly ResponseFactoryInterface $response;
-
-    public function __construct(ResourceServer $server, ResponseFactoryInterface $response)
-    {
-        $this->server = $server;
-        $this->response = $response;
-    }
+    public function __construct(private ResourceServer $server, private ResponseFactoryInterface $response) {}
 
     public static function identity(ServerRequestInterface $request): ?Identity
     {

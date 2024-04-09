@@ -8,22 +8,12 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use DomainException;
 
-final class UserRepository
+final readonly class UserRepository
 {
-    /**
-     * @var EntityRepository<User>
-     */
-    private readonly EntityRepository $repo;
-    private readonly EntityManagerInterface $em;
-
     /**
      * @param EntityRepository<User> $repo
      */
-    public function __construct(EntityManagerInterface $em, EntityRepository $repo)
-    {
-        $this->em = $em;
-        $this->repo = $repo;
-    }
+    public function __construct(private EntityManagerInterface $em, private EntityRepository $repo) {}
 
     public function hasByEmail(Email $email): bool
     {

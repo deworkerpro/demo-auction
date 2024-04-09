@@ -13,12 +13,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 final class ClearExpiredCommand extends ConsoleCommand
 {
-    private readonly Handler $handler;
-
-    public function __construct(Handler $handler)
+    public function __construct(private readonly Handler $handler)
     {
         parent::__construct();
-        $this->handler = $handler;
     }
 
     #[Override]

@@ -2,6 +2,9 @@
 
 declare(strict_types=1);
 
+use App\Rector\ConstructorPromotionExceptRector;
+use Doctrine\ORM\Mapping\Embeddable;
+use Doctrine\ORM\Mapping\Entity;
 use Rector\Caching\ValueObject\Storage\FileCacheStorage;
 use Rector\Config\RectorConfig;
 use Rector\Doctrine\Set\DoctrineSetList;
@@ -43,4 +46,10 @@ return RectorConfig::configure()
     ])
     ->withRules([
         AddVoidReturnTypeWhereNoReturnRector::class,
+    ])
+    ->withConfiguredRule(ConstructorPromotionExceptRector::class, [
+        ConstructorPromotionExceptRector::EXCEPT_CLASS_ATTRIBUTES => [
+            Entity::class,
+            Embeddable::class,
+        ],
     ]);
