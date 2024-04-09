@@ -10,6 +10,6 @@ final readonly class Command
 {
     public function __construct(
         #[Assert\NotBlank]
-        public string $token = ''
+        public string $token
     ) {}
 }

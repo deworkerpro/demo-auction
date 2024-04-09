@@ -11,9 +11,9 @@ final readonly class Command
     public function __construct(
         #[Assert\NotBlank]
         #[Assert\Email]
-        public string $email = '',
+        public string $email,
         #[Assert\Length(min: 6)]
         #[Assert\NotBlank]
-        public string $password = ''
+        public string $password
     ) {}
 }

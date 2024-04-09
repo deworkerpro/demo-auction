@@ -64,7 +64,7 @@ final class ConfirmTest extends WebTestCase
 
         self::assertSame([
             'errors' => [
-                'token' => 'This value should not be blank.',
+                'token' => 'The type must be one of "string" ("null" given).',
             ],
         ], Json::decode($body));
     }

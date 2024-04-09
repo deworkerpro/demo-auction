@@ -7,8 +7,8 @@ namespace App\Auth\Command\ChangePassword;
 final readonly class Command
 {
     public function __construct(
-        public string $id = '',
-        public string $current = '',
-        public string $new = ''
+        public string $id,
+        public string $current,
+        public string $new
     ) {}
 }

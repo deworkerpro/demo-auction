@@ -7,6 +7,6 @@ namespace App\Auth\Command\Remove;
 final readonly class Command
 {
     public function __construct(
-        public string $id = ''
+        public string $id
     ) {}
 }

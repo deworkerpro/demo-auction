@@ -86,8 +86,8 @@ final class RequestTest extends WebTestCase
 
         self::assertSame([
             'errors' => [
-                'email' => 'This value should not be blank.',
-                'password' => 'This value should not be blank.',
+                'email' => 'The type must be one of "string" ("null" given).',
+                'password' => 'The type must be one of "string" ("null" given).',
             ],
         ], Json::decode($body));
     }
