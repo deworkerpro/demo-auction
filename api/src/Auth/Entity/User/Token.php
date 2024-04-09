@@ -51,6 +51,9 @@ final readonly class Token
         return $this->expires ?? throw new RuntimeException('Empty value.');
     }
 
+    /**
+     * @internal
+     */
     public function isEmpty(): bool
     {
         return $this->value === null;
