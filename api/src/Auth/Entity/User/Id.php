@@ -11,7 +11,7 @@ use Webmozart\Assert\Assert;
 
 final class Id implements Stringable
 {
-    private string $value;
+    private readonly string $value;
 
     public function __construct(string $value)
     {

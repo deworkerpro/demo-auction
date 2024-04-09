@@ -10,7 +10,7 @@ use Webmozart\Assert\Assert;
 
 final class User implements UserEntityInterface
 {
-    private string $identifier;
+    private readonly string $identifier;
 
     public function __construct(string $identifier)
     {

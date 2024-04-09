@@ -9,9 +9,9 @@ use Ramsey\Uuid\Uuid;
 
 final class ClientBuilder
 {
-    private string $identifier;
-    private string $name;
-    private string $redirectUri;
+    private readonly string $identifier;
+    private readonly string $name;
+    private readonly string $redirectUri;
 
     public function __construct()
     {

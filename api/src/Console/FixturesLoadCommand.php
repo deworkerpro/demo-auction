@@ -15,11 +15,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 final class FixturesLoadCommand extends Command
 {
-    private EntityManagerInterface $em;
+    private readonly EntityManagerInterface $em;
     /**
      * @var string[]
      */
-    private array $paths;
+    private readonly array $paths;
 
     /**
      * @param string[] $paths

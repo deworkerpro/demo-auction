@@ -10,8 +10,8 @@ use Doctrine\DBAL\Connection;
 
 final class Fetcher
 {
-    private Connection $connection;
-    private PasswordHasher $hasher;
+    private readonly Connection $connection;
+    private readonly PasswordHasher $hasher;
 
     public function __construct(Connection $connection, PasswordHasher $hasher)
     {

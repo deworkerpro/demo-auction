@@ -11,7 +11,7 @@ final class Status
     public const string WAIT = 'wait';
     public const string ACTIVE = 'active';
 
-    private string $name;
+    private readonly string $name;
 
     public function __construct(string $name)
     {

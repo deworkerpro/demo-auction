@@ -19,8 +19,8 @@ use Symfony\Component\Console\Question\Question;
 
 final class E2ETokenCommand extends Command
 {
-    private ClientRepositoryInterface $clients;
-    private AccessTokenGenerator $generator;
+    private readonly ClientRepositoryInterface $clients;
+    private readonly AccessTokenGenerator $generator;
 
     public function __construct(ClientRepositoryInterface $clients, AccessTokenGenerator $generator)
     {

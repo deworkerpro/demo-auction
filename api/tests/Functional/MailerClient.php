@@ -8,7 +8,7 @@ use GuzzleHttp\Client;
 
 final class MailerClient
 {
-    private Client $client;
+    private readonly Client $client;
 
     public function __construct()
     {

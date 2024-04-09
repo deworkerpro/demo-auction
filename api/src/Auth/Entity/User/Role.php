@@ -11,7 +11,7 @@ final class Role
     public const string USER = 'user';
     public const string ADMIN = 'admin';
 
-    private string $name;
+    private readonly string $name;
 
     public function __construct(string $name)
     {

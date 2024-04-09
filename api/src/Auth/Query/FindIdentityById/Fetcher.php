@@ -8,7 +8,7 @@ use Doctrine\DBAL\Connection;
 
 final class Fetcher
 {
-    private Connection $connection;
+    private readonly Connection $connection;
 
     public function __construct(Connection $connection)
     {

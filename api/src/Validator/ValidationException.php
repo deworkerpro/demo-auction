@@ -10,7 +10,7 @@ use Throwable;
 
 final class ValidationException extends LogicException
 {
-    private ConstraintViolationListInterface $violations;
+    private readonly ConstraintViolationListInterface $violations;
 
     public function __construct(
         ConstraintViolationListInterface $violations,

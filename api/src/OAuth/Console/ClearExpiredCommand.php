@@ -13,7 +13,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 final class ClearExpiredCommand extends ConsoleCommand
 {
-    private Handler $handler;
+    private readonly Handler $handler;
 
     public function __construct(Handler $handler)
     {

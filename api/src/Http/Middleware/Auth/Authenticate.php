@@ -18,8 +18,8 @@ final class Authenticate implements MiddlewareInterface
 {
     private const string ATTRIBUTE = 'identity';
 
-    private ResourceServer $server;
-    private ResponseFactoryInterface $response;
+    private readonly ResourceServer $server;
+    private readonly ResponseFactoryInterface $response;
 
     public function __construct(ResourceServer $server, ResponseFactoryInterface $response)
     {
