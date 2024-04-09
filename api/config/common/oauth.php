@@ -118,13 +118,11 @@ return [
         $config = $container->get('config')['oauth'];
 
         return new ClientRepository(
-            array_map(static function (array $item): Client {
-                return new Client(
-                    $item['client_id'],
-                    $item['name'],
-                    $item['redirect_uri']
-                );
-            }, $config['clients'])
+            array_map(static fn (array $item): Client => new Client(
+                $item['client_id'],
+                $item['name'],
+                $item['redirect_uri']
+            ), $config['clients'])
         );
     },
     UserRepositoryInterface::class => DI\get(UserRepository::class),
