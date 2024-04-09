@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Auth\Entity\User;
 
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Uuid;
 
@@ -12,7 +13,7 @@ use Ramsey\Uuid\Uuid;
 #[ORM\UniqueConstraint(columns: ['network_name', 'network_identity'])]
 final readonly class UserNetwork
 {
-    #[ORM\Column(type: 'guid')]
+    #[ORM\Column(type: Types::GUID)]
     #[ORM\Id]
     private string $id;
 

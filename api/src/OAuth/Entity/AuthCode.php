@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\OAuth\Entity;
 
 use DateTimeImmutable;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use League\OAuth2\Server\Entities\AuthCodeEntityInterface;
 use League\OAuth2\Server\Entities\Traits\AuthCodeTrait;
@@ -25,19 +26,19 @@ final class AuthCode implements AuthCodeEntityInterface
     /**
      * @var string
      */
-    #[ORM\Column(type: 'string', length: 80)]
+    #[ORM\Column(type: Types::STRING, length: 80)]
     #[ORM\Id]
     protected $identifier;
 
     /**
      * @var DateTimeImmutable
      */
-    #[ORM\Column(type: 'datetime_immutable')]
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
     protected $expiryDateTime;
 
     /**
      * @var string
      */
-    #[ORM\Column(type: 'guid')]
+    #[ORM\Column(type: Types::GUID)]
     protected $userIdentifier;
 }

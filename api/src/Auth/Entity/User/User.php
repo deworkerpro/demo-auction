@@ -8,6 +8,7 @@ use App\Auth\Service\PasswordHasher;
 use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use DomainException;
 
@@ -20,13 +21,13 @@ final class User
     #[ORM\Id]
     private Id $id;
 
-    #[ORM\Column(type: 'datetime_immutable')]
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
     private DateTimeImmutable $date;
 
     #[ORM\Column(type: 'auth_user_email', unique: true)]
     private Email $email;
 
-    #[ORM\Column(type: 'string', nullable: true)]
+    #[ORM\Column(type: Types::STRING, nullable: true)]
     private ?string $passwordHash = null;
 
     #[ORM\Column(type: 'auth_user_status', length: 16)]
