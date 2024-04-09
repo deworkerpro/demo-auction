@@ -2,10 +2,12 @@
 
 declare(strict_types=1);
 
+use Rector\Caching\ValueObject\Storage\FileCacheStorage;
 use Rector\Config\RectorConfig;
 use Rector\TypeDeclaration\Rector\ClassMethod\AddVoidReturnTypeWhereNoReturnRector;
 
 return RectorConfig::configure()
+    ->withCache(__DIR__ . '/var/cache/.rector', FileCacheStorage::class)
     ->withPaths([
         __DIR__ . '/bin',
         __DIR__ . '/config',
