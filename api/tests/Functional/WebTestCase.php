@@ -9,6 +9,7 @@ use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use Doctrine\Common\DataFixtures\Loader;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\ORM\EntityManagerInterface;
+use Override;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -23,6 +24,7 @@ abstract class WebTestCase extends TestCase
     private ?App $app = null;
     private ?MailerClient $mailer = null;
 
+    #[Override]
     protected function tearDown(): void
     {
         $this->app = null;

@@ -20,6 +20,7 @@ use League\OAuth2\Server\CryptKey;
 use League\OAuth2\Server\CryptTrait;
 use League\OAuth2\Server\Exception\OAuthServerException;
 use League\OAuth2\Server\Repositories\AccessTokenRepositoryInterface;
+use Override;
 use Psr\Http\Message\ServerRequestInterface;
 use RuntimeException;
 
@@ -50,6 +51,7 @@ final class BearerTokenValidator implements AuthorizationValidatorInterface
         $this->initJwtConfiguration();
     }
 
+    #[Override]
     public function validateAuthorization(ServerRequestInterface $request): ServerRequestInterface
     {
         if ($request->hasHeader('authorization') === false) {

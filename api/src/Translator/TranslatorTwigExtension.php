@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Translator;
 
+use Override;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
@@ -12,6 +13,7 @@ final class TranslatorTwigExtension extends AbstractExtension
 {
     public function __construct(private readonly TranslatorInterface $translator) {}
 
+    #[Override]
     public function getFunctions(): array
     {
         return [

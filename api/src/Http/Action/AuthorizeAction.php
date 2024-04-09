@@ -10,6 +10,7 @@ use App\Http\Response\HtmlResponse;
 use App\OAuth\Entity\User;
 use League\OAuth2\Server\AuthorizationServer;
 use League\OAuth2\Server\Exception\OAuthServerException;
+use Override;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -29,6 +30,7 @@ final class AuthorizeAction implements RequestHandlerInterface
         private readonly TranslatorInterface $translator,
     ) {}
 
+    #[Override]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         try {

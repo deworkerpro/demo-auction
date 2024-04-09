@@ -8,6 +8,7 @@ use Doctrine\Common\EventSubscriber;
 use Doctrine\Migrations\Metadata\Storage\TableMetadataStorageConfiguration;
 use Doctrine\ORM\Tools\Event\GenerateSchemaEventArgs;
 use Doctrine\ORM\Tools\ToolEvents;
+use Override;
 
 final readonly class MigrationSchemaSubscriber implements EventSubscriber
 {
@@ -15,6 +16,7 @@ final readonly class MigrationSchemaSubscriber implements EventSubscriber
         private TableMetadataStorageConfiguration $configuration
     ) {}
 
+    #[Override]
     public function getSubscribedEvents(): array
     {
         return [

@@ -9,6 +9,7 @@ use App\Auth\Command\JoinByEmail\Request\Handler;
 use App\Http\Response\EmptyResponse;
 use App\Serializer\Denormalizer;
 use App\Validator\Validator;
+use Override;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -21,6 +22,7 @@ final class RequestAction implements RequestHandlerInterface
         private readonly Handler $handler
     ) {}
 
+    #[Override]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $command = $this->denormalizer->denormalize($request->getParsedBody(), Command::class);

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\OAuth\Entity;
 
 use League\OAuth2\Server\Repositories\ClientRepositoryInterface;
+use Override;
 
 final class ClientRepository implements ClientRepositoryInterface
 {
@@ -13,6 +14,7 @@ final class ClientRepository implements ClientRepositoryInterface
      */
     public function __construct(private readonly array $clients) {}
 
+    #[Override]
     public function getClientEntity($clientIdentifier): ?Client
     {
         foreach ($this->clients as $client) {
@@ -24,6 +26,7 @@ final class ClientRepository implements ClientRepositoryInterface
         return null;
     }
 
+    #[Override]
     public function validateClient($clientIdentifier, $clientSecret, $grantType): bool
     {
         $client = $this->getClientEntity($clientIdentifier);

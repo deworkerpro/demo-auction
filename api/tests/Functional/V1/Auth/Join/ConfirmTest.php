@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Test\Functional\V1\Auth\Join;
 
+use Override;
 use Ramsey\Uuid\Uuid;
 use Test\Functional\Json;
 use Test\Functional\WebTestCase;
@@ -13,6 +14,7 @@ use Test\Functional\WebTestCase;
  */
 final class ConfirmTest extends WebTestCase
 {
+    #[Override]
     protected function setUp(): void
     {
         parent::setUp();

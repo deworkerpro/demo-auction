@@ -7,6 +7,7 @@ namespace App\OAuth\Entity;
 use League\OAuth2\Server\Entities\ScopeEntityInterface;
 use League\OAuth2\Server\Entities\Traits\EntityTrait;
 use League\OAuth2\Server\Entities\Traits\ScopeTrait;
+use Override;
 use Webmozart\Assert\Assert;
 
 final class Scope implements ScopeEntityInterface
@@ -25,6 +26,7 @@ final class Scope implements ScopeEntityInterface
      * @TODO Remove after release with fixed return type
      * @see https://github.com/thephpleague/oauth2-server/pull/1251
      */
+    #[Override]
     public function jsonSerialize(): mixed
     {
         return $this->getIdentifier();

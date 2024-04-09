@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\ErrorHandler;
 
+use Override;
 use Slim\Handlers\ErrorHandler;
 
 /**
@@ -11,6 +12,7 @@ use Slim\Handlers\ErrorHandler;
  */
 final class LogErrorHandler extends ErrorHandler
 {
+    #[Override]
     protected function writeToErrorLog(): void
     {
         $this->logger->error($this->exception->getMessage(), [

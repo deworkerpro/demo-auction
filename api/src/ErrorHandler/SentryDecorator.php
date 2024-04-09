@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\ErrorHandler;
 
 use App\Sentry;
+use Override;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\Interfaces\ErrorHandlerInterface;
@@ -17,6 +18,7 @@ final class SentryDecorator implements ErrorHandlerInterface
         private readonly Sentry $sentry
     ) {}
 
+    #[Override]
     public function __invoke(
         ServerRequestInterface $request,
         Throwable $exception,

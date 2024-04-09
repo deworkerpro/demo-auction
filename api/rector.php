@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use Rector\Caching\ValueObject\Storage\FileCacheStorage;
 use Rector\Config\RectorConfig;
+use Rector\Php83\Rector\ClassMethod\AddOverrideAttributeToOverriddenMethodsRector;
 use Rector\TypeDeclaration\Rector\ClassMethod\AddVoidReturnTypeWhereNoReturnRector;
 
 return RectorConfig::configure()
@@ -16,8 +17,11 @@ return RectorConfig::configure()
         __DIR__ . '/tests',
         __DIR__ . '/translations',
     ])
-    // uncomment to reach your current PHP version
-    // ->withPhpSets()
+    // ->withPhpSets(php83: true)
     ->withRules([
+        // PHP 8.3
+        AddOverrideAttributeToOverriddenMethodsRector::class,
+
+        // Other
         AddVoidReturnTypeWhereNoReturnRector::class,
     ]);

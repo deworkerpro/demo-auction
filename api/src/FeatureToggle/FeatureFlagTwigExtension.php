@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\FeatureToggle;
 
+use Override;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
@@ -11,6 +12,7 @@ final class FeatureFlagTwigExtension extends AbstractExtension
 {
     public function __construct(private readonly FeatureFlag $flag) {}
 
+    #[Override]
     public function getFunctions(): array
     {
         return [

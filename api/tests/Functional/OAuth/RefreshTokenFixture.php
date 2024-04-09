@@ -12,9 +12,11 @@ use App\OAuth\Test\Builder\AccessTokenBuilder;
 use DateTimeImmutable;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Persistence\ObjectManager;
+use Override;
 
 final class RefreshTokenFixture extends AbstractFixture
 {
+    #[Override]
     public function load(ObjectManager $manager): void
     {
         $user = (new UserBuilder())

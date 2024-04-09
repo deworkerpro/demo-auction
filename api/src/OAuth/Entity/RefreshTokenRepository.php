@@ -10,6 +10,7 @@ use Doctrine\ORM\EntityRepository;
 use League\OAuth2\Server\Entities\RefreshTokenEntityInterface;
 use League\OAuth2\Server\Exception\UniqueTokenIdentifierConstraintViolationException;
 use League\OAuth2\Server\Repositories\RefreshTokenRepositoryInterface;
+use Override;
 
 final class RefreshTokenRepository implements RefreshTokenRepositoryInterface
 {
@@ -21,11 +22,13 @@ final class RefreshTokenRepository implements RefreshTokenRepositoryInterface
         private readonly EntityRepository $repo
     ) {}
 
+    #[Override]
     public function getNewRefreshToken(): ?RefreshToken
     {
         return new RefreshToken();
     }
 
+    #[Override]
     public function persistNewRefreshToken(RefreshTokenEntityInterface $refreshTokenEntity): void
     {
         if ($this->exists($refreshTokenEntity->getIdentifier())) {
@@ -36,6 +39,7 @@ final class RefreshTokenRepository implements RefreshTokenRepositoryInterface
         $this->em->flush();
     }
 
+    #[Override]
     public function revokeRefreshToken($tokenId): void
     {
         if ($token = $this->repo->find($tokenId)) {
@@ -44,6 +48,7 @@ final class RefreshTokenRepository implements RefreshTokenRepositoryInterface
         }
     }
 
+    #[Override]
     public function isRefreshTokenRevoked($tokenId): bool
     {
         return !$this->exists($tokenId);

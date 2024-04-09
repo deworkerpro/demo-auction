@@ -9,11 +9,13 @@ use League\OAuth2\Server\Entities\AccessTokenEntityInterface;
 use League\OAuth2\Server\Entities\ClientEntityInterface;
 use League\OAuth2\Server\Exception\OAuthServerException;
 use League\OAuth2\Server\Repositories\AccessTokenRepositoryInterface;
+use Override;
 
 final class AccessTokenRepository implements AccessTokenRepositoryInterface
 {
     public function __construct(private readonly Fetcher $users) {}
 
+    #[Override]
     public function getNewToken(
         ClientEntityInterface $clientEntity,
         array $scopes,
@@ -35,16 +37,19 @@ final class AccessTokenRepository implements AccessTokenRepositoryInterface
         return $accessToken;
     }
 
+    #[Override]
     public function persistNewAccessToken(AccessTokenEntityInterface $accessTokenEntity): void
     {
         // do nothing
     }
 
+    #[Override]
     public function revokeAccessToken($tokenId): void
     {
         // do nothing
     }
 
+    #[Override]
     public function isAccessTokenRevoked($tokenId): bool
     {
         return false;

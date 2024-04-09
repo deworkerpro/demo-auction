@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace App\Auth\Entity\User;
 
+use Override;
 use Ramsey\Uuid\Uuid;
+use Stringable;
 use Webmozart\Assert\Assert;
 
-final class Id
+final class Id implements Stringable
 {
     private string $value;
 
@@ -17,6 +19,7 @@ final class Id
         $this->value = mb_strtolower($value);
     }
 
+    #[Override]
     public function __toString(): string
     {
         return $this->getValue();

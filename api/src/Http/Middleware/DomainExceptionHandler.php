@@ -6,6 +6,7 @@ namespace App\Http\Middleware;
 
 use App\Http\Response\JsonResponse;
 use DomainException;
+use Override;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -20,6 +21,7 @@ final class DomainExceptionHandler implements MiddlewareInterface
         private readonly TranslatorInterface $translator
     ) {}
 
+    #[Override]
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         try {

@@ -11,11 +11,13 @@ use App\Auth\Entity\User\User;
 use DateTimeImmutable;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Persistence\ObjectManager;
+use Override;
 
 final class UserJoinConfirmFixture extends AbstractFixture
 {
     private const PASSWORD_HASH = '$2y$12$qwnND33o8DGWvFoepotSju7eTAQ6gzLD/zy6W8NCVtiHPbkybz.w6';
 
+    #[Override]
     public function load(ObjectManager $manager): void
     {
         $user = User::requestJoinByEmail(

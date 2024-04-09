@@ -12,6 +12,7 @@ use League\OAuth2\Server\Entities\ScopeEntityInterface;
 use League\OAuth2\Server\Entities\Traits\AccessTokenTrait;
 use League\OAuth2\Server\Entities\Traits\EntityTrait;
 use League\OAuth2\Server\Entities\Traits\TokenEntityTrait;
+use Override;
 use RuntimeException;
 
 /**
@@ -37,7 +38,8 @@ final class AccessToken implements AccessTokenEntityInterface
         }
     }
 
-    public function __toString()
+    #[Override]
+    public function __toString(): string
     {
         return $this->convertToJWT()->toString();
     }

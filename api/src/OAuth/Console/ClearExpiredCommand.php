@@ -6,6 +6,7 @@ namespace App\OAuth\Console;
 
 use App\OAuth\Command\ClearExpiredItems\Command;
 use App\OAuth\Command\ClearExpiredItems\Handler;
+use Override;
 use Symfony\Component\Console\Command\Command as ConsoleCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -20,12 +21,14 @@ final class ClearExpiredCommand extends ConsoleCommand
         $this->handler = $handler;
     }
 
+    #[Override]
     protected function configure(): void
     {
         $this
             ->setName('oauth:clear-expired');
     }
 
+    #[Override]
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->handler->handle(new Command(date(DATE_ATOM)));

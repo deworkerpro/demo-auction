@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Test\Functional\OAuth;
 
 use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
+use Override;
 use Test\Functional\Json;
 use Test\Functional\WebTestCase;
 
@@ -15,6 +16,7 @@ final class AuthorizeTest extends WebTestCase
 {
     use ArraySubsetAsserts;
 
+    #[Override]
     protected function setUp(): void
     {
         parent::setUp();

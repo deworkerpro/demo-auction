@@ -6,6 +6,7 @@ namespace App\Http\Action;
 
 use App\FeatureToggle\FeatureFlag;
 use App\Http\Response\JsonResponse;
+use Override;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -15,6 +16,7 @@ final class HomeAction implements RequestHandlerInterface
 {
     public function __construct(private readonly FeatureFlag $flag) {}
 
+    #[Override]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         if ($this->flag->isEnabled('NEW_HOME')) {

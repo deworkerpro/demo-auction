@@ -10,6 +10,7 @@ use Doctrine\ORM\EntityRepository;
 use League\OAuth2\Server\Entities\AuthCodeEntityInterface;
 use League\OAuth2\Server\Exception\UniqueTokenIdentifierConstraintViolationException;
 use League\OAuth2\Server\Repositories\AuthCodeRepositoryInterface;
+use Override;
 
 final class AuthCodeRepository implements AuthCodeRepositoryInterface
 {
@@ -21,11 +22,13 @@ final class AuthCodeRepository implements AuthCodeRepositoryInterface
         private readonly EntityRepository $repo
     ) {}
 
+    #[Override]
     public function getNewAuthCode(): AuthCode
     {
         return new AuthCode();
     }
 
+    #[Override]
     public function persistNewAuthCode(AuthCodeEntityInterface $authCodeEntity): void
     {
         if ($this->exists($authCodeEntity->getIdentifier())) {
@@ -36,6 +39,7 @@ final class AuthCodeRepository implements AuthCodeRepositoryInterface
         $this->em->flush();
     }
 
+    #[Override]
     public function revokeAuthCode($codeId): void
     {
         if ($code = $this->repo->find($codeId)) {
@@ -44,6 +48,7 @@ final class AuthCodeRepository implements AuthCodeRepositoryInterface
         }
     }
 
+    #[Override]
     public function isAuthCodeRevoked($codeId): bool
     {
         return !$this->exists($codeId);

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\FeatureToggle;
 
+use Override;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -16,6 +17,7 @@ final class FeaturesMiddleware implements MiddlewareInterface
         private readonly string $header = 'X-Features'
     ) {}
 
+    #[Override]
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $header = $request->getHeaderLine($this->header);

@@ -6,6 +6,7 @@ namespace App\OAuth\Entity;
 
 use League\OAuth2\Server\Entities\ClientEntityInterface;
 use League\OAuth2\Server\Repositories\ScopeRepositoryInterface;
+use Override;
 
 final class ScopeRepository implements ScopeRepositoryInterface
 {
@@ -14,6 +15,7 @@ final class ScopeRepository implements ScopeRepositoryInterface
      */
     public function __construct(private readonly array $scopes) {}
 
+    #[Override]
     public function getScopeEntityByIdentifier($identifier): ?Scope
     {
         foreach ($this->scopes as $scope) {
@@ -24,6 +26,7 @@ final class ScopeRepository implements ScopeRepositoryInterface
         return null;
     }
 
+    #[Override]
     public function finalizeScopes(
         array $scopes,
         $grantType,

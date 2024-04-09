@@ -10,6 +10,7 @@ use League\OAuth2\Server\Entities\AccessTokenEntityInterface;
 use League\OAuth2\Server\Entities\RefreshTokenEntityInterface;
 use League\OAuth2\Server\Entities\Traits\EntityTrait;
 use League\OAuth2\Server\Entities\Traits\RefreshTokenTrait;
+use Override;
 
 /**
  * @psalm-suppress MissingConstructor
@@ -37,6 +38,7 @@ final class RefreshToken implements RefreshTokenEntityInterface
     #[ORM\Column(type: 'guid', nullable: false)]
     private ?string $userIdentifier = null;
 
+    #[Override]
     public function setAccessToken(AccessTokenEntityInterface $accessToken): void
     {
         $this->accessToken = $accessToken;

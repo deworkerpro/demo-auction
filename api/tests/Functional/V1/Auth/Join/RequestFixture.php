@@ -11,10 +11,12 @@ use App\Auth\Entity\User\User;
 use DateTimeImmutable;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Persistence\ObjectManager;
+use Override;
 use Ramsey\Uuid\Uuid;
 
 final class RequestFixture extends AbstractFixture
 {
+    #[Override]
     public function load(ObjectManager $manager): void
     {
         $user = User::requestJoinByEmail(

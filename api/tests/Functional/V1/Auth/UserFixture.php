@@ -8,9 +8,11 @@ use App\Auth\Entity\User\Id;
 use App\Auth\Test\Builder\UserBuilder;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Persistence\ObjectManager;
+use Override;
 
 final class UserFixture extends AbstractFixture
 {
+    #[Override]
     public function load(ObjectManager $manager): void
     {
         $user = (new UserBuilder())

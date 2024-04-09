@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\OAuth\Entity;
 
 use League\OAuth2\Server\Entities\UserEntityInterface;
+use Override;
 use Webmozart\Assert\Assert;
 
 final class User implements UserEntityInterface
@@ -18,6 +19,7 @@ final class User implements UserEntityInterface
         $this->identifier = $identifier;
     }
 
+    #[Override]
     public function getIdentifier(): string
     {
         return $this->identifier;
