@@ -21,6 +21,7 @@ return RectorConfig::configure()
         __DIR__ . '/src',
         __DIR__ . '/tests',
         __DIR__ . '/translations',
+        __DIR__ . '/rector',
     ])
     ->withPhpSets(php83: true)
     ->withSets([

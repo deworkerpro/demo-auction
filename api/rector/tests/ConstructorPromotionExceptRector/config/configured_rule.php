@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
+use App\Rector\ConstructorPromotionExceptRector;
 use Rector\Config\RectorConfig;
 
 return static function (RectorConfig $rectorConfig): void {
-    $rectorConfig->rule(\App\Rector\ConstructorPromotionExceptRector::class);
+    $rectorConfig->rule(ConstructorPromotionExceptRector::class);
 };

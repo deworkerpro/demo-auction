@@ -4,9 +4,14 @@ declare(strict_types=1);
 
 namespace App\Rector\Tests\ConstructorPromotionExceptRector;
 
+use Iterator;
+use Override;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Rector\Testing\PHPUnit\AbstractRectorTestCase;
 
+/**
+ * @internal
+ */
 final class ConstructorPromotionExceptRectorTest extends AbstractRectorTestCase
 {
     #[DataProvider('provideData')]
@@ -15,11 +20,12 @@ final class ConstructorPromotionExceptRectorTest extends AbstractRectorTestCase
         $this->doTestFile($filePath);
     }
 
-    public static function provideData(): \Iterator
+    public static function provideData(): Iterator
     {
         return self::yieldFilesFromDirectory(__DIR__ . '/Fixture');
     }
 
+    #[Override]
     public function provideConfigFilePath(): string
     {
         return __DIR__ . '/config/configured_rule.php';
