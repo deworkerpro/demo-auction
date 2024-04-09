@@ -16,7 +16,7 @@ final class FrontendUrlTwigExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('frontend_url', [$this, 'url']),
+            new TwigFunction('frontend_url', $this->url(...)),
         ];
     }
 

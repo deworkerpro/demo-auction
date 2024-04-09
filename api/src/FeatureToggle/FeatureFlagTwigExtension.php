@@ -16,7 +16,7 @@ final class FeatureFlagTwigExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('is_feature_enabled', [$this, 'isFeatureEnabled']),
+            new TwigFunction('is_feature_enabled', $this->isFeatureEnabled(...)),
         ];
     }
 

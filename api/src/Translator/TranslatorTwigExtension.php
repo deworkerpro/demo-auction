@@ -17,7 +17,7 @@ final class TranslatorTwigExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('trans', [$this, 'trans']),
+            new TwigFunction('trans', $this->trans(...)),
         ];
     }
 

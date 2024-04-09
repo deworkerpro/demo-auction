@@ -5,6 +5,7 @@ declare(strict_types=1);
 use Rector\Caching\ValueObject\Storage\FileCacheStorage;
 use Rector\Config\RectorConfig;
 use Rector\Php80\Rector\Class_\StringableForToStringRector;
+use Rector\Php81\Rector\Array_\FirstClassCallableRector;
 use Rector\Php83\Rector\ClassMethod\AddOverrideAttributeToOverriddenMethodsRector;
 use Rector\TypeDeclaration\Rector\ClassMethod\AddVoidReturnTypeWhereNoReturnRector;
 
@@ -23,6 +24,7 @@ return RectorConfig::configure()
         // PHP 8.3
         AddOverrideAttributeToOverriddenMethodsRector::class,
         StringableForToStringRector::class,
+        FirstClassCallableRector::class,
 
         // Other
         AddVoidReturnTypeWhereNoReturnRector::class,
