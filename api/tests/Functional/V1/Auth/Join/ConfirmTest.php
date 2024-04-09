@@ -28,7 +28,7 @@ final class ConfirmTest extends WebTestCase
     {
         $response = $this->app()->handle(self::json('GET', '/v1/auth/join/confirm'));
 
-        self::assertEquals(405, $response->getStatusCode());
+        self::assertSame(405, $response->getStatusCode());
     }
 
     public function testSuccess(): void
@@ -37,8 +37,8 @@ final class ConfirmTest extends WebTestCase
             'token' => ConfirmFixture::VALID,
         ]));
 
-        self::assertEquals(200, $response->getStatusCode());
-        self::assertEquals('', (string)$response->getBody());
+        self::assertSame(200, $response->getStatusCode());
+        self::assertSame('', (string)$response->getBody());
     }
 
     public function testExpired(): void
@@ -47,10 +47,10 @@ final class ConfirmTest extends WebTestCase
             'token' => ConfirmFixture::EXPIRED,
         ]));
 
-        self::assertEquals(409, $response->getStatusCode());
+        self::assertSame(409, $response->getStatusCode());
         self::assertJson($body = (string)$response->getBody());
 
-        self::assertEquals([
+        self::assertSame([
             'message' => 'Token is expired.',
         ], Json::decode($body));
     }
@@ -59,10 +59,10 @@ final class ConfirmTest extends WebTestCase
     {
         $response = $this->app()->handle(self::json('POST', '/v1/auth/join/confirm', []));
 
-        self::assertEquals(422, $response->getStatusCode());
+        self::assertSame(422, $response->getStatusCode());
         self::assertJson($body = (string)$response->getBody());
 
-        self::assertEquals([
+        self::assertSame([
             'errors' => [
                 'token' => 'This value should not be blank.',
             ],
@@ -75,10 +75,10 @@ final class ConfirmTest extends WebTestCase
             'token' => Uuid::uuid4()->toString(),
         ]));
 
-        self::assertEquals(409, $response->getStatusCode());
+        self::assertSame(409, $response->getStatusCode());
         self::assertJson($body = (string)$response->getBody());
 
-        self::assertEquals([
+        self::assertSame([
             'message' => 'Incorrect token.',
         ], Json::decode($body));
     }

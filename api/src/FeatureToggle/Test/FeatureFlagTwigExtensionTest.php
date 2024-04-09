@@ -6,15 +6,15 @@ namespace App\FeatureToggle\Test;
 
 use App\FeatureToggle\FeatureFlag;
 use App\FeatureToggle\FeatureFlagTwigExtension;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Twig\Environment;
 use Twig\Loader\ArrayLoader;
 
 /**
- * @covers \App\FeatureToggle\FeatureFlagTwigExtension
- *
  * @internal
  */
+#[CoversClass(FeatureFlagTwigExtension::class)]
 final class FeatureFlagTwigExtensionTest extends TestCase
 {
     public function testActive(): void
@@ -28,7 +28,7 @@ final class FeatureFlagTwigExtensionTest extends TestCase
 
         $twig->addExtension(new FeatureFlagTwigExtension($flag));
 
-        self::assertEquals('<p>true</p>', $twig->render('page.html.twig'));
+        self::assertSame('<p>true</p>', $twig->render('page.html.twig'));
     }
 
     public function testNotActive(): void
@@ -42,6 +42,6 @@ final class FeatureFlagTwigExtensionTest extends TestCase
 
         $twig->addExtension(new FeatureFlagTwigExtension($flag));
 
-        self::assertEquals('<p>false</p>', $twig->render('page.html.twig'));
+        self::assertSame('<p>false</p>', $twig->render('page.html.twig'));
     }
 }

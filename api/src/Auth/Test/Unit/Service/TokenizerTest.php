@@ -7,13 +7,13 @@ namespace App\Auth\Test\Unit\Service;
 use App\Auth\Service\Tokenizer;
 use DateInterval;
 use DateTimeImmutable;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \App\Auth\Service\Tokenizer
- *
  * @internal
  */
+#[CoversClass(Tokenizer::class)]
 final class TokenizerTest extends TestCase
 {
     public function testSuccess(): void

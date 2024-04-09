@@ -5,14 +5,15 @@ declare(strict_types=1);
 namespace App\Auth\Test\Unit\Entity\User\User;
 
 use App\Auth\Entity\User\Network;
+use App\Auth\Entity\User\User;
 use App\Auth\Test\Builder\UserBuilder;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \App\Auth\Entity\User\User
- *
  * @internal
  */
+#[CoversClass(User::class)]
 final class AttachNetworkTest extends TestCase
 {
     public function testSuccess(): void

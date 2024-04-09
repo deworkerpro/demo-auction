@@ -10,14 +10,14 @@ use App\Auth\Entity\User\Role;
 use App\Auth\Entity\User\Token;
 use App\Auth\Entity\User\User;
 use DateTimeImmutable;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
 
 /**
- * @covers \App\Auth\Entity\User\User
- *
  * @internal
  */
+#[CoversClass(User::class)]
 final class RequestTest extends TestCase
 {
     public function testSuccess(): void
@@ -33,12 +33,12 @@ final class RequestTest extends TestCase
         self::assertEquals($id, $user->getId());
         self::assertEquals($date, $user->getDate());
         self::assertEquals($email, $user->getEmail());
-        self::assertEquals($hash, $user->getPasswordHash());
+        self::assertSame($hash, $user->getPasswordHash());
         self::assertEquals($token, $user->getJoinConfirmToken());
 
         self::assertTrue($user->isWait());
         self::assertFalse($user->isActive());
 
-        self::assertEquals(Role::USER, $user->getRole()->getName());
+        self::assertSame(Role::USER, $user->getRole()->getName());
     }
 }

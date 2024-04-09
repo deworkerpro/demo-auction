@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Auth\Test\Unit\Entity\User\User;
 
 use App\Auth\Test\Builder\UserBuilder;
+use PHPUnit\Framework\Attributes\DoesNotPerformAssertions;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -12,9 +13,7 @@ use PHPUnit\Framework\TestCase;
  */
 final class RemoveTest extends TestCase
 {
-    /**
-     * @doesNotPerformAssertions
-     */
+    #[DoesNotPerformAssertions]
     public function testSuccess(): void
     {
         $user = (new UserBuilder())

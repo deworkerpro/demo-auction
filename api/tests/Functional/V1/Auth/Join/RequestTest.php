@@ -27,7 +27,7 @@ final class RequestTest extends WebTestCase
     {
         $response = $this->app()->handle(self::json('GET', '/v1/auth/join'));
 
-        self::assertEquals(405, $response->getStatusCode());
+        self::assertSame(405, $response->getStatusCode());
     }
 
     public function testSuccess(): void
@@ -39,8 +39,8 @@ final class RequestTest extends WebTestCase
             'password' => 'new-password',
         ]));
 
-        self::assertEquals(201, $response->getStatusCode());
-        self::assertEquals('', (string)$response->getBody());
+        self::assertSame(201, $response->getStatusCode());
+        self::assertSame('', (string)$response->getBody());
 
         self::assertTrue($this->mailer()->hasEmailSentTo('new-user@app.test'));
     }
@@ -52,10 +52,10 @@ final class RequestTest extends WebTestCase
             'password' => 'new-password',
         ]));
 
-        self::assertEquals(409, $response->getStatusCode());
+        self::assertSame(409, $response->getStatusCode());
         self::assertJson($body = (string)$response->getBody());
 
-        self::assertEquals([
+        self::assertSame([
             'message' => 'User already exists.',
         ], Json::decode($body));
     }
@@ -67,12 +67,12 @@ final class RequestTest extends WebTestCase
             'password' => 'new-password',
         ])->withHeader('Accept-Language', 'ru'));
 
-        self::assertEquals(409, $response->getStatusCode());
+        self::assertSame(409, $response->getStatusCode());
         self::assertJson($body = (string)$response->getBody());
 
         $data = Json::decode($body);
 
-        self::assertEquals([
+        self::assertSame([
             'message' => 'Пользователь уже существует.',
         ], $data);
     }
@@ -81,10 +81,10 @@ final class RequestTest extends WebTestCase
     {
         $response = $this->app()->handle(self::json('POST', '/v1/auth/join', []));
 
-        self::assertEquals(422, $response->getStatusCode());
+        self::assertSame(422, $response->getStatusCode());
         self::assertJson($body = (string)$response->getBody());
 
-        self::assertEquals([
+        self::assertSame([
             'errors' => [
                 'email' => 'This value should not be blank.',
                 'password' => 'This value should not be blank.',
@@ -99,10 +99,10 @@ final class RequestTest extends WebTestCase
             'password' => '',
         ]));
 
-        self::assertEquals(422, $response->getStatusCode());
+        self::assertSame(422, $response->getStatusCode());
         self::assertJson($body = (string)$response->getBody());
 
-        self::assertEquals([
+        self::assertSame([
             'errors' => [
                 'email' => 'This value should not be blank.',
                 'password' => 'This value should not be blank.',
@@ -118,10 +118,10 @@ final class RequestTest extends WebTestCase
             'age' => 42,
         ]));
 
-        self::assertEquals(422, $response->getStatusCode());
+        self::assertSame(422, $response->getStatusCode());
         self::assertJson($body = (string)$response->getBody());
 
-        self::assertEquals([
+        self::assertSame([
             'errors' => [
                 'age' => 'The attribute is not allowed.',
             ],
@@ -135,10 +135,10 @@ final class RequestTest extends WebTestCase
             'password' => 42,
         ]));
 
-        self::assertEquals(422, $response->getStatusCode());
+        self::assertSame(422, $response->getStatusCode());
         self::assertJson($body = (string)$response->getBody());
 
-        self::assertEquals([
+        self::assertSame([
             'errors' => [
                 'email' => 'The type must be one of "string" ("bool" given).',
                 'password' => 'The type must be one of "string" ("int" given).',
@@ -153,10 +153,10 @@ final class RequestTest extends WebTestCase
             'password' => 'new',
         ]));
 
-        self::assertEquals(422, $response->getStatusCode());
+        self::assertSame(422, $response->getStatusCode());
         self::assertJson($body = (string)$response->getBody());
 
-        self::assertEquals([
+        self::assertSame([
             'errors' => [
                 'email' => 'This value is not a valid email address.',
                 'password' => 'This value is too short. It should have 6 characters or more.',
@@ -171,12 +171,12 @@ final class RequestTest extends WebTestCase
             'password' => '',
         ])->withHeader('Accept-Language', 'es;q=0.9, ru;q=0.8, *;q=0.5'));
 
-        self::assertEquals(422, $response->getStatusCode());
+        self::assertSame(422, $response->getStatusCode());
         self::assertJson($body = (string)$response->getBody());
 
         $data = Json::decode($body);
 
-        self::assertEquals([
+        self::assertSame([
             'errors' => [
                 'email' => 'Значение адреса электронной почты недопустимо.',
                 'password' => 'Значение не должно быть пустым.',

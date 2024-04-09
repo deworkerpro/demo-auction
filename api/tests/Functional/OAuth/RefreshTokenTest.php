@@ -52,7 +52,7 @@ final class RefreshTokenTest extends WebTestCase
             'access_type' => 'offline',
         ]));
 
-        self::assertEquals(200, $response->getStatusCode());
+        self::assertSame(200, $response->getStatusCode());
 
         self::assertJson($content = (string)$response->getBody());
 

@@ -6,6 +6,7 @@ namespace App\Http\Test\Middleware;
 
 use App\Http\Middleware\ValidationExceptionHandler;
 use App\Validator\ValidationException;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -16,10 +17,9 @@ use Symfony\Component\Validator\ConstraintViolation;
 use Symfony\Component\Validator\ConstraintViolationList;
 
 /**
- * @covers \App\Http\Middleware\ValidationExceptionHandler
- *
  * @internal
  */
+#[CoversClass(ValidationExceptionHandler::class)]
 final class ValidationExceptionHandlerTest extends TestCase
 {
     public function testNormal(): void
@@ -48,13 +48,13 @@ final class ValidationExceptionHandlerTest extends TestCase
 
         $response = $middleware->process(self::createRequest(), $handler);
 
-        self::assertEquals(422, $response->getStatusCode());
+        self::assertSame(422, $response->getStatusCode());
         self::assertJson($body = (string)$response->getBody());
 
         /** @var array $data */
         $data = json_decode($body, true, 512, JSON_THROW_ON_ERROR);
 
-        self::assertEquals([
+        self::assertSame([
             'errors' => [
                 'email' => 'Incorrect Email',
                 'password' => 'Empty Password',

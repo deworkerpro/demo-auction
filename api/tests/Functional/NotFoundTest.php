@@ -17,7 +17,7 @@ final class NotFoundTest extends WebTestCase
     {
         $response = $this->app()->handle(self::json('GET', '/not-found'));
 
-        self::assertEquals(404, $response->getStatusCode());
+        self::assertSame(404, $response->getStatusCode());
         self::assertJson($body = (string)$response->getBody());
 
         $data = Json::decode($body);

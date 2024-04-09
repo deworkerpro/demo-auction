@@ -6,21 +6,21 @@ namespace App\Auth\Test\Unit\Entity\User;
 
 use App\Auth\Entity\User\Id;
 use InvalidArgumentException;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
 
 /**
- * @covers \App\Auth\Entity\User\Id
- *
  * @internal
  */
+#[CoversClass(Id::class)]
 final class IdTest extends TestCase
 {
     public function testSuccess(): void
     {
         $id = new Id($value = Uuid::uuid4()->toString());
 
-        self::assertEquals($value, $id->getValue());
+        self::assertSame($value, $id->getValue());
     }
 
     public function testCase(): void
@@ -29,7 +29,7 @@ final class IdTest extends TestCase
 
         $id = new Id(mb_strtoupper($value));
 
-        self::assertEquals($value, $id->getValue());
+        self::assertSame($value, $id->getValue());
     }
 
     public function testGenerate(): void

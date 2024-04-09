@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Serializer\Test;
 
 use App\Serializer\Denormalizer;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 use Symfony\Component\Serializer\Exception\PartialDenormalizationException;
@@ -12,10 +13,9 @@ use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
 /**
- * @covers \App\Serializer\Denormalizer
- *
  * @internal
  */
+#[CoversClass(Denormalizer::class)]
 final class DenormalizerTest extends TestCase
 {
     public function testValid(): void

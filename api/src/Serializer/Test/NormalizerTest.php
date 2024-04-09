@@ -5,15 +5,15 @@ declare(strict_types=1);
 namespace App\Serializer\Test;
 
 use App\Serializer\Normalizer;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 /**
- * @covers \App\Serializer\Normalizer
- *
  * @internal
  */
+#[CoversClass(Normalizer::class)]
 final class NormalizerTest extends TestCase
 {
     public function testValid(): void

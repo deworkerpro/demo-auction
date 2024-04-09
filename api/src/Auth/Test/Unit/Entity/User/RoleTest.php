@@ -6,20 +6,20 @@ namespace App\Auth\Test\Unit\Entity\User;
 
 use App\Auth\Entity\User\Role;
 use InvalidArgumentException;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \App\Auth\Entity\User\Role
- *
  * @internal
  */
+#[CoversClass(Role::class)]
 final class RoleTest extends TestCase
 {
     public function testSuccess(): void
     {
         $role = new Role($name = Role::ADMIN);
 
-        self::assertEquals($name, $role->getName());
+        self::assertSame($name, $role->getName());
     }
 
     public function testIncorrect(): void
@@ -38,6 +38,6 @@ final class RoleTest extends TestCase
     {
         $role = Role::user();
 
-        self::assertEquals(Role::USER, $role->getName());
+        self::assertSame(Role::USER, $role->getName());
     }
 }

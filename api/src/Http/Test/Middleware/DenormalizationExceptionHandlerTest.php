@@ -7,6 +7,7 @@ namespace App\Http\Test\Middleware;
 use App\Http\Middleware\DenormalizationExceptionHandler;
 use App\Validator\ValidationException;
 use Exception;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -18,10 +19,9 @@ use Symfony\Component\Serializer\Exception\NotNormalizableValueException;
 use Symfony\Component\Serializer\Exception\PartialDenormalizationException;
 
 /**
- * @covers \App\Http\Middleware\DenormalizationExceptionHandler
- *
  * @internal
  */
+#[CoversClass(DenormalizationExceptionHandler::class)]
 final class DenormalizationExceptionHandlerTest extends TestCase
 {
     public function testNormal(): void
@@ -59,13 +59,13 @@ final class DenormalizationExceptionHandlerTest extends TestCase
 
             self::assertTrue($exception->getViolations()->has(0));
             $violation = $exception->getViolations()->get(0);
-            self::assertEquals('The type must be one of "string" ("int" given).', $violation->getMessage());
-            self::assertEquals('name', $violation->getPropertyPath());
+            self::assertSame('The type must be one of "string" ("int" given).', $violation->getMessage());
+            self::assertSame('name', $violation->getPropertyPath());
 
             self::assertTrue($exception->getViolations()->has(1));
             $violation = $exception->getViolations()->get(1);
-            self::assertEquals('The type must be one of "int" ("string" given).', $violation->getMessage());
-            self::assertEquals('age', $violation->getPropertyPath());
+            self::assertSame('The type must be one of "int" ("string" given).', $violation->getMessage());
+            self::assertSame('age', $violation->getPropertyPath());
         }
     }
 
@@ -85,8 +85,8 @@ final class DenormalizationExceptionHandlerTest extends TestCase
             self::assertInstanceOf(ValidationException::class, $exception);
             self::assertTrue($exception->getViolations()->has(0));
             $violation = $exception->getViolations()->get(0);
-            self::assertEquals('The type must be one of "string" ("int" given).', $violation->getMessage());
-            self::assertEquals('name', $violation->getPropertyPath());
+            self::assertSame('The type must be one of "string" ("int" given).', $violation->getMessage());
+            self::assertSame('name', $violation->getPropertyPath());
         }
     }
 
@@ -106,8 +106,8 @@ final class DenormalizationExceptionHandlerTest extends TestCase
             self::assertInstanceOf(ValidationException::class, $exception);
             self::assertTrue($exception->getViolations()->has(0));
             $violation = $exception->getViolations()->get(0);
-            self::assertEquals('The attribute is not allowed.', $violation->getMessage());
-            self::assertEquals('age', $violation->getPropertyPath());
+            self::assertSame('The attribute is not allowed.', $violation->getMessage());
+            self::assertSame('age', $violation->getPropertyPath());
         }
     }
 

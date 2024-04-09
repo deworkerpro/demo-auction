@@ -33,7 +33,7 @@ final class AuthorizationCodeTest extends WebTestCase
     public function testMethod(): void
     {
         $response = $this->app()->handle(self::json('GET', '/token'));
-        self::assertEquals(405, $response->getStatusCode());
+        self::assertSame(405, $response->getStatusCode());
     }
 
     public function testSuccess(): void
@@ -63,7 +63,7 @@ final class AuthorizationCodeTest extends WebTestCase
             'access_type' => 'offline',
         ]));
 
-        self::assertEquals(200, $response->getStatusCode());
+        self::assertSame(200, $response->getStatusCode());
 
         self::assertJson($content = (string)$response->getBody());
 
@@ -109,7 +109,7 @@ final class AuthorizationCodeTest extends WebTestCase
             'access_type' => 'offline',
         ]));
 
-        self::assertEquals(400, $response->getStatusCode());
+        self::assertSame(400, $response->getStatusCode());
     }
 
     public function testWithoutVerifier(): void
@@ -138,7 +138,7 @@ final class AuthorizationCodeTest extends WebTestCase
             'access_type' => 'offline',
         ]));
 
-        self::assertEquals(401, $response->getStatusCode());
+        self::assertSame(401, $response->getStatusCode());
     }
 
     public function testInvalidClient(): void
@@ -168,6 +168,6 @@ final class AuthorizationCodeTest extends WebTestCase
             'access_type' => 'offline',
         ]));
 
-        self::assertEquals(401, $response->getStatusCode());
+        self::assertSame(401, $response->getStatusCode());
     }
 }

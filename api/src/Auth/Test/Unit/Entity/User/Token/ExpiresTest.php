@@ -6,14 +6,16 @@ namespace App\Auth\Test\Unit\Entity\User\Token;
 
 use App\Auth\Entity\User\Token;
 use DateTimeImmutable;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\CoversFunction;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
 
 /**
- * @covers \App\Auth\Entity\User\Token::isExpiredTo
- *
  * @internal
  */
+#[CoversClass(Token::class)]
+#[CoversFunction('isExpiredTo')]
 final class ExpiresTest extends TestCase
 {
     public function testNot(): void

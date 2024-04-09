@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Test\Middleware;
 
 use App\Http\Middleware\ClearEmptyInput;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -15,10 +16,9 @@ use Slim\Psr7\Factory\StreamFactory;
 use Slim\Psr7\Factory\UploadedFileFactory;
 
 /**
- * @covers \App\Http\Middleware\ClearEmptyInput
- *
  * @internal
  */
+#[CoversClass(ClearEmptyInput::class)]
 final class ClearEmptyInputTest extends TestCase
 {
     public function testParsedBody(): void

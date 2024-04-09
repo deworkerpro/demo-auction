@@ -6,6 +6,7 @@ namespace App\Http\Test\Middleware;
 
 use App\Http\Middleware\DomainExceptionHandler;
 use DomainException;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Log\LoggerInterface;
@@ -14,10 +15,9 @@ use Slim\Psr7\Factory\ServerRequestFactory;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * @covers \App\Http\Middleware\DomainExceptionHandler
- *
  * @internal
  */
+#[CoversClass(DomainExceptionHandler::class)]
 final class DomainExceptionHandlerTest extends TestCase
 {
     public function testNormal(): void
@@ -58,13 +58,13 @@ final class DomainExceptionHandlerTest extends TestCase
         $request = (new ServerRequestFactory())->createServerRequest('POST', 'http://test');
         $response = $middleware->process($request, $handler);
 
-        self::assertEquals(409, $response->getStatusCode());
+        self::assertSame(409, $response->getStatusCode());
         self::assertJson($body = (string)$response->getBody());
 
         /** @var array $data */
         $data = json_decode($body, true, 512, JSON_THROW_ON_ERROR);
 
-        self::assertEquals([
+        self::assertSame([
             'message' => 'Ошибка.',
         ], $data);
     }

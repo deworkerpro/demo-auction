@@ -6,15 +6,15 @@ namespace App\Frontend\Test;
 
 use App\Frontend\FrontendUrlGenerator;
 use App\Frontend\FrontendUrlTwigExtension;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Twig\Environment;
 use Twig\Loader\ArrayLoader;
 
 /**
- * @covers \App\Frontend\FrontendUrlTwigExtension
- *
  * @internal
  */
+#[CoversClass(FrontendUrlTwigExtension::class)]
 final class FrontendUrlTwigExtensionTest extends TestCase
 {
     public function testSuccess(): void
@@ -31,6 +31,6 @@ final class FrontendUrlTwigExtensionTest extends TestCase
 
         $twig->addExtension(new FrontendUrlTwigExtension($frontend));
 
-        self::assertEquals('<p>http://test/path?a=1&amp;b=2</p>', $twig->render('page.html.twig'));
+        self::assertSame('<p>http://test/path?a=1&amp;b=2</p>', $twig->render('page.html.twig'));
     }
 }

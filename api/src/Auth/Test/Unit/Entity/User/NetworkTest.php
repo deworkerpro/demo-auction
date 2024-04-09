@@ -6,21 +6,21 @@ namespace App\Auth\Test\Unit\Entity\User;
 
 use App\Auth\Entity\User\Network;
 use InvalidArgumentException;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \App\Auth\Entity\User\Network
- *
  * @internal
  */
+#[CoversClass(Network::class)]
 final class NetworkTest extends TestCase
 {
     public function testSuccess(): void
     {
         $network = new Network($name = 'google', $identity = 'google-1');
 
-        self::assertEquals($name, $network->getName());
-        self::assertEquals($identity, $network->getIdentity());
+        self::assertSame($name, $network->getName());
+        self::assertSame($identity, $network->getIdentity());
     }
 
     public function testEmptyName(): void

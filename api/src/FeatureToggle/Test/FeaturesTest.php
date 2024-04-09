@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace App\FeatureToggle\Test;
 
 use App\FeatureToggle\Features;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \App\FeatureToggle\Features
- *
  * @internal
  */
+#[CoversClass(Features::class)]
 final class FeaturesTest extends TestCase
 {
     public function testInitial(): void
@@ -25,7 +25,7 @@ final class FeaturesTest extends TestCase
         self::assertFalse($features->isEnabled('SECOND'));
         self::assertFalse($features->isEnabled('THIRD'));
 
-        self::assertEquals(['FIRST'], $features->getAllEnabled());
+        self::assertSame(['FIRST'], $features->getAllEnabled());
     }
 
     public function testEnable(): void
@@ -42,7 +42,7 @@ final class FeaturesTest extends TestCase
         self::assertTrue($features->isEnabled('SECOND'));
         self::assertTrue($features->isEnabled('THIRD'));
 
-        self::assertEquals(['SECOND', 'THIRD'], $features->getAllEnabled());
+        self::assertSame(['SECOND', 'THIRD'], $features->getAllEnabled());
     }
 
     public function testDisable(): void

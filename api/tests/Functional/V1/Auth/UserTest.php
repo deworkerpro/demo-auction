@@ -28,7 +28,7 @@ final class UserTest extends WebTestCase
     {
         $response = $this->app()->handle(self::json('GET', '/v1/auth/user'));
 
-        self::assertEquals(401, $response->getStatusCode());
+        self::assertSame(401, $response->getStatusCode());
     }
 
     public function testUser(): void
@@ -38,10 +38,10 @@ final class UserTest extends WebTestCase
                 ->withHeader('Authorization', AuthHeader::for('00000000-0000-0000-0000-000000000001', 'user'))
         );
 
-        self::assertEquals(200, $response->getStatusCode());
+        self::assertSame(200, $response->getStatusCode());
         self::assertJson($body = (string)$response->getBody());
 
-        self::assertEquals([
+        self::assertSame([
             'id' => '00000000-0000-0000-0000-000000000001',
             'role' => 'user',
         ], Json::decode($body));
@@ -54,10 +54,10 @@ final class UserTest extends WebTestCase
                 ->withHeader('Authorization', AuthHeader::for('00000000-0000-0000-0000-000000000001', 'admin'))
         );
 
-        self::assertEquals(200, $response->getStatusCode());
+        self::assertSame(200, $response->getStatusCode());
         self::assertJson($body = (string)$response->getBody());
 
-        self::assertEquals([
+        self::assertSame([
             'id' => '00000000-0000-0000-0000-000000000001',
             'role' => 'admin',
         ], Json::decode($body));

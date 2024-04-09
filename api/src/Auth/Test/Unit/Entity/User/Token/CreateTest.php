@@ -7,14 +7,14 @@ namespace App\Auth\Test\Unit\Entity\User\Token;
 use App\Auth\Entity\User\Token;
 use DateTimeImmutable;
 use InvalidArgumentException;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
 
 /**
- * @covers \App\Auth\Entity\User\Token
- *
  * @internal
  */
+#[CoversClass(Token::class)]
 final class CreateTest extends TestCase
 {
     public function testSuccess(): void
@@ -24,7 +24,7 @@ final class CreateTest extends TestCase
             $expires = new DateTimeImmutable()
         );
 
-        self::assertEquals($value, $token->getValue());
+        self::assertSame($value, $token->getValue());
         self::assertEquals($expires, $token->getExpires());
     }
 
@@ -34,7 +34,7 @@ final class CreateTest extends TestCase
 
         $token = new Token(mb_strtoupper($value), new DateTimeImmutable());
 
-        self::assertEquals($value, $token->getValue());
+        self::assertSame($value, $token->getValue());
     }
 
     public function testIncorrect(): void

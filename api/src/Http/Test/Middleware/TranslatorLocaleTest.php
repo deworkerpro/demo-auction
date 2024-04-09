@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Test\Middleware;
 
 use App\Http\Middleware\TranslatorLocale;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -14,10 +15,9 @@ use Slim\Psr7\Factory\ServerRequestFactory;
 use Symfony\Component\Translation\Translator;
 
 /**
- * @covers \App\Http\Middleware\TranslatorLocale
- *
  * @internal
  */
+#[CoversClass(TranslatorLocale::class)]
 final class TranslatorLocaleTest extends TestCase
 {
     public function testDefault(): void

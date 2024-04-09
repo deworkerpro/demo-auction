@@ -6,6 +6,7 @@ namespace App\Http\Test\Response;
 
 use App\Http\Response\JsonResponse;
 use JsonException;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
@@ -18,22 +19,22 @@ final class JsonResponseTest extends TestCase
     {
         $response = new JsonResponse(0, 201);
 
-        self::assertEquals('application/json', $response->getHeaderLine('Content-Type'));
-        self::assertEquals('0', $response->getBody()->getContents());
-        self::assertEquals(201, $response->getStatusCode());
+        self::assertSame('application/json', $response->getHeaderLine('Content-Type'));
+        self::assertSame('0', $response->getBody()->getContents());
+        self::assertSame(201, $response->getStatusCode());
     }
 
     /**
-     * @dataProvider provideResponseCases
      * @throws JsonException
      */
+    #[DataProvider('provideResponseCases')]
     public function testResponse(mixed $source, mixed $expect): void
     {
         $response = new JsonResponse($source);
 
-        self::assertEquals('application/json', $response->getHeaderLine('Content-Type'));
+        self::assertSame('application/json', $response->getHeaderLine('Content-Type'));
         self::assertEquals($expect, $response->getBody()->getContents());
-        self::assertEquals(200, $response->getStatusCode());
+        self::assertSame(200, $response->getStatusCode());
     }
 
     /**

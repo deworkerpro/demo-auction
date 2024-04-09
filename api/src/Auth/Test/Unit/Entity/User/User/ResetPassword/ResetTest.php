@@ -5,16 +5,17 @@ declare(strict_types=1);
 namespace App\Auth\Test\Unit\Entity\User\User\ResetPassword;
 
 use App\Auth\Entity\User\Token;
+use App\Auth\Entity\User\User;
 use App\Auth\Test\Builder\UserBuilder;
 use DateTimeImmutable;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
 
 /**
- * @covers \App\Auth\Entity\User\User
- *
  * @internal
  */
+#[CoversClass(User::class)]
 final class ResetTest extends TestCase
 {
     public function testSuccess(): void
@@ -29,7 +30,7 @@ final class ResetTest extends TestCase
         $user->resetPassword($token->getValue(), $now, $hash = 'hash');
 
         self::assertNull($user->getPasswordResetToken());
-        self::assertEquals($hash, $user->getPasswordHash());
+        self::assertSame($hash, $user->getPasswordHash());
     }
 
     public function testInvalidToken(): void

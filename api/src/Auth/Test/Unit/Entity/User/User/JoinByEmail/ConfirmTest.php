@@ -5,16 +5,17 @@ declare(strict_types=1);
 namespace App\Auth\Test\Unit\Entity\User\User\JoinByEmail;
 
 use App\Auth\Entity\User\Token;
+use App\Auth\Entity\User\User;
 use App\Auth\Test\Builder\UserBuilder;
 use DateTimeImmutable;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
 
 /**
- * @covers \App\Auth\Entity\User\User
- *
  * @internal
  */
+#[CoversClass(User::class)]
 final class ConfirmTest extends TestCase
 {
     public function testSuccess(): void

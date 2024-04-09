@@ -6,6 +6,7 @@ namespace App\FeatureToggle\Test;
 
 use App\FeatureToggle\FeaturesMiddleware;
 use App\FeatureToggle\FeatureSwitch;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -14,10 +15,9 @@ use Slim\Psr7\Factory\ResponseFactory;
 use Slim\Psr7\Factory\ServerRequestFactory;
 
 /**
- * @covers \App\FeatureToggle\FeaturesMiddleware
- *
  * @internal
  */
+#[CoversClass(FeaturesMiddleware::class)]
 final class FeaturesMiddlewareTest extends TestCase
 {
     public function testEmpty(): void

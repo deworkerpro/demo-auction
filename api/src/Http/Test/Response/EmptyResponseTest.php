@@ -16,10 +16,10 @@ final class EmptyResponseTest extends TestCase
     {
         $response = new EmptyResponse();
 
-        self::assertEquals(204, $response->getStatusCode());
+        self::assertSame(204, $response->getStatusCode());
         self::assertFalse($response->hasHeader('Content-Type'));
 
-        self::assertEquals('', (string)$response->getBody());
+        self::assertSame('', (string)$response->getBody());
         self::assertFalse($response->getBody()->isWritable());
     }
 
@@ -27,6 +27,6 @@ final class EmptyResponseTest extends TestCase
     {
         $response = new EmptyResponse(201);
 
-        self::assertEquals(201, $response->getStatusCode());
+        self::assertSame(201, $response->getStatusCode());
     }
 }

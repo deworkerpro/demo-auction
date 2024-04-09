@@ -8,6 +8,7 @@ use App\Auth\Entity\User\Email;
 use App\Auth\Entity\User\Token;
 use App\Auth\Service\PasswordResetTokenSender;
 use DateTimeImmutable;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\Mailer\MailerInterface;
@@ -15,10 +16,9 @@ use Symfony\Component\Mime\Email as MimeEmail;
 use Twig\Environment;
 
 /**
- * @covers \App\Auth\Service\PasswordResetTokenSender
- *
  * @internal
  */
+#[CoversClass(PasswordResetTokenSender::class)]
 final class PasswordResetTokenSenderTest extends TestCase
 {
     public function testSuccess(): void
@@ -36,9 +36,9 @@ final class PasswordResetTokenSenderTest extends TestCase
         $mailer = $this->createMock(MailerInterface::class);
         $mailer->expects(self::once())->method('send')
             ->willReturnCallback(static function (MimeEmail $message) use ($to, $body): void {
-                self::assertEquals($to->getValue(), $message->getTo()[0]->getAddress());
-                self::assertEquals('Password Reset', $message->getSubject());
-                self::assertEquals($body, $message->getHtmlBody());
+                self::assertSame($to->getValue(), $message->getTo()[0]->getAddress());
+                self::assertSame('Password Reset', $message->getSubject());
+                self::assertSame($body, $message->getHtmlBody());
             });
 
         $sender = new PasswordResetTokenSender($mailer, $twig);
