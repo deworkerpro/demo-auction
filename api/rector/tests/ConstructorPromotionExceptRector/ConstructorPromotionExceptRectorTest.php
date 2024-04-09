@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Rector\Tests\Rector\ConstructorPromotionExceptRector;
+namespace App\Rector\Tests\ConstructorPromotionExceptRector;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use Rector\Testing\PHPUnit\AbstractRectorTestCase;

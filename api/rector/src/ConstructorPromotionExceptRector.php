@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Rector\Rector;
+namespace App\Rector;
 
 use PhpParser\Node;
 use Rector\Rector\AbstractRector;
@@ -10,7 +10,7 @@ use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 /**
- * @see \App\Rector\Tests\Rector\ConstructorPromotionExceptRector\ConstructorPromotionExceptRectorTest
+ * @see \App\Rector\Tests\ConstructorPromotionExceptRector\ConstructorPromotionExceptRectorTest
  */
 final class ConstructorPromotionExceptRector extends AbstractRector
 {
