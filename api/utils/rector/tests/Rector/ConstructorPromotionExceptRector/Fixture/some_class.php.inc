@@ -2,7 +2,7 @@
 
 namespace Utils\Rector\Tests\Rector\ConstructorPromotionExceptRector\Fixture;
 
-// @todo fill code before
+// @todo fill code
 
 ?>
 -----
@@ -10,6 +10,6 @@ namespace Utils\Rector\Tests\Rector\ConstructorPromotionExceptRector\Fixture;
 
 namespace Utils\Rector\Tests\Rector\ConstructorPromotionExceptRector\Fixture;
 
-// @todo fill code after
+// @todo fill code
 
 ?>
