@@ -17,20 +17,20 @@ use DomainException;
 #[ORM\Table(name: 'auth_users')]
 final class User
 {
-    #[ORM\Column(type: 'auth_user_id')]
+    #[ORM\Column(type: IdType::NAME)]
     #[ORM\Id]
     private Id $id;
 
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
     private DateTimeImmutable $date;
 
-    #[ORM\Column(type: 'auth_user_email', unique: true)]
+    #[ORM\Column(type: EmailType::NAME, unique: true)]
     private Email $email;
 
     #[ORM\Column(type: Types::STRING, nullable: true)]
     private ?string $passwordHash = null;
 
-    #[ORM\Column(type: 'auth_user_status', length: 16)]
+    #[ORM\Column(type: StatusType::NAME, length: 16)]
     private Status $status;
 
     #[ORM\Embedded(class: Token::class)]
@@ -39,13 +39,13 @@ final class User
     #[ORM\Embedded(class: Token::class)]
     private ?Token $passwordResetToken = null;
 
-    #[ORM\Column(type: 'auth_user_email', nullable: true)]
+    #[ORM\Column(type: EmailType::NAME, nullable: true)]
     private ?Email $newEmail = null;
 
     #[ORM\Embedded(class: Token::class)]
     private ?Token $newEmailToken = null;
 
-    #[ORM\Column(type: 'auth_user_role', length: 16)]
+    #[ORM\Column(type: RoleType::NAME, length: 16)]
     private Role $role;
 
     /**
