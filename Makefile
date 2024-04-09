@@ -60,9 +60,11 @@ api-validate-schema:
 
 api-lint:
 	docker compose run --rm api-php-cli composer lint
+	docker compose run --rm api-php-cli composer rector -- --dry-run
 	docker compose run --rm api-php-cli composer php-cs-fixer fix -- --dry-run --diff
 
 api-lint-fix:
+	docker compose run --rm api-php-cli composer rector
 	docker compose run --rm api-php-cli composer php-cs-fixer fix
 
 api-analyze:

@@ -83,6 +83,7 @@
         "lint": "phplint",
         "php-cs-fixer": "php-cs-fixer --config=.php-cs-fixer.php",
         "psalm": "psalm --config=psalm.xml",
+        "rector": "rector process",
         "test": "phpunit --colors=always",
         "test-coverage": "XDEBUG_MODE=coverage phpunit --colors=always --coverage-html var/test/coverage",
         "app": "php bin/app.php --ansi"
