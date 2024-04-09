@@ -17,12 +17,10 @@
             <directory>src/Serializer/Test</directory>
             <directory>src/Translator/Test</directory>
             <directory>src/Validator/Test</directory>
+            <directory>rector/tests</directory>
         </testsuite>
         <testsuite name="functional">
             <directory>tests/Functional</directory>
-        </testsuite>
-        <testsuite name="rector">
-            <directory>rector/tests</directory>
         </testsuite>
     </testsuites>
     <source>
