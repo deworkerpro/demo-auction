@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Frontend;
 
-final class FrontendUrlGenerator
+final readonly class FrontendUrlGenerator
 {
-    public function __construct(private readonly string $baseUrl) {}
+    public function __construct(private string $baseUrl) {}
 
     public function generate(string $uri, array $params = []): string
     {

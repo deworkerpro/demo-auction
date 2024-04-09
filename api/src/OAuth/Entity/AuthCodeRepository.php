@@ -12,14 +12,14 @@ use League\OAuth2\Server\Exception\UniqueTokenIdentifierConstraintViolationExcep
 use League\OAuth2\Server\Repositories\AuthCodeRepositoryInterface;
 use Override;
 
-final class AuthCodeRepository implements AuthCodeRepositoryInterface
+final readonly class AuthCodeRepository implements AuthCodeRepositoryInterface
 {
     /**
      * @param EntityRepository<AuthCode> $repo
      */
     public function __construct(
-        private readonly EntityManagerInterface $em,
-        private readonly EntityRepository $repo
+        private EntityManagerInterface $em,
+        private EntityRepository $repo
     ) {}
 
     #[Override]

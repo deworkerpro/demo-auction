@@ -13,13 +13,13 @@ use App\Flusher;
 use DateTimeImmutable;
 use DomainException;
 
-final class Handler
+final readonly class Handler
 {
     public function __construct(
-        private readonly UserRepository $users,
-        private readonly Tokenizer $tokenizer,
-        private readonly NewEmailConfirmTokenSender $sender,
-        private readonly Flusher $flusher
+        private UserRepository $users,
+        private Tokenizer $tokenizer,
+        private NewEmailConfirmTokenSender $sender,
+        private Flusher $flusher
     ) {}
 
     public function handle(Command $command): void

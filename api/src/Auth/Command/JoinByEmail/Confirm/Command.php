@@ -6,10 +6,10 @@ namespace App\Auth\Command\JoinByEmail\Confirm;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-final class Command
+final readonly class Command
 {
     public function __construct(
         #[Assert\NotBlank]
-        public readonly string $token = ''
+        public string $token = ''
     ) {}
 }

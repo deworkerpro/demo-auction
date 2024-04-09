@@ -10,9 +10,9 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email as MimeEmail;
 use Twig\Environment;
 
-final class PasswordResetTokenSender
+final readonly class PasswordResetTokenSender
 {
-    public function __construct(private readonly MailerInterface $mailer, private readonly Environment $twig) {}
+    public function __construct(private MailerInterface $mailer, private Environment $twig) {}
 
     public function send(Email $email, Token $token): void
     {

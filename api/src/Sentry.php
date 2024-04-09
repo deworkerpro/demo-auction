@@ -7,9 +7,9 @@ namespace App;
 use Sentry\State\HubInterface;
 use Throwable;
 
-final class Sentry
+final readonly class Sentry
 {
-    public function __construct(private readonly HubInterface $hub) {}
+    public function __construct(private HubInterface $hub) {}
 
     public function capture(Throwable $exception): void
     {

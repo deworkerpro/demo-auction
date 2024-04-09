@@ -6,9 +6,9 @@ namespace Test\Functional;
 
 use GuzzleHttp\Client;
 
-final class MailerClient
+final readonly class MailerClient
 {
-    private readonly Client $client;
+    private Client $client;
 
     public function __construct()
     {

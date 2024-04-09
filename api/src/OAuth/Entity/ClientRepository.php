@@ -7,12 +7,12 @@ namespace App\OAuth\Entity;
 use League\OAuth2\Server\Repositories\ClientRepositoryInterface;
 use Override;
 
-final class ClientRepository implements ClientRepositoryInterface
+final readonly class ClientRepository implements ClientRepositoryInterface
 {
     /**
      * @param Client[] $clients
      */
-    public function __construct(private readonly array $clients) {}
+    public function __construct(private array $clients) {}
 
     #[Override]
     public function getClientEntity($clientIdentifier): ?Client

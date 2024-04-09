@@ -6,9 +6,9 @@ namespace App\Validator;
 
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-final class Validator
+final readonly class Validator
 {
-    public function __construct(private readonly ValidatorInterface $validator) {}
+    public function __construct(private ValidatorInterface $validator) {}
 
     public function validate(object $object): void
     {

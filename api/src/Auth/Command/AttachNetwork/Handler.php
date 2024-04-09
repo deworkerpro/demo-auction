@@ -10,11 +10,11 @@ use App\Auth\Entity\User\UserRepository;
 use App\Flusher;
 use DomainException;
 
-final class Handler
+final readonly class Handler
 {
     public function __construct(
-        private readonly UserRepository $users,
-        private readonly Flusher $flusher
+        private UserRepository $users,
+        private Flusher $flusher
     ) {}
 
     public function handle(Command $command): void

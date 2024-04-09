@@ -11,9 +11,9 @@ use League\OAuth2\Server\Exception\OAuthServerException;
 use League\OAuth2\Server\Repositories\AccessTokenRepositoryInterface;
 use Override;
 
-final class AccessTokenRepository implements AccessTokenRepositoryInterface
+final readonly class AccessTokenRepository implements AccessTokenRepositoryInterface
 {
-    public function __construct(private readonly Fetcher $users) {}
+    public function __construct(private Fetcher $users) {}
 
     #[Override]
     public function getNewToken(

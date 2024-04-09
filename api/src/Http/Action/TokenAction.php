@@ -15,13 +15,13 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Log\LoggerInterface;
 
-final class TokenAction implements RequestHandlerInterface
+final readonly class TokenAction implements RequestHandlerInterface
 {
     public function __construct(
-        private readonly AuthorizationServer $server,
-        private readonly LoggerInterface $logger,
-        private readonly ResponseFactoryInterface $response,
-        private readonly Sentry $sentry
+        private AuthorizationServer $server,
+        private LoggerInterface $logger,
+        private ResponseFactoryInterface $response,
+        private Sentry $sentry
     ) {}
 
     #[Override]

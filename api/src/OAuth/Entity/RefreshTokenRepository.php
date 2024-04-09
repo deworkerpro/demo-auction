@@ -12,14 +12,14 @@ use League\OAuth2\Server\Exception\UniqueTokenIdentifierConstraintViolationExcep
 use League\OAuth2\Server\Repositories\RefreshTokenRepositoryInterface;
 use Override;
 
-final class RefreshTokenRepository implements RefreshTokenRepositoryInterface
+final readonly class RefreshTokenRepository implements RefreshTokenRepositoryInterface
 {
     /**
      * @param EntityRepository<RefreshToken> $repo
      */
     public function __construct(
-        private readonly EntityManagerInterface $em,
-        private readonly EntityRepository $repo
+        private EntityManagerInterface $em,
+        private EntityRepository $repo
     ) {}
 
     #[Override]

@@ -15,14 +15,14 @@ use App\Flusher;
 use DateTimeImmutable;
 use DomainException;
 
-final class Handler
+final readonly class Handler
 {
     public function __construct(
-        private readonly UserRepository $users,
-        private readonly PasswordHasher $hasher,
-        private readonly Tokenizer $tokenizer,
-        private readonly Flusher $flusher,
-        private readonly JoinConfirmationSender $sender
+        private UserRepository $users,
+        private PasswordHasher $hasher,
+        private Tokenizer $tokenizer,
+        private Flusher $flusher,
+        private JoinConfirmationSender $sender
     ) {}
 
     public function handle(Command $command): void

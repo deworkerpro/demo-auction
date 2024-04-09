@@ -9,9 +9,9 @@ use League\OAuth2\Server\CryptKey;
 use League\OAuth2\Server\Entities\ClientEntityInterface;
 use League\OAuth2\Server\Entities\ScopeEntityInterface;
 
-final class AccessTokenGenerator
+final readonly class AccessTokenGenerator
 {
-    public function __construct(private readonly string $privateKeyPath) {}
+    public function __construct(private string $privateKeyPath) {}
 
     /**
      * @param ScopeEntityInterface[] $scopes

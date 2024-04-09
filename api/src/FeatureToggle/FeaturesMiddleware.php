@@ -10,11 +10,11 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-final class FeaturesMiddleware implements MiddlewareInterface
+final readonly class FeaturesMiddleware implements MiddlewareInterface
 {
     public function __construct(
-        private readonly FeatureSwitch $switch,
-        private readonly string $header = 'X-Features'
+        private FeatureSwitch $switch,
+        private string $header = 'X-Features'
     ) {}
 
     #[Override]

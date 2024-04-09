@@ -7,10 +7,10 @@ namespace App\Serializer;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
-final class Denormalizer
+final readonly class Denormalizer
 {
     public function __construct(
-        private readonly DenormalizerInterface $denormalizer
+        private DenormalizerInterface $denormalizer
     ) {}
 
     /**

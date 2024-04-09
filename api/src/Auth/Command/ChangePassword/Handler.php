@@ -9,12 +9,12 @@ use App\Auth\Entity\User\UserRepository;
 use App\Auth\Service\PasswordHasher;
 use App\Flusher;
 
-final class Handler
+final readonly class Handler
 {
     public function __construct(
-        private readonly UserRepository $users,
-        private readonly PasswordHasher $hasher,
-        private readonly Flusher $flusher
+        private UserRepository $users,
+        private PasswordHasher $hasher,
+        private Flusher $flusher
     ) {}
 
     public function handle(Command $command): void

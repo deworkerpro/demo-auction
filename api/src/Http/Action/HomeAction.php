@@ -12,9 +12,9 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use stdClass;
 
-final class HomeAction implements RequestHandlerInterface
+final readonly class HomeAction implements RequestHandlerInterface
 {
-    public function __construct(private readonly FeatureFlag $flag) {}
+    public function __construct(private FeatureFlag $flag) {}
 
     #[Override]
     public function handle(ServerRequestInterface $request): ResponseInterface

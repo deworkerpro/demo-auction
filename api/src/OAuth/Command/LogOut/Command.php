@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\OAuth\Command\LogOut;
 
-final class Command
+final readonly class Command
 {
     public function __construct(
-        public readonly string $userId
+        public string $userId
     ) {}
 }

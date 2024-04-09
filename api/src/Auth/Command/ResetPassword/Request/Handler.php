@@ -11,13 +11,13 @@ use App\Auth\Service\Tokenizer;
 use App\Flusher;
 use DateTimeImmutable;
 
-final class Handler
+final readonly class Handler
 {
     public function __construct(
-        private readonly UserRepository $users,
-        private readonly Tokenizer $tokenizer,
-        private readonly Flusher $flusher,
-        private readonly PasswordResetTokenSender $sender
+        private UserRepository $users,
+        private Tokenizer $tokenizer,
+        private Flusher $flusher,
+        private PasswordResetTokenSender $sender
     ) {}
 
     public function handle(Command $command): void

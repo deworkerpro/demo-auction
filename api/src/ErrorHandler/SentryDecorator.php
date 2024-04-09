@@ -11,11 +11,11 @@ use Psr\Http\Message\ServerRequestInterface;
 use Slim\Interfaces\ErrorHandlerInterface;
 use Throwable;
 
-final class SentryDecorator implements ErrorHandlerInterface
+final readonly class SentryDecorator implements ErrorHandlerInterface
 {
     public function __construct(
-        private readonly ErrorHandlerInterface $next,
-        private readonly Sentry $sentry
+        private ErrorHandlerInterface $next,
+        private Sentry $sentry
     ) {}
 
     #[Override]

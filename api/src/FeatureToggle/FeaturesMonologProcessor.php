@@ -8,10 +8,10 @@ use Monolog\LogRecord;
 use Monolog\Processor\ProcessorInterface;
 use Override;
 
-final class FeaturesMonologProcessor implements ProcessorInterface
+final readonly class FeaturesMonologProcessor implements ProcessorInterface
 {
     public function __construct(
-        private readonly FeaturesContext $context
+        private FeaturesContext $context
     ) {}
 
     #[Override]

@@ -12,14 +12,14 @@ use Psr\Http\Server\RequestHandlerInterface;
 use ptlis\ConNeg\Negotiation;
 use Symfony\Component\Translation\Translator;
 
-final class TranslatorLocale implements MiddlewareInterface
+final readonly class TranslatorLocale implements MiddlewareInterface
 {
     /**
      * @param string[] $locales
      */
     public function __construct(
-        private readonly Translator $translator,
-        private readonly array $locales
+        private Translator $translator,
+        private array $locales
     ) {}
 
     #[Override]

@@ -7,10 +7,10 @@ namespace App\Serializer;
 use ArrayObject;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-final class Normalizer
+final readonly class Normalizer
 {
     public function __construct(
-        private readonly NormalizerInterface $normalizer
+        private NormalizerInterface $normalizer
     ) {}
 
     public function normalize(mixed $object): null|array|ArrayObject|bool|float|int|string

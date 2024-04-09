@@ -7,11 +7,11 @@ namespace App\OAuth\Command\LogOut;
 use App\OAuth\Entity\AuthCodeRepository;
 use App\OAuth\Entity\RefreshTokenRepository;
 
-final class Handler
+final readonly class Handler
 {
     public function __construct(
-        private readonly AuthCodeRepository $authCodes,
-        private readonly RefreshTokenRepository $refreshTokens
+        private AuthCodeRepository $authCodes,
+        private RefreshTokenRepository $refreshTokens
     ) {}
 
     public function handle(Command $command): void

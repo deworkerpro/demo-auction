@@ -8,6 +8,7 @@ use Rector\Php74\Rector\Closure\ClosureToArrowFunctionRector;
 use Rector\Php80\Rector\Class_\StringableForToStringRector;
 use Rector\Php81\Rector\Array_\FirstClassCallableRector;
 use Rector\Php81\Rector\Property\ReadOnlyPropertyRector;
+use Rector\Php82\Rector\Class_\ReadOnlyClassRector;
 use Rector\Php83\Rector\ClassConst\AddTypeToConstRector;
 use Rector\Php83\Rector\ClassMethod\AddOverrideAttributeToOverriddenMethodsRector;
 use Rector\TypeDeclaration\Rector\ClassMethod\AddVoidReturnTypeWhereNoReturnRector;
@@ -31,6 +32,7 @@ return RectorConfig::configure()
         ClosureToArrowFunctionRector::class,
         AddTypeToConstRector::class,
         ReadOnlyPropertyRector::class,
+        ReadOnlyClassRector::class,
 
         // Other
         AddVoidReturnTypeWhereNoReturnRector::class,

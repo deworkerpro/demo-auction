@@ -7,11 +7,11 @@ namespace App\OAuth\Test\Builder;
 use App\OAuth\Entity\Client;
 use Ramsey\Uuid\Uuid;
 
-final class ClientBuilder
+final readonly class ClientBuilder
 {
-    private readonly string $identifier;
-    private readonly string $name;
-    private readonly string $redirectUri;
+    private string $identifier;
+    private string $name;
+    private string $redirectUri;
 
     public function __construct()
     {

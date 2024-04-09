@@ -14,11 +14,11 @@ use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-final class DomainExceptionHandler implements MiddlewareInterface
+final readonly class DomainExceptionHandler implements MiddlewareInterface
 {
     public function __construct(
-        private readonly LoggerInterface $logger,
-        private readonly TranslatorInterface $translator
+        private LoggerInterface $logger,
+        private TranslatorInterface $translator
     ) {}
 
     #[Override]

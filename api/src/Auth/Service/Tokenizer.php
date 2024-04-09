@@ -9,9 +9,9 @@ use DateInterval;
 use DateTimeImmutable;
 use Ramsey\Uuid\Uuid;
 
-final class Tokenizer
+final readonly class Tokenizer
 {
-    public function __construct(private readonly DateInterval $interval) {}
+    public function __construct(private DateInterval $interval) {}
 
     public function generate(DateTimeImmutable $date): Token
     {

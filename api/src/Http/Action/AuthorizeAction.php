@@ -19,15 +19,15 @@ use Psr\Log\LoggerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Environment;
 
-final class AuthorizeAction implements RequestHandlerInterface
+final readonly class AuthorizeAction implements RequestHandlerInterface
 {
     public function __construct(
-        private readonly AuthorizationServer $server,
-        private readonly LoggerInterface $logger,
-        private readonly Fetcher $users,
-        private readonly Environment $template,
-        private readonly ResponseFactoryInterface $response,
-        private readonly TranslatorInterface $translator,
+        private AuthorizationServer $server,
+        private LoggerInterface $logger,
+        private Fetcher $users,
+        private Environment $template,
+        private ResponseFactoryInterface $response,
+        private TranslatorInterface $translator,
     ) {}
 
     #[Override]
