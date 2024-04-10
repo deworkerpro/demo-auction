@@ -12,8 +12,8 @@ final readonly class Command
         #[Assert\NotBlank]
         #[Assert\Email]
         public string $email = '',
-        #[Assert\Length(min: 6)]
         #[Assert\NotBlank]
+        #[Assert\Length(min: 6)]
         public string $password = ''
     ) {}
 }

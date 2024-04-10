@@ -31,7 +31,9 @@ final class ValidationExceptionHandler implements MiddlewareInterface
     {
         $errors = [];
         foreach ($violations as $violation) {
-            $errors[$violation->getPropertyPath()] = $violation->getMessage();
+            if (!\array_key_exists($violation->getPropertyPath(), $errors)) {
+                $errors[$violation->getPropertyPath()] = $violation->getMessage();
+            }
         }
         return $errors;
     }
