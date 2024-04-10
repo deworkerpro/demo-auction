@@ -15,6 +15,7 @@ return [
     'Resetting is already requested.' => 'Восстановление уже запрошено.',
     'Resetting is not requested.' => 'Восстановление не запрошено.',
     'Incorrect current password.' => 'Неверный текущий пароль.',
+    'New password is already same.' => 'Новый пароль совпадает с текущим.',
     'Email is already same.' => 'Email совпадает с текущим.',
     'Changing is already requested.' => 'Смена уже запрошена.',
     'Changing is not requested.' => 'Смена не запрошена.',

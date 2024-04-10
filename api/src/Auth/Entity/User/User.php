@@ -137,6 +137,9 @@ final class User
         if (!$hasher->validate($current, $this->passwordHash)) {
             throw new DomainException('Incorrect current password.');
         }
+        if ($hasher->validate($new, $this->passwordHash)) {
+            throw new DomainException('New password is already same.');
+        }
         $this->passwordHash = $hasher->hash($new);
     }
 

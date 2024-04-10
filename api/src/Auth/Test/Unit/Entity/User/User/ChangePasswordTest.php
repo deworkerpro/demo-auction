@@ -22,7 +22,10 @@ final class ChangePasswordTest extends TestCase
             ->active()
             ->build();
 
-        $hasher = $this->createHasher(true, $hash = 'new-hash');
+        $hasher = $this->createHasher([
+            ['old-password', 'hash', true],
+            ['new-password', 'hash', false],
+        ], $hash = 'new-hash');
 
         $user->changePassword(
             'old-password',
@@ -39,11 +42,33 @@ final class ChangePasswordTest extends TestCase
             ->active()
             ->build();
 
-        $hasher = $this->createHasher(false, 'new-hash');
+        $hasher = $this->createHasher([
+            ['old-password', 'hash', false],
+            ['new-password', 'hash', false],
+        ], 'new-hash');
 
         $this->expectExceptionMessage('Incorrect current password.');
         $user->changePassword(
-            'wrong-old-password',
+            'old-password',
+            'new-password',
+            $hasher
+        );
+    }
+
+    public function testSameNew(): void
+    {
+        $user = (new UserBuilder())
+            ->active()
+            ->build();
+
+        $hasher = $this->createHasher([
+            ['old-password', 'hash', true],
+            ['new-password', 'hash', true],
+        ], 'new-hash');
+
+        $this->expectExceptionMessage('New password is already same.');
+        $user->changePassword(
+            'old-password',
             'new-password',
             $hasher
         );
@@ -55,7 +80,7 @@ final class ChangePasswordTest extends TestCase
             ->viaNetwork()
             ->build();
 
-        $hasher = $this->createHasher(false, 'new-hash');
+        $hasher = $this->createHasher([], 'new-hash');
 
         $this->expectExceptionMessage('User does not have an old password.');
         $user->changePassword(
@@ -65,10 +90,13 @@ final class ChangePasswordTest extends TestCase
         );
     }
 
-    private function createHasher(bool $valid, string $hash): PasswordHasher
+    /**
+     * @param list<list<mixed>> $validateMap
+     */
+    private function createHasher(array $validateMap, string $hash): PasswordHasher
     {
         $hasher = $this->createStub(PasswordHasher::class);
-        $hasher->method('validate')->willReturn($valid);
+        $hasher->method('validate')->willReturnMap($validateMap);
         $hasher->method('hash')->willReturn($hash);
         return $hasher;
     }
