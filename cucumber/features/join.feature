@@ -10,7 +10,7 @@ Feature: View join page
     Given I am a guest user
     And I am on "/join" page
     When I fill "email" field with "join-new@app.test"
-    And I fill "password" field with "new-password"
+    And I fill "password" field with "n9w#pasS_word"
     And I check "agree" checkbox
     And I click submit button
     Then I see success "Confirm join by link in email."
@@ -19,7 +19,7 @@ Feature: View join page
     Given I am a guest user
     And I am on "/join" page
     When I fill "email" field with "join-existing@app.test"
-    And I fill "password" field with "new-password"
+    And I fill "password" field with "n9w#pasS_word"
     And I check "agree" checkbox
     And I click submit button
     Then I see error "User already exists."
@@ -28,7 +28,7 @@ Feature: View join page
     Given I am a guest user
     And I am on "/join" page
     When I fill "email" field with "join-not-valid@app.test"
-    And I fill "password" field with "new"
+    And I fill "password" field with "new-password"
     And I check "agree" checkbox
     And I click submit button
-    Then I see validation error "This value is too short"
+    Then I see validation error "Password should contain at least one capital letter."

@@ -6,7 +6,7 @@ RUN apk add --no-cache postgresql-dev git \
     && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
     && git clone --branch $REDIS_VERSION --depth 1 https://github.com/phpredis/phpredis.git /usr/src/php/ext/redis \
     && docker-php-ext-configure redis \
-    && docker-php-ext-install pdo_pgsql redis opcache \
+    && docker-php-ext-install pdo_pgsql intl redis opcache \
     && apk del git
 
 ENV COMPOSER_ALLOW_SUPERUSER 1
@@ -30,7 +30,7 @@ RUN apk add --no-cache postgresql-dev bash coreutils git \
     && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
     && git clone --branch $REDIS_VERSION --depth 1 https://github.com/phpredis/phpredis.git /usr/src/php/ext/redis \
     && docker-php-ext-configure redis \
-    && docker-php-ext-install pdo_pgsql redis opcache \
+    && docker-php-ext-install pdo_pgsql intl redis opcache \
     && apk del git
 
 RUN mv $PHP_INI_DIR/php.ini-production $PHP_INI_DIR/php.ini

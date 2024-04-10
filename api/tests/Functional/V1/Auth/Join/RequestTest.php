@@ -36,7 +36,7 @@ final class RequestTest extends WebTestCase
 
         $response = $this->app()->handle(self::json('POST', '/v1/auth/join', [
             'email' => 'new-user@app.test',
-            'password' => 'new-password',
+            'password' => 'n9w#pasS_word',
         ]));
 
         self::assertSame(201, $response->getStatusCode());
@@ -49,7 +49,7 @@ final class RequestTest extends WebTestCase
     {
         $response = $this->app()->handle(self::json('POST', '/v1/auth/join', [
             'email' => 'existing@app.test',
-            'password' => 'new-password',
+            'password' => 'n9w#pasS_word',
         ]));
 
         self::assertSame(409, $response->getStatusCode());
@@ -64,7 +64,7 @@ final class RequestTest extends WebTestCase
     {
         $response = $this->app()->handle(self::json('POST', '/v1/auth/join', [
             'email' => 'existing@app.test',
-            'password' => 'new-password',
+            'password' => 'n9w#pasS_word',
         ])->withHeader('Accept-Language', 'ru'));
 
         self::assertSame(409, $response->getStatusCode());
@@ -114,7 +114,7 @@ final class RequestTest extends WebTestCase
     {
         $response = $this->app()->handle(self::json('POST', '/v1/auth/join', [
             'email' => 'existing@app.test',
-            'password' => 'new-password',
+            'password' => 'n9w#pasS_word',
             'age' => 42,
         ]));
 
@@ -160,6 +160,24 @@ final class RequestTest extends WebTestCase
             'errors' => [
                 'email' => 'This value is not a valid email address.',
                 'password' => 'This value is too short. It should have 8 characters or more.',
+            ],
+        ], Json::decode($body));
+    }
+
+    public function testNotValidPassword(): void
+    {
+        $response = $this->app()->handle(self::json('POST', '/v1/auth/join', [
+            'email' => 'not-email',
+            'password' => 'new-password',
+        ]));
+
+        self::assertSame(422, $response->getStatusCode());
+        self::assertJson($body = (string)$response->getBody());
+
+        self::assertSame([
+            'errors' => [
+                'email' => 'This value is not a valid email address.',
+                'password' => 'Password should contain at least one capital letter.',
             ],
         ], Json::decode($body));
     }
