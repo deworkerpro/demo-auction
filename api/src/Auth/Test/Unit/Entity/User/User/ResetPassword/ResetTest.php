@@ -6,6 +6,7 @@ namespace App\Auth\Test\Unit\Entity\User\User\ResetPassword;
 
 use App\Auth\Entity\User\Token;
 use App\Auth\Entity\User\User;
+use App\Auth\Service\PasswordHasher;
 use App\Auth\Test\Builder\UserBuilder;
 use DateTimeImmutable;
 use PHPUnit\Framework\Attributes\CoversClass;
@@ -22,12 +23,14 @@ final class ResetTest extends TestCase
     {
         $user = (new UserBuilder())->active()->build();
 
+        $hasher = $this->createHasher($password = 'new-password', $hash = 'new-hash');
+
         $now = new DateTimeImmutable();
         $token = $this->createToken($now->modify('+1 hour'));
 
         $user->requestPasswordReset($token, $now);
 
-        $user->resetPassword($token->getValue(), $now, $hash = 'hash');
+        $user->resetPassword($token->getValue(), $now, $password, $hasher);
 
         self::assertNull($user->getPasswordResetToken());
         self::assertSame($hash, $user->getPasswordHash());
@@ -37,18 +40,22 @@ final class ResetTest extends TestCase
     {
         $user = (new UserBuilder())->active()->build();
 
+        $hasher = $this->createHasher($password = 'new-password', 'new-hash');
+
         $now = new DateTimeImmutable();
         $token = $this->createToken($now->modify('+1 hour'));
 
         $user->requestPasswordReset($token, $now);
 
         $this->expectExceptionMessage('Token is invalid.');
-        $user->resetPassword(Uuid::uuid4()->toString(), $now, 'hash');
+        $user->resetPassword(Uuid::uuid4()->toString(), $now, $password, $hasher);
     }
 
     public function testExpiredToken(): void
     {
         $user = (new UserBuilder())->active()->build();
+
+        $hasher = $this->createHasher($password = 'new-password', 'new-hash');
 
         $now = new DateTimeImmutable();
         $token = $this->createToken($now->modify('+1 hour'));
@@ -56,17 +63,26 @@ final class ResetTest extends TestCase
         $user->requestPasswordReset($token, $now);
 
         $this->expectExceptionMessage('Token is expired.');
-        $user->resetPassword($token->getValue(), $now->modify('+1 day'), 'hash');
+        $user->resetPassword($token->getValue(), $now->modify('+1 day'), $password, $hasher);
     }
 
     public function testNotRequested(): void
     {
         $user = (new UserBuilder())->active()->build();
 
+        $hasher = $this->createHasher($password = 'new-password', 'new-hash');
+
         $now = new DateTimeImmutable();
 
         $this->expectExceptionMessage('Resetting is not requested.');
-        $user->resetPassword(Uuid::uuid4()->toString(), $now, 'hash');
+        $user->resetPassword(Uuid::uuid4()->toString(), $now, $password, $hasher);
+    }
+
+    private function createHasher(string $password, string $hash): PasswordHasher
+    {
+        $hasher = $this->createMock(PasswordHasher::class);
+        $hasher->method('hash')->with($password)->willReturn($hash);
+        return $hasher;
     }
 
     private function createToken(DateTimeImmutable $date): Token

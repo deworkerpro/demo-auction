@@ -119,14 +119,14 @@ final class User
         $this->passwordResetToken = $token;
     }
 
-    public function resetPassword(string $token, DateTimeImmutable $date, string $hash): void
+    public function resetPassword(string $token, DateTimeImmutable $date, string $password, PasswordHasher $hasher): void
     {
         if ($this->passwordResetToken === null) {
             throw new DomainException('Resetting is not requested.');
         }
         $this->passwordResetToken->validate($token, $date);
         $this->passwordResetToken = null;
-        $this->passwordHash = $hash;
+        $this->passwordHash = $hasher->hash($password);
     }
 
     public function changePassword(string $current, string $new, PasswordHasher $hasher): void
