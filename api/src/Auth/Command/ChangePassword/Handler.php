@@ -8,6 +8,7 @@ use App\Auth\Entity\User\Id;
 use App\Auth\Entity\User\UserRepository;
 use App\Auth\Service\PasswordHasher;
 use App\Flusher;
+use DateTimeImmutable;
 
 final readonly class Handler
 {
@@ -24,6 +25,7 @@ final readonly class Handler
         $user->changePassword(
             $command->current,
             $command->new,
+            new DateTimeImmutable(),
             $this->hasher
         );
 

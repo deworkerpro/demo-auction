@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Auth\Test\Unit\Entity\User\User\ResetPassword;
 
+use App\Auth\Entity\User\PasswordHash;
 use App\Auth\Entity\User\Token;
 use App\Auth\Entity\User\User;
 use App\Auth\Service\PasswordHasher;
@@ -33,7 +34,7 @@ final class ResetTest extends TestCase
         $user->resetPassword($token->getValue(), $now, $password, $hasher);
 
         self::assertNull($user->getPasswordResetToken());
-        self::assertSame($hash, $user->getPasswordHash());
+        self::assertSame($hash, $user->getPasswordHash()?->getValue());
     }
 
     public function testInvalidToken(): void
@@ -81,7 +82,7 @@ final class ResetTest extends TestCase
     private function createHasher(string $password, string $hash): PasswordHasher
     {
         $hasher = $this->createMock(PasswordHasher::class);
-        $hasher->method('hash')->with($password)->willReturn($hash);
+        $hasher->method('hash')->with($password)->willReturn(new PasswordHash($hash, new DateTimeImmutable('+1 day')));
         return $hasher;
     }
 

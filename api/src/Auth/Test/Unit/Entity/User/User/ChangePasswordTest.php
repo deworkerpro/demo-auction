@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace App\Auth\Test\Unit\Entity\User\User;
 
+use App\Auth\Entity\User\PasswordHash;
 use App\Auth\Entity\User\User;
 use App\Auth\Service\PasswordHasher;
 use App\Auth\Test\Builder\UserBuilder;
+use DateTimeImmutable;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
@@ -30,10 +32,11 @@ final class ChangePasswordTest extends TestCase
         $user->changePassword(
             'old-password',
             'new-password',
+            new DateTimeImmutable(),
             $hasher
         );
 
-        self::assertSame($hash, $user->getPasswordHash());
+        self::assertSame($hash, $user->getPasswordHash()?->getValue());
     }
 
     public function testWrongCurrent(): void
@@ -51,6 +54,7 @@ final class ChangePasswordTest extends TestCase
         $user->changePassword(
             'old-password',
             'new-password',
+            new DateTimeImmutable(),
             $hasher
         );
     }
@@ -70,6 +74,7 @@ final class ChangePasswordTest extends TestCase
         $user->changePassword(
             'old-password',
             'new-password',
+            new DateTimeImmutable(),
             $hasher
         );
     }
@@ -86,6 +91,7 @@ final class ChangePasswordTest extends TestCase
         $user->changePassword(
             'any-old-password',
             'new-password',
+            new DateTimeImmutable(),
             $hasher
         );
     }
@@ -97,7 +103,7 @@ final class ChangePasswordTest extends TestCase
     {
         $hasher = $this->createStub(PasswordHasher::class);
         $hasher->method('validate')->willReturnMap($validateMap);
-        $hasher->method('hash')->willReturn($hash);
+        $hasher->method('hash')->willReturn(new PasswordHash($hash, new DateTimeImmutable('+1 day')));
         return $hasher;
     }
 }

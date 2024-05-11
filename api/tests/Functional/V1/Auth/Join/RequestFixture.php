@@ -6,6 +6,7 @@ namespace Test\Functional\V1\Auth\Join;
 
 use App\Auth\Entity\User\Email;
 use App\Auth\Entity\User\Id;
+use App\Auth\Entity\User\PasswordHash;
 use App\Auth\Entity\User\Token;
 use App\Auth\Entity\User\User;
 use DateTimeImmutable;
@@ -23,7 +24,7 @@ final class RequestFixture extends AbstractFixture
             Id::generate(),
             $date = new DateTimeImmutable('-30 days'),
             new Email('existing@app.test'),
-            'password-hash',
+            new PasswordHash('password-hash', new DateTimeImmutable('+1 day')),
             new Token(Uuid::uuid4()->toString(), $date->modify('+1 day'))
         );
 

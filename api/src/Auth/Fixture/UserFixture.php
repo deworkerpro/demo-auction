@@ -6,6 +6,7 @@ namespace App\Auth\Fixture;
 
 use App\Auth\Entity\User\Email;
 use App\Auth\Entity\User\Id;
+use App\Auth\Entity\User\PasswordHash;
 use App\Auth\Entity\User\Token;
 use App\Auth\Entity\User\User;
 use DateTimeImmutable;
@@ -26,8 +27,8 @@ final class UserFixture extends AbstractFixture
             new Id('00000000-0000-0000-0000-000000000001'),
             $date = new DateTimeImmutable('-30 days'),
             new Email('user@app.test'),
-            self::PASSWORD_HASH,
-            new Token($value = Uuid::uuid4()->toString(), $date->modify('+1 day'))
+            new PasswordHash(self::PASSWORD_HASH, new DateTimeImmutable('+1 day')),
+            new Token($value = Uuid::uuid4()->toString(), new DateTimeImmutable('+1 day'))
         );
 
         $user->confirmJoin($value, $date);

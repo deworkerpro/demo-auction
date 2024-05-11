@@ -27,8 +27,8 @@ final class User
     #[ORM\Column(type: EmailType::NAME, unique: true)]
     private Email $email;
 
-    #[ORM\Column(type: Types::STRING, nullable: true)]
-    private ?string $passwordHash = null;
+    #[ORM\Embedded(class: PasswordHash::class)]
+    private ?PasswordHash $passwordHash = null;
 
     #[ORM\Column(type: StatusType::NAME, length: 16)]
     private Status $status;
@@ -79,7 +79,7 @@ final class User
         Id $id,
         DateTimeImmutable $date,
         Email $email,
-        string $passwordHash,
+        PasswordHash $passwordHash,
         Token $token
     ): self {
         $user = new self($id, $date, $email, Status::wait());
@@ -126,21 +126,21 @@ final class User
         }
         $this->passwordResetToken->validate($token, $date);
         $this->passwordResetToken = null;
-        $this->passwordHash = $hasher->hash($password);
+        $this->passwordHash = $hasher->hash($password, $date);
     }
 
-    public function changePassword(string $current, string $new, PasswordHasher $hasher): void
+    public function changePassword(string $current, string $new, DateTimeImmutable $date, PasswordHasher $hasher): void
     {
         if ($this->passwordHash === null) {
             throw new DomainException('User does not have an old password.');
         }
-        if (!$hasher->validate($current, $this->passwordHash)) {
+        if (!$hasher->validate($current, $this->passwordHash->getValue())) {
             throw new DomainException('Incorrect current password.');
         }
-        if ($hasher->validate($new, $this->passwordHash)) {
+        if ($hasher->validate($new, $this->passwordHash->getValue())) {
             throw new DomainException('New password is already same.');
         }
-        $this->passwordHash = $hasher->hash($new);
+        $this->passwordHash = $hasher->hash($new, $date);
     }
 
     public function requestEmailChanging(Token $token, DateTimeImmutable $date, Email $email): void
@@ -211,7 +211,7 @@ final class User
         return $this->role;
     }
 
-    public function getPasswordHash(): ?string
+    public function getPasswordHash(): ?PasswordHash
     {
         return $this->passwordHash;
     }
@@ -256,6 +256,9 @@ final class User
         }
         if ($this->newEmailToken && $this->newEmailToken->isEmpty()) {
             $this->newEmailToken = null;
+        }
+        if ($this->passwordHash && $this->passwordHash->isEmpty()) {
+            $this->passwordHash = null;
         }
     }
 }

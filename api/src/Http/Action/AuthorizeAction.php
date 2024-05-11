@@ -4,11 +4,15 @@ declare(strict_types=1);
 
 namespace App\Http\Action;
 
+use App\Auth\Command\ResetPassword\Request\Command;
+use App\Auth\Command\ResetPassword\Request\Handler;
 use App\Auth\Query\FindIdByCredentials\Fetcher;
 use App\Auth\Query\FindIdByCredentials\Query;
 use App\Http\RateLimit;
 use App\Http\Response\HtmlResponse;
 use App\OAuth\Entity\User;
+use DateTimeImmutable;
+use DomainException;
 use League\OAuth2\Server\AuthorizationServer;
 use League\OAuth2\Server\Exception\OAuthServerException;
 use Override;
@@ -29,7 +33,8 @@ final readonly class AuthorizeAction implements RequestHandlerInterface
         private Environment $template,
         private ResponseFactoryInterface $response,
         private TranslatorInterface $translator,
-        private RateLimit $rateLimit
+        private RateLimit $rateLimit,
+        private Handler $passwordResetHandler
     ) {}
 
     #[Override]
@@ -70,7 +75,7 @@ final readonly class AuthorizeAction implements RequestHandlerInterface
                     );
                 }
 
-                $user = $this->users->fetch($query);
+                $user = $this->users->fetch($query, new DateTimeImmutable());
 
                 if ($user === null) {
                     $error = $this->translator->trans('error.incorrect_credentials', [], 'oauth');
@@ -88,6 +93,25 @@ final readonly class AuthorizeAction implements RequestHandlerInterface
                         $this->template->render('authorize.html.twig', compact('query', 'error')),
                         409
                     );
+                }
+
+                if ($user->isPasswordExpired) {
+                    try {
+                        $this->passwordResetHandler->handle(new Command($query->email));
+                        $error = $this->translator->trans('error.password_expired', [], 'oauth');
+
+                        return new HtmlResponse(
+                            $this->template->render('authorize.html.twig', compact('query', 'error')),
+                            409
+                        );
+                    } catch (DomainException $exception) {
+                        $error = $this->translator->trans($exception->getMessage(), [], 'exceptions');
+
+                        return new HtmlResponse(
+                            $this->template->render('authorize.html.twig', compact('query', 'error')),
+                            409
+                        );
+                    }
                 }
 
                 $authRequest->setUser(new User($user->id));

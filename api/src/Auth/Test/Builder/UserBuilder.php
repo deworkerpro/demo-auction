@@ -7,6 +7,7 @@ namespace App\Auth\Test\Builder;
 use App\Auth\Entity\User\Email;
 use App\Auth\Entity\User\Id;
 use App\Auth\Entity\User\Network;
+use App\Auth\Entity\User\PasswordHash;
 use App\Auth\Entity\User\Token;
 use App\Auth\Entity\User\User;
 use DateTimeImmutable;
@@ -16,7 +17,7 @@ final class UserBuilder
 {
     private Id $id;
     private Email $email;
-    private string $passwordHash;
+    private PasswordHash $passwordHash;
     private DateTimeImmutable $date;
     private Token $joinConfirmToken;
     private bool $active = false;
@@ -26,7 +27,7 @@ final class UserBuilder
     {
         $this->id = Id::generate();
         $this->email = new Email('mail@example.com');
-        $this->passwordHash = 'hash';
+        $this->passwordHash = new PasswordHash('hash', new DateTimeImmutable('+1 day'));
         $this->date = new DateTimeImmutable();
         $this->joinConfirmToken = new Token(Uuid::uuid4()->toString(), $this->date->modify('+1 day'));
     }
@@ -52,7 +53,7 @@ final class UserBuilder
         return $clone;
     }
 
-    public function withPasswordHash(string $passwordHash): self
+    public function withPasswordHash(PasswordHash $passwordHash): self
     {
         $clone = clone $this;
         $clone->passwordHash = $passwordHash;

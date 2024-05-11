@@ -270,4 +270,37 @@ final class AuthorizeTest extends WebTestCase
         self::assertNotEmpty($content = (string)$response->getBody());
         self::assertStringContainsString('Неверный email или пароль.', $content);
     }
+
+    public function testAuthExpiredPassword(): void
+    {
+        $this->mailer()->clear();
+
+        $redis = $this->container()->get(Redis::class);
+        $redis->set('csrf652428450beae', '8fbf173d86dc87b3eeda2d81da151c0e');
+
+        $response = $this->app()->handle(self::html(
+            'POST',
+            '/authorize?' . http_build_query([
+                'response_type' => 'code',
+                'client_id' => 'frontend',
+                'redirect_uri' => 'http://localhost/oauth',
+                'code_challenge' => PKCE::challenge(PKCE::verifier()),
+                'code_challenge_method' => 'S256',
+                'scope' => 'common',
+                'state' => 'sTaTe',
+            ]),
+            [
+                'email' => 'expires@app.test',
+                'password' => 'password',
+                'csrf_name' => 'csrf652428450beae',
+                'csrf_value' => '05au666iikd1rmF0GQzkZJhvpSsOGuI9ZKWNyOz455Tr8MyNn5W5I02YBRchO4ZX/QrBSjx+2gwAxLz93ZvX8Q==',
+            ]
+        ));
+
+        self::assertSame(409, $response->getStatusCode());
+        self::assertNotEmpty($content = (string)$response->getBody());
+        self::assertStringContainsString('Password is expired. Check your email for changing the password.', $content);
+
+        self::assertTrue($this->mailer()->hasEmailSentTo('expires@app.test'));
+    }
 }

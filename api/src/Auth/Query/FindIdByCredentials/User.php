@@ -9,5 +9,6 @@ final readonly class User
     public function __construct(
         public string $id,
         public bool $isActive,
+        public bool $isPasswordExpired,
     ) {}
 }

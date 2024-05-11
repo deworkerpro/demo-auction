@@ -6,6 +6,7 @@ namespace App\Auth\Fixture;
 
 use App\Auth\Entity\User\Email;
 use App\Auth\Entity\User\Id;
+use App\Auth\Entity\User\PasswordHash;
 use App\Auth\Entity\User\Token;
 use App\Auth\Entity\User\User;
 use DateTimeImmutable;
@@ -24,8 +25,8 @@ final class UserJoinConfirmFixture extends AbstractFixture
             Id::generate(),
             new DateTimeImmutable('-1 hours'),
             new Email('join-wait-active@app.test'),
-            self::PASSWORD_HASH,
-            new Token('00000000-0000-0000-0000-200000000001', new DateTimeImmutable('+1 hours'))
+            new PasswordHash(self::PASSWORD_HASH, new DateTimeImmutable('+1 day')),
+            new Token('00000000-0000-0000-0000-200000000001', new DateTimeImmutable('+1 hour'))
         );
         $manager->persist($user);
 
@@ -33,8 +34,8 @@ final class UserJoinConfirmFixture extends AbstractFixture
             Id::generate(),
             new DateTimeImmutable('-1 hours'),
             new Email('join-wait-expired@app.test'),
-            self::PASSWORD_HASH,
-            new Token('00000000-0000-0000-0000-200000000002', new DateTimeImmutable('-1 hours'))
+            new PasswordHash(self::PASSWORD_HASH, new DateTimeImmutable('+1 day')),
+            new Token('00000000-0000-0000-0000-200000000002', new DateTimeImmutable('-1 hour'))
         );
         $manager->persist($user);
 

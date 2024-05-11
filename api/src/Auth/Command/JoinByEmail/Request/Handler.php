@@ -39,7 +39,7 @@ final readonly class Handler
             Id::generate(),
             $date,
             $email,
-            $this->hasher->hash($command->password),
+            $this->hasher->hash($command->password, $date),
             $token = $this->tokenizer->generate($date)
         );
 
