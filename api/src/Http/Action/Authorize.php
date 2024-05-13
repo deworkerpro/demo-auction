@@ -33,6 +33,13 @@ final readonly class Authorize implements RequestHandlerInterface
     #[Override]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
+        /**
+         * @var array{
+         *     provider?: ?string
+         * } $params
+         */
+        $params = $request->getQueryParams();
+
         try {
             $authRequest = $this->server->validateAuthorizationRequest($request);
 
@@ -56,7 +63,7 @@ final readonly class Authorize implements RequestHandlerInterface
                     $error = $this->translator->trans('error.incorrect_credentials', [], 'oauth');
 
                     return new HtmlResponse(
-                        $this->template->render('authorize.html.twig', compact('query', 'error')),
+                        $this->template->render('authorize.html.twig', compact('query', 'error', 'params')),
                         400
                     );
                 }
@@ -65,7 +72,7 @@ final readonly class Authorize implements RequestHandlerInterface
                     $error = $this->translator->trans('error.not_confirmed', [], 'oauth');
 
                     return new HtmlResponse(
-                        $this->template->render('authorize.html.twig', compact('query', 'error')),
+                        $this->template->render('authorize.html.twig', compact('query', 'error', 'params')),
                         409
                     );
                 }
@@ -77,7 +84,7 @@ final readonly class Authorize implements RequestHandlerInterface
             }
 
             return new HtmlResponse(
-                $this->template->render('authorize.html.twig', compact('query'))
+                $this->template->render('authorize.html.twig', compact('query', 'params'))
             );
         } catch (OAuthServerException $exception) {
             $this->logger->warning($exception->getMessage(), ['exception' => $exception]);

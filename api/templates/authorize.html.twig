@@ -198,16 +198,34 @@
     {% if (is_feature_enabled('OAUTH_EXTERNAL')) %}
         <p class="external-heading">{{ trans('external.heading', [], 'oauth') }}</p>
 
-        <div class="external" data-testid="auth-external">
-            <button class="item yandex" data-testid="auth-external-yandex">
+        <div class="external" id="external" data-testid="auth-external">
+            <button
+                class="item yandex"
+                data-url="/authorize?{{ params|merge({'provider': 'yandex'})|url_encode }}"
+                data-testid="auth-external-yandex"
+            >
                 Yandex
             </button>
 
-            <button class="item mailru" data-testid="auth-external-mailru">
+            <button
+                class="item mailru"
+                data-url="/authorize?{{ params|merge({'provider': 'mailru'})|url_encode }}"
+                data-testid="auth-external-mailru"
+            >
                 MailRu
             </button>
         </div>
     {% endif %}
 </div>
+
+<script>
+(function () {
+    document.querySelectorAll('#external .item').forEach((item) => {
+        item.addEventListener('click', (event) => {
+            window.location.assign(event.target.dataset['url']);
+        })
+    })
+})();
+</script>
 </body>
 </html>
