@@ -8,7 +8,7 @@ function useQuery() {
   return new URLSearchParams(useLocation().search)
 }
 
-function Confirm(): React.JSX.Element {
+export default function Confirm(): React.JSX.Element {
   const [success, setSuccess] = useState<true | null>(null)
   const [error, setError] = useState<string | null>(null)
 
@@ -44,5 +44,3 @@ function Confirm(): React.JSX.Element {
     </System>
   )
 }
-
-export default Confirm

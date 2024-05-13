@@ -24,7 +24,14 @@ type Tokens = {
   refreshToken: string
 }
 
-function AuthProvider({ authorizeUrl, tokenUrl, clientId, scope, redirectPath, children }: Props) {
+export default function AuthProvider({
+  authorizeUrl,
+  tokenUrl,
+  clientId,
+  scope,
+  redirectPath,
+  children,
+}: Props) {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(
     window.localStorage.getItem('auth.tokens') !== null,
   )
@@ -261,5 +268,3 @@ function AuthProvider({ authorizeUrl, tokenUrl, clientId, scope, redirectPath, c
 
   return <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
 }
-
-export default AuthProvider

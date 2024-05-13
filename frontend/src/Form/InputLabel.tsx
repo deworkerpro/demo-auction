@@ -5,12 +5,10 @@ type Props = {
   htmlFor: string | null
 }
 
-function InputLabel({ label, htmlFor = null, ...rest }: Props): React.JSX.Element {
+export default function InputLabel({ label, htmlFor = null, ...rest }: Props): React.JSX.Element {
   return (
     <label className="input-label" htmlFor={htmlFor || undefined} {...rest}>
       {label}
     </label>
   )
 }
-
-export default InputLabel

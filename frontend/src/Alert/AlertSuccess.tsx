@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './Alert.module.css'
 
-function AlertSuccess({ message }: { message: string | null }): React.JSX.Element {
+export default function AlertSuccess({ message }: { message: string | null }): React.JSX.Element {
   return (
     <>
       {message ? (
@@ -12,5 +12,3 @@ function AlertSuccess({ message }: { message: string | null }): React.JSX.Elemen
     </>
   )
 }
-
-export default AlertSuccess

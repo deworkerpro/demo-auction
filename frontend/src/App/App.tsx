@@ -10,7 +10,7 @@ import Success from '../Join/Success'
 import OAuth from '../OAuth'
 import { AuthProvider } from '../OAuth/Provider'
 
-function App({ features }: { features: string[] }) {
+export default function App({ features }: { features: string[] }) {
   return (
     <FeaturesProvider features={features}>
       <AuthProvider
@@ -36,5 +36,3 @@ function App({ features }: { features: string[] }) {
     </FeaturesProvider>
   )
 }
-
-export default App

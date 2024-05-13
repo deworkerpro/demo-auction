@@ -1,4 +1,4 @@
-async function parseErrors(error: Error | Response) {
+export default async function parseErrors(error: Error | Response) {
   if (error instanceof Error) {
     return {}
   }
@@ -10,5 +10,3 @@ async function parseErrors(error: Error | Response) {
 
   return {}
 }
-
-export default parseErrors

@@ -4,7 +4,7 @@ import api, { parseError, parseErrors } from '../../Api'
 import { AlertError, AlertSuccess } from '../../Alert'
 import { ButtonRow, InputError, InputLabel, InputRow } from '../../Form'
 
-function JoinForm(): React.JSX.Element {
+export default function JoinForm(): React.JSX.Element {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -107,5 +107,3 @@ function JoinForm(): React.JSX.Element {
     </div>
   )
 }
-
-export default JoinForm

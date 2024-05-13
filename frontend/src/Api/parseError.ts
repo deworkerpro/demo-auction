@@ -1,6 +1,6 @@
 import isJsonResponse from './isJsonResponse'
 
-async function parseError(error: Error | Response) {
+export default async function parseError(error: Error | Response) {
   if (error instanceof Error) {
     return error.message
   }
@@ -18,5 +18,3 @@ async function parseError(error: Error | Response) {
 
   return error.statusText
 }
-
-export default parseError

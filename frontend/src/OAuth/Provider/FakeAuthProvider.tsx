@@ -6,7 +6,7 @@ type Props = {
   children: ReactNode
 }
 
-function FakeAuthProvider({ isAuthenticated, children }: Props) {
+export default function FakeAuthProvider({ isAuthenticated, children }: Props) {
   const contextValue = {
     isAuthenticated,
     getToken: () =>
@@ -18,5 +18,3 @@ function FakeAuthProvider({ isAuthenticated, children }: Props) {
   }
   return <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
 }
-
-export default FakeAuthProvider

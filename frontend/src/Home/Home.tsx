@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import FeatureFlag from '../FeatureToggle'
 import { useAuth } from '../OAuth/Provider'
 
-function Home(): React.JSX.Element {
+export default function Home(): React.JSX.Element {
   const { isAuthenticated, login, logout } = useAuth()
 
   return (
@@ -46,5 +46,3 @@ function Home(): React.JSX.Element {
     </System>
   )
 }
-
-export default Home

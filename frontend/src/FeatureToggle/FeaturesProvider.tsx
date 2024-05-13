@@ -6,8 +6,6 @@ type Props = {
   children: ReactNode
 }
 
-function FeaturesProvider({ features, children }: Props): React.JSX.Element {
+export default function FeaturesProvider({ features, children }: Props): React.JSX.Element {
   return <FeaturesContext.Provider value={features}>{children}</FeaturesContext.Provider>
 }
-
-export default FeaturesProvider

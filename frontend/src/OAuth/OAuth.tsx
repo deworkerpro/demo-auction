@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { AlertError } from '../Alert'
 import useAuth from './Provider/useAuth'
 
-function OAuth(): React.JSX.Element {
+export default function OAuth(): React.JSX.Element {
   const { error, loading } = useAuth()
 
   return (
@@ -18,5 +18,3 @@ function OAuth(): React.JSX.Element {
     </System>
   )
 }
-
-export default OAuth

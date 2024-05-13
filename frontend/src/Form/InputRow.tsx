@@ -5,8 +5,6 @@ type Props = {
   children: ReactNode
 }
 
-function InputRow({ children, error }: Props): React.JSX.Element {
+export default function InputRow({ children, error }: Props): React.JSX.Element {
   return <div className={'input-row' + (error ? ' has-error' : '')}>{children}</div>
 }
-
-export default InputRow

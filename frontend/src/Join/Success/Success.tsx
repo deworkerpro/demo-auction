@@ -2,7 +2,7 @@ import React from 'react'
 import System from '../../Layout/System'
 import { Link } from 'react-router-dom'
 
-function Success(): React.JSX.Element {
+export default function Success(): React.JSX.Element {
   return (
     <System>
       <div data-testid="join-success">
@@ -15,5 +15,3 @@ function Success(): React.JSX.Element {
     </System>
   )
 }
-
-export default Success

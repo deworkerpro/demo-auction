@@ -7,11 +7,9 @@ type Props = {
   children: ReactNode
 }
 
-function FeatureFlag({ name, not = false, children }: Props): React.JSX.Element {
+export default function FeatureFlag({ name, not = false, children }: Props): React.JSX.Element {
   const features = useContext(FeaturesContext)
   const isActive = features.includes(name)
 
   return <>{(not ? !isActive : isActive) ? children : null}</>
 }
-
-export default FeatureFlag

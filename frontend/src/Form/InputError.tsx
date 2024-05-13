@@ -1,6 +1,6 @@
 import React from 'react'
 
-function InputError({ error }: { error: string | null }): React.JSX.Element {
+export default function InputError({ error }: { error: string | null }): React.JSX.Element {
   return (
     <>
       {error ? (
@@ -11,5 +11,3 @@ function InputError({ error }: { error: string | null }): React.JSX.Element {
     </>
   )
 }
-
-export default InputError
