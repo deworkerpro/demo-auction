@@ -27,10 +27,21 @@ final class HomeTest extends WebTestCase
         self::assertSame('{}', (string)$response->getBody());
     }
 
-    public function testNewHome(): void
+    public function testNewHomeHeader(): void
     {
         $response = $this->app()->handle(
             self::json('GET', '/')->withHeader('X-Features', 'NEW_HOME')
+        );
+
+        self::assertSame(200, $response->getStatusCode());
+        self::assertSame('application/json', $response->getHeaderLine('Content-Type'));
+        self::assertSame('{"name":"API"}', (string)$response->getBody());
+    }
+
+    public function testNewHomeCookie(): void
+    {
+        $response = $this->app()->handle(
+            self::json('GET', '/')->withCookieParams(['features' => 'NEW_HOME'])
         );
 
         self::assertSame(200, $response->getStatusCode());

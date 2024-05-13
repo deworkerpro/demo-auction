@@ -42,9 +42,9 @@ final class FeaturesMiddlewareTest extends TestCase
     {
         $switch = $this->createMock(FeatureSwitch::class);
 
-        $variants = [['ONE'], ['TWO']];
+        $variants = [['ONE'], ['TWO'], ['THREE']];
 
-        $switch->expects(self::exactly(2))->method('enable')->willReturnCallback(
+        $switch->expects(self::exactly(\count($variants)))->method('enable')->willReturnCallback(
             static function (mixed ...$params) use (&$variants): void {
                 foreach ($variants as $key => $variant) {
                     if ($params === $variant) {
@@ -56,11 +56,13 @@ final class FeaturesMiddlewareTest extends TestCase
             }
         );
 
-        $switch->expects(self::once())->method('disable')->with('THREE');
+        $switch->expects(self::once())->method('disable')->with('FOUR');
 
-        $middleware = new FeaturesMiddleware($switch, 'X-Features');
+        $middleware = new FeaturesMiddleware($switch, 'X-Features', 'features');
 
-        $request = self::createRequest()->withHeader('X-Features', 'ONE, TWO, !THREE');
+        $request = self::createRequest()
+            ->withHeader('X-Features', 'ONE, TWO, !THREE, FOUR')
+            ->withCookieParams(['features' => 'ONE, THREE, !FOUR']);
 
         $handler = $this->createStub(RequestHandlerInterface::class);
         $handler->method('handle')->willReturn($source = self::createResponse());
