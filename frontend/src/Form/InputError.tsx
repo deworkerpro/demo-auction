@@ -1,6 +1,6 @@
 import React from 'react'
 
-function InputError({ error }: { error: string | null }): JSX.Element {
+function InputError({ error }: { error: string | null }): React.JSX.Element {
   return (
     <>
       {error ? (

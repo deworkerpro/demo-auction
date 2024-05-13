@@ -4,7 +4,7 @@ import api, { parseError, parseErrors } from '../../Api'
 import { AlertError, AlertSuccess } from '../../Alert'
 import { ButtonRow, InputError, InputLabel, InputRow } from '../../Form'
 
-function JoinForm(): JSX.Element {
+function JoinForm(): React.JSX.Element {
   const [formData, setFormData] = useState({
     email: '',
     password: '',

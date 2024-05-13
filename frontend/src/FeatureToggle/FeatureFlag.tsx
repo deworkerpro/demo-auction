@@ -7,7 +7,7 @@ type Props = {
   children: ReactNode
 }
 
-function FeatureFlag({ name, not = false, children }: Props): JSX.Element {
+function FeatureFlag({ name, not = false, children }: Props): React.JSX.Element {
   const features = useContext(FeaturesContext)
   const isActive = features.includes(name)
 

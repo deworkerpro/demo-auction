@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './Alert.module.css'
 
-function AlertError({ message }: { message: string | null }): JSX.Element {
+function AlertError({ message }: { message: string | null }): React.JSX.Element {
   return (
     <>
       {message ? (

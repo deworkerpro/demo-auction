@@ -6,7 +6,7 @@ type Props = {
   children: ReactNode
 }
 
-function FeaturesProvider({ features, children }: Props): JSX.Element {
+function FeaturesProvider({ features, children }: Props): React.JSX.Element {
   return <FeaturesContext.Provider value={features}>{children}</FeaturesContext.Provider>
 }
 

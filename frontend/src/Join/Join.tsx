@@ -3,7 +3,7 @@ import System from '../Layout/System'
 import { Link } from 'react-router-dom'
 import JoinForm from './JoinForm'
 
-function Join(): JSX.Element {
+function Join(): React.JSX.Element {
   return (
     <System>
       <h1>Join to Us</h1>

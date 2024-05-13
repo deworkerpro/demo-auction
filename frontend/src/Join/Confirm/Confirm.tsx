@@ -8,7 +8,7 @@ function useQuery() {
   return new URLSearchParams(useLocation().search)
 }
 
-function Confirm(): JSX.Element {
+function Confirm(): React.JSX.Element {
   const [success, setSuccess] = useState<true | null>(null)
   const [error, setError] = useState<string | null>(null)
 

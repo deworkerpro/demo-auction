@@ -5,7 +5,7 @@ type Props = {
   htmlFor: string | null
 }
 
-function InputLabel({ label, htmlFor = null, ...rest }: Props): JSX.Element {
+function InputLabel({ label, htmlFor = null, ...rest }: Props): React.JSX.Element {
   return (
     <label className="input-label" htmlFor={htmlFor || undefined} {...rest}>
       {label}
