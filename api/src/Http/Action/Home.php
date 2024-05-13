@@ -12,7 +12,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use stdClass;
 
-final readonly class HomeAction implements RequestHandlerInterface
+final readonly class Home implements RequestHandlerInterface
 {
     public function __construct(private FeatureFlag $flag) {}
 

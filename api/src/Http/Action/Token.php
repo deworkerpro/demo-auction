@@ -15,7 +15,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Log\LoggerInterface;
 
-final readonly class TokenAction implements RequestHandlerInterface
+final readonly class Token implements RequestHandlerInterface
 {
     public function __construct(
         private AuthorizationServer $server,

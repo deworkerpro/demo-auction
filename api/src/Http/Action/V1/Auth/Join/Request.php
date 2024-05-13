@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Http\Action\V1\Auth\Join;
 
-use App\Auth\Command\JoinByEmail\Confirm\Command;
-use App\Auth\Command\JoinByEmail\Confirm\Handler;
+use App\Auth\Command\JoinByEmail\Request\Command;
+use App\Auth\Command\JoinByEmail\Request\Handler;
 use App\Http\Response\EmptyResponse;
 use App\Serializer\Denormalizer;
 use App\Validator\Validator;
@@ -14,7 +14,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-final readonly class ConfirmAction implements RequestHandlerInterface
+final readonly class Request implements RequestHandlerInterface
 {
     public function __construct(
         private Denormalizer $denormalizer,
@@ -31,6 +31,6 @@ final readonly class ConfirmAction implements RequestHandlerInterface
 
         $this->handler->handle($command);
 
-        return new EmptyResponse(200);
+        return new EmptyResponse(201);
     }
 }

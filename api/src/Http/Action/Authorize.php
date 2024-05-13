@@ -19,7 +19,7 @@ use Psr\Log\LoggerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Environment;
 
-final readonly class AuthorizeAction implements RequestHandlerInterface
+final readonly class Authorize implements RequestHandlerInterface
 {
     public function __construct(
         private AuthorizationServer $server,

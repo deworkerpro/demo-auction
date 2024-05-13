@@ -8,17 +8,17 @@ use Slim\App;
 use Slim\Routing\RouteCollectorProxy;
 
 return static function (App $app): void {
-    $app->get('/', Action\HomeAction::class);
+    $app->get('/', Action\Home::class);
 
-    $app->map(['GET', 'POST'], '/authorize', Action\AuthorizeAction::class);
-    $app->post('/token', Action\TokenAction::class);
+    $app->map(['GET', 'POST'], '/authorize', Action\Authorize::class);
+    $app->post('/token', Action\Token::class);
 
     $app->group('/v1', new Group(static function (RouteCollectorProxy $group): void {
         $group->group('/auth', new Group(static function (RouteCollectorProxy $group): void {
-            $group->post('/join', Action\V1\Auth\Join\RequestAction::class);
-            $group->post('/join/confirm', Action\V1\Auth\Join\ConfirmAction::class);
+            $group->post('/join', Action\V1\Auth\Join\Request::class);
+            $group->post('/join/confirm', Action\V1\Auth\Join\Confirm::class);
 
-            $group->get('/user', Action\V1\Auth\UserAction::class);
+            $group->get('/user', Action\V1\Auth\User::class);
         }));
     }));
 };
