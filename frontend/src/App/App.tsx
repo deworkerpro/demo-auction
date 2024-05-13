@@ -24,7 +24,7 @@ export default function App({ features }: { features: string[] }) {
           <div className="app">
             <Routes>
               <Route path="/" element={<Home />} />
-              {features.includes('OAUTH') ? <Route path="/oauth" element={<OAuth />} /> : null}
+              <Route path="/oauth" element={<OAuth />} />
               <Route path="/join" element={<Join />} />
               <Route path="/join/confirm" element={<Confirm />} />
               <Route path="/join/success" element={<Success />} />

@@ -3,18 +3,8 @@ Feature: Login
   As a guest user
   I want to be able to authenticate
 
-  Scenario: Without login button
-    Given I am a guest user
-    And I do not have "OAUTH" feature
-    When I open "/" page
-    Then I see "Auction" header
-    And I see "join-link" element
-    And I do not see "login-button" element
-    And I do not see "logout-button" element
-
   Scenario: View login button
     Given I am a guest user
-    And I have "OAUTH" feature
     When I open "/" page
     Then I see "Auction" header
     And I see "join-link" element
@@ -23,7 +13,6 @@ Feature: Login
 
   Scenario: Login
     Given I am a guest user
-    And I have "OAUTH" feature
     And I am on "/" page
     When I click "login-button" element
     Then I see "authorize-page" element
@@ -37,7 +26,6 @@ Feature: Login
 
   Scenario: Authenticated
     Given I am a user
-    And I have "OAUTH" feature
     And I am on "/" page
     Then I see "logout-button" element
     And I do not see "login-button" element
@@ -45,7 +33,6 @@ Feature: Login
 
   Scenario: Logout
     Given I am a user
-    And I have "OAUTH" feature
     And I am on "/" page
     When I click "logout-button" element
     Then I see "login-button" element

@@ -1,5 +1,3 @@
-const features: Record<string, boolean> = {
-  OAUTH: true,
-}
+const features: Record<string, boolean> = {}
 
 export default features
