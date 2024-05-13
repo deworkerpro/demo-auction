@@ -12,6 +12,7 @@
 
         html {
             background-color: #fcfcfc;
+            font-size: 16px;
 
             display: flex;
             align-items: center;
@@ -103,14 +104,57 @@
         }
 
         p.links {
-            font-size: .8rem;
+            font-size: 0.85rem;
             color: #666;
-            margin-bottom: 0;
+            margin-bottom: 1rem;
             text-align: center;
         }
 
         p.links a {
             color: #2d6ba1;
+        }
+
+        p.external-heading {
+          font-size: 0.8rem;
+          color: #555;
+          text-align: center;
+          margin-bottom: 1rem;
+        }
+
+        .external {
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+        }
+
+        .external .item {
+          margin-right: 0.5rem;
+          border-radius: 3px;
+          padding: 0.6rem 1rem;
+          cursor: pointer;
+          border: 1px solid #ccc;
+          background: linear-gradient(to bottom, #fff, #f6f6f6);
+          color: #222;
+          font-size: 0.8rem;
+          line-height: 1;
+          text-decoration: none;
+          text-align: center;
+        }
+
+        .external .item:last-of-type {
+          margin-right: 0;
+        }
+
+        .external .item.yandex {
+          border: 1px solid #f60;
+          background: linear-gradient(to bottom, #ff7600, #f00);
+          color: #fff;
+        }
+
+        .external .item.mailru {
+          border: 1px solid #064fcd;
+          background: linear-gradient(to bottom, #256ce7, #064fcd);
+          color: #fff;
         }
     </style>
 </head>
@@ -151,6 +195,19 @@
         {% endif %}
     </p>
 
+    {% if (is_feature_enabled('OAUTH_EXTERNAL')) %}
+        <p class="external-heading">{{ trans('external.heading', [], 'oauth') }}</p>
+
+        <div class="external" data-testid="auth-external">
+            <button class="item yandex" data-testid="auth-external-yandex">
+                Yandex
+            </button>
+
+            <button class="item mailru" data-testid="auth-external-mailru">
+                MailRu
+            </button>
+        </div>
+    {% endif %}
 </div>
 </body>
 </html>

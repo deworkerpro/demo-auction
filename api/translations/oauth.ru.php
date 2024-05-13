@@ -11,4 +11,5 @@ return [
     'button.login' => 'Войти',
     'link.join' => 'Зарегистрироваться',
     'link.reset' => 'Восстановить пароль',
+    'external.heading' => 'Или войти через:',
 ];

@@ -11,4 +11,5 @@ return [
     'button.login' => 'Log In',
     'link.join' => 'Sign In',
     'link.reset' => 'Reset Password',
+    'external.heading' => 'Or log in via:',
 ];
