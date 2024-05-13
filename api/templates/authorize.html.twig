@@ -199,21 +199,25 @@
         <p class="external-heading">{{ trans('external.heading', [], 'oauth') }}</p>
 
         <div class="external" id="external" data-testid="auth-external">
-            <button
-                class="item yandex"
-                data-url="/authorize?{{ params|merge({'provider': 'yandex'})|url_encode }}"
-                data-testid="auth-external-yandex"
-            >
-                Yandex
-            </button>
+            {% if (is_feature_enabled('OAUTH_EXTERNAL_YANDEX')) %}
+                <button
+                    class="item yandex"
+                    data-url="/authorize?{{ params|merge({'provider': 'yandex'})|url_encode }}"
+                    data-testid="auth-external-yandex"
+                >
+                    Yandex
+                </button>
+            {% endif %}
 
-            <button
-                class="item mailru"
-                data-url="/authorize?{{ params|merge({'provider': 'mailru'})|url_encode }}"
-                data-testid="auth-external-mailru"
-            >
-                MailRu
-            </button>
+            {% if (is_feature_enabled('OAUTH_EXTERNAL_MAILRU')) %}
+                <button
+                    class="item mailru"
+                    data-url="/authorize?{{ params|merge({'provider': 'mailru'})|url_encode }}"
+                    data-testid="auth-external-mailru"
+                >
+                    MailRu
+                </button>
+            {% endif %}
         </div>
     {% endif %}
 </div>

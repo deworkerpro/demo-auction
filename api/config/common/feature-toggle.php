@@ -29,6 +29,8 @@ return [
                 'NEW_HOME' => false,
                 'PASSWORD_RESET' => false,
                 'OAUTH_EXTERNAL' => false,
+                'OAUTH_EXTERNAL_YANDEX' => false,
+                'OAUTH_EXTERNAL_MAILRU' => false,
             ],
         ],
     ],

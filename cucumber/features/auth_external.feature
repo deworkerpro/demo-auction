@@ -2,7 +2,7 @@ Feature: Login external
 
   Scenario: Guest without feature
     Given I am a guest user
-    And I do not have "OAUTH_EXTERNAL" authorize feature
+    And I have "!OAUTH_EXTERNAL" authorize features
     And I am on "/" page
     When I click "login-button" element
     Then I see "authorize-page" element
@@ -10,7 +10,7 @@ Feature: Login external
 
   Scenario: Guest
     Given I am a guest user
-    And I have "OAUTH_EXTERNAL" authorize feature
+    And I have "OAUTH_EXTERNAL" authorize features
     And I am on "/" page
     When I click "login-button" element
     Then I see "authorize-page" element
