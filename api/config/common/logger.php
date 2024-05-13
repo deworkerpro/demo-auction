@@ -19,7 +19,7 @@ return [
          * @var array{
          *     debug:bool,
          *     stderr:bool,
-         *     file:string,
+         *     file:string|null,
          *     processors:string[]
          * } $config
          */
@@ -33,7 +33,7 @@ return [
             $log->pushHandler(new StreamHandler('php://stderr', $level));
         }
 
-        if (!empty($config['file'])) {
+        if ($config['file'] !== null) {
             $log->pushHandler(new StreamHandler($config['file'], $level));
         }
 
