@@ -24,6 +24,7 @@ abstract class WebTestCase extends TestCase
     private ?App $app = null;
     private ?MailerClient $mailer = null;
     private ?OAuthYandexClient $oAuthYandex = null;
+    private ?OAuthMailRuClient $oAuthMailRu = null;
     private ?WiremockClient $wiremock = null;
 
     #[Override]
@@ -101,6 +102,14 @@ abstract class WebTestCase extends TestCase
             $this->oAuthYandex = new OAuthYandexClient($this->wiremock());
         }
         return $this->oAuthYandex;
+    }
+
+    protected function oAuthMailRu(): OAuthMailRuClient
+    {
+        if ($this->oAuthMailRu === null) {
+            $this->oAuthMailRu = new OAuthMailRuClient($this->wiremock());
+        }
+        return $this->oAuthMailRu;
     }
 
     private function wiremock(): WiremockClient

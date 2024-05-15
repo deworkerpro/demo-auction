@@ -1,0 +1,23 @@
+{
+    "request": {
+        "method": "GET",
+        "urlPath": "/oauth.mail.ru/userinfo",
+        "queryParameters" : {
+            "access_token" : {
+                "equalTo" : "TokenExistingEmail"
+            }
+        },
+        "headers" : {
+            "Accept": {
+                "equalTo": "application/json"
+            }
+        }
+    },
+    "response": {
+        "status": 200,
+        "jsonBody": {
+            "id": "1121121",
+            "email": "mailru-active@app.test"
+        }
+    }
+}

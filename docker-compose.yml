@@ -93,6 +93,11 @@ services:
             OAUTH_YANDEX_API_URL: http://wiremock/login.yandex.ru
             OAUTH_YANDEX_CLIENT_ID: app
             OAUTH_YANDEX_CLIENT_SECRET_FILE: /run/secrets/oauth_yandex_client_secret
+            OAUTH_MAILRU_AUTH_URL: http://wiremock.localhost/oauth.mail.ru
+            OAUTH_MAILRU_TOKEN_URL: http://wiremock/oauth.mail.ru
+            OAUTH_MAILRU_API_URL: http://wiremock/oauth.mail.ru
+            OAUTH_MAILRU_CLIENT_ID: app
+            OAUTH_MAILRU_CLIENT_SECRET_FILE: /run/secrets/oauth_mailru_client_secret
         volumes:
             - ./api:/app
         secrets:
@@ -103,6 +108,7 @@ services:
             - jwt_public_key
             - jwt_private_key
             - oauth_yandex_client_secret
+            - oauth_mailru_client_secret
 
     api-php-cli:
         build:
@@ -131,6 +137,11 @@ services:
             OAUTH_YANDEX_API_URL: http://wiremock/login.yandex.ru
             OAUTH_YANDEX_CLIENT_ID: app
             OAUTH_YANDEX_CLIENT_SECRET_FILE: /run/secrets/oauth_yandex_client_secret
+            OAUTH_MAILRU_AUTH_URL: http://wiremock.localhost/oauth.mail.ru
+            OAUTH_MAILRU_TOKEN_URL: http://wiremock/oauth.mail.ru
+            OAUTH_MAILRU_API_URL: http://wiremock/oauth.mail.ru
+            OAUTH_MAILRU_CLIENT_ID: app
+            OAUTH_MAILRU_CLIENT_SECRET_FILE: /run/secrets/oauth_mailru_client_secret
         volumes:
             - ./api:/app
         secrets:
@@ -141,6 +152,7 @@ services:
             - jwt_public_key
             - jwt_private_key
             - oauth_yandex_client_secret
+            - oauth_mailru_client_secret
 
     api-postgres:
         image: postgres:13.3-alpine
@@ -249,6 +261,8 @@ secrets:
         file: ./docker/development/secrets/jwt_private_key
     oauth_yandex_client_secret:
         file: ./docker/development/secrets/oauth_yandex_client_secret
+    oauth_mailru_client_secret:
+        file: ./docker/development/secrets/oauth_mailru_client_secret
     backup_aws_secret_access_key:
         file: ./docker/development/secrets/backup_aws_secret_access_key
 

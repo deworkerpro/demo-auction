@@ -1,0 +1,26 @@
+{
+    "request": {
+        "method": "POST",
+        "url": "/oauth.mail.ru/token",
+        "headers": {
+            "Accept": {
+                "equalTo": "application/json"
+            }
+        },
+        "bodyPatterns": [
+            {"matches": ".*client_id=app&.*"},
+            {"matches": ".*client_secret=mailru-secret&.*"},
+            {"matches": ".*redirect_uri=http%3A%2F%2Fapi.localhost%2Foauth%2Fmailru&.*"},
+            {"matches": ".*grant_type=authorization_code&.*"},
+            {"matches": ".*code=CodeExistingEmailWait$"}
+        ]
+    },
+    "response": {
+        "status": 200,
+        "jsonBody": {
+            "access_token": "TokenExistingEmailWait",
+            "expires_in": 3599,
+            "refresh_token": "qAJ1FJQ7NPVm7p"
+        }
+    }
+}

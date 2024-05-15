@@ -1,0 +1,30 @@
+{
+    "request": {
+        "method": "GET",
+        "urlPath": "/oauth.mail.ru/login",
+        "queryParameters" : {
+            "client_id" : {
+                "equalTo" : "app"
+            },
+            "redirect_uri" : {
+                "equalTo" : "http://api.localhost/oauth/mailru"
+            },
+            "response_type" : {
+                "equalTo" : "code"
+            },
+            "scope" : {
+                "equalTo" : "userinfo"
+            },
+            "state" : {
+                "matches" : ".+"
+            }
+        }
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "text/html"
+        },
+        "bodyFileName": "oauth.mail.ru/login.html"
+    }
+}

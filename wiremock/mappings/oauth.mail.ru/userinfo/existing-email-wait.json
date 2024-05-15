@@ -1,0 +1,23 @@
+{
+    "request": {
+        "method": "GET",
+        "urlPath": "/oauth.mail.ru/userinfo",
+        "queryParameters" : {
+            "access_token" : {
+                "equalTo" : "TokenExistingEmailWait"
+            }
+        },
+        "headers" : {
+            "Accept": {
+                "equalTo": "application/json"
+            }
+        }
+    },
+    "response": {
+        "status": 200,
+        "jsonBody": {
+            "id": "2113121",
+            "email": "mailru-wait@app.test"
+        }
+    }
+}
