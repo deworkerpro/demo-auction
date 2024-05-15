@@ -5,6 +5,7 @@ declare(strict_types=1);
 use App\OAuthClient\OAuthClient;
 use App\OAuthClient\Provider\Provider;
 use App\OAuthClient\Provider\Yandex;
+use GuzzleHttp\Client;
 use Psr\Container\ContainerInterface;
 
 use function App\env;
@@ -29,9 +30,13 @@ return [
         $config = $container->get('config')['oauth-client']['yandex'];
 
         return new Yandex(
+            client: new Client(),
             authUrl: $config['auth_url'],
             callbackUrl: $config['callback_url'],
+            tokenUrl: $config['token_url'],
+            apiUrl: $config['api_url'],
             clientId: $config['client_id'],
+            clientSecret: $config['client_secret'],
         );
     },
 

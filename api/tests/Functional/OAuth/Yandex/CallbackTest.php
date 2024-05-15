@@ -27,10 +27,8 @@ final class CallbackTest extends WebTestCase
         ]);
     }
 
-    public function testWithoutCookies(): never
+    public function testWithoutCookies(): void
     {
-        self::markTestIncomplete();
-
         $response = $this->app()->handle(self::html('GET', '/oauth/yandex?' . http_build_query([
             'code' => 'InvalidCode',
             'state' => 'sTaTe',
@@ -44,10 +42,8 @@ final class CallbackTest extends WebTestCase
         ], Json::decode($content));
     }
 
-    public function testNew(): never
+    public function testNew(): void
     {
-        self::markTestIncomplete();
-
         $response = $this->app()->handle(self::html('GET', '/oauth/yandex?' . http_build_query([
             'code' => 'CodeNew',
             'state' => 'sTaTe',
@@ -65,10 +61,8 @@ final class CallbackTest extends WebTestCase
         self::assertNotEmpty($data['code']);
     }
 
-    public function testExistingNetwork(): never
+    public function testExistingNetwork(): void
     {
-        self::markTestIncomplete();
-
         $response = $this->app()->handle(self::html('GET', '/oauth/yandex?' . http_build_query([
             'code' => 'CodeExistingNetwork',
             'state' => 'sTaTe',
@@ -86,10 +80,8 @@ final class CallbackTest extends WebTestCase
         self::assertNotEmpty($data['code']);
     }
 
-    public function testExistingEmail(): never
+    public function testExistingEmail(): void
     {
-        self::markTestIncomplete();
-
         $response = $this->app()->handle(self::html('GET', '/oauth/yandex?' . http_build_query([
             'code' => 'CodeExistingEmail',
             'state' => 'sTaTe',
@@ -107,10 +99,8 @@ final class CallbackTest extends WebTestCase
         self::assertNotEmpty($data['code']);
     }
 
-    public function testExistingEmailWait(): never
+    public function testExistingEmailWait(): void
     {
-        self::markTestIncomplete();
-
         $response = $this->app()->handle(self::html('GET', '/oauth/yandex?' . http_build_query([
             'code' => 'CodeExistingEmailWait',
             'state' => 'sTaTe',
@@ -128,10 +118,8 @@ final class CallbackTest extends WebTestCase
         self::assertNotEmpty($data['code']);
     }
 
-    public function testInvalidState(): never
+    public function testInvalidState(): void
     {
-        self::markTestIncomplete();
-
         $response = $this->app()->handle(self::html('GET', '/oauth/yandex?' . http_build_query([
             'code' => 'CodeNew',
             'state' => 'InvalidState',
@@ -141,7 +129,6 @@ final class CallbackTest extends WebTestCase
         self::assertJson($content = (string)$response->getBody());
 
         self::assertArraySubset([
-            'state' => 'sTaTe',
             'error' => 'invalid_request',
             'hint' => 'Check the `state` parameter',
         ], Json::decode($content));

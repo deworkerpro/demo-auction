@@ -11,6 +11,7 @@ return static function (App $app): void {
     $app->get('/', Action\Home::class);
 
     $app->map(['GET', 'POST'], '/authorize', Action\Authorize::class);
+    $app->get('/oauth/{provider}', Action\OAuth::class);
     $app->post('/token', Action\Token::class);
 
     $app->group('/v1', new Group(static function (RouteCollectorProxy $group): void {

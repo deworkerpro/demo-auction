@@ -29,4 +29,18 @@ final readonly class OAuthClient
 
         throw new RuntimeException('Unknown provider "' . $name . '".');
     }
+
+    public function getIdentity(string $name, string $code): Identity
+    {
+        Assert::notEmpty($name);
+        Assert::notEmpty($code);
+
+        foreach ($this->providers as $provider) {
+            if ($provider->isFor($name)) {
+                return $provider->getIdentity($code);
+            }
+        }
+
+        throw new RuntimeException('Unknown provider "' . $name . '".');
+    }
 }
