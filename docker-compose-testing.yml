@@ -62,6 +62,12 @@ services:
             JWT_ENCRYPTION_KEY_FILE: /run/secrets/jwt_encryption_key
             JWT_PUBLIC_KEY_PATH: /run/secrets/jwt_public_key
             JWT_PRIVATE_KEY_PATH: /run/secrets/jwt_private_key
+            OAUTH_CALLBACK_URL: http://api.localhost
+            OAUTH_YANDEX_AUTH_URL: http://wiremock.localhost/oauth.yandex.ru
+            OAUTH_YANDEX_TOKEN_URL: http://wiremock/oauth.yandex.ru
+            OAUTH_YANDEX_API_URL: http://wiremock/login.yandex.ru
+            OAUTH_YANDEX_CLIENT_ID: app
+            OAUTH_YANDEX_CLIENT_SECRET_FILE: /run/secrets/oauth_yandex_client_secret
         secrets:
             - api_db_password
             - api_mailer_password
@@ -69,6 +75,7 @@ services:
             - jwt_encryption_key
             - jwt_public_key
             - jwt_private_key
+            - oauth_yandex_client_secret
 
     api-php-cli:
         image: ${REGISTRY}/auction-api-php-cli:${IMAGE_TAG}
@@ -89,6 +96,12 @@ services:
             JWT_ENCRYPTION_KEY_FILE: /run/secrets/jwt_encryption_key
             JWT_PUBLIC_KEY_PATH: /run/secrets/jwt_public_key
             JWT_PRIVATE_KEY_PATH: /run/secrets/jwt_private_key
+            OAUTH_CALLBACK_URL: http://api.localhost
+            OAUTH_YANDEX_AUTH_URL: http://wiremock.localhost/oauth.yandex.ru
+            OAUTH_YANDEX_TOKEN_URL: http://wiremock/oauth.yandex.ru
+            OAUTH_YANDEX_API_URL: http://wiremock/login.yandex.ru
+            OAUTH_YANDEX_CLIENT_ID: app
+            OAUTH_YANDEX_CLIENT_SECRET_FILE: /run/secrets/oauth_yandex_client_secret
         secrets:
             - api_db_password
             - api_mailer_password
@@ -96,6 +109,7 @@ services:
             - jwt_encryption_key
             - jwt_public_key
             - jwt_private_key
+            - oauth_yandex_client_secret
 
     testing-api-php-cli:
         image: ${REGISTRY}/auction-testing-api-php-cli:${IMAGE_TAG}
@@ -116,6 +130,12 @@ services:
             JWT_ENCRYPTION_KEY_FILE: /run/secrets/jwt_encryption_key
             JWT_PUBLIC_KEY_PATH: /run/secrets/jwt_public_key
             JWT_PRIVATE_KEY_PATH: /run/secrets/jwt_private_key
+            OAUTH_CALLBACK_URL: http://api.localhost
+            OAUTH_YANDEX_AUTH_URL: http://wiremock.localhost/oauth.yandex.ru
+            OAUTH_YANDEX_TOKEN_URL: http://wiremock/oauth.yandex.ru
+            OAUTH_YANDEX_API_URL: http://wiremock/login.yandex.ru
+            OAUTH_YANDEX_CLIENT_ID: app
+            OAUTH_YANDEX_CLIENT_SECRET_FILE: /run/secrets/oauth_yandex_client_secret
         secrets:
             - api_db_password
             - api_mailer_password
@@ -123,6 +143,7 @@ services:
             - jwt_encryption_key
             - jwt_public_key
             - jwt_private_key
+            - oauth_yandex_client_secret
 
     api-postgres:
         image: postgres:13.3-alpine
@@ -175,6 +196,8 @@ secrets:
         file: ./docker/development/secrets/jwt_public_key
     jwt_private_key:
         file: ./docker/development/secrets/jwt_private_key
+    oauth_yandex_client_secret:
+        file: ./docker/development/secrets/oauth_yandex_client_secret
 
 networks:
     traefik-public:
