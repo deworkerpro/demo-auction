@@ -235,6 +235,8 @@ pipeline {
                     file(credentialsId: 'JWT_ENCRYPTION_KEY_FILE', variable: 'JWT_ENCRYPTION_KEY_FILE'),
                     file(credentialsId: 'JWT_PUBLIC_KEY', variable: 'JWT_PUBLIC_KEY'),
                     file(credentialsId: 'JWT_PRIVATE_KEY', variable: 'JWT_PRIVATE_KEY'),
+                    string(credentialsId: 'OAUTH_YANDEX_CLIENT_ID', variable: 'OAUTH_YANDEX_CLIENT_ID'),
+                    file(credentialsId: 'OAUTH_YANDEX_CLIENT_SECRET_FILE', variable: 'OAUTH_YANDEX_CLIENT_SECRET_FILE'),
                     string(credentialsId: 'BACKUP_AWS_ACCESS_KEY_ID', variable: 'BACKUP_AWS_ACCESS_KEY_ID'),
                     file(credentialsId: 'BACKUP_AWS_SECRET_ACCESS_KEY_FILE', variable: 'BACKUP_AWS_SECRET_ACCESS_KEY_FILE'),
                     string(credentialsId: 'BACKUP_AWS_DEFAULT_REGION', variable: 'BACKUP_AWS_DEFAULT_REGION'),

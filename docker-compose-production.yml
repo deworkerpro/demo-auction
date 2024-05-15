@@ -76,6 +76,12 @@ services:
             JWT_ENCRYPTION_KEY_FILE: /run/secrets/jwt_encryption_key
             JWT_PUBLIC_KEY_PATH: /run/secrets/jwt_public_key
             JWT_PRIVATE_KEY_PATH: /run/secrets/jwt_private_key
+            OAUTH_CALLBACK_URL: https://api.demo-auction.deworker.pro
+            OAUTH_YANDEX_AUTH_URL: https://oauth.yandex.ru
+            OAUTH_YANDEX_TOKEN_URL: https://oauth.yandex.ru
+            OAUTH_YANDEX_API_URL: https://login.yandex.ru
+            OAUTH_YANDEX_CLIENT_ID: ${OAUTH_YANDEX_CLIENT_ID}
+            OAUTH_YANDEX_CLIENT_SECRET_FILE: /run/secrets/oauth_yandex_client_secret
         secrets:
             - api_db_password
             - api_mailer_password
@@ -83,6 +89,7 @@ services:
             - jwt_encryption_key
             - jwt_public_key
             - jwt_private_key
+            - oauth_yandex_client_secret
         deploy:
             mode: replicated
             replicas: 2
@@ -109,6 +116,12 @@ services:
             JWT_ENCRYPTION_KEY_FILE: /run/secrets/jwt_encryption_key
             JWT_PUBLIC_KEY_PATH: /run/secrets/jwt_public_key
             JWT_PRIVATE_KEY_PATH: /run/secrets/jwt_private_key
+            OAUTH_CALLBACK_URL: https://api.demo-auction.deworker.pro
+            OAUTH_YANDEX_AUTH_URL: https://oauth.yandex.ru
+            OAUTH_YANDEX_TOKEN_URL: https://oauth.yandex.ru
+            OAUTH_YANDEX_API_URL: https://login.yandex.ru
+            OAUTH_YANDEX_CLIENT_ID: ${OAUTH_YANDEX_CLIENT_ID}
+            OAUTH_YANDEX_CLIENT_SECRET_FILE: /run/secrets/oauth_yandex_client_secret
         secrets:
             - api_db_password
             - api_mailer_password
@@ -116,6 +129,7 @@ services:
             - jwt_encryption_key
             - jwt_public_key
             - jwt_private_key
+            - oauth_yandex_client_secret
         command: sh -c 'wait-for-it api-postgres:5432 -t 60 && php bin/app.php migrations:migrate --no-interaction'
         deploy:
             restart_policy:
@@ -143,6 +157,12 @@ services:
             JWT_ENCRYPTION_KEY_FILE: /run/secrets/jwt_encryption_key
             JWT_PUBLIC_KEY_PATH: /run/secrets/jwt_public_key
             JWT_PRIVATE_KEY_PATH: /run/secrets/jwt_private_key
+            OAUTH_CALLBACK_URL: https://api.demo-auction.deworker.pro
+            OAUTH_YANDEX_AUTH_URL: https://oauth.yandex.ru
+            OAUTH_YANDEX_TOKEN_URL: https://oauth.yandex.ru
+            OAUTH_YANDEX_API_URL: https://login.yandex.ru
+            OAUTH_YANDEX_CLIENT_ID: ${OAUTH_YANDEX_CLIENT_ID}
+            OAUTH_YANDEX_CLIENT_SECRET_FILE: /run/secrets/oauth_yandex_client_secret
         secrets:
             - api_db_password
             - api_mailer_password
@@ -150,6 +170,7 @@ services:
             - jwt_encryption_key
             - jwt_public_key
             - jwt_private_key
+            - oauth_yandex_client_secret
         command: sh -c 'wait-for-it api-postgres:5432 -t 60 && php bin/app.php oauth:clear-expired'
         deploy:
             labels:
@@ -214,6 +235,8 @@ secrets:
         file: ./secrets/jwt_public_key
     jwt_private_key:
         file: ./secrets/jwt_private_key
+    oauth_yandex_client_secret:
+        file: ./secrets/oauth_yandex_client_secret
     backup_aws_secret_access_key:
         file: ./secrets/backup_aws_secret_access_key
 
