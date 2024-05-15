@@ -21,7 +21,7 @@ export default function Home(): React.JSX.Element {
             <Link to="/join" data-testid="join-link">
               Join
             </Link>
-            <button type="button" data-testid="login-button" onClick={() => login()}>
+            <button type="button" data-testid="login-button" onClick={() => login({})}>
               Log In
             </button>
           </>

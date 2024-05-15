@@ -3,7 +3,7 @@ import { createContext } from 'react'
 export type AuthContextValue = {
   isAuthenticated: boolean
   getToken(): Promise<string>
-  login(): void
+  login(extra: Record<string, string>): void
   logout(): void
   loading: boolean
   error: string | null
