@@ -173,6 +173,26 @@ services:
             - traefik.http.routers.mailer.entryPoints=http
             - traefik.http.services.mailer.loadBalancer.server.port=8025
 
+    wiremock:
+        image: wiremock/wiremock:3x-alpine
+        networks:
+            - traefik-public
+            - default
+        volumes:
+            - ./wiremock:/home/wiremock
+        healthcheck:
+            test: wget --no-verbose --tries=1 --spider http://localhost/__admin/health || exit 1
+        command:
+            - '--port=80'
+            - '--global-response-templating'
+            - '--verbose'
+        labels:
+            - traefik.enable=true
+            - traefik.docker.network=traefik-public
+            - traefik.http.routers.wiremock.rule=Host(`wiremock.localhost`)
+            - traefik.http.services.wiremock.loadBalancer.server.port=80
+            - traefik.http.routers.wiremock.entryPoints=http
+
     backup-storage:
         image: minio/minio
         environment:
