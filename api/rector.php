@@ -9,6 +9,7 @@ use Rector\Caching\ValueObject\Storage\FileCacheStorage;
 use Rector\Config\RectorConfig;
 use Rector\Doctrine\Set\DoctrineSetList;
 use Rector\Php80\Rector\Class_\ClassPropertyAssignToConstructorPromotionRector;
+use Rector\Php81\Rector\FuncCall\NullToStrictStringFuncCallArgRector;
 use Rector\PHPUnit\CodeQuality\Rector\Class_\AddSeeTestAnnotationRector;
 use Rector\PHPUnit\CodeQuality\Rector\Class_\PreferPHPUnitThisCallRector;
 use Rector\PHPUnit\CodeQuality\Rector\Class_\YieldDataProviderRector;
@@ -39,6 +40,7 @@ return RectorConfig::configure()
     ])
     ->withSkip([
         ClassPropertyAssignToConstructorPromotionRector::class,
+        NullToStrictStringFuncCallArgRector::class,
 
         PreferPHPUnitThisCallRector::class,
         AddSeeTestAnnotationRector::class,
