@@ -1,0 +1,48 @@
+.external {
+  margin: 1rem 0;
+  padding: 1rem 0;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
+
+.external .heading {
+  font-size: 0.8rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.external .items {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.external .item {
+  margin-right: 0.5rem;
+  border-radius: 3px;
+  padding: 0.6rem 1rem;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  background: linear-gradient(to bottom, #fff, #f6f6f6);
+  color: #222;
+  font-size: 0.8rem;
+  line-height: 1;
+  text-decoration: none;
+  text-align: center;
+}
+
+.external .item:last-of-type {
+  margin-right: 0;
+}
+
+.external .item.yandex {
+  border: 1px solid #f60;
+  background: linear-gradient(to bottom, #ff7600, #f00);
+  color: #fff;
+}
+
+.external .item.mailru {
+  border: 1px solid #064fcd;
+  background: linear-gradient(to bottom, #256ce7, #064fcd);
+  color: #fff;
+}

@@ -154,7 +154,7 @@ export default function AuthProvider({
     return () => window.removeEventListener('storage', listener)
   }, [])
 
-  const login = useCallback(async () => {
+  const login = useCallback(async (extra: Record<string, string>) => {
     const currentLocation = window.location.pathname
     const codeVerifier = generateCodeVerifier()
     const codeChallenge = await generateCodeChallenge(codeVerifier)
@@ -172,6 +172,7 @@ export default function AuthProvider({
       redirect_uri: window.location.origin + redirectPath,
       scope,
       state,
+      ...extra,
     })
 
     window.location.assign(authorizeUrl + '?' + args)
