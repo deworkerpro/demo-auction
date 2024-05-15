@@ -10,6 +10,10 @@ use App\Http\Response\HtmlResponse;
 use App\Http\Response\RedirectResponse;
 use App\OAuth\Entity\User;
 use App\OAuthClient\OAuthClient;
+use DateTimeImmutable;
+use Dflydev\FigCookies\FigResponseCookies;
+use Dflydev\FigCookies\Modifier\SameSite;
+use Dflydev\FigCookies\SetCookie;
 use League\OAuth2\Server\AuthorizationServer;
 use League\OAuth2\Server\Exception\OAuthServerException;
 use Override;
@@ -52,7 +56,16 @@ final readonly class Authorize implements RequestHandlerInterface
 
                 $state = (string)($params['state'] ?? null);
 
-                return new RedirectResponse($this->client->generateAuthUrl($provider, $state));
+                $response = new RedirectResponse($this->client->generateAuthUrl($provider, $state));
+
+                $cookie = SetCookie::create('auth_query')
+                    ->withValue(json_encode($request->getQueryParams()))
+                    ->withExpires(new DateTimeImmutable('+10 minutes'))
+                    ->withPath('/oauth')
+                    ->withHttpOnly()
+                    ->withSameSite(SameSite::lax());
+
+                return FigResponseCookies::set($response, $cookie);
             } catch (OAuthServerException $exception) {
                 return $exception->generateHttpResponse($this->response->createResponse());
             }

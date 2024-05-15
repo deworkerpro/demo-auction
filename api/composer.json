@@ -15,6 +15,7 @@
     "require": {
         "php": "^8.3",
         "ext-mbstring": "^8.3",
+        "dflydev/fig-cookies": "^3.1",
         "doctrine/annotations": "^2.0",
         "doctrine/migrations": "^3.0",
         "doctrine/orm": "^3.1",

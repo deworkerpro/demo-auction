@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Test\Functional\OAuth\Yandex;
 
+use Dflydev\FigCookies\SetCookie;
 use Test\Functional\OAuth\PKCE;
 use Test\Functional\WebTestCase;
 
@@ -44,5 +45,12 @@ final class AuthorizeTest extends WebTestCase
             'scope' => 'login:email',
             'state' => 'sTaTe',
         ], $params);
+
+        self::assertNotEmpty($setCookie = $response->getHeaderLine('Set-Cookie'));
+
+        $cookie = SetCookie::fromSetCookieString($setCookie);
+
+        self::assertSame('auth_query', $cookie->getName());
+        self::assertSame('/oauth', $cookie->getPath());
     }
 }
