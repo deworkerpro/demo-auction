@@ -29,8 +29,10 @@ final class CallbackTest extends WebTestCase
 
     public function testWithoutCookies(): void
     {
+        $this->oAuthYandex()->initAuthFlow('code', '1111', 'new@app.test');
+
         $response = $this->app()->handle(self::html('GET', '/oauth/yandex?' . http_build_query([
-            'code' => 'InvalidCode',
+            'code' => 'code',
             'state' => 'sTaTe',
         ])));
 
@@ -44,8 +46,10 @@ final class CallbackTest extends WebTestCase
 
     public function testNew(): void
     {
+        $this->oAuthYandex()->initAuthFlow('code', '1111', 'new@app.test');
+
         $response = $this->app()->handle(self::html('GET', '/oauth/yandex?' . http_build_query([
-            'code' => 'CodeNew',
+            'code' => 'code',
             'state' => 'sTaTe',
         ]))->withCookieParams(['auth_query' => json_encode(self::createPrevRequestParams())]));
 
@@ -63,8 +67,10 @@ final class CallbackTest extends WebTestCase
 
     public function testExistingNetwork(): void
     {
+        $this->oAuthYandex()->initAuthFlow('code', '13333333', 'other@app.test');
+
         $response = $this->app()->handle(self::html('GET', '/oauth/yandex?' . http_build_query([
-            'code' => 'CodeExistingNetwork',
+            'code' => 'code',
             'state' => 'sTaTe',
         ]))->withCookieParams(['auth_query' => json_encode(self::createPrevRequestParams())]));
 
@@ -82,8 +88,10 @@ final class CallbackTest extends WebTestCase
 
     public function testExistingEmail(): void
     {
+        $this->oAuthYandex()->initAuthFlow('code', '1111', 'active@app.test');
+
         $response = $this->app()->handle(self::html('GET', '/oauth/yandex?' . http_build_query([
-            'code' => 'CodeExistingEmail',
+            'code' => 'code',
             'state' => 'sTaTe',
         ]))->withCookieParams(['auth_query' => json_encode(self::createPrevRequestParams())]));
 
@@ -101,8 +109,10 @@ final class CallbackTest extends WebTestCase
 
     public function testExistingEmailWait(): void
     {
+        $this->oAuthYandex()->initAuthFlow('code', '1111', 'wait@app.test');
+
         $response = $this->app()->handle(self::html('GET', '/oauth/yandex?' . http_build_query([
-            'code' => 'CodeExistingEmailWait',
+            'code' => 'code',
             'state' => 'sTaTe',
         ]))->withCookieParams(['auth_query' => json_encode(self::createPrevRequestParams())]));
 
@@ -120,8 +130,10 @@ final class CallbackTest extends WebTestCase
 
     public function testInvalidState(): void
     {
+        $this->oAuthYandex()->initAuthFlow('code', '1111', 'new@app.test');
+
         $response = $this->app()->handle(self::html('GET', '/oauth/yandex?' . http_build_query([
-            'code' => 'CodeNew',
+            'code' => 'code',
             'state' => 'InvalidState',
         ]))->withCookieParams(['auth_query' => json_encode(self::createPrevRequestParams())]));
 

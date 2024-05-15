@@ -49,6 +49,7 @@ api-migrations:
 
 api-fixtures:
 	docker compose run --rm api-php-cli composer app fixtures:load
+	docker compose restart wiremock
 
 api-backup:
 	docker compose run --rm api-postgres-backup

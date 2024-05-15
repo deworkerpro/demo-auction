@@ -23,11 +23,18 @@ abstract class WebTestCase extends TestCase
 {
     private ?App $app = null;
     private ?MailerClient $mailer = null;
+    private ?OAuthYandexClient $oAuthYandex = null;
+    private ?WiremockClient $wiremock = null;
 
     #[Override]
     protected function tearDown(): void
     {
         $this->app = null;
+
+        if ($this->wiremock !== null) {
+            $this->wiremock->reset();
+        }
+
         parent::tearDown();
     }
 
@@ -86,6 +93,22 @@ abstract class WebTestCase extends TestCase
             $this->mailer = new MailerClient();
         }
         return $this->mailer;
+    }
+
+    protected function oAuthYandex(): OAuthYandexClient
+    {
+        if ($this->oAuthYandex === null) {
+            $this->oAuthYandex = new OAuthYandexClient($this->wiremock());
+        }
+        return $this->oAuthYandex;
+    }
+
+    private function wiremock(): WiremockClient
+    {
+        if ($this->wiremock === null) {
+            $this->wiremock = new WiremockClient();
+        }
+        return $this->wiremock;
     }
 
     private function container(): ContainerInterface
