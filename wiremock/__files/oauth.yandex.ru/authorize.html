@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>OAuth</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <style>
+      html {
+        background: #fff;
+        font-size: 16px;
+      }
+
+      body {
+        margin: 0;
+        padding: 1rem;
+        font-family: Arial, sans-serif;
+        color: #333;
+        font-size: 1rem;
+      }
+
+      h1 {
+        line-height: 1;
+        font-size: 1rem;
+        font-weight: bold;
+      }
+
+      a {
+        display: inline-block;
+        background: #1a8aee;
+        padding: 0.6rem 1.2rem;
+        color: #fff;
+        border-radius: 4px;
+        text-decoration: none;
+        font-size: 0.9rem;
+      }
+    </style>
+</head>
+<body>
+    <h1>Auth with Yandex</h1>
+    <p>
+        <a href="{{request.query.redirect_uri}}?code=CodeNew&state={{urlEncode request.query.state}}">New</a>
+        <a href="{{request.query.redirect_uri}}?code=CodeExistingEmail&state={{urlEncode request.query.state}}">Existing Email</a>
+        <a href="{{request.query.redirect_uri}}?code=CodeExistingNetwork&state={{urlEncode request.query.state}}">Existing Network</a>
+        <a href="{{request.query.redirect_uri}}?code=CodeExistingEmailWait&state={{urlEncode request.query.state}}">Existing Email Wait</a>
+        <a href="{{request.query.redirect_uri}}?error=access_denied&state={{urlEncode request.query.state}}">Error</a>
+    </p>
+</body>
+</html>

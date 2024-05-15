@@ -1,0 +1,30 @@
+{
+    "request": {
+        "method": "GET",
+        "urlPath": "/oauth.yandex.ru/authorize",
+        "queryParameters" : {
+            "client_id" : {
+                "equalTo" : "app"
+            },
+            "redirect_uri" : {
+                "equalTo" : "http://api.localhost/oauth/yandex"
+            },
+            "response_type" : {
+                "equalTo" : "code"
+            },
+            "scope" : {
+                "equalTo" : "login:email"
+            },
+            "state" : {
+                "matches" : ".+"
+            }
+        }
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "text/html"
+        },
+        "bodyFileName": "oauth.yandex.ru/authorize.html"
+    }
+}

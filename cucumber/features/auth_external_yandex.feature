@@ -18,7 +18,7 @@ Feature: Login external via Yandex
     And I see "auth-external" element
     And I do not see "auth-external-yandex" element
 
-  Scenario: Guest
+  Scenario: Guest Login
     Given I am a guest user
     And I have "OAUTH_EXTERNAL, OAUTH_EXTERNAL_YANDEX" authorize features
     And I am on "/" page
@@ -26,3 +26,5 @@ Feature: Login external via Yandex
     Then I see "authorize-page" element
     And I see "auth-external" element
     And I see "auth-external-yandex" element
+    When I click "auth-external-yandex" element
+    Then I see "Auth with Yandex"
