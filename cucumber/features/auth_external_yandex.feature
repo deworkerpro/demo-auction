@@ -28,3 +28,5 @@ Feature: Login external via Yandex
     And I see "auth-external-yandex" element
     When I click "auth-external-yandex" element
     Then I see "Auth with Yandex"
+    When I click "oauth-new" element
+    Then I see "logout-button" element

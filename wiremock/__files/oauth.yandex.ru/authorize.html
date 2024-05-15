@@ -40,7 +40,7 @@
 <body>
     <h1>Auth with Yandex</h1>
     <p>
-        <a href="{{request.query.redirect_uri}}?code=CodeNew&state={{urlEncode request.query.state}}">New</a>
+        <a href="{{request.query.redirect_uri}}?code=CodeNew&state={{urlEncode request.query.state}}" data-testid="oauth-new">New</a>
         <a href="{{request.query.redirect_uri}}?code=CodeExistingEmail&state={{urlEncode request.query.state}}">Existing Email</a>
         <a href="{{request.query.redirect_uri}}?code=CodeExistingNetwork&state={{urlEncode request.query.state}}">Existing Network</a>
         <a href="{{request.query.redirect_uri}}?code=CodeExistingEmailWait&state={{urlEncode request.query.state}}">Existing Email Wait</a>
