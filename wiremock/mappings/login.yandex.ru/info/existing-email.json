@@ -1,0 +1,21 @@
+{
+    "request": {
+        "method": "GET",
+        "url": "/login.yandex.ru/info",
+        "headers" : {
+            "Authorization" : {
+                "equalTo" : "bearer TokenExistingEmail"
+            },
+            "Accept": {
+                "equalTo": "application/json"
+            }
+        }
+    },
+    "response": {
+        "status": 200,
+        "jsonBody": {
+            "id": "31111110",
+            "default_email": "yandex-active@app.test"
+        }
+    }
+}

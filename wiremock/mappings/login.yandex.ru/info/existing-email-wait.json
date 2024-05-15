@@ -1,0 +1,21 @@
+{
+    "request": {
+        "method": "GET",
+        "url": "/login.yandex.ru/info",
+        "headers" : {
+            "Authorization" : {
+                "equalTo" : "bearer TokenExistingEmailWait"
+            },
+            "Accept": {
+                "equalTo": "application/json"
+            }
+        }
+    },
+    "response": {
+        "status": 200,
+        "jsonBody": {
+            "id": "31111111",
+            "default_email": "yandex-wait@app.test"
+        }
+    }
+}

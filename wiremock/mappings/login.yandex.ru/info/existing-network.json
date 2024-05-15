@@ -1,0 +1,21 @@
+{
+    "request": {
+        "method": "GET",
+        "url": "/login.yandex.ru/info",
+        "headers" : {
+            "Authorization" : {
+                "equalTo" : "bearer TokenExistingNetwork"
+            },
+            "Accept": {
+                "equalTo": "application/json"
+            }
+        }
+    },
+    "response": {
+        "status": 200,
+        "jsonBody": {
+            "id": "33333333",
+            "default_email": "yandex-existing-network@app.test"
+        }
+    }
+}
