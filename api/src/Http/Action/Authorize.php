@@ -7,7 +7,9 @@ namespace App\Http\Action;
 use App\Auth\Query\FindIdByCredentials\Fetcher;
 use App\Auth\Query\FindIdByCredentials\Query;
 use App\Http\Response\HtmlResponse;
+use App\Http\Response\RedirectResponse;
 use App\OAuth\Entity\User;
+use App\OAuthClient\OAuthClient;
 use League\OAuth2\Server\AuthorizationServer;
 use League\OAuth2\Server\Exception\OAuthServerException;
 use Override;
@@ -28,6 +30,7 @@ final readonly class Authorize implements RequestHandlerInterface
         private Environment $template,
         private ResponseFactoryInterface $response,
         private TranslatorInterface $translator,
+        private OAuthClient $client
     ) {}
 
     #[Override]
@@ -35,10 +38,25 @@ final readonly class Authorize implements RequestHandlerInterface
     {
         /**
          * @var array{
+         *     state?: ?string,
          *     provider?: ?string
          * } $params
          */
         $params = $request->getQueryParams();
+
+        $provider = $params['provider'] ?? null;
+
+        if (\is_string($provider) && $provider !== '') {
+            try {
+                $this->server->validateAuthorizationRequest($request);
+
+                $state = (string)($params['state'] ?? null);
+
+                return new RedirectResponse($this->client->generateAuthUrl($provider, $state));
+            } catch (OAuthServerException $exception) {
+                return $exception->generateHttpResponse($this->response->createResponse());
+            }
+        }
 
         try {
             $authRequest = $this->server->validateAuthorizationRequest($request);

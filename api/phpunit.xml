@@ -13,6 +13,7 @@
             <directory>src/Frontend/Test</directory>
             <directory>src/Http/Test</directory>
             <directory>src/OAuth/Test</directory>
+            <directory>src/OAuthClient/Test</directory>
             <directory>src/Router/Test</directory>
             <directory>src/Serializer/Test</directory>
             <directory>src/Translator/Test</directory>

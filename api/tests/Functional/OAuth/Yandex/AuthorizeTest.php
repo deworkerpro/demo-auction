@@ -14,8 +14,6 @@ final class AuthorizeTest extends WebTestCase
 {
     public function testSuccess(): void
     {
-        self::markTestIncomplete();
-
         $response = $this->app()->handle(self::html(
             'GET',
             '/authorize?' . http_build_query([
