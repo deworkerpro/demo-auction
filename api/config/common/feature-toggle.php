@@ -30,7 +30,7 @@ return [
                 'PASSWORD_RESET' => false,
                 'OAUTH_EXTERNAL' => true,
                 'OAUTH_EXTERNAL_YANDEX' => true,
-                'OAUTH_EXTERNAL_MAILRU' => false,
+                'OAUTH_EXTERNAL_MAILRU' => true,
             ],
         ],
     ],
