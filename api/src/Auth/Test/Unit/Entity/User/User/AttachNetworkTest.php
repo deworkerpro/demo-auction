@@ -16,7 +16,22 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(User::class)]
 final class AttachNetworkTest extends TestCase
 {
-    public function testSuccess(): void
+    public function testWait(): void
+    {
+        $user = (new UserBuilder())
+            ->build();
+
+        $network = new Network('vk', '0000001');
+        $user->attachNetwork($network);
+
+        self::assertFalse($user->isWait());
+        self::assertTrue($user->isActive());
+
+        self::assertCount(1, $networks = $user->getNetworks());
+        self::assertEquals($network, $networks[0] ?? null);
+    }
+
+    public function testActive(): void
     {
         $user = (new UserBuilder())
             ->active()

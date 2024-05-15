@@ -94,8 +94,7 @@ final class User
             throw new DomainException('Confirmation is not required.');
         }
         $this->joinConfirmToken->validate($token, $date);
-        $this->status = Status::active();
-        $this->joinConfirmToken = null;
+        $this->activate();
     }
 
     public function attachNetwork(Network $network): void
@@ -106,6 +105,9 @@ final class User
             }
         }
         $this->networks->add(new UserNetwork($this, $network));
+        if ($this->isWait()) {
+            $this->activate();
+        }
     }
 
     public function requestPasswordReset(Token $token, DateTimeImmutable $date): void
@@ -254,5 +256,15 @@ final class User
         if ($this->newEmailToken && $this->newEmailToken->isEmpty()) {
             $this->newEmailToken = null;
         }
+    }
+
+    private function activate(): void
+    {
+        if ($this->isActive()) {
+            throw new DomainException('User is already active.');
+        }
+
+        $this->status = Status::active();
+        $this->joinConfirmToken = null;
     }
 }
