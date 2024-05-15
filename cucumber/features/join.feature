@@ -6,6 +6,12 @@ Feature: View join page
     Then I see "Join to Us" header
     And I see "join-form" element
 
+  Scenario: View join page as user
+    Given I am a user
+    When I open "/join" page
+    Then  I see "We are here"
+    And I do not see "join-form" element
+
   Scenario: Success join
     Given I am a guest user
     And I am on "/join" page
