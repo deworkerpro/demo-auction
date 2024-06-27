@@ -27,6 +27,7 @@ return [
         'feature-toggle' => [
             'features' => [
                 'NEW_HOME' => false,
+                'PASSWORD_RESET' => false,
             ],
         ],
     ],

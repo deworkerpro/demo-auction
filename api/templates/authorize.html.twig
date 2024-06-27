@@ -145,9 +145,12 @@
     </form>
 
     <p class="links">
-        <a href="{{ frontend_url('join' ) }}">{{ trans('link.join', [], 'oauth') }}</a> |
-        <a href="{{ frontend_url('reset' ) }}">{{ trans('link.reset', [], 'oauth') }}</a>
+        <a href="{{ frontend_url('join' ) }}">{{ trans('link.join', [], 'oauth') }}</a>
+        {% if (is_feature_enabled('PASSWORD_RESET')) %}
+            | <a href="{{ frontend_url('reset' ) }}">{{ trans('link.reset', [], 'oauth') }}</a>
+        {% endif %}
     </p>
+
 </div>
 </body>
 </html>
