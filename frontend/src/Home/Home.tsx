@@ -13,7 +13,7 @@ export default function Home(): React.JSX.Element {
       <p>We are here</p>
       <p className={styles.links}>
         {isAuthenticated ? (
-          <button type="button" data-testid="logout-button" onClick={logout}>
+          <button type="button" data-testid="logout-button" onClick={() => logout()}>
             Log Out
           </button>
         ) : (
@@ -21,7 +21,7 @@ export default function Home(): React.JSX.Element {
             <Link to="/join" data-testid="join-link">
               Join
             </Link>
-            <button type="button" data-testid="login-button" onClick={login}>
+            <button type="button" data-testid="login-button" onClick={() => login()}>
               Log In
             </button>
           </>
