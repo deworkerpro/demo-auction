@@ -47,9 +47,6 @@ final class FixturesLoadCommand extends Command
 
         $executor = new ORMExecutor($this->em, new ORMPurger());
 
-        /**
-         * @psalm-suppress InternalMethod
-         */
         $executor->setLogger(new readonly class($output) implements LoggerInterface {
             use LoggerTrait;
 
