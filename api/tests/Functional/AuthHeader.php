@@ -36,6 +36,6 @@ final class AuthHeader
             )
         );
 
-        return 'Bearer ' . $token;
+        return 'Bearer ' . (string)$token;
     }
 }

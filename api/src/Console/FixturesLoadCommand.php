@@ -52,6 +52,7 @@ final class FixturesLoadCommand extends Command
 
             public function __construct(private OutputInterface $output) {}
 
+            #[Override]
             public function log($level, string|Stringable $message, array $context = []): void
             {
                 $this->output->writeln((string)$message);

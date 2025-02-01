@@ -59,7 +59,7 @@ final readonly class Authorize implements RequestHandlerInterface
                 $response = new RedirectResponse($this->client->generateAuthUrl($provider, $state));
 
                 $cookie = SetCookie::create('auth_query')
-                    ->withValue(json_encode($request->getQueryParams()))
+                    ->withValue(json_encode($request->getQueryParams(), JSON_THROW_ON_ERROR))
                     ->withExpires(new DateTimeImmutable('+10 minutes'))
                     ->withPath('/oauth')
                     ->withHttpOnly()

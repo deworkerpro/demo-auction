@@ -17,7 +17,13 @@ function env(string $name, ?string $default = null): string
     $file = getenv($name . '_FILE');
 
     if ($file !== false) {
-        return trim(file_get_contents($file));
+        $content = file_get_contents($file);
+
+        if ($content === false) {
+            throw new RuntimeException('Unable to open "' . $file . '" file');
+        }
+
+        return trim($content);
     }
 
     if ($default !== null) {
