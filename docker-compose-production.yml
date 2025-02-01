@@ -230,6 +230,8 @@ services:
         secrets:
             - api_db_password
             - backup_aws_secret_access_key
+        volumes:
+            - api-postgres-backup:/app
         command: sh -c 'wait-for-it api-postgres:5432 -t 60 && backup'
         deploy:
             labels:
@@ -262,6 +264,7 @@ secrets:
 
 volumes:
     api-postgres:
+    api-postgres-backup:
 
 networks:
     traefik-public:
