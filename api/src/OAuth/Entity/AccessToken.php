@@ -14,11 +14,12 @@ use League\OAuth2\Server\Entities\Traits\EntityTrait;
 use League\OAuth2\Server\Entities\Traits\TokenEntityTrait;
 use Override;
 use RuntimeException;
+use Stringable;
 
 /**
  * @psalm-suppress PropertyNotSetInConstructor
  */
-final class AccessToken implements AccessTokenEntityInterface
+final class AccessToken implements AccessTokenEntityInterface, Stringable
 {
     use AccessTokenTrait;
     use EntityTrait;
@@ -59,12 +60,12 @@ final class AccessToken implements AccessTokenEntityInterface
         $this->initJwtConfiguration();
 
         return $this->jwtConfiguration->builder()
-            ->permittedFor($this->getClient()->getIdentifier() ?: throw new RuntimeException('Empty value.'))
-            ->identifiedBy((string)$this->getIdentifier() ?: throw new RuntimeException('Empty value.'))
+            ->permittedFor($this->getClient()->getIdentifier())
+            ->identifiedBy($this->getIdentifier())
             ->issuedAt(new DateTimeImmutable())
             ->canOnlyBeUsedAfter(new DateTimeImmutable())
             ->expiresAt($this->getExpiryDateTime())
-            ->relatedTo((string)$this->getUserIdentifier() ?: throw new RuntimeException('Empty value.'))
+            ->relatedTo($this->getUserIdentifier() ?? throw new RuntimeException('Empty value.'))
             ->withClaim('scopes', $this->getScopes())
             ->withClaim('role', $this->getUserRole())
             ->getToken($this->jwtConfiguration->signer(), $this->jwtConfiguration->signingKey());

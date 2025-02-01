@@ -12,9 +12,9 @@ final class UserRepository implements UserRepositoryInterface
 {
     #[Override]
     public function getUserEntityByUserCredentials(
-        $username,
-        $password,
-        $grantType,
+        string $username,
+        string $password,
+        string $grantType,
         ClientEntityInterface $clientEntity
     ): ?User {
         return null;

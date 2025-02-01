@@ -14,6 +14,10 @@ final class AccessTokenBuilder
      * @var Scope[]
      */
     private array $scopes;
+
+    /**
+     * @var non-empty-string|null
+     */
     private ?string $userIdentifier = null;
 
     public function __construct()
@@ -21,6 +25,9 @@ final class AccessTokenBuilder
         $this->scopes = [new Scope('common')];
     }
 
+    /**
+     * @param non-empty-string $identifier
+     */
     public function withUserIdentifier(string $identifier): self
     {
         $clone = clone $this;

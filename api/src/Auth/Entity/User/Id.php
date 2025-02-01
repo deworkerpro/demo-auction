@@ -11,10 +11,14 @@ use Webmozart\Assert\Assert;
 
 final readonly class Id implements Stringable
 {
+    /**
+     * @var non-empty-string
+     */
     private string $value;
 
     public function __construct(string $value)
     {
+        Assert::notEmpty($value);
         Assert::uuid($value);
         $this->value = mb_strtolower($value);
     }
@@ -30,6 +34,9 @@ final readonly class Id implements Stringable
         return new self(Uuid::uuid4()->toString());
     }
 
+    /**
+     * @return non-empty-string
+     */
     public function getValue(): string
     {
         return $this->value;

@@ -19,12 +19,12 @@ final readonly class AccessTokenRepository implements AccessTokenRepositoryInter
     public function getNewToken(
         ClientEntityInterface $clientEntity,
         array $scopes,
-        $userIdentifier = null
+        ?string $userIdentifier = null
     ): AccessToken {
         $accessToken = new AccessToken($clientEntity, $scopes);
 
         if ($userIdentifier !== null) {
-            $identity = $this->users->fetch((string)$userIdentifier);
+            $identity = $this->users->fetch($userIdentifier);
 
             if ($identity === null) {
                 throw new OAuthServerException('User is not found.', 101, 'invalid_user', 401);
@@ -44,13 +44,13 @@ final readonly class AccessTokenRepository implements AccessTokenRepositoryInter
     }
 
     #[Override]
-    public function revokeAccessToken($tokenId): void
+    public function revokeAccessToken(string $tokenId): void
     {
         // do nothing
     }
 
     #[Override]
-    public function isAccessTokenRevoked($tokenId): bool
+    public function isAccessTokenRevoked(string $tokenId): bool
     {
         return false;
     }

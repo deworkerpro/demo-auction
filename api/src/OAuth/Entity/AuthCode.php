@@ -24,21 +24,18 @@ final class AuthCode implements AuthCodeEntityInterface
     use TokenEntityTrait;
 
     /**
-     * @var string
+     * @var non-empty-string
      */
     #[ORM\Column(type: Types::STRING, length: 80)]
     #[ORM\Id]
-    protected $identifier;
+    protected string $identifier;
 
-    /**
-     * @var DateTimeImmutable
-     */
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
-    protected $expiryDateTime;
+    protected DateTimeImmutable $expiryDateTime;
 
     /**
-     * @var string
+     * @var non-empty-string|null
      */
     #[ORM\Column(type: Types::GUID)]
-    protected $userIdentifier;
+    protected ?string $userIdentifier = null;
 }

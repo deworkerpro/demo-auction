@@ -11,12 +11,12 @@ use Lcobucci\JWT\Configuration;
 use Lcobucci\JWT\Exception;
 use Lcobucci\JWT\Signer\Key\InMemory;
 use Lcobucci\JWT\Signer\Rsa\Sha256;
-use Lcobucci\JWT\Token\Plain;
+use Lcobucci\JWT\UnencryptedToken;
 use Lcobucci\JWT\Validation\Constraint\LooseValidAt;
 use Lcobucci\JWT\Validation\Constraint\SignedWith;
 use Lcobucci\JWT\Validation\RequiredConstraintsViolated;
 use League\OAuth2\Server\AuthorizationValidators\AuthorizationValidatorInterface;
-use League\OAuth2\Server\CryptKey;
+use League\OAuth2\Server\CryptKeyInterface;
 use League\OAuth2\Server\CryptTrait;
 use League\OAuth2\Server\Exception\OAuthServerException;
 use League\OAuth2\Server\Repositories\AccessTokenRepositoryInterface;
@@ -31,7 +31,7 @@ final class BearerTokenValidator implements AuthorizationValidatorInterface
 {
     use CryptTrait;
 
-    private CryptKey $publicKey;
+    private CryptKeyInterface $publicKey;
     private AccessTokenRepositoryInterface $accessTokenRepository;
     private Configuration $jwtConfiguration;
     private ?DateInterval $jwtValidAtDateLeeway;
@@ -44,7 +44,7 @@ final class BearerTokenValidator implements AuthorizationValidatorInterface
         $this->jwtValidAtDateLeeway = $jwtValidAtDateLeeway;
     }
 
-    public function setPublicKey(CryptKey $key): void
+    public function setPublicKey(CryptKeyInterface $key): void
     {
         $this->publicKey = $key;
 
@@ -62,11 +62,10 @@ final class BearerTokenValidator implements AuthorizationValidatorInterface
         $jwt = trim((string)preg_replace('/^\s*Bearer\s/', '', $header[0]));
 
         if ($jwt === '') {
-            throw OAuthServerException::accessDenied('Access token could not be empty');
+            throw OAuthServerException::accessDenied('Missing "Bearer" token');
         }
 
         try {
-            /** @var Plain $token */
             $token = $this->jwtConfiguration->parser()->parse($jwt);
         } catch (Exception $exception) {
             throw OAuthServerException::accessDenied($exception->getMessage(), null, $exception);
@@ -77,6 +76,10 @@ final class BearerTokenValidator implements AuthorizationValidatorInterface
             $this->jwtConfiguration->validator()->assert($token, ...$constraints);
         } catch (RequiredConstraintsViolated $exception) {
             throw OAuthServerException::accessDenied('Access token could not be verified', null, $exception);
+        }
+
+        if (!$token instanceof UnencryptedToken) {
+            throw OAuthServerException::accessDenied('Access token is not an instance of UnencryptedToken');
         }
 
         $claims = $token->claims();

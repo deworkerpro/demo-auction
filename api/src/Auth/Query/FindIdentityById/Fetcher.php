@@ -19,7 +19,12 @@ final readonly class Fetcher
             ->setParameter('id', $id)
             ->executeQuery();
 
-        /** @var array{id: string, role: string}|false */
+        /**
+         * @var array{
+         *     id: non-empty-string,
+         *     role: non-empty-string
+         * }|false $row
+         */
         $row = $result->fetchAssociative();
 
         if ($row === false) {

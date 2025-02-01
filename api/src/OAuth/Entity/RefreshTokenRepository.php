@@ -40,7 +40,7 @@ final readonly class RefreshTokenRepository implements RefreshTokenRepositoryInt
     }
 
     #[Override]
-    public function revokeRefreshToken($tokenId): void
+    public function revokeRefreshToken(string $tokenId): void
     {
         if ($token = $this->repo->find($tokenId)) {
             $this->em->remove($token);
@@ -49,7 +49,7 @@ final readonly class RefreshTokenRepository implements RefreshTokenRepositoryInt
     }
 
     #[Override]
-    public function isRefreshTokenRevoked($tokenId): bool
+    public function isRefreshTokenRevoked(string $tokenId): bool
     {
         return !$this->exists($tokenId);
     }

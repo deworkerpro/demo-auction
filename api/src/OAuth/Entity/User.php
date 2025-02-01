@@ -10,10 +10,14 @@ use Webmozart\Assert\Assert;
 
 final readonly class User implements UserEntityInterface
 {
+    /**
+     * @var non-empty-string
+     */
     private string $identifier;
 
     public function __construct(string $identifier)
     {
+        Assert::notEmpty($identifier);
         Assert::uuid($identifier);
 
         $this->identifier = $identifier;

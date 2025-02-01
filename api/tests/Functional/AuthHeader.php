@@ -14,6 +14,10 @@ use function App\env;
 
 final class AuthHeader
 {
+    /**
+     * @param non-empty-string $userId
+     * @param non-empty-string $role
+     */
     public static function for(string $userId, string $role): string
     {
         $generator = new AccessTokenGenerator(env('JWT_PRIVATE_KEY_PATH'));

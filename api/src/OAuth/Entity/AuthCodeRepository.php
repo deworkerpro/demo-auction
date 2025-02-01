@@ -40,7 +40,7 @@ final readonly class AuthCodeRepository implements AuthCodeRepositoryInterface
     }
 
     #[Override]
-    public function revokeAuthCode($codeId): void
+    public function revokeAuthCode(string $codeId): void
     {
         if ($code = $this->repo->find($codeId)) {
             $this->em->remove($code);
@@ -49,7 +49,7 @@ final readonly class AuthCodeRepository implements AuthCodeRepositoryInterface
     }
 
     #[Override]
-    public function isAuthCodeRevoked($codeId): bool
+    public function isAuthCodeRevoked(string $codeId): bool
     {
         return !$this->exists($codeId);
     }

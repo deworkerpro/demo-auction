@@ -78,9 +78,9 @@ final class E2ETokenCommand extends Command
         $clientId = $input->getArgument('client-id');
         /** @var string $scopes */
         $scopes = $input->getArgument('scopes');
-        /** @var string $userId */
+        /** @var non-empty-string $userId */
         $userId = $input->getArgument('user-id');
-        /** @var string $role */
+        /** @var non-empty-string $role */
         $role = $input->getArgument('role');
 
         $client = $this->clients->getClientEntity($clientId);

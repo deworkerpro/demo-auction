@@ -15,7 +15,7 @@ final readonly class ClientRepository implements ClientRepositoryInterface
     public function __construct(private array $clients) {}
 
     #[Override]
-    public function getClientEntity($clientIdentifier): ?Client
+    public function getClientEntity(string $clientIdentifier): ?Client
     {
         foreach ($this->clients as $client) {
             if ($client->getIdentifier() === $clientIdentifier) {
@@ -27,7 +27,7 @@ final readonly class ClientRepository implements ClientRepositoryInterface
     }
 
     #[Override]
-    public function validateClient($clientIdentifier, $clientSecret, $grantType): bool
+    public function validateClient(string $clientIdentifier, ?string $clientSecret, ?string $grantType): bool
     {
         $client = $this->getClientEntity($clientIdentifier);
 
@@ -35,7 +35,7 @@ final readonly class ClientRepository implements ClientRepositoryInterface
             return false;
         }
 
-        if ($clientSecret !== null) {
+        if ($clientSecret !== null && $clientSecret !== '') {
             return false;
         }
 

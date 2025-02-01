@@ -29,9 +29,10 @@ final readonly class ScopeRepository implements ScopeRepositoryInterface
     #[Override]
     public function finalizeScopes(
         array $scopes,
-        $grantType,
+        string $grantType,
         ClientEntityInterface $clientEntity,
-        $userIdentifier = null
+        ?string $userIdentifier = null,
+        ?string $authCodeId = null
     ): array {
         return $scopes;
     }
