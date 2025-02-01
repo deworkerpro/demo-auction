@@ -164,7 +164,7 @@ services:
             - oauth_mailru_client_secret
 
     api-postgres:
-        image: postgres:13.3-alpine3.14
+        image: postgres:17.4-alpine3.21
         environment:
             POSTGRES_USER: app
             POSTGRES_PASSWORD_FILE: /run/secrets/api_db_password
