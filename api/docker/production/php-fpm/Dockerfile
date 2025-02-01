@@ -1,6 +1,6 @@
 FROM php:8.3-cli-alpine3.20 AS builder
 
-RUN apk add --no-cache postgresql-dev \
+RUN apk add --no-cache libpq-dev \
     && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
     && docker-php-ext-install pdo_pgsql opcache
 
@@ -19,7 +19,7 @@ RUN composer install --no-dev --prefer-dist --no-progress --no-suggest --optimiz
 
 FROM php:8.3-fpm-alpine3.20
 
-RUN apk add --no-cache postgresql-dev fcgi \
+RUN apk add --no-cache libpq-dev fcgi \
     && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
     && docker-php-ext-install pdo_pgsql opcache
 
