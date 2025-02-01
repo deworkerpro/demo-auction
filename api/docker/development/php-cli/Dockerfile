@@ -1,4 +1,4 @@
-FROM php:8.3-cli-alpine3.19
+FROM php:8.3-cli-alpine3.20
 
 ENV XDEBUG_VERSION 3.3.1
 
