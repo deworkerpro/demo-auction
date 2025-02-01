@@ -15,7 +15,7 @@ final class StaticRouteGroupTest extends TestCase
 {
     public function testSuccess(): void
     {
-        $collector = $this->createStub(RouteCollectorProxy::class);
+        $collector = self::createStub(RouteCollectorProxy::class);
 
         $callable = static fn (RouteCollectorProxy $collector): RouteCollectorProxy => $collector;
 

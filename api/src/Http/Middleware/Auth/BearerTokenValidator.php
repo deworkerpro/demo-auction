@@ -98,11 +98,11 @@ final class BearerTokenValidator implements AuthorizationValidatorInterface
         $this->jwtConfiguration = Configuration::forSymmetricSigner(
             new Sha256(),
             InMemory::plainText('empty', 'empty')
-        );
-
-        $clock = new SystemClock(new DateTimeZone(date_default_timezone_get()));
-        $this->jwtConfiguration->setValidationConstraints(
-            new LooseValidAt($clock, $this->jwtValidAtDateLeeway),
+        )->withValidationConstraints(
+            new LooseValidAt(
+                new SystemClock(new DateTimeZone(date_default_timezone_get())),
+                $this->jwtValidAtDateLeeway
+            ),
             new SignedWith(
                 new Sha256(),
                 InMemory::plainText(

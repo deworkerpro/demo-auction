@@ -30,7 +30,7 @@ final class FeaturesMiddlewareTest extends TestCase
 
         $request = self::createRequest();
 
-        $handler = $this->createStub(RequestHandlerInterface::class);
+        $handler = self::createStub(RequestHandlerInterface::class);
         $handler->method('handle')->willReturn($source = self::createResponse());
 
         $response = $middleware->process($request, $handler);
@@ -64,7 +64,7 @@ final class FeaturesMiddlewareTest extends TestCase
             ->withHeader('X-Features', 'ONE, TWO, !THREE, FOUR')
             ->withCookieParams(['features' => 'ONE, THREE, !FOUR']);
 
-        $handler = $this->createStub(RequestHandlerInterface::class);
+        $handler = self::createStub(RequestHandlerInterface::class);
         $handler->method('handle')->willReturn($source = self::createResponse());
 
         $response = $middleware->process($request, $handler);

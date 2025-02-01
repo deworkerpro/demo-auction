@@ -9,6 +9,9 @@ use Doctrine\Common\DataFixtures\Loader;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\ORM\EntityManagerInterface;
 use Override;
+use Psr\Log\LoggerInterface;
+use Psr\Log\LoggerTrait;
+use Stringable;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -44,8 +47,18 @@ final class FixturesLoadCommand extends Command
 
         $executor = new ORMExecutor($this->em, new ORMPurger());
 
-        $executor->setLogger(static function (string $message) use ($output): void {
-            $output->writeln($message);
+        /**
+         * @psalm-suppress InternalMethod
+         */
+        $executor->setLogger(new readonly class($output) implements LoggerInterface {
+            use LoggerTrait;
+
+            public function __construct(private OutputInterface $output) {}
+
+            public function log($level, string|Stringable $message, array $context = []): void
+            {
+                $this->output->writeln((string)$message);
+            }
         });
 
         $executor->execute($loader->getFixtures());

@@ -55,6 +55,9 @@
         "roave/security-advisories": "dev-latest",
         "vimeo/psalm": "^5.23"
     },
+    "conflict": {
+        "phpstan/phpdoc-parser": ">=2.0"
+    },
     "replace": {
         "symfony/polyfill-mbstring": "*",
         "symfony/polyfill-php70": "*",

@@ -28,7 +28,7 @@ final class DenormalizationExceptionHandlerTest extends TestCase
     {
         $middleware = new DenormalizationExceptionHandler();
 
-        $handler = $this->createStub(RequestHandlerInterface::class);
+        $handler = self::createStub(RequestHandlerInterface::class);
         $handler->method('handle')->willReturn($source = self::createResponse());
 
         $response = $middleware->process(self::createRequest(), $handler);
@@ -40,7 +40,7 @@ final class DenormalizationExceptionHandlerTest extends TestCase
     {
         $middleware = new DenormalizationExceptionHandler();
 
-        $handler = $this->createStub(RequestHandlerInterface::class);
+        $handler = self::createStub(RequestHandlerInterface::class);
         $handler->method('handle')->willThrowException(
             new PartialDenormalizationException(
                 ['name' => 42, 'age' => 'John'],
@@ -73,7 +73,7 @@ final class DenormalizationExceptionHandlerTest extends TestCase
     {
         $middleware = new DenormalizationExceptionHandler();
 
-        $handler = $this->createStub(RequestHandlerInterface::class);
+        $handler = self::createStub(RequestHandlerInterface::class);
         $handler->method('handle')->willThrowException(
             NotNormalizableValueException::createForUnexpectedDataType('Error', 42, ['string'], 'name')
         );
@@ -94,7 +94,7 @@ final class DenormalizationExceptionHandlerTest extends TestCase
     {
         $middleware = new DenormalizationExceptionHandler();
 
-        $handler = $this->createStub(RequestHandlerInterface::class);
+        $handler = self::createStub(RequestHandlerInterface::class);
         $handler->method('handle')->willThrowException(
             new ExtraAttributesException(['age'])
         );

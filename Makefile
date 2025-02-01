@@ -10,7 +10,7 @@ check: api-check frontend-check cucumber-check test-e2e
 test-smoke: api-fixtures cucumber-clear cucumber-smoke
 test-e2e: api-fixtures cucumber-clear cucumber-e2e
 
-update-deps: api-composer-update frontend-yarn-upgrade cucumber-yarn-upgrade restart
+update-deps: api-deps-update frontend-deps-update cucumber-deps-update restart
 
 docker-up:
 	docker compose up -d
@@ -30,15 +30,15 @@ docker-build:
 api-clear:
 	docker run --rm -v ${PWD}/api:/app -w /app alpine:3.21 sh -c 'rm -rf var/cache/* var/log/* var/test/*'
 
-api-init: api-permissions api-composer-install api-wait-db api-migrations api-fixtures
+api-init: api-permissions api-deps-install api-wait-db api-migrations api-fixtures
 
 api-permissions:
 	docker run --rm -v ${PWD}/api:/app -w /app alpine:3.21 chmod 777 var/cache var/log var/test
 
-api-composer-install:
+api-deps-install:
 	docker compose run --rm api-php-cli composer install
 
-api-composer-update:
+api-deps-update:
 	docker compose run --rm api-php-cli composer update
 
 api-wait-db:
@@ -95,12 +95,12 @@ api-test-functional-coverage:
 frontend-clear:
 	docker run --rm -v ${PWD}/frontend:/app -w /app alpine:3.21 sh -c 'rm -rf .ready build'
 
-frontend-init: frontend-yarn-install
+frontend-init: frontend-deps-install
 
-frontend-yarn-install:
+frontend-deps-install:
 	docker compose run --rm frontend-node-cli yarn install
 
-frontend-yarn-upgrade:
+frontend-deps-update:
 	docker compose run --rm frontend-node-cli yarn upgrade
 
 frontend-ready:
@@ -129,12 +129,12 @@ frontend-test-watch:
 cucumber-clear:
 	docker run --rm -v ${PWD}/cucumber:/app -w /app alpine:3.21 sh -c 'rm -rf var/*'
 
-cucumber-init: cucumber-yarn-install
+cucumber-init: cucumber-deps-install
 
-cucumber-yarn-install:
+cucumber-deps-install:
 	docker compose run --rm cucumber-node-cli yarn install
 
-cucumber-yarn-upgrade:
+cucumber-deps-update:
 	docker compose run --rm cucumber-node-cli yarn upgrade
 
 cucumber-check: cucumber-lint cucumber-ts-check

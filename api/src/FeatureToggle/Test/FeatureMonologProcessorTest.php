@@ -18,7 +18,7 @@ final class FeatureMonologProcessorTest extends TestCase
 {
     public function testProcess(): void
     {
-        $context = $this->createStub(FeaturesContext::class);
+        $context = self::createStub(FeaturesContext::class);
         $context->method('getAllEnabled')->willReturn($source = ['ONE', 'TWO']);
 
         $processor = new FeaturesMonologProcessor($context);

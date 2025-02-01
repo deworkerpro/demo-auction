@@ -10,7 +10,6 @@ use Rector\Config\RectorConfig;
 use Rector\Doctrine\Set\DoctrineSetList;
 use Rector\Php80\Rector\Class_\ClassPropertyAssignToConstructorPromotionRector;
 use Rector\Php81\Rector\FuncCall\NullToStrictStringFuncCallArgRector;
-use Rector\PHPUnit\CodeQuality\Rector\Class_\AddSeeTestAnnotationRector;
 use Rector\PHPUnit\CodeQuality\Rector\Class_\PreferPHPUnitThisCallRector;
 use Rector\PHPUnit\CodeQuality\Rector\Class_\YieldDataProviderRector;
 use Rector\PHPUnit\Set\PHPUnitSetList;
@@ -43,7 +42,6 @@ return RectorConfig::configure()
         NullToStrictStringFuncCallArgRector::class,
 
         PreferPHPUnitThisCallRector::class,
-        AddSeeTestAnnotationRector::class,
         YieldDataProviderRector::class,
     ])
     ->withRules([

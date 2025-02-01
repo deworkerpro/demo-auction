@@ -27,7 +27,7 @@ final class TranslatorLocaleTest extends TestCase
 
         $middleware = new TranslatorLocale($translator, ['en', 'ru']);
 
-        $handler = $this->createStub(RequestHandlerInterface::class);
+        $handler = self::createStub(RequestHandlerInterface::class);
         $handler->method('handle')->willReturn($source = self::createResponse());
 
         $response = $middleware->process(self::createRequest(), $handler);
@@ -42,7 +42,7 @@ final class TranslatorLocaleTest extends TestCase
 
         $middleware = new TranslatorLocale($translator, ['en', 'ru']);
 
-        $handler = $this->createStub(RequestHandlerInterface::class);
+        $handler = self::createStub(RequestHandlerInterface::class);
         $handler->method('handle')->willReturn(self::createResponse());
 
         $request = self::createRequest()->withHeader('Accept-Language', 'ru');
@@ -57,7 +57,7 @@ final class TranslatorLocaleTest extends TestCase
 
         $middleware = new TranslatorLocale($translator, ['en', 'fr', 'ru']);
 
-        $handler = $this->createStub(RequestHandlerInterface::class);
+        $handler = self::createStub(RequestHandlerInterface::class);
         $handler->method('handle')->willReturn(self::createResponse());
 
         $request = self::createRequest()->withHeader('Accept-Language', 'es;q=0.9, ru;q=0.8, *;q=0.5');
@@ -72,7 +72,7 @@ final class TranslatorLocaleTest extends TestCase
 
         $middleware = new TranslatorLocale($translator, ['en', 'ru']);
 
-        $handler = $this->createStub(RequestHandlerInterface::class);
+        $handler = self::createStub(RequestHandlerInterface::class);
         $handler->method('handle')->willReturn(self::createResponse());
 
         $request = self::createRequest()->withHeader('Accept-Language', 'es');

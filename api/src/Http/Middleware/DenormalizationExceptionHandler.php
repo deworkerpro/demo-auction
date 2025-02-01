@@ -51,7 +51,7 @@ final class DenormalizationExceptionHandler implements MiddlewareInterface
 
     private static function errorToViolation(NotNormalizableValueException $exception): ConstraintViolation
     {
-        $message = sprintf(
+        $message = \sprintf(
             'The type must be one of "%s" ("%s" given).',
             implode(', ', (array)$exception->getExpectedTypes()),
             (string)$exception->getCurrentType()

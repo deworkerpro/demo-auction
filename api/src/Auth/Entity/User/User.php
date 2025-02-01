@@ -49,7 +49,7 @@ final class User
     private Role $role;
 
     /**
-     * @var Collection<array-key,UserNetwork>
+     * @var Collection<int, UserNetwork>
      */
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: UserNetwork::class, cascade: ['all'], orphanRemoval: true)]
     private Collection $networks;

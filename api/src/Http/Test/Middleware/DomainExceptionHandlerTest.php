@@ -25,11 +25,11 @@ final class DomainExceptionHandlerTest extends TestCase
         $logger = $this->createMock(LoggerInterface::class);
         $logger->expects(self::never())->method('warning');
 
-        $translator = $this->createStub(TranslatorInterface::class);
+        $translator = self::createStub(TranslatorInterface::class);
 
         $middleware = new DomainExceptionHandler($logger, $translator);
 
-        $handler = $this->createStub(RequestHandlerInterface::class);
+        $handler = self::createStub(RequestHandlerInterface::class);
         $handler->method('handle')->willReturn($source = (new ResponseFactory())->createResponse());
 
         $request = (new ServerRequestFactory())->createServerRequest('POST', 'http://test');
@@ -50,7 +50,7 @@ final class DomainExceptionHandlerTest extends TestCase
 
         $middleware = new DomainExceptionHandler($logger, $translator);
 
-        $handler = $this->createStub(RequestHandlerInterface::class);
+        $handler = self::createStub(RequestHandlerInterface::class);
         $handler->method('handle')->willThrowException(new DomainException('Some error.'));
 
         $request = (new ServerRequestFactory())->createServerRequest('POST', 'http://test');

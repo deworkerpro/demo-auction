@@ -42,7 +42,7 @@ final class DenormalizerTest extends TestCase
 
     public function testNotValid(): void
     {
-        $origin = $this->createStub(DenormalizerInterface::class);
+        $origin = self::createStub(DenormalizerInterface::class);
         $origin->method('denormalize')->willThrowException(
             $exception = new PartialDenormalizationException([], [])
         );

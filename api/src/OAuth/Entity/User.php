@@ -8,9 +8,9 @@ use League\OAuth2\Server\Entities\UserEntityInterface;
 use Override;
 use Webmozart\Assert\Assert;
 
-final class User implements UserEntityInterface
+final readonly class User implements UserEntityInterface
 {
-    private readonly string $identifier;
+    private string $identifier;
 
     public function __construct(string $identifier)
     {

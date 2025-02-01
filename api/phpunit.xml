@@ -4,7 +4,6 @@
          bootstrap="tests/bootstrap.php"
          executionOrder="depends,defects"
          beStrictAboutOutputDuringTests="true"
-         beStrictAboutTodoAnnotatedTests="true"
          cacheDirectory="var/cache/.phpunit">
     <testsuites>
         <testsuite name="unit">
