@@ -13,8 +13,8 @@
         }
     },
     "require": {
-        "php": "^8.3",
-        "ext-mbstring": "^8.3",
+        "php": "^8.4",
+        "ext-mbstring": "^8.4",
         "dflydev/fig-cookies": "^3.1",
         "doctrine/annotations": "^2.0",
         "doctrine/migrations": "^3.0",
@@ -64,7 +64,8 @@
         "symfony/polyfill-php80": "*",
         "symfony/polyfill-php81": "*",
         "symfony/polyfill-php82": "*",
-        "symfony/polyfill-php83": "*"
+        "symfony/polyfill-php83": "*",
+        "symfony/polyfill-php84": "*"
     },
     "autoload": {
         "files": [

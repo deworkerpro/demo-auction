@@ -115,6 +115,8 @@ services:
             context: api/docker
             dockerfile: development/php-cli/Dockerfile
         environment:
+            # TODO Remove after PHP 8.4 support
+            PHP_CS_FIXER_IGNORE_ENV: 1
             APP_ENV: dev
             APP_DEBUG: 1
             DB_HOST: api-postgres

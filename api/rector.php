@@ -26,7 +26,7 @@ return RectorConfig::configure()
         __DIR__ . '/translations',
         __DIR__ . '/rector',
     ])
-    ->withPhpSets(php83: true)
+    ->withPhpSets(php84: true)
     ->withSets([
         DoctrineSetList::DOCTRINE_DBAL_40,
         DoctrineSetList::DOCTRINE_ORM_300,
