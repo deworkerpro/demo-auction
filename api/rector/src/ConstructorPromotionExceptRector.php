@@ -15,7 +15,6 @@ use Rector\Contract\Rector\ConfigurableRectorInterface;
 use Rector\Php80\Rector\Class_\ClassPropertyAssignToConstructorPromotionRector;
 use Rector\Rector\AbstractRector;
 use Rector\ValueObject\MethodName;
-use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 /**
  * @psalm-suppress PropertyNotSetInConstructor
@@ -42,12 +41,6 @@ final class ConstructorPromotionExceptRector extends AbstractRector implements C
          * } $configuration
          */
         $this->exceptClassAttributes = $configuration[self::EXCEPT_CLASS_ATTRIBUTES] ?? [];
-    }
-
-    #[Override]
-    public function getRuleDefinition(): RuleDefinition
-    {
-        return new RuleDefinition('Constructor promotion.', []);
     }
 
     #[Override]

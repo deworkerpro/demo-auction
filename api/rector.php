@@ -29,7 +29,7 @@ return RectorConfig::configure()
     ->withPhpSets(php83: true)
     ->withSets([
         DoctrineSetList::DOCTRINE_DBAL_40,
-        DoctrineSetList::DOCTRINE_ORM_214,
+        DoctrineSetList::DOCTRINE_ORM_300,
         DoctrineSetList::ANNOTATIONS_TO_ATTRIBUTES,
         DoctrineSetList::DOCTRINE_CODE_QUALITY,
 
