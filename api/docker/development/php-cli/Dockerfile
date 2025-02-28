@@ -19,7 +19,10 @@ RUN chmod 555 /usr/local/bin/wait-for-it
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/bin --filename=composer --version=2.9.1 --quiet
 
-RUN addgroup -g 1000 app && adduser -u 1000 -G app -s /bin/sh -D app
+ARG UID=1000
+ARG GID=1000
+
+RUN addgroup -g "${GID}" app && adduser -u "${UID}" -G app -s /bin/sh -D app
 
 WORKDIR /app
 
