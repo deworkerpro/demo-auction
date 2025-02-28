@@ -55,7 +55,7 @@ services:
             replicas: 2
             update_config:
                 parallelism: 1
-                delay: 5s
+                delay: 10s
 
     api-php-fpm:
         image: ${REGISTRY}/auction-api-php-fpm:${IMAGE_TAG}
@@ -101,7 +101,7 @@ services:
             replicas: 2
             update_config:
                 parallelism: 1
-                delay: 5s
+                delay: 10s
 
     api-migration:
         image: ${REGISTRY}/auction-api-php-cli:${IMAGE_TAG}
