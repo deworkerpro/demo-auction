@@ -188,20 +188,20 @@ testing-build-cucumber:
 	docker --log-level=debug build --pull --file=cucumber/docker/testing/node/Dockerfile --tag=${REGISTRY}/auction-cucumber-node-cli:${IMAGE_TAG} cucumber
 
 testing-init:
-	COMPOSE_PROJECT_NAME=testing docker compose -f docker-compose-testing.yml up -d
-	COMPOSE_PROJECT_NAME=testing docker compose -f docker-compose-testing.yml run --rm api-php-cli wait-for-it api-postgres:5432 -t 60
-	COMPOSE_PROJECT_NAME=testing docker compose -f docker-compose-testing.yml run --rm api-php-cli php bin/app.php migrations:migrate --no-interaction
-	COMPOSE_PROJECT_NAME=testing docker compose -f docker-compose-testing.yml run --rm testing-api-php-cli php bin/app.php fixtures:load --no-interaction
+	COMPOSE_PROJECT_NAME=testing docker compose -f compose-testing.yml up -d
+	COMPOSE_PROJECT_NAME=testing docker compose -f compose-testing.yml run --rm api-php-cli wait-for-it api-postgres:5432 -t 60
+	COMPOSE_PROJECT_NAME=testing docker compose -f compose-testing.yml run --rm api-php-cli php bin/app.php migrations:migrate --no-interaction
+	COMPOSE_PROJECT_NAME=testing docker compose -f compose-testing.yml run --rm testing-api-php-cli php bin/app.php fixtures:load --no-interaction
 	sleep 15
 
 testing-smoke:
-	COMPOSE_PROJECT_NAME=testing docker compose -f docker-compose-testing.yml run --rm cucumber-node-cli yarn smoke-ci
+	COMPOSE_PROJECT_NAME=testing docker compose -f compose-testing.yml run --rm cucumber-node-cli yarn smoke-ci
 
 testing-e2e:
-	COMPOSE_PROJECT_NAME=testing docker compose -f docker-compose-testing.yml run --rm cucumber-node-cli yarn e2e-ci
+	COMPOSE_PROJECT_NAME=testing docker compose -f compose-testing.yml run --rm cucumber-node-cli yarn e2e-ci
 
 testing-down-clear:
-	COMPOSE_PROJECT_NAME=testing docker compose -f docker-compose-testing.yml down --volumes --remove-orphans
+	COMPOSE_PROJECT_NAME=testing docker compose -f compose-testing.yml down --volumes --remove-orphans
 
 try-testing: try-build try-testing-build try-testing-init try-testing-smoke try-testing-e2e try-testing-down-clear
 
@@ -227,9 +227,9 @@ deploy:
 	ssh -o StrictHostKeyChecking=no deploy@${HOST} -p ${PORT} 'docker network create --driver=overlay traefik-public || true'
 	ssh -o StrictHostKeyChecking=no deploy@${HOST} -p ${PORT} 'rm -rf site_${BUILD_NUMBER} && mkdir site_${BUILD_NUMBER}'
 
-	envsubst < docker-compose-production.yml > docker-compose-production-env.yml
-	scp -o StrictHostKeyChecking=no -P ${PORT} docker-compose-production-env.yml deploy@${HOST}:site_${BUILD_NUMBER}/docker-compose.yml
-	rm -f docker-compose-production-env.yml
+	envsubst < compose-production.yml > compose-production-env.yml
+	scp -o StrictHostKeyChecking=no -P ${PORT} compose-production-env.yml deploy@${HOST}:site_${BUILD_NUMBER}/compose.yml
+	rm -f compose-production-env.yml
 
 	ssh -o StrictHostKeyChecking=no deploy@${HOST} -p ${PORT} 'mkdir site_${BUILD_NUMBER}/secrets'
 	scp -o StrictHostKeyChecking=no -P ${PORT} ${API_DB_PASSWORD_FILE} deploy@${HOST}:site_${BUILD_NUMBER}/secrets/api_db_password
@@ -242,10 +242,10 @@ deploy:
 	scp -o StrictHostKeyChecking=no -P ${PORT} ${OAUTH_MAILRU_CLIENT_SECRET_FILE} deploy@${HOST}:site_${BUILD_NUMBER}/secrets/oauth_mailru_client_secret
 	scp -o StrictHostKeyChecking=no -P ${PORT} ${BACKUP_AWS_SECRET_ACCESS_KEY_FILE} deploy@${HOST}:site_${BUILD_NUMBER}/secrets/backup_aws_secret_access_key
 
-	ssh -o StrictHostKeyChecking=no deploy@${HOST} -p ${PORT} 'cd site_${BUILD_NUMBER} && docker stack deploy --compose-file docker-compose.yml auction --with-registry-auth --prune'
+	ssh -o StrictHostKeyChecking=no deploy@${HOST} -p ${PORT} 'cd site_${BUILD_NUMBER} && docker stack deploy --compose-file compose.yml auction --with-registry-auth --prune'
 
 deploy-clean:
-	rm -f docker-compose-production-env.yml
+	rm -f compose-production-env.yml
 
 rollback:
-	ssh -o StrictHostKeyChecking=no deploy@${HOST} -p ${PORT} 'cd site_${BUILD_NUMBER} && docker stack deploy --compose-file docker-compose.yml auction --with-registry-auth --prune'
+	ssh -o StrictHostKeyChecking=no deploy@${HOST} -p ${PORT} 'cd site_${BUILD_NUMBER} && docker stack deploy --compose-file compose.yml auction --with-registry-auth --prune'
