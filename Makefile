@@ -224,28 +224,28 @@ validate-jenkins:
 	curl --user ${USER} -X POST -F "jenkinsfile=<Jenkinsfile" ${HOST}/pipeline-model-converter/validate
 
 deploy:
-	ssh -o StrictHostKeyChecking=no deploy@${HOST} -p ${PORT} 'docker network create --driver=overlay traefik-public || true'
-	ssh -o StrictHostKeyChecking=no deploy@${HOST} -p ${PORT} 'rm -rf site_${BUILD_NUMBER} && mkdir site_${BUILD_NUMBER}'
+	ssh deploy@${HOST} -p ${PORT} 'docker network create --driver=overlay traefik-public || true'
+	ssh deploy@${HOST} -p ${PORT} 'rm -rf site_${BUILD_NUMBER} && mkdir site_${BUILD_NUMBER}'
 
 	envsubst < compose-production.yml > compose-production-env.yml
-	scp -o StrictHostKeyChecking=no -P ${PORT} compose-production-env.yml deploy@${HOST}:site_${BUILD_NUMBER}/compose.yml
+	scp -P ${PORT} compose-production-env.yml deploy@${HOST}:site_${BUILD_NUMBER}/compose.yml
 	rm -f compose-production-env.yml
 
-	ssh -o StrictHostKeyChecking=no deploy@${HOST} -p ${PORT} 'mkdir site_${BUILD_NUMBER}/secrets'
-	scp -o StrictHostKeyChecking=no -P ${PORT} ${API_DB_PASSWORD_FILE} deploy@${HOST}:site_${BUILD_NUMBER}/secrets/api_db_password
-	scp -o StrictHostKeyChecking=no -P ${PORT} ${API_MAILER_PASSWORD_FILE} deploy@${HOST}:site_${BUILD_NUMBER}/secrets/api_mailer_password
-	scp -o StrictHostKeyChecking=no -P ${PORT} ${SENTRY_DSN_FILE} deploy@${HOST}:site_${BUILD_NUMBER}/secrets/sentry_dsn
-	scp -o StrictHostKeyChecking=no -P ${PORT} ${JWT_ENCRYPTION_KEY_FILE} deploy@${HOST}:site_${BUILD_NUMBER}/secrets/jwt_encryption_key
-	scp -o StrictHostKeyChecking=no -P ${PORT} ${JWT_PUBLIC_KEY_FILE} deploy@${HOST}:site_${BUILD_NUMBER}/secrets/jwt_public_key
-	scp -o StrictHostKeyChecking=no -P ${PORT} ${JWT_PRIVATE_KEY_FILE} deploy@${HOST}:site_${BUILD_NUMBER}/secrets/jwt_private_key
-	scp -o StrictHostKeyChecking=no -P ${PORT} ${OAUTH_YANDEX_CLIENT_SECRET_FILE} deploy@${HOST}:site_${BUILD_NUMBER}/secrets/oauth_yandex_client_secret
-	scp -o StrictHostKeyChecking=no -P ${PORT} ${OAUTH_MAILRU_CLIENT_SECRET_FILE} deploy@${HOST}:site_${BUILD_NUMBER}/secrets/oauth_mailru_client_secret
-	scp -o StrictHostKeyChecking=no -P ${PORT} ${BACKUP_AWS_SECRET_ACCESS_KEY_FILE} deploy@${HOST}:site_${BUILD_NUMBER}/secrets/backup_aws_secret_access_key
+	ssh deploy@${HOST} -p ${PORT} 'mkdir site_${BUILD_NUMBER}/secrets'
+	scp -P ${PORT} ${API_DB_PASSWORD_FILE} deploy@${HOST}:site_${BUILD_NUMBER}/secrets/api_db_password
+	scp -P ${PORT} ${API_MAILER_PASSWORD_FILE} deploy@${HOST}:site_${BUILD_NUMBER}/secrets/api_mailer_password
+	scp -P ${PORT} ${SENTRY_DSN_FILE} deploy@${HOST}:site_${BUILD_NUMBER}/secrets/sentry_dsn
+	scp -P ${PORT} ${JWT_ENCRYPTION_KEY_FILE} deploy@${HOST}:site_${BUILD_NUMBER}/secrets/jwt_encryption_key
+	scp -P ${PORT} ${JWT_PUBLIC_KEY_FILE} deploy@${HOST}:site_${BUILD_NUMBER}/secrets/jwt_public_key
+	scp -P ${PORT} ${JWT_PRIVATE_KEY_FILE} deploy@${HOST}:site_${BUILD_NUMBER}/secrets/jwt_private_key
+	scp -P ${PORT} ${OAUTH_YANDEX_CLIENT_SECRET_FILE} deploy@${HOST}:site_${BUILD_NUMBER}/secrets/oauth_yandex_client_secret
+	scp -P ${PORT} ${OAUTH_MAILRU_CLIENT_SECRET_FILE} deploy@${HOST}:site_${BUILD_NUMBER}/secrets/oauth_mailru_client_secret
+	scp -P ${PORT} ${BACKUP_AWS_SECRET_ACCESS_KEY_FILE} deploy@${HOST}:site_${BUILD_NUMBER}/secrets/backup_aws_secret_access_key
 
-	ssh -o StrictHostKeyChecking=no deploy@${HOST} -p ${PORT} 'cd site_${BUILD_NUMBER} && docker stack deploy --compose-file compose.yml auction --with-registry-auth --prune'
+	ssh deploy@${HOST} -p ${PORT} 'cd site_${BUILD_NUMBER} && docker stack deploy --compose-file compose.yml auction --with-registry-auth --prune'
 
 deploy-clean:
 	rm -f compose-production-env.yml
 
 rollback:
-	ssh -o StrictHostKeyChecking=no deploy@${HOST} -p ${PORT} 'cd site_${BUILD_NUMBER} && docker stack deploy --compose-file compose.yml auction --with-registry-auth --prune'
+	ssh deploy@${HOST} -p ${PORT} 'cd site_${BUILD_NUMBER} && docker stack deploy --compose-file compose.yml auction --with-registry-auth --prune'
