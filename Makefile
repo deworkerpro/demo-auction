@@ -104,7 +104,7 @@ frontend-deps-update:
 	docker compose run --rm frontend-node-cli yarn upgrade
 
 frontend-ready:
-	docker run --rm --volume "${PWD}/frontend":/app --workdir /app alpine:3.23 touch .ready
+	docker run --rm --volume "${PWD}/frontend":/app --workdir /app --user 1000:1000 alpine:3.23 touch .ready
 
 frontend-check: frontend-lint frontend-ts-check frontend-test
 
