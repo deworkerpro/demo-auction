@@ -18,7 +18,7 @@ final class AttachNetworkTest extends TestCase
 {
     public function testWait(): void
     {
-        $user = (new UserBuilder())
+        $user = new UserBuilder()
             ->build();
 
         $network = new Network('vk', '0000001');
@@ -33,7 +33,7 @@ final class AttachNetworkTest extends TestCase
 
     public function testActive(): void
     {
-        $user = (new UserBuilder())
+        $user = new UserBuilder()
             ->active()
             ->build();
 
@@ -46,7 +46,7 @@ final class AttachNetworkTest extends TestCase
 
     public function testAlready(): void
     {
-        $user = (new UserBuilder())
+        $user = new UserBuilder()
             ->active()
             ->build();
 

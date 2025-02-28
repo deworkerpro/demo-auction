@@ -20,7 +20,7 @@ final class AuthCodeTest extends TestCase
     {
         $code = new AuthCode();
 
-        $code->setClient($client = (new ClientBuilder())->build());
+        $code->setClient($client = new ClientBuilder()->build());
         $code->addScope($scope = new Scope('common'));
         $code->setIdentifier($identifier = Uuid::uuid4()->toString());
         $code->setUserIdentifier($userIdentifier = Uuid::uuid4()->toString());

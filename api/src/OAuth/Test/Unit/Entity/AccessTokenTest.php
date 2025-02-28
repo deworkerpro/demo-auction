@@ -22,7 +22,7 @@ final class AccessTokenTest extends TestCase
     public function testCreate(): void
     {
         $token = new AccessToken(
-            $client = (new ClientBuilder())->build(),
+            $client = new ClientBuilder()->build(),
             $scopes = [new Scope('common')]
         );
 

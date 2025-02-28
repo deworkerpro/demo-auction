@@ -18,7 +18,7 @@ final class ChangePasswordTest extends TestCase
 {
     public function testSuccess(): void
     {
-        $user = (new UserBuilder())
+        $user = new UserBuilder()
             ->active()
             ->build();
 
@@ -35,7 +35,7 @@ final class ChangePasswordTest extends TestCase
 
     public function testWrongCurrent(): void
     {
-        $user = (new UserBuilder())
+        $user = new UserBuilder()
             ->active()
             ->build();
 
@@ -51,7 +51,7 @@ final class ChangePasswordTest extends TestCase
 
     public function testByNetwork(): void
     {
-        $user = (new UserBuilder())
+        $user = new UserBuilder()
             ->viaNetwork()
             ->build();
 

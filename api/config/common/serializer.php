@@ -30,8 +30,11 @@ return [
          */
         $config = $container->get('config')['serializer'];
 
+        /**
+         * @var array<array-key, DenormalizerInterface|NormalizerInterface> $normalizers
+         */
         $normalizers = array_map(
-            static fn (string $name) => $container->get($name),
+            $container->get(...),
             $config['normalizers']
         );
 

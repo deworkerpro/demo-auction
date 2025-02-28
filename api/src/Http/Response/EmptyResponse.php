@@ -21,7 +21,7 @@ final class EmptyResponse extends Response
         parent::__construct(
             $status,
             null,
-            (new StreamFactory())->createStreamFromResource($resource)
+            new StreamFactory()->createStreamFromResource($resource)
         );
     }
 }

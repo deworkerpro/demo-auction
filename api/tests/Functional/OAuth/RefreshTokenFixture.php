@@ -19,7 +19,7 @@ final class RefreshTokenFixture extends AbstractFixture
     #[Override]
     public function load(ObjectManager $manager): void
     {
-        $user = (new UserBuilder())
+        $user = new UserBuilder()
             ->withId(new Id($id = '00000000-0000-0000-0000-000000000001'))
             ->active()
             ->build();
@@ -32,7 +32,7 @@ final class RefreshTokenFixture extends AbstractFixture
             redirectUri: 'http://localhost/oauth',
         );
 
-        $accessToken = (new AccessTokenBuilder())
+        $accessToken = new AccessTokenBuilder()
             ->withUserIdentifier($id)
             ->build($client);
 

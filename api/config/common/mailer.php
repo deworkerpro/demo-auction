@@ -35,13 +35,13 @@ return [
             $config['from']['name']
         )));
 
-        $transport = (new EsmtpTransport(
+        $transport = new EsmtpTransport(
             $config['host'],
             $config['port'],
             false,
             $dispatcher,
             $container->get(LoggerInterface::class)
-        ))
+        )
             ->setUsername($config['user'])
             ->setPassword($config['password']);
 

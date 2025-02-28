@@ -74,11 +74,11 @@ final class FeaturesMiddlewareTest extends TestCase
 
     private static function createResponse(): ResponseInterface
     {
-        return (new ResponseFactory())->createResponse();
+        return new ResponseFactory()->createResponse();
     }
 
     private static function createRequest(): ServerRequestInterface
     {
-        return (new ServerRequestFactory())->createServerRequest('GET', 'http://test');
+        return new ServerRequestFactory()->createServerRequest('GET', 'http://test');
     }
 }

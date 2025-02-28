@@ -19,7 +19,7 @@ final class AuthorizationCodeFixture extends AbstractFixture
     #[Override]
     public function load(ObjectManager $manager): void
     {
-        $user = (new UserBuilder())
+        $user = new UserBuilder()
             ->withId(new Id('00000000-0000-0000-0000-000000000001'))
             ->active()
             ->build();

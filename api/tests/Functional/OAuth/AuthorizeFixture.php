@@ -15,14 +15,14 @@ final class AuthorizeFixture extends AbstractFixture
     #[Override]
     public function load(ObjectManager $manager): void
     {
-        $user = (new UserBuilder())
+        $user = new UserBuilder()
             ->withEmail(new Email('active@app.test'))
             ->withPasswordHash('$2y$12$qwnND33o8DGWvFoepotSju7eTAQ6gzLD/zy6W8NCVtiHPbkybz.w6') // 'password'
             ->active()
             ->build();
         $manager->persist($user);
 
-        $user = (new UserBuilder())
+        $user = new UserBuilder()
             ->withEmail(new Email('wait@app.test'))
             ->withPasswordHash('$2y$12$qwnND33o8DGWvFoepotSju7eTAQ6gzLD/zy6W8NCVtiHPbkybz.w6') // 'password'
             ->build();

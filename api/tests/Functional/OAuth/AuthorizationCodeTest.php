@@ -47,7 +47,7 @@ final class AuthorizationCodeTest extends WebTestCase
             'auth_code_id' => 'def50200f204dedbb244ce4539b9e',
             'scopes' => 'common',
             'user_id' => '00000000-0000-0000-0000-000000000001',
-            'expire_time' => (new DateTimeImmutable('2300-12-31 21:00:10'))->getTimestamp(),
+            'expire_time' => new DateTimeImmutable('2300-12-31 21:00:10')->getTimestamp(),
             'code_challenge' => $challenge,
             'code_challenge_method' => 'S256',
         ];
@@ -93,7 +93,7 @@ final class AuthorizationCodeTest extends WebTestCase
             'auth_code_id' => 'def50200f204dedbb244ce4539b9e',
             'scopes' => 'common',
             'user_id' => '00000000-0000-0000-0000-000000000001',
-            'expire_time' => (new DateTimeImmutable('2300-12-31 21:00:10'))->getTimestamp(),
+            'expire_time' => new DateTimeImmutable('2300-12-31 21:00:10')->getTimestamp(),
             'code_challenge' => $challenge,
             'code_challenge_method' => 'S256',
         ];
@@ -123,7 +123,7 @@ final class AuthorizationCodeTest extends WebTestCase
             'auth_code_id' => 'def50200f204dedbb244ce4539b9e',
             'scopes' => 'common',
             'user_id' => '00000000-0000-0000-0000-000000000001',
-            'expire_time' => (new DateTimeImmutable('2300-12-31 21:00:10'))->getTimestamp(),
+            'expire_time' => new DateTimeImmutable('2300-12-31 21:00:10')->getTimestamp(),
             'code_challenge' => $challenge,
             'code_challenge_method' => 'S256',
         ];
@@ -152,7 +152,7 @@ final class AuthorizationCodeTest extends WebTestCase
             'auth_code_id' => 'def50200f204dedbb244ce4539b9e',
             'scopes' => 'common',
             'user_id' => '00000000-0000-0000-0000-000000000001',
-            'expire_time' => (new DateTimeImmutable('2300-12-31 21:00:10'))->getTimestamp(),
+            'expire_time' => new DateTimeImmutable('2300-12-31 21:00:10')->getTimestamp(),
             'code_challenge' => $challenge,
             'code_challenge_method' => 'S256',
         ];

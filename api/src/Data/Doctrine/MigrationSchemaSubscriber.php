@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Data\Doctrine;
 
 use Doctrine\Common\EventSubscriber;
+use Doctrine\DBAL\Schema\Name\UnqualifiedName;
+use Doctrine\DBAL\Schema\PrimaryKeyConstraint;
 use Doctrine\Migrations\Metadata\Storage\TableMetadataStorageConfiguration;
 use Doctrine\ORM\Tools\Event\GenerateSchemaEventArgs;
 use Doctrine\ORM\Tools\ToolEvents;
@@ -37,6 +39,8 @@ final readonly class MigrationSchemaSubscriber implements EventSubscriber
         $table->addColumn($this->configuration->getExecutedAtColumnName(), 'datetime', ['notnull' => false]);
         $table->addColumn($this->configuration->getExecutionTimeColumnName(), 'integer', ['notnull' => false]);
 
-        $table->setPrimaryKey([$this->configuration->getVersionColumnName()]);
+        $table->addPrimaryKeyConstraint(PrimaryKeyConstraint::editor()
+            ->setColumnNames(UnqualifiedName::unquoted($this->configuration->getVersionColumnName()))
+            ->create());
     }
 }
