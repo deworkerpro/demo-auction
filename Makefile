@@ -188,20 +188,20 @@ testing-build-cucumber:
 	docker --log-level=debug buildx build --pull --file=cucumber/docker/testing/node/Dockerfile --tag=${REGISTRY}/auction-cucumber-node-cli:${IMAGE_TAG} cucumber
 
 testing-init:
-	COMPOSE_PROJECT_NAME=testing docker compose -f compose-testing.yml up -d
-	COMPOSE_PROJECT_NAME=testing docker compose -f compose-testing.yml run --rm api-php-cli wait-for-it api-postgres:5432 -t 60
-	COMPOSE_PROJECT_NAME=testing docker compose -f compose-testing.yml run --rm api-php-cli php bin/app.php migrations:migrate --no-interaction
-	COMPOSE_PROJECT_NAME=testing docker compose -f compose-testing.yml run --rm testing-api-php-cli php bin/app.php fixtures:load --no-interaction
+	docker compose -f compose-testing.yml up -d
+	docker compose -f compose-testing.yml run --rm api-php-cli wait-for-it api-postgres:5432 -t 60
+	docker compose -f compose-testing.yml run --rm api-php-cli php bin/app.php migrations:migrate --no-interaction
+	docker compose -f compose-testing.yml run --rm testing-api-php-cli php bin/app.php fixtures:load --no-interaction
 	sleep 15
 
 testing-smoke:
-	COMPOSE_PROJECT_NAME=testing docker compose -f compose-testing.yml run --rm cucumber-node-cli yarn smoke-ci
+	docker compose -f compose-testing.yml run --rm cucumber-node-cli yarn smoke-ci
 
 testing-e2e:
-	COMPOSE_PROJECT_NAME=testing docker compose -f compose-testing.yml run --rm cucumber-node-cli yarn e2e-ci
+	docker compose -f compose-testing.yml run --rm cucumber-node-cli yarn e2e-ci
 
 testing-down-clear:
-	COMPOSE_PROJECT_NAME=testing docker compose -f compose-testing.yml down --volumes --remove-orphans
+	docker compose -f compose-testing.yml down --volumes --remove-orphans
 
 try-testing: try-build try-testing-build try-testing-init try-testing-smoke try-testing-e2e try-testing-down-clear
 
