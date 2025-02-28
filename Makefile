@@ -16,10 +16,10 @@ docker-up:
 	docker compose up --detach
 
 docker-down:
-	docker compose down --remove-orphans
+	docker compose down --remove-orphans --timeout=1
 
 docker-down-clear:
-	docker compose down --volumes --remove-orphans
+	docker compose down --volumes --remove-orphans --timeout=1
 
 docker-pull:
 	docker compose pull
@@ -201,7 +201,7 @@ testing-e2e:
 	COMPOSE_PROJECT_NAME=testing docker compose -f docker-compose-testing.yml run --rm cucumber-node-cli yarn e2e-ci
 
 testing-down-clear:
-	COMPOSE_PROJECT_NAME=testing docker compose -f docker-compose-testing.yml down --volumes --remove-orphans
+	COMPOSE_PROJECT_NAME=testing docker compose -f docker-compose-testing.yml down --volumes --remove-orphans --timeout=1
 
 try-testing: try-build try-testing-build try-testing-init try-testing-smoke try-testing-e2e try-testing-down-clear
 
