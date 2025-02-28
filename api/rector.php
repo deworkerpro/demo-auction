@@ -16,6 +16,7 @@ use Rector\PHPUnit\Set\PHPUnitSetList;
 use Rector\TypeDeclaration\Rector\ClassMethod\AddVoidReturnTypeWhereNoReturnRector;
 
 return RectorConfig::configure()
+    ->withParallel()
     ->withCache(__DIR__ . '/var/cache/.rector', FileCacheStorage::class)
     ->withPaths([
         __DIR__ . '/bin',
