@@ -222,6 +222,9 @@ pipeline {
             when {
                 branch 'master'
             }
+            environment {
+                TEMP_PATH = pwd(tmp: true)
+            }
             steps {
                 withCredentials([
                     usernamePassword(
@@ -271,7 +274,6 @@ pipeline {
         always {
             sh 'make docker-down-clear || true'
             sh 'make testing-down-clear || true'
-            sh 'make deploy-clean || true'
         }
         failure {
             emailext (
