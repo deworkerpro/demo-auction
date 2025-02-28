@@ -13,13 +13,13 @@ test-e2e: api-fixtures cucumber-clear cucumber-e2e
 update-deps: api-deps-update frontend-deps-update cucumber-deps-update restart
 
 docker-up:
-	docker compose up -d
+	docker compose up --detach
 
 docker-down:
 	docker compose down --remove-orphans
 
 docker-down-clear:
-	docker compose down -v --remove-orphans
+	docker compose down --volumes --remove-orphans
 
 docker-pull:
 	docker compose pull
@@ -28,12 +28,12 @@ docker-build:
 	docker compose build --pull
 
 api-clear:
-	docker run --rm -v ${PWD}/api:/app -w /app alpine:3.23 sh -c 'rm -rf var/cache/* var/log/* var/test/*'
+	docker run --rm --volume ${PWD}/api:/app --workdir /app alpine:3.23 sh -c 'rm -rf var/cache/* var/log/* var/test/*'
 
 api-init: api-permissions api-deps-install api-wait-db api-migrations api-fixtures
 
 api-permissions:
-	docker run --rm -v ${PWD}/api:/app -w /app alpine:3.23 chmod 777 var/cache var/log var/test
+	docker run --rm --volume ${PWD}/api:/app --workdir /app alpine:3.23 chmod 777 var/cache var/log var/test
 
 api-deps-install:
 	docker compose run --rm api-php-cli composer install
@@ -93,7 +93,7 @@ api-test-functional-coverage:
 	docker compose run --rm api-php-cli composer test-coverage -- --testsuite=functional
 
 frontend-clear:
-	docker run --rm -v ${PWD}/frontend:/app -w /app alpine:3.23 sh -c 'rm -rf .ready build'
+	docker run --rm --volume ${PWD}/frontend:/app --workdir /app alpine:3.23 sh -c 'rm -rf .ready build'
 
 frontend-init: frontend-deps-install
 
@@ -104,7 +104,7 @@ frontend-deps-update:
 	docker compose run --rm frontend-node-cli yarn upgrade
 
 frontend-ready:
-	docker run --rm -v ${PWD}/frontend:/app -w /app alpine:3.23 touch .ready
+	docker run --rm --volume ${PWD}/frontend:/app --workdir /app alpine:3.23 touch .ready
 
 frontend-check: frontend-lint frontend-ts-check frontend-test
 
@@ -127,7 +127,7 @@ frontend-test-watch:
 	docker compose run --rm frontend-node-cli yarn test
 
 cucumber-clear:
-	docker run --rm -v ${PWD}/cucumber:/app -w /app alpine:3.23 sh -c 'rm -rf var/*'
+	docker run --rm --volume ${PWD}/cucumber:/app --workdir /app alpine:3.23 sh -c 'rm -rf var/*'
 
 cucumber-init: cucumber-deps-install
 
@@ -201,7 +201,7 @@ testing-e2e:
 	COMPOSE_PROJECT_NAME=testing docker compose -f docker-compose-testing.yml run --rm cucumber-node-cli yarn e2e-ci
 
 testing-down-clear:
-	COMPOSE_PROJECT_NAME=testing docker compose -f docker-compose-testing.yml down -v --remove-orphans
+	COMPOSE_PROJECT_NAME=testing docker compose -f docker-compose-testing.yml down --volumes --remove-orphans
 
 try-testing: try-build try-testing-build try-testing-init try-testing-smoke try-testing-e2e try-testing-down-clear
 
