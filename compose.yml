@@ -191,7 +191,10 @@ services:
         command: sh -c 'wait-for-it api-postgres:5432 -t 20 && backup'
 
     mailer:
-        image: mailhog/mailhog
+        image: axllent/mailpit:v1.27
+        environment:
+            MP_SMTP_AUTH_ACCEPT_ANY: 1
+            MP_SMTP_AUTH_ALLOW_INSECURE: 1
         networks:
             - traefik-public
             - default
