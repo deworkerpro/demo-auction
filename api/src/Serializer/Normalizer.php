@@ -13,7 +13,7 @@ final readonly class Normalizer
         private NormalizerInterface $normalizer
     ) {}
 
-    public function normalize(mixed $object): null|array|ArrayObject|bool|float|int|string
+    public function normalize(mixed $object): array|ArrayObject|bool|float|int|string|null
     {
         return $this->normalizer->normalize($object);
     }

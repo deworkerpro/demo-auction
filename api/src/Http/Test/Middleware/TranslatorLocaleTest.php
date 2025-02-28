@@ -82,11 +82,11 @@ final class TranslatorLocaleTest extends TestCase
 
     private static function createRequest(): ServerRequestInterface
     {
-        return (new ServerRequestFactory())->createServerRequest('POST', 'http://test');
+        return new ServerRequestFactory()->createServerRequest('POST', 'http://test');
     }
 
     private static function createResponse(): ResponseInterface
     {
-        return (new ResponseFactory())->createResponse();
+        return new ResponseFactory()->createResponse();
     }
 }

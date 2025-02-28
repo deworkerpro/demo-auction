@@ -36,7 +36,7 @@ final readonly class Token implements RequestHandlerInterface
         } catch (Exception $exception) {
             $this->logger->error($exception->getMessage(), ['exception' => $exception]);
             $this->sentry->capture($exception);
-            return (new OAuthServerException($exception->getMessage(), 0, 'unknown_error', 500))
+            return new OAuthServerException($exception->getMessage(), 0, 'unknown_error', 500)
                 ->generateHttpResponse($response);
         }
     }

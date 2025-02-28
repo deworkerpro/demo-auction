@@ -20,9 +20,9 @@ final class RefreshTokenTest extends TestCase
     {
         $token = new RefreshToken();
 
-        $accessToken = (new AccessTokenBuilder())
+        $accessToken = new AccessTokenBuilder()
             ->withUserIdentifier($userIdentifier = Uuid::uuid4()->toString())
-            ->build((new ClientBuilder())->build());
+            ->build(new ClientBuilder()->build());
 
         $token->setIdentifier($identifier = Uuid::uuid4()->toString());
         $token->setExpiryDateTime($expiryDateTime = new DateTimeImmutable());

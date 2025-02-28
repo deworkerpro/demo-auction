@@ -16,7 +16,7 @@ final class RemoveTest extends TestCase
     #[DoesNotPerformAssertions]
     public function testSuccess(): void
     {
-        $user = (new UserBuilder())
+        $user = new UserBuilder()
             ->build();
 
         $user->remove();
@@ -24,7 +24,7 @@ final class RemoveTest extends TestCase
 
     public function testActive(): void
     {
-        $user = (new UserBuilder())
+        $user = new UserBuilder()
             ->active()
             ->build();
 

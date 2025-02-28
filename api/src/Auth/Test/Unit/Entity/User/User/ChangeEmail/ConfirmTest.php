@@ -21,7 +21,7 @@ final class ConfirmTest extends TestCase
 {
     public function testSuccess(): void
     {
-        $user = (new UserBuilder())->active()->build();
+        $user = new UserBuilder()->active()->build();
 
         $now = new DateTimeImmutable();
         $token = new Token(Uuid::uuid4()->toString(), $now->modify('+1 day'));
@@ -37,7 +37,7 @@ final class ConfirmTest extends TestCase
 
     public function testInvalidToken(): void
     {
-        $user = (new UserBuilder())->active()->build();
+        $user = new UserBuilder()->active()->build();
 
         $now = new DateTimeImmutable();
         $token = new Token(Uuid::uuid4()->toString(), $now->modify('+1 day'));
@@ -50,7 +50,7 @@ final class ConfirmTest extends TestCase
 
     public function testExpiredToken(): void
     {
-        $user = (new UserBuilder())->active()->build();
+        $user = new UserBuilder()->active()->build();
 
         $now = new DateTimeImmutable();
         $token = new Token(Uuid::uuid4()->toString(), $now);
@@ -63,7 +63,7 @@ final class ConfirmTest extends TestCase
 
     public function testNotRequested(): void
     {
-        $user = (new UserBuilder())->active()->build();
+        $user = new UserBuilder()->active()->build();
 
         $now = new DateTimeImmutable();
         $token = new Token(Uuid::uuid4()->toString(), $now->modify('+1 day'));

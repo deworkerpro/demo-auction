@@ -15,7 +15,7 @@ final class ChangeRoleTest extends TestCase
 {
     public function testSuccess(): void
     {
-        $user = (new UserBuilder())
+        $user = new UserBuilder()
             ->build();
 
         $user->changeRole($role = new Role(Role::ADMIN));

@@ -16,7 +16,7 @@ final readonly class JoinConfirmationSender
 
     public function send(Email $email, Token $token): void
     {
-        $message = (new MimeEmail())
+        $message = new MimeEmail()
             ->subject('Join Confirmation')
             ->to($email->getValue())
             ->html($this->twig->render('auth/join/confirm.html.twig', ['token' => $token]), 'text/html');

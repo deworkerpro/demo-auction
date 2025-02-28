@@ -27,13 +27,10 @@ return RectorConfig::configure()
         __DIR__ . '/rector',
     ])
     ->withPhpSets(php84: true)
+    ->withComposerBased(twig: true, doctrine: true, phpunit: true)
     ->withSets([
-        DoctrineSetList::DOCTRINE_DBAL_40,
-        DoctrineSetList::DOCTRINE_ORM_300,
         DoctrineSetList::ANNOTATIONS_TO_ATTRIBUTES,
         DoctrineSetList::DOCTRINE_CODE_QUALITY,
-
-        PHPUnitSetList::PHPUNIT_110,
         PHPUnitSetList::ANNOTATIONS_TO_ATTRIBUTES,
         PHPUnitSetList::PHPUNIT_CODE_QUALITY,
     ])
