@@ -1,3 +1,11 @@
+SHELL = /bin/sh
+
+UID := $(shell id --user)
+GID := $(shell id --group)
+
+export UID
+export GID
+
 init: init-ci frontend-ready
 init-ci: docker-down-clear \
 	api-clear frontend-clear cucumber-clear \
@@ -104,7 +112,7 @@ frontend-deps-update:
 	docker compose run --rm frontend-node-cli yarn upgrade
 
 frontend-ready:
-	docker run --rm --volume "${PWD}/frontend":/app --workdir /app --user 1000:1000 alpine:3.23 touch .ready
+	docker run --rm --volume "${PWD}/frontend":/app --workdir /app --user ${UID}:${GID} alpine:3.23 touch .ready
 
 frontend-check: frontend-lint frontend-ts-check frontend-test
 
@@ -185,7 +193,11 @@ testing-build-testing-api-php-cli:
 	docker --log-level=debug buildx build --pull --file=api/docker/testing/php-cli/Dockerfile --tag=${REGISTRY}/auction-testing-api-php-cli:${IMAGE_TAG} api
 
 testing-build-cucumber:
-	docker --log-level=debug buildx build --pull --file=cucumber/docker/testing/node/Dockerfile --tag=${REGISTRY}/auction-cucumber-node-cli:${IMAGE_TAG} cucumber
+	docker --log-level=debug buildx build --pull \
+		--build-arg GID=${GID} \
+		--build-arg UID=${UID} \
+		--tag=${REGISTRY}/auction-cucumber-node-cli:${IMAGE_TAG} \
+		--file=cucumber/docker/testing/node/Dockerfile cucumber
 
 testing-init:
 	docker compose -f compose-testing.yml up -d
