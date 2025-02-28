@@ -23,7 +23,7 @@ services:
                 - traefik.docker.network=traefik-public
                 - traefik.http.routers.frontend.rule=Host(`demo-auction.deworker.pro`) || Host(`www.demo-auction.deworker.pro`)
                 - traefik.http.services.frontend.loadBalancer.server.port=80
-                - traefik.http.middlewares.frontend-redirect.redirectRegex.regex=^(https?://)www.demo-auction.deworker.pro/(.*)$$
+                - traefik.http.middlewares.frontend-redirect.redirectRegex.regex=^(https?://)www\.demo-auction\.deworker\.pro/(.*)$$
                 - traefik.http.middlewares.frontend-redirect.redirectRegex.replacement=$${1}demo-auction.deworker.pro/$${2}
                 - traefik.http.middlewares.frontend-redirect.redirectRegex.permanent=true
                 - traefik.http.routers.frontend.middlewares=frontend-redirect,secure-headers
