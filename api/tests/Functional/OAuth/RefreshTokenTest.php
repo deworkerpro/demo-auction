@@ -7,8 +7,8 @@ namespace Test\Functional\OAuth;
 use App\OAuth\Entity\Scope;
 use DateTimeImmutable;
 use Defuse\Crypto\Crypto;
-use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
 use Override;
+use Test\Functional\ArraySubsetAsserts;
 use Test\Functional\Json;
 use Test\Functional\WebTestCase;
 
