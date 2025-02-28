@@ -18,8 +18,11 @@ COPY ./development/php-fpm/conf.d /usr/local/etc/php/conf.d
 
 WORKDIR /app
 
-COPY ./development/php-fpm/entrypoint.sh /usr/local/bin/docker-php-entrypoint
-RUN chmod +x /usr/local/bin/docker-php-entrypoint
+COPY ./development/php-fpm/docker-entrypoint-host.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/docker-entrypoint-host.sh
+
+ENTRYPOINT ["docker-entrypoint-host.sh", "docker-php-entrypoint"]
+CMD ["php-fpm"]
 
 HEALTHCHECK --interval=5s --timeout=3s --start-period=1s \
     CMD REDIRECT_STATUS=true SCRIPT_NAME=/ping SCRIPT_FILENAME=/ping REQUEST_METHOD=GET \
