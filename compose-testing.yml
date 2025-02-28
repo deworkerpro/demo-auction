@@ -173,7 +173,10 @@ services:
             - api_db_password
 
     mailer:
-        image: mailhog/mailhog
+        image: axllent/mailpit:v1.27
+        environment:
+            MP_SMTP_AUTH_ACCEPT_ANY: 1
+            MP_SMTP_AUTH_ALLOW_INSECURE: 1
 
     wiremock:
         image: wiremock/wiremock:3x-alpine
