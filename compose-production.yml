@@ -244,23 +244,23 @@ services:
 
 secrets:
     api_db_password:
-        file: ./secrets/api_db_password
+        file: ${API_DB_PASSWORD_FILE}
     api_mailer_password:
-        file: ./secrets/api_mailer_password
+        file: ${API_MAILER_PASSWORD_FILE}
     sentry_dsn:
-        file: ./secrets/sentry_dsn
+        file: ${SENTRY_DSN_FILE}
     jwt_encryption_key:
-        file: ./secrets/jwt_encryption_key
+        file: ${JWT_ENCRYPTION_KEY_FILE}
     jwt_public_key:
-        file: ./secrets/jwt_public_key
+        file: ${JWT_PUBLIC_KEY_FILE}
     jwt_private_key:
-        file: ./secrets/jwt_private_key
+        file: ${JWT_PRIVATE_KEY_FILE}
     oauth_yandex_client_secret:
-        file: ./secrets/oauth_yandex_client_secret
+        file: ${OAUTH_YANDEX_CLIENT_SECRET_FILE}
     oauth_mailru_client_secret:
-        file: ./secrets/oauth_mailru_client_secret
+        file: ${OAUTH_MAILRU_CLIENT_SECRET_FILE}
     backup_aws_secret_access_key:
-        file: ./secrets/backup_aws_secret_access_key
+        file: ${BACKUP_AWS_SECRET_ACCESS_KEY_FILE}
 
 volumes:
     api-postgres:
