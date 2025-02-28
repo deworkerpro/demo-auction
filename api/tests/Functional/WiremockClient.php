@@ -13,7 +13,7 @@ final readonly class WiremockClient
     public function __construct()
     {
         $this->client = new Client([
-            'base_uri' => 'http://wiremock',
+            'base_uri' => 'http://wiremock:8080',
         ]);
     }
 

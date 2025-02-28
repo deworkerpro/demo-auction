@@ -97,13 +97,13 @@ services:
             JWT_PRIVATE_KEY_PATH: /run/secrets/jwt_private_key
             OAUTH_CALLBACK_URL: http://api.localhost
             OAUTH_YANDEX_AUTH_URL: http://wiremock.localhost/oauth.yandex.ru
-            OAUTH_YANDEX_TOKEN_URL: http://wiremock/oauth.yandex.ru
-            OAUTH_YANDEX_API_URL: http://wiremock/login.yandex.ru
+            OAUTH_YANDEX_TOKEN_URL: http://wiremock:8080/oauth.yandex.ru
+            OAUTH_YANDEX_API_URL: http://wiremock:8080/login.yandex.ru
             OAUTH_YANDEX_CLIENT_ID: app
             OAUTH_YANDEX_CLIENT_SECRET_FILE: /run/secrets/oauth_yandex_client_secret
             OAUTH_MAILRU_AUTH_URL: http://wiremock.localhost/oauth.mail.ru
-            OAUTH_MAILRU_TOKEN_URL: http://wiremock/oauth.mail.ru
-            OAUTH_MAILRU_API_URL: http://wiremock/oauth.mail.ru
+            OAUTH_MAILRU_TOKEN_URL: http://wiremock:8080/oauth.mail.ru
+            OAUTH_MAILRU_API_URL: http://wiremock:8080/oauth.mail.ru
             OAUTH_MAILRU_CLIENT_ID: app
             OAUTH_MAILRU_CLIENT_SECRET_FILE: /run/secrets/oauth_mailru_client_secret
         volumes:
@@ -146,13 +146,13 @@ services:
             JWT_PRIVATE_KEY_PATH: /run/secrets/jwt_private_key
             OAUTH_CALLBACK_URL: http://api.localhost
             OAUTH_YANDEX_AUTH_URL: http://wiremock.localhost/oauth.yandex.ru
-            OAUTH_YANDEX_TOKEN_URL: http://wiremock/oauth.yandex.ru
-            OAUTH_YANDEX_API_URL: http://wiremock/login.yandex.ru
+            OAUTH_YANDEX_TOKEN_URL: http://wiremock:8080/oauth.yandex.ru
+            OAUTH_YANDEX_API_URL: http://wiremock:8080/login.yandex.ru
             OAUTH_YANDEX_CLIENT_ID: app
             OAUTH_YANDEX_CLIENT_SECRET_FILE: /run/secrets/oauth_yandex_client_secret
             OAUTH_MAILRU_AUTH_URL: http://wiremock.localhost/oauth.mail.ru
-            OAUTH_MAILRU_TOKEN_URL: http://wiremock/oauth.mail.ru
-            OAUTH_MAILRU_API_URL: http://wiremock/oauth.mail.ru
+            OAUTH_MAILRU_TOKEN_URL: http://wiremock:8080/oauth.mail.ru
+            OAUTH_MAILRU_API_URL: http://wiremock:8080/oauth.mail.ru
             OAUTH_MAILRU_CLIENT_ID: app
             OAUTH_MAILRU_CLIENT_SECRET_FILE: /run/secrets/oauth_mailru_client_secret
         volumes:
@@ -224,17 +224,14 @@ services:
             - default
         volumes:
             - ./wiremock:/home/wiremock
-        healthcheck:
-            test: wget --no-verbose --tries=1 --spider http://localhost/__admin/health || exit 1
         command:
-            - '--port=80'
             - '--global-response-templating'
             - '--verbose'
         labels:
             - traefik.enable=true
             - traefik.docker.network=traefik-public
             - traefik.http.routers.wiremock.rule=Host(`wiremock.localhost`)
-            - traefik.http.services.wiremock.loadBalancer.server.port=80
+            - traefik.http.services.wiremock.loadBalancer.server.port=8080
             - traefik.http.routers.wiremock.entryPoints=http
 
     backup-storage:
