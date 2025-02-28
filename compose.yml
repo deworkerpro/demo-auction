@@ -126,8 +126,6 @@ services:
                 GID: ${GID:-1000}
                 UID: ${UID:-1000}
         environment:
-            # TODO Remove after PHP 8.4 support
-            PHP_CS_FIXER_IGNORE_ENV: 1
             APP_ENV: dev
             APP_DEBUG: 1
             DB_HOST: api-postgres
