@@ -3,14 +3,6 @@
 set -o errexit
 set -o pipefail
 
-if [ -f "$POSTGRES_PASSWORD_FILE" ]; then
-  POSTGRES_PASSWORD="$(cat "$POSTGRES_PASSWORD_FILE")"
-fi
-
-if [ -f "$AWS_SECRET_ACCESS_KEY_FILE" ]; then
-  AWS_SECRET_ACCESS_KEY="$(cat "$AWS_SECRET_ACCESS_KEY_FILE")"
-fi
-
 BACKUP_FILE="${BACKUP_NAME:?}_$(date +%Y-%m-%d_%H-%M).sql.gz"
 
 echo "Dump $BACKUP_FILE"
