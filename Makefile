@@ -224,8 +224,8 @@ validate-jenkins:
 	curl --user ${USER} -X POST -F "jenkinsfile=<Jenkinsfile" ${HOST}/pipeline-model-converter/validate
 
 deploy:
-	envsubst < compose-production.yml > compose-production-env.yml
-	DOCKER_HOST=ssh://deploy@${HOST}:${PORT} docker stack deploy --compose-file compose-production-env.yml auction --with-registry-auth --prune
+	envsubst < compose-production.yml > "${TEMP_PATH}/compose.yml"
+	DOCKER_HOST=ssh://deploy@${HOST}:${PORT} docker stack deploy --compose-file "${TEMP_PATH}/compose.yml" auction --with-registry-auth --prune
 
 deploy-clean:
-	rm -f compose-production-env.yml
+	rm -f "${TEMP_PATH}/compose.yml"

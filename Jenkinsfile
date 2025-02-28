@@ -223,6 +223,9 @@ pipeline {
             when {
                 branch 'master'
             }
+            environment {
+                TEMP_PATH = pwd(tmp: true)
+            }
             steps {
                 withCredentials([
                     usernamePassword(
