@@ -224,6 +224,15 @@ pipeline {
             }
             steps {
                 withCredentials([
+                    usernamePassword(
+                        credentialsId: 'PRODUCTION_REGISTRY_AUTH',
+                        usernameVariable: 'USER',
+                        passwordVariable: 'PASSWORD'
+                    )
+                ]) {
+                    sh 'docker login -u="$USER" -p="$PASSWORD" $REGISTRY'
+                }
+                withCredentials([
                     string(credentialsId: 'PRODUCTION_HOST', variable: 'HOST'),
                     string(credentialsId: 'PRODUCTION_PORT', variable: 'PORT'),
                     file(credentialsId: 'API_DB_PASSWORD_FILE', variable: 'API_DB_PASSWORD_FILE'),
