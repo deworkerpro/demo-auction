@@ -2,6 +2,7 @@ pipeline {
     agent any
     options {
         timestamps()
+        disableConcurrentBuilds()
     }
     environment {
         CI = 'true'
