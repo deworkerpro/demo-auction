@@ -16,10 +16,10 @@ docker-up:
 	docker compose up --detach
 
 docker-down:
-	docker compose down --remove-orphans
+	docker compose down --remove-orphans --timeout=1
 
 docker-down-clear:
-	docker compose down --volumes --remove-orphans
+	docker compose down --volumes --remove-orphans --timeout=1
 
 docker-pull:
 	docker compose pull
