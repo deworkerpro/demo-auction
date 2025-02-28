@@ -212,7 +212,7 @@ pipeline {
                         passwordVariable: 'PASSWORD'
                     )
                 ]) {
-                    sh 'docker login -u=$USER -p=$PASSWORD $REGISTRY'
+                    sh 'docker login -u="$USER" -p="$PASSWORD" $REGISTRY'
                 }
                 sh 'make push'
             }
