@@ -40,7 +40,7 @@ services:
             REACT_APP_AUTH_URL: http://api.localhost
         volumes:
             - ./frontend:/app
-        command: sh -c "until [ -f .ready ] ; do sleep 1 ; done && yarn start"
+        command: ["sh", "-c", "until [ -f .ready ] ; do sleep 1 ; done && yarn start"]
 
     frontend-node-cli:
         build:
@@ -188,7 +188,7 @@ services:
             - backup_aws_secret_access_key
         volumes:
             - api-postgres-backup:/app
-        command: sh -c 'wait-for-it api-postgres:5432 -t 20 && backup'
+        command: ["sh", "-c", "wait-for-it api-postgres:5432 -t 20 && backup"]
 
     mailer:
         image: axllent/mailpit:v1.27
@@ -234,7 +234,7 @@ services:
             - backup_aws_secret_access_key
         volumes:
             - backup-storage:/data
-        entrypoint: sh -c 'mkdir -p /data/backup && docker-entrypoint.sh minio server /data --console-address ":80"'
+        entrypoint: ["sh", "-c", "mkdir -p /data/backup && docker-entrypoint.sh minio server /data --console-address ':80'"]
         networks:
             - traefik-public
             - default
