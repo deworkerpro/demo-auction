@@ -7,7 +7,7 @@ use PhpCsFixer\Finder;
 use PhpCsFixer\Runner\Parallel\ParallelConfigFactory;
 
 return
-    (new Config())
+    new Config()
         ->setCacheFile(__DIR__ . '/var/cache/.php_cs')
         ->setParallelConfig(ParallelConfigFactory::detect())
         ->setFinder(

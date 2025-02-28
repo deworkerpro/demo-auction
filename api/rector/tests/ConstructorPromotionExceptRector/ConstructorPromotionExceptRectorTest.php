@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Rector\Tests\ConstructorPromotionExceptRector;
 
-use Iterator;
 use Override;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Rector\Testing\PHPUnit\AbstractRectorTestCase;
@@ -14,14 +13,20 @@ use Rector\Testing\PHPUnit\AbstractRectorTestCase;
  */
 final class ConstructorPromotionExceptRectorTest extends AbstractRectorTestCase
 {
-    #[DataProvider('provideData')]
+    #[DataProvider('provideCases')]
     public function test(string $filePath): void
     {
         $this->doTestFile($filePath);
     }
 
-    public static function provideData(): Iterator
+    /**
+     * @return iterable<array-key, array<array-key, string>>
+     */
+    public static function provideCases(): iterable
     {
+        /**
+         * @var iterable<array-key, array<array-key, string>>
+         */
         return self::yieldFilesFromDirectory(__DIR__ . '/Fixture');
     }
 

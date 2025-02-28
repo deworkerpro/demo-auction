@@ -16,20 +16,20 @@ final class CallbackFixture extends AbstractFixture
     #[Override]
     public function load(ObjectManager $manager): void
     {
-        $user = (new UserBuilder())
+        $user = new UserBuilder()
             ->withEmail(new Email('active@app.test'))
             ->active()
             ->build();
 
         $manager->persist($user);
 
-        $user = (new UserBuilder())
+        $user = new UserBuilder()
             ->withEmail(new Email('wait@app.test'))
             ->build();
 
         $manager->persist($user);
 
-        $user = (new UserBuilder())
+        $user = new UserBuilder()
             ->withEmail(new Email('network@app.test'))
             ->viaNetwork(new Network('yandex', '13333333'))
             ->build();

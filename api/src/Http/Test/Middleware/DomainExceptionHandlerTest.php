@@ -30,9 +30,9 @@ final class DomainExceptionHandlerTest extends TestCase
         $middleware = new DomainExceptionHandler($logger, $translator);
 
         $handler = self::createStub(RequestHandlerInterface::class);
-        $handler->method('handle')->willReturn($source = (new ResponseFactory())->createResponse());
+        $handler->method('handle')->willReturn($source = new ResponseFactory()->createResponse());
 
-        $request = (new ServerRequestFactory())->createServerRequest('POST', 'http://test');
+        $request = new ServerRequestFactory()->createServerRequest('POST', 'http://test');
         $response = $middleware->process($request, $handler);
 
         self::assertEquals($source, $response);
@@ -53,7 +53,7 @@ final class DomainExceptionHandlerTest extends TestCase
         $handler = self::createStub(RequestHandlerInterface::class);
         $handler->method('handle')->willThrowException(new DomainException('Some error.'));
 
-        $request = (new ServerRequestFactory())->createServerRequest('POST', 'http://test');
+        $request = new ServerRequestFactory()->createServerRequest('POST', 'http://test');
         $response = $middleware->process($request, $handler);
 
         self::assertSame(409, $response->getStatusCode());
