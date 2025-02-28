@@ -35,6 +35,9 @@ services:
     frontend-node:
         build:
             context: frontend/docker/development/node
+            args:
+                GID: ${GID:-1000}
+                UID: ${UID:-1000}
         environment:
             WDS_SOCKET_PORT: 0
             REACT_APP_AUTH_URL: http://api.localhost
@@ -45,6 +48,9 @@ services:
     frontend-node-cli:
         build:
             context: frontend/docker/development/node
+            args:
+                GID: ${GID:-1000}
+                UID: ${UID:-1000}
         volumes:
             - ./frontend:/app
 
@@ -68,6 +74,9 @@ services:
         build:
             context: api/docker
             dockerfile: development/php-fpm/Dockerfile
+            args:
+                GID: ${GID:-1000}
+                UID: ${UID:-1000}
         environment:
             APP_ENV: dev
             APP_DEBUG: 1
@@ -113,6 +122,9 @@ services:
         build:
             context: api/docker
             dockerfile: development/php-cli/Dockerfile
+            args:
+                GID: ${GID:-1000}
+                UID: ${UID:-1000}
         environment:
             # TODO Remove after PHP 8.4 support
             PHP_CS_FIXER_IGNORE_ENV: 1
@@ -245,6 +257,9 @@ services:
     cucumber-node-cli:
         build:
             context: cucumber/docker/development/node
+            args:
+                GID: ${GID:-1000}
+                UID: ${UID:-1000}
         volumes:
             - ./cucumber:/app
         network_mode: service:traefik
