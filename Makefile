@@ -236,8 +236,8 @@ deploy:
 	scp -o StrictHostKeyChecking=no -P ${PORT} ${API_MAILER_PASSWORD_FILE} deploy@${HOST}:site_${BUILD_NUMBER}/secrets/api_mailer_password
 	scp -o StrictHostKeyChecking=no -P ${PORT} ${SENTRY_DSN_FILE} deploy@${HOST}:site_${BUILD_NUMBER}/secrets/sentry_dsn
 	scp -o StrictHostKeyChecking=no -P ${PORT} ${JWT_ENCRYPTION_KEY_FILE} deploy@${HOST}:site_${BUILD_NUMBER}/secrets/jwt_encryption_key
-	scp -o StrictHostKeyChecking=no -P ${PORT} ${JWT_PUBLIC_KEY} deploy@${HOST}:site_${BUILD_NUMBER}/secrets/jwt_public_key
-	scp -o StrictHostKeyChecking=no -P ${PORT} ${JWT_PRIVATE_KEY} deploy@${HOST}:site_${BUILD_NUMBER}/secrets/jwt_private_key
+	scp -o StrictHostKeyChecking=no -P ${PORT} ${JWT_PUBLIC_KEY_FILE} deploy@${HOST}:site_${BUILD_NUMBER}/secrets/jwt_public_key
+	scp -o StrictHostKeyChecking=no -P ${PORT} ${JWT_PRIVATE_KEY_FILE} deploy@${HOST}:site_${BUILD_NUMBER}/secrets/jwt_private_key
 	scp -o StrictHostKeyChecking=no -P ${PORT} ${OAUTH_YANDEX_CLIENT_SECRET_FILE} deploy@${HOST}:site_${BUILD_NUMBER}/secrets/oauth_yandex_client_secret
 	scp -o StrictHostKeyChecking=no -P ${PORT} ${OAUTH_MAILRU_CLIENT_SECRET_FILE} deploy@${HOST}:site_${BUILD_NUMBER}/secrets/oauth_mailru_client_secret
 	scp -o StrictHostKeyChecking=no -P ${PORT} ${BACKUP_AWS_SECRET_ACCESS_KEY_FILE} deploy@${HOST}:site_${BUILD_NUMBER}/secrets/backup_aws_secret_access_key
