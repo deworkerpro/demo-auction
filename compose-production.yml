@@ -142,7 +142,7 @@ services:
             - jwt_private_key
             - oauth_yandex_client_secret
             - oauth_mailru_client_secret
-        command: ["sh", "-c", "wait-for-it api-postgres:5432 -t 60 && php bin/app.php migrations:migrate --no-interaction"]
+        command: ["sh", "-c", "wait-for-it api-postgres:5432 -t 60 && exec php bin/app.php migrations:migrate --no-interaction"]
         deploy:
             restart_policy:
                 condition: on-failure
@@ -189,7 +189,7 @@ services:
             - jwt_private_key
             - oauth_yandex_client_secret
             - oauth_mailru_client_secret
-        command: ["sh", "-c", "wait-for-it api-postgres:5432 -t 60 && php bin/app.php oauth:clear-expired"]
+        command: ["sh", "-c", "wait-for-it api-postgres:5432 -t 60 && exec php bin/app.php oauth:clear-expired"]
         deploy:
             labels:
                 - swarm.cronjob.enable=true
@@ -232,7 +232,7 @@ services:
             - backup_aws_secret_access_key
         volumes:
             - api-postgres-backup:/app
-        command: ["sh", "-c", "wait-for-it api-postgres:5432 -t 60 && backup"]
+        command: ["sh", "-c", "wait-for-it api-postgres:5432 -t 60 && exec backup"]
         deploy:
             labels:
                 - swarm.cronjob.enable=true
