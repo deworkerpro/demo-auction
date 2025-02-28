@@ -15,10 +15,11 @@ FROM nginx:1.29-alpine3.23
 RUN apk add --no-cache curl
 
 COPY ./docker/production/nginx/conf.d /etc/nginx/conf.d
-COPY ./docker/production/nginx/docker-entrypoint-env.sh /
-RUN chmod +x /docker-entrypoint-env.sh
 
-ENTRYPOINT ["/docker-entrypoint-env.sh"]
+COPY ./docker/production/nginx/docker-entrypoint-subst.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/docker-entrypoint-subst.sh
+
+ENTRYPOINT ["docker-entrypoint-subst.sh", "/docker-entrypoint.sh"]
 CMD ["nginx", "-g", "daemon off;"]
 
 WORKDIR /app
