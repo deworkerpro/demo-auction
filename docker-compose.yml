@@ -166,7 +166,7 @@ services:
         volumes:
             - api-postgres:/var/lib/postgresql/data
         ports:
-            - "54321:5432"
+            - "5432:5432"
 
     api-postgres-backup:
         build:
