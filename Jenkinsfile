@@ -216,6 +216,7 @@ pipeline {
                     sh 'docker login -u="$USER" -p="$PASSWORD" $REGISTRY'
                 }
                 sh 'make push'
+                sh 'docker logout $REGISTRY'
             }
         }
         stage ('Prod') {
@@ -223,6 +224,15 @@ pipeline {
                 branch 'master'
             }
             steps {
+                withCredentials([
+                    usernamePassword(
+                        credentialsId: 'PRODUCTION_REGISTRY_AUTH',
+                        usernameVariable: 'USER',
+                        passwordVariable: 'PASSWORD'
+                    )
+                ]) {
+                    sh 'docker login -u="$USER" -p="$PASSWORD" $REGISTRY'
+                }
                 withCredentials([
                     string(credentialsId: 'PRODUCTION_HOST', variable: 'HOST'),
                     string(credentialsId: 'PRODUCTION_PORT', variable: 'PORT'),
