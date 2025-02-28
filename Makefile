@@ -28,12 +28,12 @@ docker-build:
 	docker compose build --pull
 
 api-clear:
-	docker run --rm -v ${PWD}/api:/app -w /app alpine:3.21 sh -c 'rm -rf var/cache/* var/log/* var/test/*'
+	docker run --rm -v ${PWD}/api:/app -w /app alpine:3.23 sh -c 'rm -rf var/cache/* var/log/* var/test/*'
 
 api-init: api-permissions api-deps-install api-wait-db api-migrations api-fixtures
 
 api-permissions:
-	docker run --rm -v ${PWD}/api:/app -w /app alpine:3.21 chmod 777 var/cache var/log var/test
+	docker run --rm -v ${PWD}/api:/app -w /app alpine:3.23 chmod 777 var/cache var/log var/test
 
 api-deps-install:
 	docker compose run --rm api-php-cli composer install
@@ -93,7 +93,7 @@ api-test-functional-coverage:
 	docker compose run --rm api-php-cli composer test-coverage -- --testsuite=functional
 
 frontend-clear:
-	docker run --rm -v ${PWD}/frontend:/app -w /app alpine:3.21 sh -c 'rm -rf .ready build'
+	docker run --rm -v ${PWD}/frontend:/app -w /app alpine:3.23 sh -c 'rm -rf .ready build'
 
 frontend-init: frontend-deps-install
 
@@ -104,7 +104,7 @@ frontend-deps-update:
 	docker compose run --rm frontend-node-cli yarn upgrade
 
 frontend-ready:
-	docker run --rm -v ${PWD}/frontend:/app -w /app alpine:3.21 touch .ready
+	docker run --rm -v ${PWD}/frontend:/app -w /app alpine:3.23 touch .ready
 
 frontend-check: frontend-lint frontend-ts-check frontend-test
 
@@ -127,7 +127,7 @@ frontend-test-watch:
 	docker compose run --rm frontend-node-cli yarn test
 
 cucumber-clear:
-	docker run --rm -v ${PWD}/cucumber:/app -w /app alpine:3.21 sh -c 'rm -rf var/*'
+	docker run --rm -v ${PWD}/cucumber:/app -w /app alpine:3.23 sh -c 'rm -rf var/*'
 
 cucumber-init: cucumber-deps-install
 

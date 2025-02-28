@@ -1,6 +1,6 @@
-FROM php:8.4-cli-alpine3.21
+FROM php:8.4-cli-alpine3.23
 
-ENV XDEBUG_VERSION 3.4.1
+ENV XDEBUG_VERSION 3.4.7
 
 RUN apk add --no-cache libpq-dev bash coreutils git linux-headers \
     && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
@@ -17,7 +17,7 @@ COPY ./development/php/conf.d /usr/local/etc/php/conf.d
 COPY ./common/wait-for-it.sh /usr/local/bin/wait-for-it
 RUN chmod 555 /usr/local/bin/wait-for-it
 
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/bin --filename=composer --version=2.8.5 --quiet
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/bin --filename=composer --version=2.9.1 --quiet
 
 RUN addgroup -g 1000 app && adduser -u 1000 -G app -s /bin/sh -D app
 
