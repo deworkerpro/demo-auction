@@ -20,7 +20,7 @@ final class ConfirmTest extends TestCase
 {
     public function testSuccess(): void
     {
-        $user = (new UserBuilder())
+        $user = new UserBuilder()
             ->withJoinConfirmToken($token = $this->createToken())
             ->build();
 
@@ -40,7 +40,7 @@ final class ConfirmTest extends TestCase
 
     public function testWrong(): void
     {
-        $user = (new UserBuilder())
+        $user = new UserBuilder()
             ->withJoinConfirmToken($token = $this->createToken())
             ->build();
 
@@ -54,7 +54,7 @@ final class ConfirmTest extends TestCase
 
     public function testExpired(): void
     {
-        $user = (new UserBuilder())
+        $user = new UserBuilder()
             ->withJoinConfirmToken($token = $this->createToken())
             ->build();
 
@@ -70,7 +70,7 @@ final class ConfirmTest extends TestCase
     {
         $token = $this->createToken();
 
-        $user = (new UserBuilder())
+        $user = new UserBuilder()
             ->withJoinConfirmToken($token)
             ->active()
             ->build();

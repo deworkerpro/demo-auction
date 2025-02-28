@@ -16,7 +16,7 @@ final readonly class NewEmailConfirmTokenSender
 
     public function send(Email $email, Token $token): void
     {
-        $message = (new MimeEmail())
+        $message = new MimeEmail()
             ->subject('New Email Confirmation')
             ->to($email->getValue())
             ->html($this->twig->render('auth/email/confirm.html.twig', ['token' => $token]), 'text/html');

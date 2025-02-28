@@ -20,7 +20,7 @@ final class RequestTest extends TestCase
 {
     public function testSuccess(): void
     {
-        $user = (new UserBuilder())->active()->build();
+        $user = new UserBuilder()->active()->build();
 
         $now = new DateTimeImmutable();
         $token = $this->createToken($now->modify('+1 hour'));
@@ -33,7 +33,7 @@ final class RequestTest extends TestCase
 
     public function testAlready(): void
     {
-        $user = (new UserBuilder())->active()->build();
+        $user = new UserBuilder()->active()->build();
 
         $now = new DateTimeImmutable();
         $token = $this->createToken($now->modify('+1 hour'));
@@ -46,7 +46,7 @@ final class RequestTest extends TestCase
 
     public function testExpired(): void
     {
-        $user = (new UserBuilder())->active()->build();
+        $user = new UserBuilder()->active()->build();
 
         $now = new DateTimeImmutable();
         $token = $this->createToken($now->modify('+1 hour'));
@@ -61,7 +61,7 @@ final class RequestTest extends TestCase
 
     public function testNotActive(): void
     {
-        $user = (new UserBuilder())->build();
+        $user = new UserBuilder()->build();
 
         $now = new DateTimeImmutable();
         $token = $this->createToken($now->modify('+1 hour'));

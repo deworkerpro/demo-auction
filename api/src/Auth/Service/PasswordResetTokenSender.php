@@ -16,7 +16,7 @@ final readonly class PasswordResetTokenSender
 
     public function send(Email $email, Token $token): void
     {
-        $message = (new MimeEmail())
+        $message = new MimeEmail()
             ->subject('Password Reset')
             ->to($email->getValue())
             ->html($this->twig->render('auth/password/confirm.html.twig', ['token' => $token]), 'text/html');

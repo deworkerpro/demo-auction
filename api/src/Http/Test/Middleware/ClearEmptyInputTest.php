@@ -25,7 +25,7 @@ final class ClearEmptyInputTest extends TestCase
     {
         $middleware = new ClearEmptyInput();
 
-        $request = (new ServerRequestFactory())->createServerRequest('POST', 'http://test')
+        $request = new ServerRequestFactory()->createServerRequest('POST', 'http://test')
             ->withParsedBody([
                 'null' => null,
                 'space' => ' ',
@@ -52,7 +52,7 @@ final class ClearEmptyInputTest extends TestCase
                         'name' => 'Name',
                     ],
                 ], $request->getParsedBody());
-                return (new ResponseFactory())->createResponse();
+                return new ResponseFactory()->createResponse();
             });
 
         $middleware->process($request, $handler);
@@ -62,19 +62,19 @@ final class ClearEmptyInputTest extends TestCase
     {
         $middleware = new ClearEmptyInput();
 
-        $realFile = (new UploadedFileFactory())->createUploadedFile(
-            (new StreamFactory())->createStream(''),
+        $realFile = new UploadedFileFactory()->createUploadedFile(
+            new StreamFactory()->createStream(''),
             0,
             UPLOAD_ERR_OK,
         );
 
-        $noFile = (new UploadedFileFactory())->createUploadedFile(
-            (new StreamFactory())->createStream(''),
+        $noFile = new UploadedFileFactory()->createUploadedFile(
+            new StreamFactory()->createStream(''),
             0,
             UPLOAD_ERR_NO_FILE,
         );
 
-        $request = (new ServerRequestFactory())->createServerRequest('POST', 'http://test')
+        $request = new ServerRequestFactory()->createServerRequest('POST', 'http://test')
             ->withUploadedFiles([
                 'real_file' => $realFile,
                 'none_file' => $noFile,
@@ -88,7 +88,7 @@ final class ClearEmptyInputTest extends TestCase
                     'real_file' => $realFile,
                     'files' => [$realFile],
                 ], $request->getUploadedFiles());
-                return (new ResponseFactory())->createResponse();
+                return new ResponseFactory()->createResponse();
             });
 
         $middleware->process($request, $handler);

@@ -21,7 +21,7 @@ final class RequestTest extends TestCase
 {
     public function testSuccess(): void
     {
-        $user = (new UserBuilder())
+        $user = new UserBuilder()
             ->withEmail($old = new Email('old-email@app.test'))
             ->active()
             ->build();
@@ -38,7 +38,7 @@ final class RequestTest extends TestCase
 
     public function testSame(): void
     {
-        $user = (new UserBuilder())
+        $user = new UserBuilder()
             ->withEmail($old = new Email('old-email@app.test'))
             ->active()
             ->build();
@@ -52,7 +52,7 @@ final class RequestTest extends TestCase
 
     public function testAlready(): void
     {
-        $user = (new UserBuilder())->active()->build();
+        $user = new UserBuilder()->active()->build();
 
         $now = new DateTimeImmutable();
         $token = $this->createToken($now->modify('+1 day'));
@@ -65,7 +65,7 @@ final class RequestTest extends TestCase
 
     public function testExpired(): void
     {
-        $user = (new UserBuilder())->active()->build();
+        $user = new UserBuilder()->active()->build();
 
         $now = new DateTimeImmutable();
         $token = $this->createToken($now->modify('+1 hour'));
@@ -84,7 +84,7 @@ final class RequestTest extends TestCase
         $now = new DateTimeImmutable();
         $token = $this->createToken($now->modify('+1 day'));
 
-        $user = (new UserBuilder())->build();
+        $user = new UserBuilder()->build();
 
         $this->expectExceptionMessage('User is not active.');
         $user->requestEmailChanging($token, $now, new Email('temp-email@app.test'));

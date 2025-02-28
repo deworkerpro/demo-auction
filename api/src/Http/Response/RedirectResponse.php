@@ -22,7 +22,7 @@ final class RedirectResponse extends Response
         parent::__construct(
             $status,
             new Headers(['Location' => $url]),
-            (new StreamFactory())->createStreamFromResource($resource)
+            new StreamFactory()->createStreamFromResource($resource)
         );
     }
 }

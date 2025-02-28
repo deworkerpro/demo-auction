@@ -39,7 +39,7 @@ final class RefreshTokenTest extends WebTestCase
             'access_token_id' => '50200f204dedbb244ce453',
             'scopes' => [new Scope('common')],
             'user_id' => '00000000-0000-0000-0000-000000000001',
-            'expire_time' => (new DateTimeImmutable('2300-12-31 21:00:10'))->getTimestamp(),
+            'expire_time' => new DateTimeImmutable('2300-12-31 21:00:10')->getTimestamp(),
         ];
 
         $token = Crypto::encryptWithPassword(Json::encode($payload), env('JWT_ENCRYPTION_KEY'));

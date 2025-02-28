@@ -15,7 +15,7 @@ final class HtmlResponse extends Response
         parent::__construct(
             $status,
             new Headers(['Content-Type' => 'text/html']),
-            (new StreamFactory())->createStream($html)
+            new StreamFactory()->createStream($html)
         );
     }
 }
