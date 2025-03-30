@@ -5,7 +5,6 @@ import tsEslint from 'typescript-eslint'
 import pluginReact from 'eslint-plugin-react'
 import pluginReactHooks from 'eslint-plugin-react-hooks'
 import pluginReactRefresh from 'eslint-plugin-react-refresh'
-import pluginJest from 'eslint-plugin-jest'
 import pluginJestDom from 'eslint-plugin-jest-dom'
 import pluginTestingLibrary from 'eslint-plugin-testing-library'
 import pluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
@@ -36,10 +35,6 @@ export default defineConfig([
     rules: {
       'react-refresh/only-export-components': ['error', { allowConstantExport: true }],
     },
-  },
-  {
-    files: ['**/*.test.ts', '**/*.test.tsx'],
-    ...pluginJest.configs['flat/recommended'],
   },
   {
     files: ['**/*.test.ts', '**/*.test.tsx'],
