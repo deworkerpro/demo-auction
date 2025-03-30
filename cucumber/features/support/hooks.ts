@@ -22,7 +22,8 @@ After(async function (this: CustomWorld, testCase) {
       const name = testCase.pickle.uri.replace(/^\/app\/features\//, '').replace(/\//g, '_') +
         '-' +
         testCase.pickle.name.toLowerCase().replace(/[^\w]/g, '_')
-      await this.page.screenshot({ path: 'var/' + name + '.png', fullPage: true })
+      const pathName = 'var/' + name
+      await this.page.screenshot({ path: `${pathName}.png`, fullPage: true })
     }
     await this.page.close()
   }

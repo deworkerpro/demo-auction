@@ -10,12 +10,12 @@
     "lint-fix": "eslint --fix --ext .ts features"
   },
   "dependencies": {
-    "@cucumber/cucumber": "^10.4.0",
-    "chai": "^4.2.0",
-    "puppeteer": "^22.6.4"
+    "@cucumber/cucumber": "^11.2.0",
+    "chai": "^5.2.0",
+    "puppeteer": "^24.4.0"
   },
   "devDependencies": {
-    "@types/chai": "^4.3.1",
+    "@types/chai": "^5.2.1",
     "@typescript-eslint/eslint-plugin": "^7.6.0",
     "@typescript-eslint/parser": "^7.6.0",
     "eslint": "^8.1.0",
