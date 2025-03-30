@@ -6,8 +6,8 @@
     "e2e": "cucumber-js --tags 'not @wip' --parallel 4 --retry 2",
     "e2e-ci": "cucumber-js --tags 'not @wip' --parallel 2 --retry 2",
     "ts-check": "tsc --noEmit --incremental false",
-    "lint": "eslint --ext .ts features",
-    "lint-fix": "eslint --fix --ext .ts features"
+    "lint": "eslint",
+    "lint-fix": "eslint --fix"
   },
   "dependencies": {
     "@cucumber/cucumber": "^11.2.0",
@@ -15,16 +15,13 @@
     "puppeteer": "^24.4.0"
   },
   "devDependencies": {
+    "@eslint/js": "^9.23.0",
     "@types/chai": "^5.2.1",
-    "@typescript-eslint/eslint-plugin": "^7.6.0",
-    "@typescript-eslint/parser": "^7.6.0",
-    "eslint": "^8.1.0",
-    "eslint-config-standard": "^17.0.0",
-    "eslint-plugin-import": "^2.20.2",
-    "eslint-plugin-n": "^17.2.0",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^6.0.0",
+    "@types/node": "^22.13.17",
+    "eslint": "^9.23.0",
+    "globals": "^16.0.0",
     "ts-node": "^10.8.1",
-    "typescript": "^5.4.5"
+    "typescript": "^5.4.5",
+    "typescript-eslint": "^8.28.0"
   }
 }
