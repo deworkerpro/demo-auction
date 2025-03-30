@@ -15,3 +15,15 @@ test('renders empty', () => {
 
   expect(screen.queryByTestId('alert-error')).not.toBeInTheDocument()
 })
+
+test('renders null', () => {
+  render(<AlertError message={null} />)
+
+  expect(screen.queryByTestId('alert-error')).not.toBeInTheDocument()
+})
+
+test('renders undefined', () => {
+  render(<AlertError message={undefined} />)
+
+  expect(screen.queryByTestId('alert-error')).not.toBeInTheDocument()
+})
