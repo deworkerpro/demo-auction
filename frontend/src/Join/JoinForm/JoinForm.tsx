@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import { ChangeEvent, SyntheticEvent, useState } from 'react'
 import styles from './JoinForm.module.css'
 import api, { parseError, parseErrors } from '../../Api'
 import { AlertError, AlertSuccess } from '../../Alert'
 import { ButtonRow, InputError, InputLabel, InputRow } from '../../Form'
 
-export default function JoinForm(): React.JSX.Element {
+export default function JoinForm() {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -16,7 +16,7 @@ export default function JoinForm(): React.JSX.Element {
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState<string | null>(null)
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const input = event.currentTarget
     setFormData({
       ...formData,
@@ -24,7 +24,7 @@ export default function JoinForm(): React.JSX.Element {
     })
   }
 
-  const handleSubmit = (event: React.SyntheticEvent) => {
+  const handleSubmit = (event: SyntheticEvent) => {
     event.preventDefault()
 
     if (!formData.agree) {

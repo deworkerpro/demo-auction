@@ -14,5 +14,6 @@ export default defineConfig([
   { files: ['**/*.ts', '**/*.tsx'], plugins: { js }, extends: ['js/recommended'] },
   tsEslint.configs.recommended,
   pluginReact.configs.flat.recommended,
+  pluginReact.configs.flat['jsx-runtime'],
   pluginPrettierRecommended,
 ])

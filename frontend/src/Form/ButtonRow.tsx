@@ -1,5 +1,5 @@
-import React, { ReactNode } from 'react'
+import { ReactNode } from 'react'
 
-export default function ButtonRow({ children }: { children: ReactNode }): React.JSX.Element {
+export default function ButtonRow({ children }: { children: ReactNode }) {
   return <div className="button-row">{children}</div>
 }

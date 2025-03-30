@@ -1,11 +1,6 @@
-import React from 'react'
 import styles from './Alert.module.css'
 
-export default function AlertSuccess({
-  message,
-}: {
-  message: string | null | undefined
-}): React.JSX.Element {
+export default function AlertSuccess({ message }: { message: string | null | undefined }) {
   return (
     <>
       {message ? (

@@ -1,4 +1,4 @@
-import React from 'react'
+import { StrictMode } from 'react'
 import './index.css'
 import App from './App'
 import { parse } from 'cookie'
@@ -13,7 +13,7 @@ const features = mergeFeatures(defaultFeatures, cookieFeatures)
 
 const root = createRoot(document.getElementById('root') as HTMLElement)
 root.render(
-  <React.StrictMode>
+  <StrictMode>
     <App features={features} />
-  </React.StrictMode>,
+  </StrictMode>,
 )
