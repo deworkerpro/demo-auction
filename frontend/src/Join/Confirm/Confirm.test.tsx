@@ -20,10 +20,11 @@ test('confirms without token', async () => {
     ],
     {
       initialEntries: ['/join/confirm'],
+      future: { v7_relativeSplatPath: true },
     },
   )
 
-  render(<RouterProvider router={router} />)
+  render(<RouterProvider router={router} future={{ v7_startTransition: true }} />)
 
   expect(router.state.location.pathname).toBe('/')
 
@@ -51,10 +52,11 @@ test('confirms successfully', async () => {
     ],
     {
       initialEntries: ['/join/confirm?token=01'],
+      future: { v7_relativeSplatPath: true },
     },
   )
 
-  render(<RouterProvider router={router} />)
+  render(<RouterProvider router={router} future={{ v7_startTransition: true }} />)
 
   await waitFor(() => {
     expect(api.post).toHaveBeenCalled()
@@ -86,10 +88,11 @@ test('shows error', async () => {
     ],
     {
       initialEntries: ['/join/confirm?token=01'],
+      future: { v7_relativeSplatPath: true },
     },
   )
 
-  render(<RouterProvider router={router} />)
+  render(<RouterProvider router={router} future={{ v7_startTransition: true }} />)
 
   const alert = await screen.findByTestId('alert-error')
 
