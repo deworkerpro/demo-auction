@@ -15,3 +15,9 @@ test('renders empty', () => {
 
   expect(screen.queryByTestId('violation')).not.toBeInTheDocument()
 })
+
+test('renders undefined', () => {
+  render(<InputError error={undefined} />)
+
+  expect(screen.queryByTestId('violation')).not.toBeInTheDocument()
+})
