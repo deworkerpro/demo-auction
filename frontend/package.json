@@ -34,6 +34,7 @@
     "eslint-config-prettier": "^10.1.5",
     "eslint-plugin-prettier": "^5.4.0",
     "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^5.2.0",
     "globals": "^16.2.0",
     "identity-obj-proxy": "^3.0.0",
     "isomorphic-fetch": "^3.0.0",
