@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import { type ReactNode } from 'react'
 
 export default function ButtonRow({ children }: { children: ReactNode }) {
   return <div className="button-row">{children}</div>

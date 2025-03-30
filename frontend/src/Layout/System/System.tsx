@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import { type ReactNode } from 'react'
 import styles from './System.module.css'
 
 export default function System({ children }: { children: ReactNode }) {
