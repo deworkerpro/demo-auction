@@ -1,4 +1,4 @@
-import { ChangeEvent, SyntheticEvent, useState } from 'react'
+import { type ChangeEvent, type SyntheticEvent, useState } from 'react'
 import styles from './JoinForm.module.css'
 import api, { parseError, parseErrors } from '../../Api'
 import { AlertError, AlertSuccess } from '../../Alert'

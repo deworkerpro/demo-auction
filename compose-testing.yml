@@ -16,7 +16,7 @@ services:
     frontend:
         image: ${REGISTRY}/auction-frontend:${IMAGE_TAG}
         environment:
-            REACT_APP_AUTH_URL: http://api.localhost
+            VITE_AUTH_URL: http://api.localhost
         networks:
             - traefik-public
             - default

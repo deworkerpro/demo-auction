@@ -11,7 +11,7 @@ import pluginTestingLibrary from 'eslint-plugin-testing-library'
 import pluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
 
 export default defineConfig([
-  globalIgnores(['build/']),
+  globalIgnores(['dist/']),
   {
     files: ['**/*.ts', '**/*.tsx'],
     languageOptions: { globals: { ...globals.browser, ...globals.node } },
