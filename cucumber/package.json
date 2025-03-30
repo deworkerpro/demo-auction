@@ -10,24 +10,21 @@
     "lint-fix": "eslint --fix --ext .ts features"
   },
   "dependencies": {
-    "@cucumber/cucumber": "^10.4.0",
-    "chai": "^4.2.0",
-    "puppeteer": "^22.6.4"
+    "@cucumber/cucumber": "^12.7.0",
+    "chai": "^6.2.2",
+    "puppeteer": "^24.38.0"
   },
   "devDependencies": {
-    "@types/chai": "^4.3.1",
-    "@typescript-eslint/eslint-plugin": "^7.6.0",
-    "@typescript-eslint/parser": "^7.6.0",
+    "@types/chai": "^5.2.3",
+    "@typescript-eslint/eslint-plugin": "^8.56.1",
+    "@typescript-eslint/parser": "^8.56.1",
     "eslint": "^8.1.0",
     "eslint-config-standard": "^17.0.0",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-n": "^17.2.0",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^6.0.0",
-    "ts-node": "^10.8.1",
-    "typescript": "^5.4.5"
-  },
-  "resolutions": {
-    "cliui/wrap-ansi": "7.0.0"
+    "eslint-plugin-promise": "^7.2.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
   }
 }
