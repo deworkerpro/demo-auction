@@ -2,6 +2,17 @@
   "name": "react-app",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "ts-check": "tsc --noEmit --incremental false",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eslint": "eslint --ext .js,.ts,.jsx,.tsx src",
+    "eslint-fix": "eslint --fix --ext .js,.ts,.jsx,.tsx src",
+    "stylelint": "stylelint \"src/**/*.css\"",
+    "stylelint-fix": "stylelint --fix \"src/**/*.css\"",
+    "prettier": "prettier --write \"**/*.+(js|ts|jsx|tsx|json|css|md)\""
+  },
   "dependencies": {
     "cookie": "^0.6.0",
     "react": "^18.0.0",
@@ -41,17 +52,6 @@
     "stylelint-config-standard": "^36.0.0",
     "stylelint-prettier": "^5.0.0",
     "typescript": "^5.4.4"
-  },
-  "scripts": {
-    "ts-check": "tsc --noEmit --incremental false",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eslint": "eslint --ext .js,.ts,.jsx,.tsx src",
-    "eslint-fix": "eslint --fix --ext .js,.ts,.jsx,.tsx src",
-    "stylelint": "stylelint \"src/**/*.css\"",
-    "stylelint-fix": "stylelint --fix \"src/**/*.css\"",
-    "prettier": "prettier --write \"**/*.+(js|ts|jsx|tsx|json|css|md)\""
   },
   "browserslist": {
     "production": [
