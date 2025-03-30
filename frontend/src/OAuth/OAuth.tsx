@@ -1,6 +1,6 @@
 import React from 'react'
 import System from '../Layout/System'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router'
 import { AlertError } from '../Alert'
 import useAuth from './Provider/useAuth'
 
