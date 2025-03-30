@@ -1,4 +1,3 @@
-import React from 'react'
 import styles from './App.module.css'
 import { FeaturesProvider } from '../FeatureToggle'
 import { BrowserRouter, Route, Routes } from 'react-router'

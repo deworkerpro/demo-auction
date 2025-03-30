@@ -1,8 +1,7 @@
-import React from 'react'
 import styles from './AuthExternal.module.css'
 import { useAuth } from '../Provider'
 
-export default function AuthExternal(): React.JSX.Element {
+export default function AuthExternal() {
   const { login } = useAuth()
 
   return (

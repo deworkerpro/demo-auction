@@ -1,8 +1,7 @@
-import React from 'react'
 import System from '../../Layout/System'
 import { Link } from 'react-router'
 
-export default function Success(): React.JSX.Element {
+export default function Success() {
   return (
     <System>
       <div data-testid="join-success">

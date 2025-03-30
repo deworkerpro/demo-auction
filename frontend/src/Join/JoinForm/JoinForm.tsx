@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import styles from './JoinForm.module.css'
 import api, { parseError, parseErrors } from '../../Api'
 import { AlertError, AlertSuccess } from '../../Alert'
 import { ButtonRow, InputError, InputLabel, InputRow } from '../../Form'
 
-export default function JoinForm(): React.JSX.Element {
+export default function JoinForm() {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
