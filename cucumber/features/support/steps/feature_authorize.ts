@@ -2,10 +2,10 @@ import { CustomWorld } from '../world'
 import { Given } from '@cucumber/cucumber'
 
 Given('I have {string} authorize features', async function (this: CustomWorld, features: string) {
-  if (!this.page) {
+  if (!this.browser) {
     throw new Error('Page is undefined')
   }
-  await this.page.setCookie({
+  await this.browser.setCookie({
     name: 'features',
     value: features,
     domain: 'api.localhost',
