@@ -1,3 +1,4 @@
+import { jest } from '@jest/globals'
 import api from './api'
 
 test('get with custom header', async () => {
