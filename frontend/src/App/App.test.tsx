@@ -9,7 +9,7 @@ jest.mock('../FeatureToggle', () => ({ FeaturesProvider: jest.fn(() => null) }))
 test('renders app', () => {
   render(<App features={['ONE']} />)
 
-  const context = expect.any(Object)
+  const context = undefined
   const children = expect.any(Object)
   const props = { children, features: ['ONE'] }
 
