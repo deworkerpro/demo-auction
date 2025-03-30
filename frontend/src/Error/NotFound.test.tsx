@@ -5,7 +5,7 @@ import NotFound from './NotFound'
 
 test('renders not found', () => {
   render(
-    <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+    <MemoryRouter>
       <NotFound />
     </MemoryRouter>,
   )
