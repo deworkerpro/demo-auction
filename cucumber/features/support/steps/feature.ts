@@ -2,10 +2,10 @@ import { CustomWorld } from '../world'
 import { Given } from '@cucumber/cucumber'
 
 Given('I have {string} feature', async function (this: CustomWorld, feature: string) {
-  if (!this.page) {
+  if (!this.browser) {
     throw new Error('Page is undefined')
   }
-  await this.page.setCookie({
+  await this.browser.setCookie({
     name: 'features',
     value: feature,
     domain: 'localhost',
@@ -17,10 +17,10 @@ Given('I have {string} feature', async function (this: CustomWorld, feature: str
 })
 
 Given('I do not have {string} feature', async function (this: CustomWorld, feature: string) {
-  if (!this.page) {
+  if (!this.browser) {
     throw new Error('Page is undefined')
   }
-  await this.page.setCookie({
+  await this.browser.setCookie({
     name: 'features',
     value: '!' + feature,
     domain: 'localhost',
