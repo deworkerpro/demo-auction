@@ -50,7 +50,7 @@
     "react-test-renderer": "^19.1.0",
     "stylelint": "^16.3.1",
     "stylelint-config-prettier": "^9.0.3",
-    "stylelint-config-standard": "^36.0.0",
+    "stylelint-config-standard": "^37.0.0",
     "stylelint-prettier": "^5.0.0",
     "ts-jest": "^29.3.0",
     "ts-node": "^10.9.2",
