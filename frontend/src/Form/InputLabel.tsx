@@ -7,7 +7,7 @@ type Props = {
 
 export default function InputLabel({ label, htmlFor = null, ...rest }: Props): React.JSX.Element {
   return (
-    <label className="input-label" htmlFor={htmlFor || undefined} {...rest}>
+    <label className="input-label" htmlFor={htmlFor ?? undefined} {...rest}>
       {label}
     </label>
   )
