@@ -7,7 +7,10 @@ Given('I am a user', async function (this: CustomWorld) {
   if (!this.page) {
     throw new Error('Page is undefined')
   }
-  await this.page.evaluateOnNewDocument(() => {
+
+  await this.page.goto('http://localhost/robots.txt')
+
+  await this.page.evaluate(() => {
     localStorage.setItem('auth.tokens', JSON.stringify({
       accessToken:
         'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiJmcm9udGVuZCIsImp' +
