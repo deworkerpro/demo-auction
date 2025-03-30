@@ -1,7 +1,11 @@
 import React from 'react'
 import styles from './Alert.module.css'
 
-export default function AlertError({ message }: { message: string | null }): React.JSX.Element {
+export default function AlertError({
+  message,
+}: {
+  message: string | null | undefined
+}): React.JSX.Element {
   return (
     <>
       {message ? (
