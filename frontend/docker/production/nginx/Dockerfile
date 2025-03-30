@@ -1,6 +1,6 @@
 FROM node:24-alpine3.21 AS builder
 
-ENV REACT_APP_AUTH_URL=%%REACT_APP_AUTH_URL%%
+ENV VITE_AUTH_URL=%%VITE_AUTH_URL%%
 
 WORKDIR /app
 
@@ -24,6 +24,6 @@ CMD ["nginx", "-g", "daemon off;"]
 
 WORKDIR /app
 
-COPY --from=builder /app/build ./public
+COPY --from=builder /app/dist ./public
 
 HEALTHCHECK --interval=5s --timeout=3s --start-period=1s CMD curl --fail http://127.0.0.1/health || exit 1

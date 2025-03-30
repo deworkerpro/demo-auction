@@ -39,8 +39,7 @@ services:
                 GID: ${GID:-1000}
                 UID: ${UID:-1000}
         environment:
-            WDS_SOCKET_PORT: 0
-            REACT_APP_AUTH_URL: http://api.localhost
+            VITE_AUTH_URL: http://api.localhost
         volumes:
             - ./frontend:/app
         command: ["sh", "-c", "until [ -f .ready ] ; do sleep 1 ; done && exec yarn start"]
@@ -51,6 +50,8 @@ services:
             args:
                 GID: ${GID:-1000}
                 UID: ${UID:-1000}
+        environment:
+            VITE_AUTH_URL: http://api.localhost
         volumes:
             - ./frontend:/app
 

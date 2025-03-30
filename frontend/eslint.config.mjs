@@ -11,7 +11,7 @@ import pluginTestingLibrary from 'eslint-plugin-testing-library'
 import pluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
 
 export default defineConfig([
-  { ignores: ['build/'] },
+  { ignores: ['dist/'] },
   { files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'] },
   {
     files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'],

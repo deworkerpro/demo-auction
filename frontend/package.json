@@ -1,11 +1,12 @@
 {
-  "name": "react-app",
-  "version": "0.1.0",
+  "name": "vite",
+  "version": "0.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
-    "ts-check": "tsc --noEmit --incremental false",
-    "start": "DISABLE_ESLINT_PLUGIN=true react-scripts start",
-    "build": "DISABLE_ESLINT_PLUGIN=true react-scripts build",
+    "ts-check": "tsc --project tsconfig.app.json --noEmit --incremental false",
+    "start": "vite",
+    "build": "vite build",
     "test": "jest",
     "eslint": "eslint",
     "eslint-fix": "eslint --fix",
@@ -17,8 +18,7 @@
     "cookie": "^1.0.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "react-router": "^7.6.1",
-    "react-scripts": "^5.0.0"
+    "react-router": "^7.6.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.27.0",
@@ -30,6 +30,7 @@
     "@types/node": "^22.13.14",
     "@types/react": "^19.1.0",
     "@types/react-dom": "^19.1.1",
+    "@vitejs/plugin-react": "^4.5.1",
     "eslint": "^9.27.0",
     "eslint-config-prettier": "^10.1.5",
     "eslint-plugin-jest": "^28.11.0",
@@ -51,20 +52,10 @@
     "stylelint-config-standard": "^37.0.0",
     "stylelint-prettier": "^5.0.0",
     "ts-jest": "^29.3.0",
+    "ts-jest-mock-import-meta": "^1.3.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3",
-    "typescript-eslint": "^8.32.1"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "typescript-eslint": "^8.32.1",
+    "vite": "^6.3.5"
   }
 }
