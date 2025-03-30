@@ -5,7 +5,7 @@ export default {
     '\\.tsx?$': [
       'ts-jest',
       {
-        tsconfig: 'tsconfig.app.json',
+        tsconfig: 'tsconfig.test.json',
       },
     ],
   },
