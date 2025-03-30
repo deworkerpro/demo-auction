@@ -8,6 +8,7 @@ Before({ timeout: 30000 }, async function (this: CustomWorld) {
   this.browser = await puppeteer.launch({
     args: [
       '--disable-dev-shm-usage',
+      '--disable-gpu',
       '--no-sandbox'
     ]
   })
