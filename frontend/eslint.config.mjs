@@ -5,6 +5,7 @@ import tsEslint from 'typescript-eslint'
 import pluginReact from 'eslint-plugin-react'
 import pluginReactHooks from 'eslint-plugin-react-hooks'
 import pluginReactRefresh from 'eslint-plugin-react-refresh'
+import pluginJest from 'eslint-plugin-jest'
 import pluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
 
 export default defineConfig([
@@ -33,6 +34,10 @@ export default defineConfig([
     rules: {
       'react-refresh/only-export-components': ['error', { allowConstantExport: true }],
     },
+  },
+  {
+    files: ['**/*.test.{js,ts,jsx,tsx}'],
+    ...pluginJest.configs['flat/recommended'],
   },
   pluginPrettierRecommended,
 ])
