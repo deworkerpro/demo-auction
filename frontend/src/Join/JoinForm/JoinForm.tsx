@@ -16,7 +16,7 @@ export default function JoinForm(): React.JSX.Element {
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState<string | null>(null)
 
-  const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const input = event.currentTarget
     setFormData({
       ...formData,
