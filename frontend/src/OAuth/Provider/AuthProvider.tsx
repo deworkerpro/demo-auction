@@ -42,6 +42,8 @@ export default function AuthProvider({
 
   const query = new URLSearchParams(window.location.search)
 
+  const authCode = query.get('code')
+
   const getStateError = (): string | null => {
     if (!query.get('state')) {
       return 'Empty state.'
@@ -60,6 +62,15 @@ export default function AuthProvider({
     isAuthRedirect ? getStateError() || getAuthRedirectError() : null,
   )
 
+  const buildTokens = useCallback(
+    (data: TokenResponse): Tokens => ({
+      accessToken: data.token_type + ' ' + data.access_token,
+      expires: new Date().getTime() + (data.expires_in - 5) * 1000,
+      refreshToken: data.refresh_token,
+    }),
+    [],
+  )
+
   useEffect(() => {
     if (!isAuthRedirect) {
       return
@@ -68,8 +79,6 @@ export default function AuthProvider({
     if (error) {
       return
     }
-
-    const authCode = query.get('code')
 
     if (!authCode) {
       return
@@ -142,7 +151,7 @@ export default function AuthProvider({
 
         setError(error.statusText)
       })
-  }, [])
+  }, [buildTokens, clientId, error, isAuthRedirect, authCode, redirectPath, tokenUrl])
 
   useEffect(() => {
     const listener = (e: StorageEvent) => {
@@ -154,29 +163,32 @@ export default function AuthProvider({
     return () => window.removeEventListener('storage', listener)
   }, [])
 
-  const login = useCallback(async (extra: Record<string, string>) => {
-    const currentLocation = window.location.pathname
-    const codeVerifier = generateCodeVerifier()
-    const codeChallenge = await generateCodeChallenge(codeVerifier)
-    const state = generateState()
+  const login = useCallback(
+    async (extra: Record<string, string>) => {
+      const currentLocation = window.location.pathname
+      const codeVerifier = generateCodeVerifier()
+      const codeChallenge = await generateCodeChallenge(codeVerifier)
+      const state = generateState()
 
-    window.localStorage.setItem('auth.location', currentLocation)
-    window.localStorage.setItem('auth.code_verifier', codeVerifier)
-    window.localStorage.setItem('auth.state', state)
+      window.localStorage.setItem('auth.location', currentLocation)
+      window.localStorage.setItem('auth.code_verifier', codeVerifier)
+      window.localStorage.setItem('auth.state', state)
 
-    const args = new URLSearchParams({
-      response_type: 'code',
-      client_id: clientId,
-      code_challenge_method: 'S256',
-      code_challenge: codeChallenge,
-      redirect_uri: window.location.origin + redirectPath,
-      scope,
-      state,
-      ...extra,
-    })
+      const args = new URLSearchParams({
+        response_type: 'code',
+        client_id: clientId,
+        code_challenge_method: 'S256',
+        code_challenge: codeChallenge,
+        redirect_uri: window.location.origin + redirectPath,
+        scope,
+        state,
+        ...extra,
+      })
 
-    window.location.assign(authorizeUrl + '?' + args)
-  }, [])
+      window.location.assign(authorizeUrl + '?' + args)
+    },
+    [authorizeUrl, clientId, redirectPath, scope],
+  )
 
   const logout = useCallback(() => {
     window.localStorage.removeItem('auth.tokens')
@@ -244,16 +256,7 @@ export default function AuthProvider({
       })
 
     return refreshPromises[tokens.refreshToken]
-  }, [])
-
-  const buildTokens = useCallback(
-    (data: TokenResponse): Tokens => ({
-      accessToken: data.token_type + ' ' + data.access_token,
-      expires: new Date().getTime() + (data.expires_in - 5) * 1000,
-      refreshToken: data.refresh_token,
-    }),
-    [],
-  )
+  }, [buildTokens, clientId, redirectPath, refreshPromises, tokenUrl])
 
   const contextValue = useMemo(
     (): AuthContextValue => ({
