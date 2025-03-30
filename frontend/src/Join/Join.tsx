@@ -1,6 +1,6 @@
 import React from 'react'
 import System from '../Layout/System'
-import { Link, Navigate } from 'react-router-dom'
+import { Link, Navigate } from 'react-router'
 import JoinForm from './JoinForm'
 import { useAuth } from '../OAuth/Provider'
 import AuthExternal from '../OAuth/External/AuthExternal'

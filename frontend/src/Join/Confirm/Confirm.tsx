@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link, Navigate, useLocation } from 'react-router-dom'
+import { Link, Navigate, useLocation } from 'react-router'
 import System from '../../Layout/System'
 import { AlertError } from '../../Alert'
 import api, { parseError } from '../../Api'

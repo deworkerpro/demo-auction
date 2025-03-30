@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './App.module.css'
 import { FeaturesProvider } from '../FeatureToggle'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router'
 import Home from '../Home'
 import Join from '../Join'
 import { NotFound } from '../Error'
