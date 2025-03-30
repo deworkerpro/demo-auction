@@ -86,6 +86,8 @@ test('shows validation errors', async () => {
 
   screen.getByText('Incorrect email')
   screen.getByText('Incorrect password')
+
+  expect(true).toBeDefined()
 })
 
 test('shows server error', async () => {

@@ -104,6 +104,17 @@ test('post with params and header', async () => {
   })
 })
 
+class NoErrorThrownError extends Error {}
+
+const getError = async <TError>(call: () => unknown): Promise<TError> => {
+  try {
+    await call()
+    throw new NoErrorThrownError()
+  } catch (error: unknown) {
+    return error as TError
+  }
+}
+
 test('post with error response', async () => {
   const response = new Response('', {
     status: 409,
@@ -111,9 +122,10 @@ test('post with error response', async () => {
 
   jest.spyOn(global, 'fetch').mockResolvedValue(response)
 
-  expect.assertions(1)
+  const result = await getError(async () => api.post('/url'))
 
-  await api.post('/url').catch((result) => expect(result).toEqual(response))
+  expect(result).not.toBeInstanceOf(NoErrorThrownError)
+  expect(result).toEqual(response)
 })
 
 test('post with JS error', async () => {
@@ -121,7 +133,8 @@ test('post with JS error', async () => {
 
   jest.spyOn(global, 'fetch').mockRejectedValue(error)
 
-  expect.assertions(1)
+  const result = await getError(async () => api.post('/url'))
 
-  await api.post('/url').catch((result) => expect(result).toEqual(error))
+  expect(result).not.toBeInstanceOf(NoErrorThrownError)
+  expect(result).toEqual(error)
 })
