@@ -1,4 +1,4 @@
-FROM node:21-alpine3.19 AS builder
+FROM node:25-alpine3.23 AS builder
 
 ENV REACT_APP_AUTH_URL=%%REACT_APP_AUTH_URL%%
 
