@@ -7,7 +7,8 @@ Given('I am a user', async function (this: CustomWorld) {
   if (!this.page) {
     throw new Error('Page is undefined')
   }
-  await this.page.evaluateOnNewDocument(() => {
+
+  const { identifier } = await this.page.evaluateOnNewDocument(() => {
     localStorage.setItem('auth.tokens', JSON.stringify({
       accessToken:
         'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiJmcm9udGVuZCIsImp' +
@@ -25,5 +26,15 @@ Given('I am a user', async function (this: CustomWorld) {
       expires: new Date().getTime() + 36000000,
       refreshToken: ''
     }))
+
+    const w = window as unknown as Window & {
+      removeAuthTokensCallback: () => void
+    }
+
+    w.removeAuthTokensCallback()
+  })
+
+  await this.page.exposeFunction('removeAuthTokensCallback', async () => {
+    await this.page?.removeScriptToEvaluateOnNewDocument(identifier)
   })
 })
