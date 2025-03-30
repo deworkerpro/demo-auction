@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { ChangeEvent, SyntheticEvent, useState } from 'react'
 import styles from './JoinForm.module.css'
 import api, { parseError, parseErrors } from '../../Api'
 import { AlertError, AlertSuccess } from '../../Alert'
@@ -16,7 +16,7 @@ export default function JoinForm() {
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState<string | null>(null)
 
-  const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const input = event.currentTarget
     setFormData({
       ...formData,
@@ -24,7 +24,7 @@ export default function JoinForm() {
     })
   }
 
-  const handleSubmit = (event: React.SyntheticEvent) => {
+  const handleSubmit = (event: SyntheticEvent) => {
     event.preventDefault()
 
     if (!formData.agree) {
