@@ -20,7 +20,7 @@ export default function App({ features }: { features: string[] }) {
         scope="common"
         redirectPath="/oauth"
       >
-        <BrowserRouter future={{ v7_relativeSplatPath: true, v7_startTransition: true }}>
+        <BrowserRouter>
           <div className={styles.app}>
             <Routes>
               <Route path="/" element={<Home />} />

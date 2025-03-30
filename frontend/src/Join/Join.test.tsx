@@ -7,7 +7,7 @@ import FakeAuthProvider from '../OAuth/Provider/FakeAuthProvider'
 test('renders join page', () => {
   render(
     <FakeAuthProvider isAuthenticated={false}>
-      <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+      <MemoryRouter>
         <Join />
       </MemoryRouter>
     </FakeAuthProvider>,
