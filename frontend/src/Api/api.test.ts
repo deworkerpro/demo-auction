@@ -1,8 +1,8 @@
-import { jest } from '@jest/globals'
 import api from './api'
+import { expect, test, vi } from 'vitest'
 
 test('get with custom header', async () => {
-  const fetch = jest.spyOn(global, 'fetch').mockResolvedValue(new Response())
+  const fetch = vi.spyOn(global, 'fetch').mockResolvedValue(new Response())
 
   const data = await api.get('/url', { 'Custom-Header': 'Value' })
 
@@ -18,7 +18,7 @@ test('get with custom header', async () => {
 })
 
 test('get with JSON response', async () => {
-  const fetch = jest.spyOn(global, 'fetch').mockResolvedValue(
+  const fetch = vi.spyOn(global, 'fetch').mockResolvedValue(
     new Response(JSON.stringify({ name: 'value' }), {
       status: 200,
       headers: new Headers({ 'Content-Type': 'application/json' }),
@@ -38,7 +38,7 @@ test('get with JSON response', async () => {
 })
 
 test('get with text response', async () => {
-  jest.spyOn(global, 'fetch').mockResolvedValue(
+  vi.spyOn(global, 'fetch').mockResolvedValue(
     new Response('value', {
       status: 200,
       headers: new Headers({ 'Content-Type': 'text/plain' }),
@@ -51,7 +51,7 @@ test('get with text response', async () => {
 })
 
 test('get promise', async () => {
-  jest.spyOn(global, 'fetch').mockResolvedValue(
+  vi.spyOn(global, 'fetch').mockResolvedValue(
     new Response('value', {
       status: 200,
       headers: new Headers({ 'Content-Type': 'text/plain' }),
@@ -64,7 +64,7 @@ test('get promise', async () => {
 })
 
 test('post without params', async () => {
-  const fetch = jest.spyOn(global, 'fetch').mockResolvedValue(
+  const fetch = vi.spyOn(global, 'fetch').mockResolvedValue(
     new Response(JSON.stringify({ name: 'value' }), {
       status: 200,
       headers: new Headers({ 'Content-Type': 'application/json' }),
@@ -82,7 +82,7 @@ test('post without params', async () => {
 })
 
 test('post with params and header', async () => {
-  const fetch = jest.spyOn(global, 'fetch').mockResolvedValue(
+  const fetch = vi.spyOn(global, 'fetch').mockResolvedValue(
     new Response(JSON.stringify({ name: 'value' }), {
       status: 200,
       headers: new Headers({ 'Content-Type': 'application/json' }),
@@ -120,7 +120,7 @@ test('post with error response', async () => {
     status: 409,
   })
 
-  jest.spyOn(global, 'fetch').mockResolvedValue(response)
+  vi.spyOn(global, 'fetch').mockResolvedValue(response)
 
   const result = await getError(async () => api.post('/url'))
 
@@ -131,7 +131,7 @@ test('post with error response', async () => {
 test('post with JS error', async () => {
   const error = new Error('Message')
 
-  jest.spyOn(global, 'fetch').mockRejectedValue(error)
+  vi.spyOn(global, 'fetch').mockRejectedValue(error)
 
   const result = await getError(async () => api.post('/url'))
 

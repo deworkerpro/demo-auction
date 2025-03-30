@@ -1,12 +1,12 @@
 import { Fragment } from 'react'
-import { jest } from '@jest/globals'
+import { expect, test, vi } from 'vitest'
 import { render, waitFor, screen } from '@testing-library/react'
 import Confirm from './Confirm'
 import { createMemoryRouter, RouterProvider } from 'react-router'
 import api from '../../Api'
 
 test('confirms without token', async () => {
-  jest.spyOn(api, 'post')
+  vi.spyOn(api, 'post')
 
   const router = createMemoryRouter(
     [
@@ -32,7 +32,7 @@ test('confirms without token', async () => {
 })
 
 test('confirms successfully', async () => {
-  jest.spyOn(api, 'post').mockResolvedValue(
+  vi.spyOn(api, 'post').mockResolvedValue(
     new Response('', {
       status: 201,
       headers: new Headers(),
@@ -71,7 +71,7 @@ test('confirms successfully', async () => {
 })
 
 test('shows error', async () => {
-  jest.spyOn(api, 'post').mockRejectedValue(
+  vi.spyOn(api, 'post').mockRejectedValue(
     new Response(JSON.stringify({ message: 'Incorrect token.' }), {
       status: 409,
       headers: new Headers({ 'content-type': 'application/json' }),

@@ -129,7 +129,7 @@ frontend-ts-check:
 	docker compose run --rm frontend-node-cli yarn ts-check
 
 frontend-test:
-	docker compose run --rm frontend-node-cli yarn test --watchAll=false
+	docker compose run --rm frontend-node-cli yarn test --watch=false
 
 frontend-test-watch:
 	docker compose run --rm frontend-node-cli yarn test

@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import InputError from './InputError'
+import { expect, test } from 'vitest'
 
 test('renders violation', () => {
   render(<InputError error="Error!" />)

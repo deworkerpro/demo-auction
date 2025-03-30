@@ -1,10 +1,11 @@
-import { jest } from '@jest/globals'
+import { vi } from 'vitest'
 import { fireEvent, render, screen } from '@testing-library/react'
 import JoinForm from './JoinForm'
 import api from '../../Api'
+import { expect, test } from 'vitest'
 
 test('allows the user to join successfully', async () => {
-  jest.spyOn(api, 'post').mockResolvedValue('')
+  vi.spyOn(api, 'post').mockResolvedValue('')
 
   render(<JoinForm />)
 
@@ -29,7 +30,7 @@ test('allows the user to join successfully', async () => {
 })
 
 test('shows conflict error', async () => {
-  jest.spyOn(api, 'post').mockRejectedValue(
+  vi.spyOn(api, 'post').mockRejectedValue(
     new Response(JSON.stringify({ message: 'User already exists.' }), {
       status: 409,
       headers: new Headers({ 'Content-Type': 'application/json' }),
@@ -54,7 +55,7 @@ test('shows conflict error', async () => {
 })
 
 test('shows validation errors', async () => {
-  jest.spyOn(api, 'post').mockRejectedValue(
+  vi.spyOn(api, 'post').mockRejectedValue(
     new Response(
       JSON.stringify({
         errors: {
@@ -90,7 +91,7 @@ test('shows validation errors', async () => {
 })
 
 test('shows server error', async () => {
-  jest.spyOn(api, 'post').mockRejectedValue(
+  vi.spyOn(api, 'post').mockRejectedValue(
     new Response('', {
       status: 502,
       statusText: 'Bad Gateway',

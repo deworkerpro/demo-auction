@@ -1,6 +1,7 @@
 import { MemoryRouter } from 'react-router'
 import { render, screen } from '@testing-library/react'
 import NotFound from './NotFound'
+import { expect, test } from 'vitest'
 
 test('renders not found', () => {
   render(

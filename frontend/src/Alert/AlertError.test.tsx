@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import AlertError from './AlertError'
+import { expect, test } from 'vitest'
 
 test('renders error', () => {
   render(<AlertError message="Error!" />)

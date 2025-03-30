@@ -1,9 +1,9 @@
-import { jest } from '@jest/globals'
+import { expect, test, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import { FeaturesProvider } from '../FeatureToggle'
 import App from './App'
 
-jest.mock('../FeatureToggle', () => ({ FeaturesProvider: jest.fn(() => null) }))
+vi.mock('../FeatureToggle', () => ({ FeaturesProvider: vi.fn(() => null) }))
 
 test('renders app', () => {
   render(<App features={['ONE']} />)

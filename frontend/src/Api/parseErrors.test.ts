@@ -1,4 +1,5 @@
 import parseErrors from './parseErrors'
+import { expect, test } from 'vitest'
 
 test('response with violations', async () => {
   const response = new Response(

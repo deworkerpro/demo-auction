@@ -1,6 +1,7 @@
 import { render } from '@testing-library/react'
 import FeatureFlag from './FeatureFlag'
 import FeaturesProvider from './FeaturesProvider'
+import { expect, test } from 'vitest'
 
 test('renders content if feature is active', () => {
   const { container } = render(

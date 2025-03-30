@@ -1,4 +1,5 @@
 import isJsonResponse from './isJsonResponse'
+import { expect, test } from 'vitest'
 
 test('json response', () => {
   const response = new Response('', {

@@ -1,4 +1,5 @@
 import parseError from './parseError'
+import { expect, test } from 'vitest'
 
 test('response with violations', async () => {
   const response = new Response(JSON.stringify({ errors: { email: 'Wrong' } }), {

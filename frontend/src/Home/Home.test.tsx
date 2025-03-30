@@ -3,6 +3,7 @@ import Home from './Home'
 import { FeaturesProvider } from '../FeatureToggle'
 import { MemoryRouter } from 'react-router'
 import FakeAuthProvider from '../OAuth/Provider/FakeAuthProvider'
+import { expect, test } from 'vitest'
 
 test('renders home', () => {
   render(

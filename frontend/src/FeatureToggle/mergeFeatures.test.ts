@@ -1,4 +1,5 @@
 import mergeFeatures from './mergeFeatures'
+import { expect, test } from 'vitest'
 
 test('merges features structs and arrays', () => {
   const features1 = {

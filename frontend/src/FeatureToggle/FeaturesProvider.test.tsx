@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import FeaturesProvider from './FeaturesProvider'
 import FeaturesContext from './FeaturesContext'
+import { expect, test } from 'vitest'
 
 test('passes features', () => {
   const features = ['ONE', 'TWO']
