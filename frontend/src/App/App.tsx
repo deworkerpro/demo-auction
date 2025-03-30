@@ -1,5 +1,5 @@
 import React from 'react'
-import './App.css'
+import styles from './App.module.css'
 import { FeaturesProvider } from '../FeatureToggle'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Home from '../Home'
@@ -21,7 +21,7 @@ export default function App({ features }: { features: string[] }) {
         redirectPath="/oauth"
       >
         <BrowserRouter>
-          <div className="app">
+          <div className={styles.app}>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/oauth" element={<OAuth />} />
