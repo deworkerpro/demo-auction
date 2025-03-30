@@ -1,10 +1,4 @@
-import React from 'react'
-
-export default function InputError({
-  error,
-}: {
-  error: string | null | undefined
-}): React.JSX.Element {
+export default function InputError({ error }: { error: string | null | undefined }) {
   return (
     <>
       {error ? (

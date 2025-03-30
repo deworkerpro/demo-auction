@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react'
+import { ReactNode } from 'react'
 import FeaturesContext from './FeaturesContext'
 
 type Props = {
@@ -6,6 +6,6 @@ type Props = {
   children: ReactNode
 }
 
-export default function FeaturesProvider({ features, children }: Props): React.JSX.Element {
+export default function FeaturesProvider({ features, children }: Props) {
   return <FeaturesContext.Provider value={features}>{children}</FeaturesContext.Provider>
 }

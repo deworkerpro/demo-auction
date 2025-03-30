@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, Navigate, useLocation } from 'react-router'
 import System from '../../Layout/System'
 import { AlertError } from '../../Alert'
@@ -8,7 +8,7 @@ function useQuery() {
   return new URLSearchParams(useLocation().search)
 }
 
-export default function Confirm(): React.JSX.Element {
+export default function Confirm() {
   const [success, setSuccess] = useState<true | null>(null)
   const [error, setError] = useState<string | null>(null)
 

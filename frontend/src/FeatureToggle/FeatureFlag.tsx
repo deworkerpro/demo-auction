@@ -1,4 +1,4 @@
-import React, { ReactNode, useContext } from 'react'
+import { ReactNode, useContext } from 'react'
 import FeaturesContext from './FeaturesContext'
 
 type Props = {
@@ -7,7 +7,7 @@ type Props = {
   children: ReactNode
 }
 
-export default function FeatureFlag({ name, not = false, children }: Props): React.JSX.Element {
+export default function FeatureFlag({ name, not = false, children }: Props) {
   const features = useContext(FeaturesContext)
   const isActive = features.includes(name)
 
