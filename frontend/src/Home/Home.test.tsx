@@ -9,7 +9,7 @@ test('renders home', () => {
   render(
     <FakeAuthProvider isAuthenticated={false}>
       <FeaturesProvider features={[]}>
-        <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+        <MemoryRouter>
           <Home />
         </MemoryRouter>
       </FeaturesProvider>
