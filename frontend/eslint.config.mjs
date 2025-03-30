@@ -4,6 +4,7 @@ import js from '@eslint/js'
 import tsEslint from 'typescript-eslint'
 import pluginReact from 'eslint-plugin-react'
 import pluginReactHooks from 'eslint-plugin-react-hooks'
+import pluginReactRefresh from 'eslint-plugin-react-refresh'
 import pluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
 
 export default defineConfig([
@@ -22,6 +23,15 @@ export default defineConfig([
     rules: {
       'react-hooks/rules-of-hooks': 'error',
       'react-hooks/exhaustive-deps': 'error',
+    },
+  },
+  {
+    files: ['**/*.{js,ts,jsx,tsx}'],
+    plugins: {
+      'react-refresh': pluginReactRefresh,
+    },
+    rules: {
+      'react-refresh/only-export-components': ['error', { allowConstantExport: true }],
     },
   },
   pluginPrettierRecommended,
