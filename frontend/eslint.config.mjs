@@ -7,6 +7,7 @@ import pluginReactHooks from 'eslint-plugin-react-hooks'
 import pluginReactRefresh from 'eslint-plugin-react-refresh'
 import pluginJest from 'eslint-plugin-jest'
 import pluginJestDom from 'eslint-plugin-jest-dom'
+import pluginTestingLibrary from 'eslint-plugin-testing-library'
 import pluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
 
 export default defineConfig([
@@ -43,6 +44,10 @@ export default defineConfig([
   {
     files: ['**/*.test.{js,ts,jsx,tsx}'],
     ...pluginJestDom.configs['flat/recommended'],
+  },
+  {
+    files: ['**/*.test.{js,ts,jsx,tsx}'],
+    ...pluginTestingLibrary.configs['flat/react'],
   },
   pluginPrettierRecommended,
 ])
