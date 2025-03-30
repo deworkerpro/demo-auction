@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './Home.module.css'
 import System from '../Layout/System'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router'
 import { useAuth } from '../OAuth/Provider'
 
 export default function Home(): React.JSX.Element {

@@ -1,6 +1,6 @@
 import React from 'react'
 import System from '../Layout/System'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router'
 
 export default function NotFound(): React.JSX.Element {
   return (
