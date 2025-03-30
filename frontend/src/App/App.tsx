@@ -14,8 +14,8 @@ export default function App({ features }: { features: string[] }) {
   return (
     <FeaturesProvider features={features}>
       <AuthProvider
-        authorizeUrl={process.env.REACT_APP_AUTH_URL + '/authorize'}
-        tokenUrl={process.env.REACT_APP_AUTH_URL + '/token'}
+        authorizeUrl={import.meta.env.VITE_AUTH_URL + '/authorize'}
+        tokenUrl={import.meta.env.VITE_AUTH_URL + '/token'}
         clientId="frontend"
         scope="common"
         redirectPath="/oauth"
