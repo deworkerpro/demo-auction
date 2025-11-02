@@ -67,10 +67,10 @@ services:
         environment:
             APP_ENV: prod
             APP_DEBUG: 0
-            DB_HOST: api-postgres
-            DB_USER: app
+            DB_HOST: ${API_DB_HOST}
+            DB_USER: ${API_DB_USERNAME}
             DB_PASSWORD: ${API_DB_PASSWORD}
-            DB_NAME: app
+            DB_NAME: ${API_DB_NAME}
             MAILER_HOST: ${API_MAILER_HOST}
             MAILER_PORT: ${API_MAILER_PORT}
             MAILER_USERNAME: ${API_MAILER_USERNAME}
@@ -107,10 +107,10 @@ services:
         environment:
             APP_ENV: prod
             APP_DEBUG: 0
-            DB_HOST: api-postgres
-            DB_USER: app
+            DB_HOST: ${API_DB_HOST}
+            DB_USER: ${API_DB_USERNAME}
             DB_PASSWORD: ${API_DB_PASSWORD}
-            DB_NAME: app
+            DB_NAME: ${API_DB_NAME}
             MAILER_HOST: ${API_MAILER_HOST}
             MAILER_PORT: ${API_MAILER_PORT}
             MAILER_USERNAME: ${API_MAILER_USERNAME}
@@ -148,10 +148,10 @@ services:
         environment:
             APP_ENV: prod
             APP_DEBUG: 0
-            DB_HOST: api-postgres
-            DB_USER: app
+            DB_HOST: ${API_DB_HOST}
+            DB_USER: ${API_DB_USERNAME}
             DB_PASSWORD: ${API_DB_PASSWORD}
-            DB_NAME: app
+            DB_NAME: ${API_DB_NAME}
             MAILER_HOST: ${API_MAILER_HOST}
             MAILER_PORT: ${API_MAILER_PORT}
             MAILER_USERNAME: ${API_MAILER_USERNAME}
@@ -186,27 +186,14 @@ services:
             restart_policy:
                 condition: none
 
-    api-postgres:
-        image: postgres:17.7-alpine3.23
-        environment:
-            POSTGRES_USER: app
-            POSTGRES_PASSWORD: ${API_DB_PASSWORD}
-            POSTGRES_DB: app
-        volumes:
-            - api-postgres:/var/lib/postgresql/data
-        deploy:
-            placement:
-                constraints: [ node.labels.db == db ]
-            endpoint_mode: dnsrr
-
     api-postgres-backup:
         image: ${REGISTRY}/auction-api-postgres-backup:${IMAGE_TAG}
         environment:
             BACKUP_NAME: auction_api-postgres
-            POSTGRES_HOST: api-postgres
-            POSTGRES_USERNAME: app
+            POSTGRES_HOST: ${API_DB_HOST}
+            POSTGRES_USERNAME: ${API_DB_USERNAME}
             POSTGRES_PASSWORD: ${API_DB_PASSWORD}
-            POSTGRES_DB: app
+            POSTGRES_DB: ${API_DB_NAME}
             AWS_ACCESS_KEY_ID: ${BACKUP_AWS_ACCESS_KEY_ID}
             AWS_SECRET_ACCESS_KEY: ${BACKUP_AWS_SECRET_ACCESS_KEY}
             AWS_DEFAULT_REGION: ${BACKUP_AWS_DEFAULT_REGION}

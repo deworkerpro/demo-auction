@@ -238,7 +238,10 @@ pipeline {
                 withCredentials([
                     string(credentialsId: 'PRODUCTION_HOST', variable: 'HOST'),
                     string(credentialsId: 'PRODUCTION_PORT', variable: 'PORT'),
+                    string(credentialsId: 'API_DB_HOST', variable: 'API_DB_HOST'),
+                    string(credentialsId: 'API_DB_USERNAME', variable: 'API_DB_USERNAME'),
                     string(credentialsId: 'API_DB_PASSWORD', variable: 'API_DB_PASSWORD'),
+                    string(credentialsId: 'API_DB_NAME', variable: 'API_DB_NAME'),
                     string(credentialsId: 'API_MAILER_HOST', variable: 'API_MAILER_HOST'),
                     string(credentialsId: 'API_MAILER_PORT', variable: 'API_MAILER_PORT'),
                     string(credentialsId: 'API_MAILER_USERNAME', variable: 'API_MAILER_USERNAME'),
