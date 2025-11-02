@@ -50,16 +50,16 @@ services:
             APP_DEBUG: 0
             DB_HOST: api-postgres
             DB_USER: app
-            DB_PASSWORD_FILE: /run/secrets/api_db_password
+            DB_PASSWORD: secret
             DB_NAME: app
             MAILER_HOST: mailer
             MAILER_PORT: 1025
             MAILER_USERNAME: app
-            MAILER_PASSWORD_FILE: /run/secrets/api_mailer_password
+            MAILER_PASSWORD: secret
             MAILER_FROM_EMAIL: mail@app.test
             FRONTEND_URL: http://localhost
-            SENTRY_DSN_FILE: /run/secrets/sentry_dsn
-            JWT_ENCRYPTION_KEY_FILE: /run/secrets/jwt_encryption_key
+            SENTRY_DSN: ""
+            JWT_ENCRYPTION_KEY: secret
             JWT_PUBLIC_KEY_PATH: /run/secrets/jwt_public_key
             JWT_PRIVATE_KEY_PATH: /run/secrets/jwt_private_key
             OAUTH_CALLBACK_URL: http://api.localhost
@@ -67,21 +67,15 @@ services:
             OAUTH_YANDEX_TOKEN_URL: http://wiremock:8080/oauth.yandex.ru
             OAUTH_YANDEX_API_URL: http://wiremock:8080/login.yandex.ru
             OAUTH_YANDEX_CLIENT_ID: app
-            OAUTH_YANDEX_CLIENT_SECRET_FILE: /run/secrets/oauth_yandex_client_secret
+            OAUTH_YANDEX_CLIENT_SECRET: yandex-secret
             OAUTH_MAILRU_AUTH_URL: http://wiremock.localhost/oauth.mail.ru
             OAUTH_MAILRU_TOKEN_URL: http://wiremock:8080/oauth.mail.ru
             OAUTH_MAILRU_API_URL: http://wiremock:8080/oauth.mail.ru
             OAUTH_MAILRU_CLIENT_ID: app
-            OAUTH_MAILRU_CLIENT_SECRET_FILE: /run/secrets/oauth_mailru_client_secret
+            OAUTH_MAILRU_CLIENT_SECRET: mailru-secret
         secrets:
-            - api_db_password
-            - api_mailer_password
-            - sentry_dsn
-            - jwt_encryption_key
             - jwt_public_key
             - jwt_private_key
-            - oauth_yandex_client_secret
-            - oauth_mailru_client_secret
 
     api-php-cli:
         image: ${REGISTRY}/auction-api-php-cli:${IMAGE_TAG}
@@ -90,16 +84,16 @@ services:
             APP_DEBUG: 0
             DB_HOST: api-postgres
             DB_USER: app
-            DB_PASSWORD_FILE: /run/secrets/api_db_password
+            DB_PASSWORD: secret
             DB_NAME: app
             MAILER_HOST: mailer
             MAILER_PORT: 1025
             MAILER_USERNAME: app
-            MAILER_PASSWORD_FILE: /run/secrets/api_mailer_password
+            MAILER_PASSWORD: secret
             MAILER_FROM_EMAIL: mail@app.test
             FRONTEND_URL: http://localhost
-            SENTRY_DSN_FILE: /run/secrets/sentry_dsn
-            JWT_ENCRYPTION_KEY_FILE: /run/secrets/jwt_encryption_key
+            SENTRY_DSN: ""
+            JWT_ENCRYPTION_KEY: secret
             JWT_PUBLIC_KEY_PATH: /run/secrets/jwt_public_key
             JWT_PRIVATE_KEY_PATH: /run/secrets/jwt_private_key
             OAUTH_CALLBACK_URL: http://api.localhost
@@ -107,21 +101,15 @@ services:
             OAUTH_YANDEX_TOKEN_URL: http://wiremock:8080/oauth.yandex.ru
             OAUTH_YANDEX_API_URL: http://wiremock:8080/login.yandex.ru
             OAUTH_YANDEX_CLIENT_ID: app
-            OAUTH_YANDEX_CLIENT_SECRET_FILE: /run/secrets/oauth_yandex_client_secret
+            OAUTH_YANDEX_CLIENT_SECRET: yandex-secret
             OAUTH_MAILRU_AUTH_URL: http://wiremock.localhost/oauth.mail.ru
             OAUTH_MAILRU_TOKEN_URL: http://wiremock:8080/oauth.mail.ru
             OAUTH_MAILRU_API_URL: http://wiremock:8080/oauth.mail.ru
             OAUTH_MAILRU_CLIENT_ID: app
-            OAUTH_MAILRU_CLIENT_SECRET_FILE: /run/secrets/oauth_mailru_client_secret
+            OAUTH_MAILRU_CLIENT_SECRET: mailru-secret
         secrets:
-            - api_db_password
-            - api_mailer_password
-            - sentry_dsn
-            - jwt_encryption_key
             - jwt_public_key
             - jwt_private_key
-            - oauth_yandex_client_secret
-            - oauth_mailru_client_secret
 
     testing-api-php-cli:
         image: ${REGISTRY}/auction-testing-api-php-cli:${IMAGE_TAG}
@@ -130,16 +118,16 @@ services:
             APP_DEBUG: 1
             DB_HOST: api-postgres
             DB_USER: app
-            DB_PASSWORD_FILE: /run/secrets/api_db_password
+            DB_PASSWORD: secret
             DB_NAME: app
             MAILER_HOST: mailer
             MAILER_PORT: 1025
             MAILER_USERNAME: app
-            MAILER_PASSWORD_FILE: /run/secrets/api_mailer_password
+            MAILER_PASSWORD: secret
             MAILER_FROM_EMAIL: mail@app.test
             FRONTEND_URL: http://localhost
-            SENTRY_DSN_FILE: /run/secrets/sentry_dsn
-            JWT_ENCRYPTION_KEY_FILE: /run/secrets/jwt_encryption_key
+            SENTRY_DSN: ""
+            JWT_ENCRYPTION_KEY: secret
             JWT_PUBLIC_KEY_PATH: /run/secrets/jwt_public_key
             JWT_PRIVATE_KEY_PATH: /run/secrets/jwt_private_key
             OAUTH_CALLBACK_URL: http://api.localhost
@@ -147,30 +135,22 @@ services:
             OAUTH_YANDEX_TOKEN_URL: http://wiremock:8080/oauth.yandex.ru
             OAUTH_YANDEX_API_URL: http://wiremock:8080/login.yandex.ru
             OAUTH_YANDEX_CLIENT_ID: app
-            OAUTH_YANDEX_CLIENT_SECRET_FILE: /run/secrets/oauth_yandex_client_secret
+            OAUTH_YANDEX_CLIENT_SECRET: yandex-secret
             OAUTH_MAILRU_AUTH_URL: http://wiremock.localhost/oauth.mail.ru
             OAUTH_MAILRU_TOKEN_URL: http://wiremock:8080/oauth.mail.ru
             OAUTH_MAILRU_API_URL: http://wiremock:8080/oauth.mail.ru
             OAUTH_MAILRU_CLIENT_ID: app
-            OAUTH_MAILRU_CLIENT_SECRET_FILE: /run/secrets/oauth_mailru_client_secret
+            OAUTH_MAILRU_CLIENT_SECRET: mailru-secret
         secrets:
-            - api_db_password
-            - api_mailer_password
-            - sentry_dsn
-            - jwt_encryption_key
             - jwt_public_key
             - jwt_private_key
-            - oauth_yandex_client_secret
-            - oauth_mailru_client_secret
 
     api-postgres:
         image: postgres:17.7-alpine3.23
         environment:
             POSTGRES_USER: app
-            POSTGRES_PASSWORD_FILE: /run/secrets/api_db_password
+            POSTGRES_PASSWORD: secret
             POSTGRES_DB: app
-        secrets:
-            - api_db_password
 
     mailer:
         image: axllent/mailpit:v1.27
@@ -202,22 +182,10 @@ services:
         network_mode: service:traefik
 
 secrets:
-    api_db_password:
-        file: ./docker/development/secrets/api_db_password
-    api_mailer_password:
-        file: ./docker/development/secrets/api_mailer_password
-    sentry_dsn:
-        file: ./docker/development/secrets/sentry_dsn
-    jwt_encryption_key:
-        file: ./docker/development/secrets/jwt_encryption_key
     jwt_public_key:
         file: ./docker/development/secrets/jwt_public_key
     jwt_private_key:
         file: ./docker/development/secrets/jwt_private_key
-    oauth_yandex_client_secret:
-        file: ./docker/development/secrets/oauth_yandex_client_secret
-    oauth_mailru_client_secret:
-        file: ./docker/development/secrets/oauth_mailru_client_secret
 
 networks:
     traefik-public:

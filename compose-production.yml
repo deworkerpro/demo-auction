@@ -64,16 +64,16 @@ services:
             APP_DEBUG: 0
             DB_HOST: api-postgres
             DB_USER: app
-            DB_PASSWORD_FILE: /run/secrets/api_db_password
+            DB_PASSWORD: ${API_DB_PASSWORD}
             DB_NAME: app
             MAILER_HOST: ${API_MAILER_HOST}
             MAILER_PORT: ${API_MAILER_PORT}
             MAILER_USERNAME: ${API_MAILER_USERNAME}
-            MAILER_PASSWORD_FILE: /run/secrets/api_mailer_password
+            MAILER_PASSWORD: ${API_MAILER_PASSWORD}
             MAILER_FROM_EMAIL: ${API_MAILER_FROM_EMAIL}
             FRONTEND_URL: https://demo-auction.deworker.pro
-            SENTRY_DSN_FILE: /run/secrets/sentry_dsn
-            JWT_ENCRYPTION_KEY_FILE: /run/secrets/jwt_encryption_key
+            SENTRY_DSN: ""
+            JWT_ENCRYPTION_KEY: ${JWT_ENCRYPTION_KEY}
             JWT_PUBLIC_KEY_PATH: /run/secrets/jwt_public_key
             JWT_PRIVATE_KEY_PATH: /run/secrets/jwt_private_key
             OAUTH_CALLBACK_URL: https://api.demo-auction.deworker.pro
@@ -81,21 +81,15 @@ services:
             OAUTH_YANDEX_TOKEN_URL: https://oauth.yandex.ru
             OAUTH_YANDEX_API_URL: https://login.yandex.ru
             OAUTH_YANDEX_CLIENT_ID: ${OAUTH_YANDEX_CLIENT_ID}
-            OAUTH_YANDEX_CLIENT_SECRET_FILE: /run/secrets/oauth_yandex_client_secret
+            OAUTH_YANDEX_CLIENT_SECRET: ${OAUTH_YANDEX_CLIENT_SECRET}
             OAUTH_MAILRU_AUTH_URL: https://oauth.mail.ru
             OAUTH_MAILRU_TOKEN_URL: https://oauth.mail.ru
             OAUTH_MAILRU_API_URL: https://oauth.mail.ru
             OAUTH_MAILRU_CLIENT_ID: ${OAUTH_MAILRU_CLIENT_ID}
-            OAUTH_MAILRU_CLIENT_SECRET_FILE: /run/secrets/oauth_mailru_client_secret
+            OAUTH_MAILRU_CLIENT_SECRET: ${OAUTH_MAILRU_CLIENT_SECRET}
         secrets:
-            - api_db_password
-            - api_mailer_password
-            - sentry_dsn
-            - jwt_encryption_key
             - jwt_public_key
             - jwt_private_key
-            - oauth_yandex_client_secret
-            - oauth_mailru_client_secret
         deploy:
             mode: replicated
             replicas: 2
@@ -110,16 +104,16 @@ services:
             APP_DEBUG: 0
             DB_HOST: api-postgres
             DB_USER: app
-            DB_PASSWORD_FILE: /run/secrets/api_db_password
+            DB_PASSWORD: ${API_DB_PASSWORD}
             DB_NAME: app
             MAILER_HOST: ${API_MAILER_HOST}
             MAILER_PORT: ${API_MAILER_PORT}
             MAILER_USERNAME: ${API_MAILER_USERNAME}
-            MAILER_PASSWORD_FILE: /run/secrets/api_mailer_password
+            MAILER_PASSWORD: ${API_MAILER_PASSWORD}
             MAILER_FROM_EMAIL: ${API_MAILER_FROM_EMAIL}
             FRONTEND_URL: https://demo-auction.deworker.pro
-            SENTRY_DSN_FILE: /run/secrets/sentry_dsn
-            JWT_ENCRYPTION_KEY_FILE: /run/secrets/jwt_encryption_key
+            SENTRY_DSN: ""
+            JWT_ENCRYPTION_KEY: ${JWT_ENCRYPTION_KEY}
             JWT_PUBLIC_KEY_PATH: /run/secrets/jwt_public_key
             JWT_PRIVATE_KEY_PATH: /run/secrets/jwt_private_key
             OAUTH_CALLBACK_URL: https://api.demo-auction.deworker.pro
@@ -127,21 +121,15 @@ services:
             OAUTH_YANDEX_TOKEN_URL: https://oauth.yandex.ru
             OAUTH_YANDEX_API_URL: https://login.yandex.ru
             OAUTH_YANDEX_CLIENT_ID: ${OAUTH_YANDEX_CLIENT_ID}
-            OAUTH_YANDEX_CLIENT_SECRET_FILE: /run/secrets/oauth_yandex_client_secret
+            OAUTH_YANDEX_CLIENT_SECRET: ${OAUTH_YANDEX_CLIENT_SECRET}
             OAUTH_MAILRU_AUTH_URL: https://oauth.mail.ru
             OAUTH_MAILRU_TOKEN_URL: https://oauth.mail.ru
             OAUTH_MAILRU_API_URL: https://oauth.mail.ru
             OAUTH_MAILRU_CLIENT_ID: ${OAUTH_MAILRU_CLIENT_ID}
-            OAUTH_MAILRU_CLIENT_SECRET_FILE: /run/secrets/oauth_mailru_client_secret
+            OAUTH_MAILRU_CLIENT_SECRET: ${OAUTH_MAILRU_CLIENT_SECRET}
         secrets:
-            - api_db_password
-            - api_mailer_password
-            - sentry_dsn
-            - jwt_encryption_key
             - jwt_public_key
             - jwt_private_key
-            - oauth_yandex_client_secret
-            - oauth_mailru_client_secret
         command: ["sh", "-c", "wait-for-it api-postgres:5432 -t 60 && exec php bin/app.php migrations:migrate --no-interaction"]
         deploy:
             restart_policy:
@@ -157,16 +145,16 @@ services:
             APP_DEBUG: 0
             DB_HOST: api-postgres
             DB_USER: app
-            DB_PASSWORD_FILE: /run/secrets/api_db_password
+            DB_PASSWORD: ${API_DB_PASSWORD}
             DB_NAME: app
             MAILER_HOST: ${API_MAILER_HOST}
             MAILER_PORT: ${API_MAILER_PORT}
             MAILER_USERNAME: ${API_MAILER_USERNAME}
-            MAILER_PASSWORD_FILE: /run/secrets/api_mailer_password
+            MAILER_PASSWORD: ${API_MAILER_PASSWORD}
             MAILER_FROM_EMAIL: ${API_MAILER_FROM_EMAIL}
             FRONTEND_URL: https://demo-auction.deworker.pro
-            SENTRY_DSN_FILE: /run/secrets/sentry_dsn
-            JWT_ENCRYPTION_KEY_FILE: /run/secrets/jwt_encryption_key
+            SENTRY_DSN: ""
+            JWT_ENCRYPTION_KEY: ${JWT_ENCRYPTION_KEY}
             JWT_PUBLIC_KEY_PATH: /run/secrets/jwt_public_key
             JWT_PRIVATE_KEY_PATH: /run/secrets/jwt_private_key
             OAUTH_CALLBACK_URL: https://api.demo-auction.deworker.pro
@@ -174,21 +162,15 @@ services:
             OAUTH_YANDEX_TOKEN_URL: https://oauth.yandex.ru
             OAUTH_YANDEX_API_URL: https://login.yandex.ru
             OAUTH_YANDEX_CLIENT_ID: ${OAUTH_YANDEX_CLIENT_ID}
-            OAUTH_YANDEX_CLIENT_SECRET_FILE: /run/secrets/oauth_yandex_client_secret
+            OAUTH_YANDEX_CLIENT_SECRET: ${OAUTH_YANDEX_CLIENT_SECRET}
             OAUTH_MAILRU_AUTH_URL: https://oauth.mail.ru
             OAUTH_MAILRU_TOKEN_URL: https://oauth.mail.ru
             OAUTH_MAILRU_API_URL: https://oauth.mail.ru
             OAUTH_MAILRU_CLIENT_ID: ${OAUTH_MAILRU_CLIENT_ID}
-            OAUTH_MAILRU_CLIENT_SECRET_FILE: /run/secrets/oauth_mailru_client_secret
+            OAUTH_MAILRU_CLIENT_SECRET: ${OAUTH_MAILRU_CLIENT_SECRET}
         secrets:
-            - api_db_password
-            - api_mailer_password
-            - sentry_dsn
-            - jwt_encryption_key
             - jwt_public_key
             - jwt_private_key
-            - oauth_yandex_client_secret
-            - oauth_mailru_client_secret
         command: ["sh", "-c", "wait-for-it api-postgres:5432 -t 60 && exec php bin/app.php oauth:clear-expired"]
         deploy:
             labels:
@@ -203,10 +185,8 @@ services:
         image: postgres:17.7-alpine3.23
         environment:
             POSTGRES_USER: app
-            POSTGRES_PASSWORD_FILE: /run/secrets/api_db_password
+            POSTGRES_PASSWORD: ${API_DB_PASSWORD}
             POSTGRES_DB: app
-        secrets:
-            - api_db_password
         volumes:
             - api-postgres:/var/lib/postgresql/data
         deploy:
@@ -220,16 +200,13 @@ services:
             BACKUP_NAME: auction_api-postgres
             POSTGRES_HOST: api-postgres
             POSTGRES_USERNAME: app
-            POSTGRES_PASSWORD_FILE: /run/secrets/api_db_password
+            POSTGRES_PASSWORD: ${API_DB_PASSWORD}
             POSTGRES_DB: app
             AWS_ACCESS_KEY_ID: ${BACKUP_AWS_ACCESS_KEY_ID}
-            AWS_SECRET_ACCESS_KEY_FILE: /run/secrets/backup_aws_secret_access_key
+            AWS_SECRET_ACCESS_KEY: ${BACKUP_AWS_SECRET_ACCESS_KEY}
             AWS_DEFAULT_REGION: ${BACKUP_AWS_DEFAULT_REGION}
             S3_ENDPOINT: ${BACKUP_S3_ENDPOINT}
             S3_BUCKET: ${BACKUP_S3_BUCKET}
-        secrets:
-            - api_db_password
-            - backup_aws_secret_access_key
         volumes:
             - api-postgres-backup:/app
         command: ["sh", "-c", "wait-for-it api-postgres:5432 -t 60 && exec backup"]
@@ -243,24 +220,10 @@ services:
                 condition: none
 
 secrets:
-    api_db_password:
-        file: ${API_DB_PASSWORD_FILE}
-    api_mailer_password:
-        file: ${API_MAILER_PASSWORD_FILE}
-    sentry_dsn:
-        file: ${SENTRY_DSN_FILE}
-    jwt_encryption_key:
-        file: ${JWT_ENCRYPTION_KEY_FILE}
     jwt_public_key:
         file: ${JWT_PUBLIC_KEY_FILE}
     jwt_private_key:
         file: ${JWT_PRIVATE_KEY_FILE}
-    oauth_yandex_client_secret:
-        file: ${OAUTH_YANDEX_CLIENT_SECRET_FILE}
-    oauth_mailru_client_secret:
-        file: ${OAUTH_MAILRU_CLIENT_SECRET_FILE}
-    backup_aws_secret_access_key:
-        file: ${BACKUP_AWS_SECRET_ACCESS_KEY_FILE}
 
 volumes:
     api-postgres:
