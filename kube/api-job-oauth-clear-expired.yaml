@@ -1,0 +1,129 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: api-oauth-clear-expired
+  namespace: auction
+spec:
+  schedule: "0 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+            - name: api-oauth-clear-expired
+              image: ${REGISTRY}/auction-api-php-cli:${IMAGE_TAG}
+              command: ["php", "bin/app.php", "oauth:clear-expired"]
+              env:
+                - name: DB_HOST
+                  valueFrom:
+                    secretKeyRef:
+                      name: api-db
+                      key: host
+                - name: DB_USER
+                  valueFrom:
+                    secretKeyRef:
+                      name: api-db
+                      key: username
+                - name: DB_PASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      name: api-db
+                      key: password
+                - name: DB_NAME
+                  valueFrom:
+                    secretKeyRef:
+                      name: api-db
+                      key: database
+                - name: MAILER_HOST
+                  valueFrom:
+                    secretKeyRef:
+                      name: api-mailer
+                      key: host
+                - name: MAILER_PORT
+                  valueFrom:
+                    secretKeyRef:
+                      name: api-mailer
+                      key: port
+                - name: MAILER_USERNAME
+                  valueFrom:
+                    secretKeyRef:
+                      name: api-mailer
+                      key: username
+                - name: MAILER_PASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      name: api-mailer
+                      key: password
+                - name: MAILER_ENCRYPTION
+                  value: tls
+                - name: MAILER_FROM_EMAIL
+                  valueFrom:
+                    secretKeyRef:
+                      name: api-mailer
+                      key: fromEmail
+                - name: FRONTEND_URL
+                  value: https://demo-auction.deworker.pro
+                - name: SENTRY_DSN
+                  valueFrom:
+                    secretKeyRef:
+                      name: sentry
+                      key: dsn
+                - name: OAUTH_CALLBACK_URL
+                  value: https://api.demo-auction.deworker.pro
+                - name: OAUTH_YANDEX_AUTH_URL
+                  value: https://oauth.yandex.ru
+                - name: OAUTH_YANDEX_TOKEN_URL
+                  value: https://oauth.yandex.ru
+                - name: OAUTH_YANDEX_API_URL
+                  value: https://login.yandex.ru
+                - name: OAUTH_YANDEX_CLIENT_ID
+                  valueFrom:
+                    secretKeyRef:
+                      name: api-oauth-yandex
+                      key: clientId
+                - name: OAUTH_YANDEX_CLIENT_SECRET
+                  valueFrom:
+                    secretKeyRef:
+                      name: api-oauth-yandex
+                      key: clientSecret
+                - name: OAUTH_MAILRU_AUTH_URL
+                  value: https://oauth.mail.ru
+                - name: OAUTH_MAILRU_TOKEN_URL
+                  value: https://oauth.mail.ru
+                - name: OAUTH_MAILRU_API_URL
+                  value: https://oauth.mail.ru
+                - name: OAUTH_MAILRU_CLIENT_ID
+                  valueFrom:
+                    secretKeyRef:
+                      name: api-oauth-mailru
+                      key: clientId
+                - name: OAUTH_MAILRU_CLIENT_SECRET
+                  valueFrom:
+                    secretKeyRef:
+                      name: api-oauth-mailru
+                      key: clientSecret
+                - name: JWT_ENCRYPTION_KEY
+                  valueFrom:
+                    secretKeyRef:
+                      name: api-jwt
+                      key: encryptionKey
+                - name: JWT_PRIVATE_KEY_PATH
+                  value: /mnt/secrets/jwt/private_key
+                - name: JWT_PUBLIC_KEY_PATH
+                  value: /mnt/secrets/jwt/public_key
+              volumeMounts:
+                - name: api-jwt
+                  mountPath: /mnt/secrets/jwt
+                  readOnly: true
+          volumes:
+            - name: api-jwt
+              secret:
+                secretName: api-jwt
+                items:
+                  - key: privateKey
+                    path: private_key
+                  - key: publicKey
+                    path: public_key
+          imagePullSecrets:
+            - name: docker-registry
