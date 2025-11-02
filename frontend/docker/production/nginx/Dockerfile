@@ -16,10 +16,13 @@ RUN apk add --no-cache curl
 
 COPY ./docker/production/nginx/conf.d /etc/nginx/conf.d
 
+COPY ./docker/common/nginx/docker-entrypoint-nginx-conf.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/docker-entrypoint-nginx-conf.sh
+
 COPY ./docker/production/nginx/docker-entrypoint-subst.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint-subst.sh
 
-ENTRYPOINT ["docker-entrypoint-subst.sh", "/docker-entrypoint.sh"]
+ENTRYPOINT ["docker-entrypoint-nginx-conf.sh", "docker-entrypoint-subst.sh", "/docker-entrypoint.sh"]
 CMD ["nginx", "-g", "daemon off;"]
 
 WORKDIR /app
