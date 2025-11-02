@@ -1,0 +1,84 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  namespace: auction
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+        - name: frontend
+          image: ${REGISTRY}/auction-frontend:${IMAGE_TAG}
+          env:
+            - name: NGINX_UPSTREAM_RESOLVER
+              value: kube-dns.kube-system.svc.cluster.local
+            - name: NGINX_UPSTREAM_HOST
+              value: .auction.svc.cluster.local
+            - name: VITE_AUTH_URL
+              value: https://api.demo-auction.deworker.pro
+          ports:
+            - containerPort: 80
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 80
+            initialDelaySeconds: 5
+            timeoutSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 80
+            initialDelaySeconds: 5
+            timeoutSeconds: 5
+      imagePullSecrets:
+        - name: docker-registry
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+  namespace: auction
+spec:
+  selector:
+    app: frontend
+  type: ClusterIP
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: frontend
+  namespace: auction
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
+    cert-manager.io/issuer: letsencrypt-prod
+spec:
+  tls:
+    - hosts:
+        - demo-auction.deworker.pro
+        - www.demo-auction.deworker.pro
+      secretName: letsencrypt-frontend
+  rules:
+    - host: demo-auction.deworker.pro
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: frontend
+                port:
+                  number: 80
