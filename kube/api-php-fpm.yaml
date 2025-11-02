@@ -1,0 +1,262 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-php-fpm
+  namespace: auction
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: api-php-fpm
+  template:
+    metadata:
+      labels:
+        app: api-php-fpm
+    spec:
+      containers:
+        - name: api-php-fpm
+          image: ${REGISTRY}/auction-api-php-fpm:${IMAGE_TAG}
+          env:
+            - name: DB_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: api-db
+                  key: host
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: api-db
+                  key: username
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: api-db
+                  key: password
+            - name: DB_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: api-db
+                  key: database
+            - name: MAILER_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: api-mailer
+                  key: host
+            - name: MAILER_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: api-mailer
+                  key: port
+            - name: MAILER_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: api-mailer
+                  key: username
+            - name: MAILER_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: api-mailer
+                  key: password
+            - name: MAILER_ENCRYPTION
+              value: tls
+            - name: MAILER_FROM_EMAIL
+              valueFrom:
+                secretKeyRef:
+                  name: api-mailer
+                  key: fromEmail
+            - name: FRONTEND_URL
+              value: https://demo-auction.deworker.pro
+            - name: SENTRY_DSN
+              valueFrom:
+                secretKeyRef:
+                  name: sentry
+                  key: dsn
+            - name: OAUTH_CALLBACK_URL
+              value: https://api.demo-auction.deworker.pro
+            - name: OAUTH_YANDEX_AUTH_URL
+              value: https://oauth.yandex.ru
+            - name: OAUTH_YANDEX_TOKEN_URL
+              value: https://oauth.yandex.ru
+            - name: OAUTH_YANDEX_API_URL
+              value: https://login.yandex.ru
+            - name: OAUTH_YANDEX_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: api-oauth-yandex
+                  key: clientId
+            - name: OAUTH_YANDEX_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: api-oauth-yandex
+                  key: clientSecret
+            - name: OAUTH_MAILRU_AUTH_URL
+              value: https://oauth.mail.ru
+            - name: OAUTH_MAILRU_TOKEN_URL
+              value: https://oauth.mail.ru
+            - name: OAUTH_MAILRU_API_URL
+              value: https://oauth.mail.ru
+            - name: OAUTH_MAILRU_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: api-oauth-mailru
+                  key: clientId
+            - name: OAUTH_MAILRU_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: api-oauth-mailru
+                  key: clientSecret
+            - name: JWT_ENCRYPTION_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: api-jwt
+                  key: encryptionKey
+            - name: JWT_PRIVATE_KEY_PATH
+              value: /mnt/secrets/jwt/private_key
+            - name: JWT_PUBLIC_KEY_PATH
+              value: /mnt/secrets/jwt/public_key
+          volumeMounts:
+            - name: api-jwt
+              mountPath: /mnt/secrets/jwt
+              readOnly: true
+          ports:
+            - containerPort: 9000
+          livenessProbe:
+            exec:
+              command:
+                - sh
+                - -c
+                - "REDIRECT_STATUS=true SCRIPT_NAME=/ping SCRIPT_FILENAME=/ping REQUEST_METHOD=GET cgi-fcgi -bind -connect 127.0.0.1:9000 || exit 1"
+            initialDelaySeconds: 5
+            timeoutSeconds: 5
+      initContainers:
+        - name: api-migrations
+          image: ${REGISTRY}/auction-api-php-cli:${IMAGE_TAG}
+          command: ["php", "bin/app.php", "migrations:migrate", "--no-interaction"]
+          env:
+            - name: DB_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: api-db
+                  key: host
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: api-db
+                  key: username
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: api-db
+                  key: password
+            - name: DB_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: api-db
+                  key: database
+            - name: MAILER_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: api-mailer
+                  key: host
+            - name: MAILER_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: api-mailer
+                  key: port
+            - name: MAILER_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: api-mailer
+                  key: username
+            - name: MAILER_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: api-mailer
+                  key: password
+            - name: MAILER_ENCRYPTION
+              value: tls
+            - name: MAILER_FROM_EMAIL
+              valueFrom:
+                secretKeyRef:
+                  name: api-mailer
+                  key: fromEmail
+            - name: FRONTEND_URL
+              value: https://demo-auction.deworker.pro
+            - name: SENTRY_DSN
+              valueFrom:
+                secretKeyRef:
+                  name: sentry
+                  key: dsn
+            - name: OAUTH_CALLBACK_URL
+              value: https://api.demo-auction.deworker.pro
+            - name: OAUTH_YANDEX_AUTH_URL
+              value: https://oauth.yandex.ru
+            - name: OAUTH_YANDEX_TOKEN_URL
+              value: https://oauth.yandex.ru
+            - name: OAUTH_YANDEX_API_URL
+              value: https://login.yandex.ru
+            - name: OAUTH_YANDEX_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: api-oauth-yandex
+                  key: clientId
+            - name: OAUTH_YANDEX_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: api-oauth-yandex
+                  key: clientSecret
+            - name: OAUTH_MAILRU_AUTH_URL
+              value: https://oauth.mail.ru
+            - name: OAUTH_MAILRU_TOKEN_URL
+              value: https://oauth.mail.ru
+            - name: OAUTH_MAILRU_API_URL
+              value: https://oauth.mail.ru
+            - name: OAUTH_MAILRU_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: api-oauth-mailru
+                  key: clientId
+            - name: OAUTH_MAILRU_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: api-oauth-mailru
+                  key: clientSecret
+            - name: JWT_ENCRYPTION_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: api-jwt
+                  key: encryptionKey
+            - name: JWT_PRIVATE_KEY_PATH
+              value: /mnt/secrets/jwt/private_key
+            - name: JWT_PUBLIC_KEY_PATH
+              value: /mnt/secrets/jwt/public_key
+          volumeMounts:
+            - name: api-jwt
+              mountPath: /mnt/secrets/jwt
+              readOnly: true
+      volumes:
+        - name: api-jwt
+          secret:
+            secretName: api-jwt
+            items:
+              - key: privateKey
+                path: private_key
+              - key: publicKey
+                path: public_key
+      imagePullSecrets:
+        - name: docker-registry
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: api-php-fpm
+  namespace: auction
+spec:
+  selector:
+    app: api-php-fpm
+  type: ClusterIP
+  ports:
+    - protocol: TCP
+      port: 9000
+      targetPort: 9000

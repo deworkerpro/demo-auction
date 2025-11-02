@@ -1,0 +1,72 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: api-postgres-backup
+  namespace: auction
+spec:
+  schedule: "12 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+            - name: api-postgres-backup
+              image: ${REGISTRY}/auction-api-postgres-backup:${IMAGE_TAG}
+              env:
+                - name: BACKUP_NAME
+                  value: auction_api-postgres
+                - name: POSTGRES_HOST
+                  valueFrom:
+                    secretKeyRef:
+                      name: api-db
+                      key: host
+                - name: POSTGRES_DB
+                  valueFrom:
+                    secretKeyRef:
+                      name: api-db
+                      key: database
+                - name: POSTGRES_USERNAME
+                  valueFrom:
+                    secretKeyRef:
+                      name: api-db
+                      key: username
+                - name: POSTGRES_PASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      name: api-db
+                      key: password
+                - name: AWS_ACCESS_KEY_ID
+                  valueFrom:
+                    secretKeyRef:
+                      name: api-backup-storage
+                      key: keyId
+                - name: AWS_SECRET_ACCESS_KEY
+                  valueFrom:
+                    secretKeyRef:
+                      name: api-backup-storage
+                      key: keySecret
+                - name: AWS_DEFAULT_REGION
+                  valueFrom:
+                    secretKeyRef:
+                      name: api-backup-storage
+                      key: region
+                - name: S3_ENDPOINT
+                  valueFrom:
+                    secretKeyRef:
+                      name: api-backup-storage
+                      key: endpoint
+                - name: S3_BUCKET
+                  valueFrom:
+                    secretKeyRef:
+                      name: api-backup-storage
+                      key: bucket
+              volumeMounts:
+                - name: api-postgres-backup-volume
+                  mountPath: /app
+          volumes:
+            - name: api-postgres-backup-volume
+              emptyDir:
+                sizeLimit: 128Mi
+          imagePullSecrets:
+            - name: docker-registry

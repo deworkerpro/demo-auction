@@ -236,5 +236,4 @@ validate-jenkins:
 	curl --user ${USER} -X POST -F "jenkinsfile=<Jenkinsfile" ${HOST}/pipeline-model-converter/validate
 
 deploy:
-	envsubst < compose-production.yml > "${TEMP_PATH}/compose.yml"
-	DOCKER_HOST=ssh://deploy@${HOST}:${PORT} docker stack deploy --compose-file "${TEMP_PATH}/compose.yml" auction --with-registry-auth --prune
+	find kube -type f -name "*.yaml" | xargs -i sh -c 'envsubst < "{}" | kubectl apply -f -'
