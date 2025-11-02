@@ -222,22 +222,9 @@ pipeline {
             when {
                 branch 'master'
             }
-            environment {
-                TEMP_PATH = pwd(tmp: true)
-            }
             steps {
                 withCredentials([
-                    usernamePassword(
-                        credentialsId: 'PRODUCTION_REGISTRY_AUTH',
-                        usernameVariable: 'USER',
-                        passwordVariable: 'PASSWORD'
-                    )
-                ]) {
-                    sh 'docker login -u="$USER" -p="$PASSWORD" $REGISTRY'
-                }
-                withCredentials([
-                    string(credentialsId: 'PRODUCTION_HOST', variable: 'HOST'),
-                    string(credentialsId: 'PRODUCTION_PORT', variable: 'PORT'),
+                    string(credentialsId: 'KUBERNETES_SERVER', variable: 'KUBERNETES_SERVER'),
                     string(credentialsId: 'API_DB_HOST', variable: 'API_DB_HOST'),
                     string(credentialsId: 'API_DB_USERNAME', variable: 'API_DB_USERNAME'),
                     string(credentialsId: 'API_DB_PASSWORD', variable: 'API_DB_PASSWORD'),
@@ -261,9 +248,25 @@ pipeline {
                     string(credentialsId: 'BACKUP_S3_ENDPOINT', variable: 'BACKUP_S3_ENDPOINT'),
                     string(credentialsId: 'BACKUP_S3_BUCKET', variable: 'BACKUP_S3_BUCKET')
                 ]) {
-                    sshagent (credentials: ['PRODUCTION_AUTH']) {
-                        sh 'mkdir -p ~/.ssh'
-                        sh 'ssh-keyscan -p ${PORT} -H ${HOST} > ~/.ssh/known_hosts'
+                    script {
+                        env.JWT_ENCRYPTION_KEY_BASE64 = sh(
+                            returnStdout: true,
+                            script: 'echo -n "${JWT_ENCRYPTION_KEY}" | base64 --wrap 0'
+                        ).trim()
+                    }
+                    script {
+                        env.JWT_PUBLIC_KEY_BASE64 = sh(
+                            returnStdout: true,
+                            script: 'cat "${JWT_PUBLIC_KEY_FILE}" | base64 --wrap 0'
+                        ).trim()
+                    }
+                    script {
+                        env.JWT_PRIVATE_KEY_BASE64 = sh(
+                            returnStdout: true,
+                            script: 'cat "${JWT_PRIVATE_KEY_FILE}" | base64 --wrap 0'
+                        ).trim()
+                    }
+                    withKubeConfig(credentialsId: 'KUBERNETES_TOKEN', serverUrl: env.KUBERNETES_SERVER) {
                         sh 'make deploy'
                     }
                 }
