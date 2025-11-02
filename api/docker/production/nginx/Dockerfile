@@ -4,6 +4,12 @@ RUN apk add --no-cache curl
 
 COPY ./docker/common/nginx/conf.d /etc/nginx/conf.d
 
+COPY ./docker/common/nginx/docker-entrypoint-nginx-conf.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/docker-entrypoint-nginx-conf.sh
+
+ENTRYPOINT ["docker-entrypoint-nginx-conf.sh", "/docker-entrypoint.sh"]
+CMD ["nginx", "-g", "daemon off;"]
+
 WORKDIR /app
 
 COPY ./public ./public

@@ -16,6 +16,8 @@ services:
     frontend:
         image: ${REGISTRY}/auction-frontend:${IMAGE_TAG}
         environment:
+            NGINX_UPSTREAM_RESOLVER: 127.0.0.11
+            NGINX_UPSTREAM_HOST: ""
             VITE_AUTH_URL: http://api.localhost
         networks:
             - traefik-public
@@ -33,6 +35,9 @@ services:
 
     api:
         image: ${REGISTRY}/auction-api:${IMAGE_TAG}
+        environment:
+            NGINX_UPSTREAM_RESOLVER: 127.0.0.11
+            NGINX_UPSTREAM_HOST: ""
         networks:
             - traefik-public
             - default
